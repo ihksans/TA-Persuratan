@@ -21,6 +21,7 @@ Lakukan dengan clean baik push, pull, merge dan lakukan sesuai prosedure
 2. git fetch origin
 3. git branch -u origin/master master
 
+
 # [Cara Menjalankan Project]
 1. Buka 2 cmd 
 2. Cmd pertama ketik perintah **npm install**
