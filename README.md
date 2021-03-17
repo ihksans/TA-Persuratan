@@ -21,4 +21,10 @@ Lakukan dengan clean baik push, pull, merge dan lakukan sesuai prosedure
 2. git fetch origin
 3. git branch -u origin/master master
 
+# [Cara Menjalankan Project]
+1. Buka 2 cmd 
+2. Cmd pertama ketik perintah **npm install**
+3. npm run watch
+4. Cmd kedua ketik **php artisan serve**
+5. Buka di browser alamat linknya
 #**Selamat Bekerja.....**
