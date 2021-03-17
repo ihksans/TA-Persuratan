@@ -28,4 +28,4 @@ Lakukan dengan clean baik push, pull, merge dan lakukan sesuai prosedure
 4. Cmd kedua ketik **php artisan serve**
 5. Buka di browser alamat linknya
 
-#Selamat Bekerja.....**
+#Selamat Bekerja.....
