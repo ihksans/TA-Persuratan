@@ -21,4 +21,4 @@ Lakukan dengan clean baik push, pull, merge dan lakukan sesuai prosedure
 2. git fetch origin
 3. git branch -u origin/master master
 
-##**Selamat Bekerja.....**
+#**Selamat Bekerja.....**
