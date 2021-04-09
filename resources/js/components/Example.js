@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+    
 function Example() {
     return (
         <div className="container">
@@ -13,6 +13,7 @@ function Example() {
                     </div>
                 </div>
             </div>
+            
         </div>
     );
 }
