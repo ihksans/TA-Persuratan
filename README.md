@@ -29,4 +29,7 @@ Lakukan dengan clean baik push, pull, merge dan lakukan sesuai prosedure
 4. Cmd kedua ketik **php artisan serve**
 5. Buka di browser alamat linknya
 
+# [Aturan dependencies]
+1. Harap setelah install external dependencies tulis di sprintsheet dan keterangannya
+2. Kalo engga kepake external dependenciesnya tolong hapus karena bisa bikin overload
 #Selamat Bekerja.....
