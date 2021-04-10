@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Nama from './ComponentExample'
+import Nama from './ComponentExample';
 function User() {
     return (
         <>
@@ -20,7 +20,7 @@ function User() {
             </div>
             
         </div>
-      
+     
         </>
     );
 }

@@ -1,9 +1,8 @@
 import React from 'react'
 
-const ComponentExample = () =>{
+const HeaderComponent = () =>{
     //contoh variabel
     const a = "Bismillah";
-
     //contoh method
     const methodA = ()=>
     {
@@ -12,10 +11,8 @@ const ComponentExample = () =>{
 
     return (
         <>
-        <p>Kelompok TA</p>
-        <h5>Ihksan - Nadia - Satria</h5>
-        <h5>{a}</h5>
+        <h5>Header Component</h5>
         </>
     )
 }
-export default ComponentExample;
+export default HeaderComponent;

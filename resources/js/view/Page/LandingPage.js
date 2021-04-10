@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 //Ini buat dependecies/library nya
 //import + "nama variabel" + from + "nama librarynya";
 
-class ClassExample extends Component {
+class LandingPage extends React.Component {
     //deklarasi variabel
     constructor(props){
         super();
@@ -25,10 +25,10 @@ class ClassExample extends Component {
             //html
             //js
             <>
-            <p>Ini Class Komponen</p>
+            <p>Ini LandingPage</p>
             </>
-        )
+        );
     }
 }
-export default ClassExample;
+export default LandingPage;
 
