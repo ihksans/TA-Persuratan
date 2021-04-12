@@ -3,8 +3,9 @@
 Lakukan dengan clean baik push, pull, merge dan lakukan sesuai prosedure
 
 # [Remote Git]
-1. git remote add origin https://github.com/ihksans/TA-Persuratan.git
-
+1. git init
+2. git remote add origin https://github.com/ihksans/TA-Persuratan.git
+3. git pull origin master
 # [Push seremoni]
 1. git add .
 2. git commit -m [Pesan bagian apa yang diperbaharui]
