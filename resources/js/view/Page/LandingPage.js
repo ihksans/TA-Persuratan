@@ -20,14 +20,16 @@ class LandingPage extends React.Component {
     }
     render(){
         return(
-            //html
-            //js
+           
             <>
-            <p>Ini LandingPage</p>
+          
             <Login/>
             </>
+            
         );
+        
     }
 }
+
 export default LandingPage;
 

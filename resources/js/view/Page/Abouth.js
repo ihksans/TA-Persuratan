@@ -25,7 +25,9 @@ class LandingPage extends React.Component {
             //html
             //js
             <>
-            <p>Ini Page Abouth</p>
+              <div className="App">
+                  <h1 className='text-red-500'>hello</h1>
+              </div>       
             </>
         );
     }
