@@ -12,5 +12,10 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+<<<<<<< HEAD
 
 require('./Index');
+=======
+require('./components/Example');
+require('./components/User');
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33

@@ -1,6 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+<<<<<<< HEAD
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
@@ -103,6 +104,8 @@ function _setPrototypeOf(o, p) {
 
 /***/ }),
 
+=======
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -1936,6 +1939,7 @@ module.exports = {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./resources/js/Application.js":
 /*!*************************************!*\
   !*** ./resources/js/Application.js ***!
@@ -2196,6 +2200,8 @@ var Main = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
+=======
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -2215,7 +2221,13 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  */
 
 
+<<<<<<< HEAD
 __webpack_require__(/*! ./Index */ "./resources/js/Index.js");
+=======
+__webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js");
+
+__webpack_require__(/*! ./components/User */ "./resources/js/components/User.js");
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 
 /***/ }),
 
@@ -2263,10 +2275,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./resources/js/components/Footer/FooterComponent.js":
 /*!***********************************************************!*\
   !*** ./resources/js/components/Footer/FooterComponent.js ***!
   \***********************************************************/
+=======
+/***/ "./resources/js/components/Example.js":
+/*!********************************************!*\
+  !*** ./resources/js/components/Example.js ***!
+  \********************************************/
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2275,6 +2294,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+<<<<<<< HEAD
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -2301,6 +2321,49 @@ var FooterComponent = function FooterComponent() {
 /*!***********************************************************!*\
   !*** ./resources/js/components/Header/HeaderComponent.js ***!
   \***********************************************************/
+=======
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+function Example() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "container",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "row justify-content-center",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "col-md-8",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "card",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "card-header",
+            children: "Example Component"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "card-body",
+            children: "I'm an example component!"
+          })]
+        })
+      })
+    })
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Example);
+
+if (document.getElementById('example')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Example, {}), document.getElementById('example'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/User.js":
+/*!*****************************************!*\
+  !*** ./resources/js/components/User.js ***!
+  \*****************************************/
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2309,6 +2372,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+<<<<<<< HEAD
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -3322,6 +3386,328 @@ var MainDashboardPage = /*#__PURE__*/function (_React$Component) {
       if (customEvent.isDefaultPrevented()) {
         return;
       }
+=======
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+function User() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "container mt-5",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "row justify-content-center",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "col-md-8",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "card text-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "card-header",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+              children: "React Component in Laravel"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "card-body",
+            children: "I'm tiny React component in Laravel app!"
+          })]
+        })
+      })
+    })
+  });
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (User); // DOM element
+
+if (document.getElementById('user')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(User, {}), document.getElementById('user'));
+}
+
+/***/ }),
+
+/***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+/*!
+  * Bootstrap v4.6.0 (https://getbootstrap.com/)
+  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+(function (global, factory) {
+   true ? factory(exports, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")) :
+  0;
+}(this, (function (exports, $, Popper) { 'use strict';
+
+  function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+  var $__default = /*#__PURE__*/_interopDefaultLegacy($);
+  var Popper__default = /*#__PURE__*/_interopDefaultLegacy(Popper);
+
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+  }
+
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+
+    return _extends.apply(this, arguments);
+  }
+
+  function _inheritsLoose(subClass, superClass) {
+    subClass.prototype = Object.create(superClass.prototype);
+    subClass.prototype.constructor = subClass;
+    subClass.__proto__ = superClass;
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Bootstrap (v4.6.0): util.js
+   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+   * --------------------------------------------------------------------------
+   */
+  /**
+   * ------------------------------------------------------------------------
+   * Private TransitionEnd Helpers
+   * ------------------------------------------------------------------------
+   */
+
+  var TRANSITION_END = 'transitionend';
+  var MAX_UID = 1000000;
+  var MILLISECONDS_MULTIPLIER = 1000; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
+
+  function toType(obj) {
+    if (obj === null || typeof obj === 'undefined') {
+      return "" + obj;
+    }
+
+    return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase();
+  }
+
+  function getSpecialTransitionEndEvent() {
+    return {
+      bindType: TRANSITION_END,
+      delegateType: TRANSITION_END,
+      handle: function handle(event) {
+        if ($__default['default'](event.target).is(this)) {
+          return event.handleObj.handler.apply(this, arguments); // eslint-disable-line prefer-rest-params
+        }
+
+        return undefined;
+      }
+    };
+  }
+
+  function transitionEndEmulator(duration) {
+    var _this = this;
+
+    var called = false;
+    $__default['default'](this).one(Util.TRANSITION_END, function () {
+      called = true;
+    });
+    setTimeout(function () {
+      if (!called) {
+        Util.triggerTransitionEnd(_this);
+      }
+    }, duration);
+    return this;
+  }
+
+  function setTransitionEndSupport() {
+    $__default['default'].fn.emulateTransitionEnd = transitionEndEmulator;
+    $__default['default'].event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
+  }
+  /**
+   * --------------------------------------------------------------------------
+   * Public Util Api
+   * --------------------------------------------------------------------------
+   */
+
+
+  var Util = {
+    TRANSITION_END: 'bsTransitionEnd',
+    getUID: function getUID(prefix) {
+      do {
+        prefix += ~~(Math.random() * MAX_UID); // "~~" acts like a faster Math.floor() here
+      } while (document.getElementById(prefix));
+
+      return prefix;
+    },
+    getSelectorFromElement: function getSelectorFromElement(element) {
+      var selector = element.getAttribute('data-target');
+
+      if (!selector || selector === '#') {
+        var hrefAttr = element.getAttribute('href');
+        selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : '';
+      }
+
+      try {
+        return document.querySelector(selector) ? selector : null;
+      } catch (_) {
+        return null;
+      }
+    },
+    getTransitionDurationFromElement: function getTransitionDurationFromElement(element) {
+      if (!element) {
+        return 0;
+      } // Get transition-duration of the element
+
+
+      var transitionDuration = $__default['default'](element).css('transition-duration');
+      var transitionDelay = $__default['default'](element).css('transition-delay');
+      var floatTransitionDuration = parseFloat(transitionDuration);
+      var floatTransitionDelay = parseFloat(transitionDelay); // Return 0 if element or transition duration is not found
+
+      if (!floatTransitionDuration && !floatTransitionDelay) {
+        return 0;
+      } // If multiple durations are defined, take the first
+
+
+      transitionDuration = transitionDuration.split(',')[0];
+      transitionDelay = transitionDelay.split(',')[0];
+      return (parseFloat(transitionDuration) + parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER;
+    },
+    reflow: function reflow(element) {
+      return element.offsetHeight;
+    },
+    triggerTransitionEnd: function triggerTransitionEnd(element) {
+      $__default['default'](element).trigger(TRANSITION_END);
+    },
+    supportsTransitionEnd: function supportsTransitionEnd() {
+      return Boolean(TRANSITION_END);
+    },
+    isElement: function isElement(obj) {
+      return (obj[0] || obj).nodeType;
+    },
+    typeCheckConfig: function typeCheckConfig(componentName, config, configTypes) {
+      for (var property in configTypes) {
+        if (Object.prototype.hasOwnProperty.call(configTypes, property)) {
+          var expectedTypes = configTypes[property];
+          var value = config[property];
+          var valueType = value && Util.isElement(value) ? 'element' : toType(value);
+
+          if (!new RegExp(expectedTypes).test(valueType)) {
+            throw new Error(componentName.toUpperCase() + ": " + ("Option \"" + property + "\" provided type \"" + valueType + "\" ") + ("but expected type \"" + expectedTypes + "\"."));
+          }
+        }
+      }
+    },
+    findShadowRoot: function findShadowRoot(element) {
+      if (!document.documentElement.attachShadow) {
+        return null;
+      } // Can find the shadow root otherwise it'll return the document
+
+
+      if (typeof element.getRootNode === 'function') {
+        var root = element.getRootNode();
+        return root instanceof ShadowRoot ? root : null;
+      }
+
+      if (element instanceof ShadowRoot) {
+        return element;
+      } // when we don't find a shadow root
+
+
+      if (!element.parentNode) {
+        return null;
+      }
+
+      return Util.findShadowRoot(element.parentNode);
+    },
+    jQueryDetection: function jQueryDetection() {
+      if (typeof $__default['default'] === 'undefined') {
+        throw new TypeError('Bootstrap\'s JavaScript requires jQuery. jQuery must be included before Bootstrap\'s JavaScript.');
+      }
+
+      var version = $__default['default'].fn.jquery.split(' ')[0].split('.');
+      var minMajor = 1;
+      var ltMajor = 2;
+      var minMinor = 9;
+      var minPatch = 1;
+      var maxMajor = 4;
+
+      if (version[0] < ltMajor && version[1] < minMinor || version[0] === minMajor && version[1] === minMinor && version[2] < minPatch || version[0] >= maxMajor) {
+        throw new Error('Bootstrap\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0');
+      }
+    }
+  };
+  Util.jQueryDetection();
+  setTransitionEndSupport();
+
+  /**
+   * ------------------------------------------------------------------------
+   * Constants
+   * ------------------------------------------------------------------------
+   */
+
+  var NAME = 'alert';
+  var VERSION = '4.6.0';
+  var DATA_KEY = 'bs.alert';
+  var EVENT_KEY = "." + DATA_KEY;
+  var DATA_API_KEY = '.data-api';
+  var JQUERY_NO_CONFLICT = $__default['default'].fn[NAME];
+  var SELECTOR_DISMISS = '[data-dismiss="alert"]';
+  var EVENT_CLOSE = "close" + EVENT_KEY;
+  var EVENT_CLOSED = "closed" + EVENT_KEY;
+  var EVENT_CLICK_DATA_API = "click" + EVENT_KEY + DATA_API_KEY;
+  var CLASS_NAME_ALERT = 'alert';
+  var CLASS_NAME_FADE = 'fade';
+  var CLASS_NAME_SHOW = 'show';
+  /**
+   * ------------------------------------------------------------------------
+   * Class Definition
+   * ------------------------------------------------------------------------
+   */
+
+  var Alert = /*#__PURE__*/function () {
+    function Alert(element) {
+      this._element = element;
+    } // Getters
+
+
+    var _proto = Alert.prototype;
+
+    // Public
+    _proto.close = function close(element) {
+      var rootElement = this._element;
+
+      if (element) {
+        rootElement = this._getRootElement(element);
+      }
+
+      var customEvent = this._triggerCloseEvent(rootElement);
+
+      if (customEvent.isDefaultPrevented()) {
+        return;
+      }
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 
       this._removeElement(rootElement);
     };
@@ -7482,6 +7868,7 @@ var MainDashboardPage = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/cookie/index.js":
 /*!**************************************!*\
   !*** ./node_modules/cookie/index.js ***!
@@ -8754,6 +9141,8 @@ module.exports = hoistNonReactStatics;
 
 /***/ }),
 
+=======
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 /***/ "./node_modules/jquery/dist/jquery.js":
 /*!********************************************!*\
   !*** ./node_modules/jquery/dist/jquery.js ***!
@@ -19646,6 +20035,7 @@ return jQuery;
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/js-cookie/src/js.cookie.js":
 /*!*************************************************!*\
   !*** ./node_modules/js-cookie/src/js.cookie.js ***!
@@ -19823,6 +20213,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
+=======
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 /***/ "./node_modules/lodash/lodash.js":
 /*!***************************************!*\
   !*** ./node_modules/lodash/lodash.js ***!
@@ -37035,6 +37427,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/mini-create-react-context/dist/esm/index.js":
 /*!******************************************************************!*\
   !*** ./node_modules/mini-create-react-context/dist/esm/index.js ***!
@@ -37231,6 +37624,8 @@ var index = react__WEBPACK_IMPORTED_MODULE_0__.createContext || createReactConte
 
 /***/ }),
 
+=======
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -40283,6 +40678,7 @@ module.exports = checkPropTypes;
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/prop-types/factoryWithTypeCheckers.js":
 /*!************************************************************!*\
   !*** ./node_modules/prop-types/factoryWithTypeCheckers.js ***!
@@ -40910,6 +41306,8 @@ if (true) {
 
 /***/ }),
 
+=======
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 /***/ "./node_modules/prop-types/lib/ReactPropTypesSecret.js":
 /*!*************************************************************!*\
   !*** ./node_modules/prop-types/lib/ReactPropTypesSecret.js ***!
@@ -65614,6 +66012,7 @@ var warnedAboutHydrateAPI = false;
 
 function getReactRootElementInContainer(container) {
   if (!container) {
+<<<<<<< HEAD
     return null;
   }
 
@@ -67826,6 +68225,389 @@ function pathToRegexp (path, keys, options) {
   }
 
   return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
+=======
+    return null;
+  }
+
+  if (container.nodeType === DOCUMENT_NODE) {
+    return container.documentElement;
+  } else {
+    return container.firstChild;
+  }
+}
+
+function shouldHydrateDueToLegacyHeuristic(container) {
+  var rootElement = getReactRootElementInContainer(container);
+  return !!(rootElement && rootElement.nodeType === ELEMENT_NODE && rootElement.hasAttribute(ROOT_ATTRIBUTE_NAME));
+}
+
+function legacyCreateRootFromDOMContainer(container, forceHydrate) {
+  var shouldHydrate = forceHydrate || shouldHydrateDueToLegacyHeuristic(container); // First clear any existing content.
+
+  if (!shouldHydrate) {
+    var warned = false;
+    var rootSibling;
+
+    while (rootSibling = container.lastChild) {
+      {
+        if (!warned && rootSibling.nodeType === ELEMENT_NODE && rootSibling.hasAttribute(ROOT_ATTRIBUTE_NAME)) {
+          warned = true;
+
+          error('render(): Target node has markup rendered by React, but there ' + 'are unrelated nodes as well. This is most commonly caused by ' + 'white-space inserted around server-rendered markup.');
+        }
+      }
+
+      container.removeChild(rootSibling);
+    }
+  }
+
+  {
+    if (shouldHydrate && !forceHydrate && !warnedAboutHydrateAPI) {
+      warnedAboutHydrateAPI = true;
+
+      warn('render(): Calling ReactDOM.render() to hydrate server-rendered markup ' + 'will stop working in React v17. Replace the ReactDOM.render() call ' + 'with ReactDOM.hydrate() if you want React to attach to the server HTML.');
+    }
+  }
+
+  return createLegacyRoot(container, shouldHydrate ? {
+    hydrate: true
+  } : undefined);
+}
+
+function warnOnInvalidCallback$1(callback, callerName) {
+  {
+    if (callback !== null && typeof callback !== 'function') {
+      error('%s(...): Expected the last optional `callback` argument to be a ' + 'function. Instead received: %s.', callerName, callback);
+    }
+  }
+}
+
+function legacyRenderSubtreeIntoContainer(parentComponent, children, container, forceHydrate, callback) {
+  {
+    topLevelUpdateWarnings(container);
+    warnOnInvalidCallback$1(callback === undefined ? null : callback, 'render');
+  } // TODO: Without `any` type, Flow says "Property cannot be accessed on any
+  // member of intersection type." Whyyyyyy.
+
+
+  var root = container._reactRootContainer;
+  var fiberRoot;
+
+  if (!root) {
+    // Initial mount
+    root = container._reactRootContainer = legacyCreateRootFromDOMContainer(container, forceHydrate);
+    fiberRoot = root._internalRoot;
+
+    if (typeof callback === 'function') {
+      var originalCallback = callback;
+
+      callback = function () {
+        var instance = getPublicRootInstance(fiberRoot);
+        originalCallback.call(instance);
+      };
+    } // Initial mount should not be batched.
+
+
+    unbatchedUpdates(function () {
+      updateContainer(children, fiberRoot, parentComponent, callback);
+    });
+  } else {
+    fiberRoot = root._internalRoot;
+
+    if (typeof callback === 'function') {
+      var _originalCallback = callback;
+
+      callback = function () {
+        var instance = getPublicRootInstance(fiberRoot);
+
+        _originalCallback.call(instance);
+      };
+    } // Update
+
+
+    updateContainer(children, fiberRoot, parentComponent, callback);
+  }
+
+  return getPublicRootInstance(fiberRoot);
+}
+
+function findDOMNode(componentOrElement) {
+  {
+    var owner = ReactCurrentOwner$3.current;
+
+    if (owner !== null && owner.stateNode !== null) {
+      var warnedAboutRefsInRender = owner.stateNode._warnedAboutRefsInRender;
+
+      if (!warnedAboutRefsInRender) {
+        error('%s is accessing findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', getComponentName(owner.type) || 'A component');
+      }
+
+      owner.stateNode._warnedAboutRefsInRender = true;
+    }
+  }
+
+  if (componentOrElement == null) {
+    return null;
+  }
+
+  if (componentOrElement.nodeType === ELEMENT_NODE) {
+    return componentOrElement;
+  }
+
+  {
+    return findHostInstanceWithWarning(componentOrElement, 'findDOMNode');
+  }
+}
+function hydrate(element, container, callback) {
+  if (!isValidContainer(container)) {
+    {
+      throw Error( "Target container is not a DOM element." );
+    }
+  }
+
+  {
+    var isModernRoot = isContainerMarkedAsRoot(container) && container._reactRootContainer === undefined;
+
+    if (isModernRoot) {
+      error('You are calling ReactDOM.hydrate() on a container that was previously ' + 'passed to ReactDOM.createRoot(). This is not supported. ' + 'Did you mean to call createRoot(container, {hydrate: true}).render(element)?');
+    }
+  } // TODO: throw or warn if we couldn't hydrate?
+
+
+  return legacyRenderSubtreeIntoContainer(null, element, container, true, callback);
+}
+function render(element, container, callback) {
+  if (!isValidContainer(container)) {
+    {
+      throw Error( "Target container is not a DOM element." );
+    }
+  }
+
+  {
+    var isModernRoot = isContainerMarkedAsRoot(container) && container._reactRootContainer === undefined;
+
+    if (isModernRoot) {
+      error('You are calling ReactDOM.render() on a container that was previously ' + 'passed to ReactDOM.createRoot(). This is not supported. ' + 'Did you mean to call root.render(element)?');
+    }
+  }
+
+  return legacyRenderSubtreeIntoContainer(null, element, container, false, callback);
+}
+function unstable_renderSubtreeIntoContainer(parentComponent, element, containerNode, callback) {
+  if (!isValidContainer(containerNode)) {
+    {
+      throw Error( "Target container is not a DOM element." );
+    }
+  }
+
+  if (!(parentComponent != null && has(parentComponent))) {
+    {
+      throw Error( "parentComponent must be a valid React Component" );
+    }
+  }
+
+  return legacyRenderSubtreeIntoContainer(parentComponent, element, containerNode, false, callback);
+}
+function unmountComponentAtNode(container) {
+  if (!isValidContainer(container)) {
+    {
+      throw Error( "unmountComponentAtNode(...): Target container is not a DOM element." );
+    }
+  }
+
+  {
+    var isModernRoot = isContainerMarkedAsRoot(container) && container._reactRootContainer === undefined;
+
+    if (isModernRoot) {
+      error('You are calling ReactDOM.unmountComponentAtNode() on a container that was previously ' + 'passed to ReactDOM.createRoot(). This is not supported. Did you mean to call root.unmount()?');
+    }
+  }
+
+  if (container._reactRootContainer) {
+    {
+      var rootEl = getReactRootElementInContainer(container);
+      var renderedByDifferentReact = rootEl && !getInstanceFromNode$1(rootEl);
+
+      if (renderedByDifferentReact) {
+        error("unmountComponentAtNode(): The node you're attempting to unmount " + 'was rendered by another copy of React.');
+      }
+    } // Unmount should not be batched.
+
+
+    unbatchedUpdates(function () {
+      legacyRenderSubtreeIntoContainer(null, null, container, false, function () {
+        // $FlowFixMe This should probably use `delete container._reactRootContainer`
+        container._reactRootContainer = null;
+        unmarkContainerAsRoot(container);
+      });
+    }); // If you call unmountComponentAtNode twice in quick succession, you'll
+    // get `true` twice. That's probably fine?
+
+    return true;
+  } else {
+    {
+      var _rootEl = getReactRootElementInContainer(container);
+
+      var hasNonRootReactChild = !!(_rootEl && getInstanceFromNode$1(_rootEl)); // Check if the container itself is a React root node.
+
+      var isContainerReactRoot = container.nodeType === ELEMENT_NODE && isValidContainer(container.parentNode) && !!container.parentNode._reactRootContainer;
+
+      if (hasNonRootReactChild) {
+        error("unmountComponentAtNode(): The node you're attempting to unmount " + 'was rendered by React and is not a top-level container. %s', isContainerReactRoot ? 'You may have accidentally passed in a React root node instead ' + 'of its container.' : 'Instead, have the parent component update its state and ' + 'rerender in order to remove this component.');
+      }
+    }
+
+    return false;
+  }
+}
+
+function createPortal(children, containerInfo, // TODO: figure out the API for cross-renderer implementation.
+implementation) {
+  var key = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  return {
+    // This tag allow us to uniquely identify this as a React Portal
+    $$typeof: REACT_PORTAL_TYPE,
+    key: key == null ? null : '' + key,
+    children: children,
+    containerInfo: containerInfo,
+    implementation: implementation
+  };
+}
+
+var ReactVersion = '16.14.0';
+
+setAttemptUserBlockingHydration(attemptUserBlockingHydration$1);
+setAttemptContinuousHydration(attemptContinuousHydration$1);
+setAttemptHydrationAtCurrentPriority(attemptHydrationAtCurrentPriority$1);
+var didWarnAboutUnstableCreatePortal = false;
+
+{
+  if (typeof Map !== 'function' || // $FlowIssue Flow incorrectly thinks Map has no prototype
+  Map.prototype == null || typeof Map.prototype.forEach !== 'function' || typeof Set !== 'function' || // $FlowIssue Flow incorrectly thinks Set has no prototype
+  Set.prototype == null || typeof Set.prototype.clear !== 'function' || typeof Set.prototype.forEach !== 'function') {
+    error('React depends on Map and Set built-in types. Make sure that you load a ' + 'polyfill in older browsers. https://fb.me/react-polyfills');
+  }
+}
+
+setRestoreImplementation(restoreControlledState$3);
+setBatchingImplementation(batchedUpdates$1, discreteUpdates$1, flushDiscreteUpdates, batchedEventUpdates$1);
+
+function createPortal$1(children, container) {
+  var key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+  if (!isValidContainer(container)) {
+    {
+      throw Error( "Target container is not a DOM element." );
+    }
+  } // TODO: pass ReactDOM portal implementation as third argument
+  // $FlowFixMe The Flow type is opaque but there's no way to actually create it.
+
+
+  return createPortal(children, container, null, key);
+}
+
+function renderSubtreeIntoContainer(parentComponent, element, containerNode, callback) {
+
+  return unstable_renderSubtreeIntoContainer(parentComponent, element, containerNode, callback);
+}
+
+function unstable_createPortal(children, container) {
+  var key = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+
+  {
+    if (!didWarnAboutUnstableCreatePortal) {
+      didWarnAboutUnstableCreatePortal = true;
+
+      warn('The ReactDOM.unstable_createPortal() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactDOM.createPortal() instead. It has the exact same API, ' + 'but without the "unstable_" prefix.');
+    }
+  }
+
+  return createPortal$1(children, container, key);
+}
+
+var Internals = {
+  // Keep in sync with ReactDOMUnstableNativeDependencies.js
+  // ReactTestUtils.js, and ReactTestUtilsAct.js. This is an array for better minification.
+  Events: [getInstanceFromNode$1, getNodeFromInstance$1, getFiberCurrentPropsFromNode$1, injectEventPluginsByName, eventNameDispatchConfigs, accumulateTwoPhaseDispatches, accumulateDirectDispatches, enqueueStateRestore, restoreStateIfNeeded, dispatchEvent, runEventsInBatch, flushPassiveEffects, IsThisRendererActing]
+};
+var foundDevTools = injectIntoDevTools({
+  findFiberByHostInstance: getClosestInstanceFromNode,
+  bundleType:  1 ,
+  version: ReactVersion,
+  rendererPackageName: 'react-dom'
+});
+
+{
+  if (!foundDevTools && canUseDOM && window.top === window.self) {
+    // If we're in Chrome or Firefox, provide a download link if not installed.
+    if (navigator.userAgent.indexOf('Chrome') > -1 && navigator.userAgent.indexOf('Edge') === -1 || navigator.userAgent.indexOf('Firefox') > -1) {
+      var protocol = window.location.protocol; // Don't warn in exotic cases like chrome-extension://.
+
+      if (/^(https?|file):$/.test(protocol)) {
+        // eslint-disable-next-line react-internal/no-production-logging
+        console.info('%cDownload the React DevTools ' + 'for a better development experience: ' + 'https://fb.me/react-devtools' + (protocol === 'file:' ? '\nYou might need to use a local HTTP server (instead of file://): ' + 'https://fb.me/react-devtools-faq' : ''), 'font-weight:bold');
+      }
+    }
+  }
+}
+
+exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = Internals;
+exports.createPortal = createPortal$1;
+exports.findDOMNode = findDOMNode;
+exports.flushSync = flushSync;
+exports.hydrate = hydrate;
+exports.render = render;
+exports.unmountComponentAtNode = unmountComponentAtNode;
+exports.unstable_batchedUpdates = batchedUpdates$1;
+exports.unstable_createPortal = unstable_createPortal;
+exports.unstable_renderSubtreeIntoContainer = renderSubtreeIntoContainer;
+exports.version = ReactVersion;
+  })();
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/react-dom/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/react-dom/index.js ***!
+  \*****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+function checkDCE() {
+  /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
+  if (
+    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' ||
+    typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function'
+  ) {
+    return;
+  }
+  if (true) {
+    // This branch is unreachable because this function is only called
+    // in production, but the condition is true only in development.
+    // Therefore if the branch is still here, dead code elimination wasn't
+    // properly applied.
+    // Don't change the message. React DevTools relies on it. Also make sure
+    // this message doesn't occur elsewhere in this function, or it will cause
+    // a false positive.
+    throw new Error('^_^');
+  }
+  try {
+    // Verify that the code above has been dead code eliminated (DCE'd).
+    __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(checkDCE);
+  } catch (err) {
+    // DevTools shouldn't crash React, no matter what.
+    // We should still report in case we break this code.
+    console.error(err);
+  }
+}
+
+if (false) {} else {
+  module.exports = __webpack_require__(/*! ./cjs/react-dom.development.js */ "./node_modules/react-dom/cjs/react-dom.development.js");
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 }
 
 
@@ -70708,6 +71490,7 @@ if (false) {} else {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/resolve-pathname/esm/resolve-pathname.js":
 /*!***************************************************************!*\
   !*** ./node_modules/resolve-pathname/esm/resolve-pathname.js ***!
@@ -70798,6 +71581,8 @@ function resolvePathname(to, from) {
 
 /***/ }),
 
+=======
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 /***/ "./node_modules/scheduler/cjs/scheduler-tracing.development.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/scheduler/cjs/scheduler-tracing.development.js ***!
@@ -72057,6 +72842,7 @@ if (false) {} else {
 }
 
 
+<<<<<<< HEAD
 /***/ }),
 
 /***/ "./node_modules/tiny-invariant/dist/tiny-invariant.esm.js":
@@ -72171,6 +72957,8 @@ function valueEqual(a, b) {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (valueEqual);
 
 
+=======
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 /***/ })
 
 /******/ 	});
@@ -72237,6 +73025,7 @@ function valueEqual(a, b) {
 /******/ 		};
 /******/ 	})();
 /******/ 	
+<<<<<<< HEAD
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -72249,6 +73038,8 @@ function valueEqual(a, b) {
 /******/ 		};
 /******/ 	})();
 /******/ 	
+=======
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports

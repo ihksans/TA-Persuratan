@@ -3,9 +3,14 @@
 Lakukan dengan clean baik push, pull, merge dan lakukan sesuai prosedure
 
 # [Remote Git]
+<<<<<<< HEAD
 1. git init
 2. git remote add origin https://github.com/ihksans/TA-Persuratan.git
 3. git pull origin master
+=======
+1. git remote add origin https://github.com/ihksans/TA-Persuratan.git
+
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
 # [Push seremoni]
 1. git add .
 2. git commit -m [Pesan bagian apa yang diperbaharui]
@@ -22,6 +27,7 @@ Lakukan dengan clean baik push, pull, merge dan lakukan sesuai prosedure
 2. git fetch origin
 3. git branch -u origin/master master
 
+<<<<<<< HEAD
 
 # [Cara Menjalankan Project]
 1. Buka 2 cmd 
@@ -34,3 +40,6 @@ Lakukan dengan clean baik push, pull, merge dan lakukan sesuai prosedure
 1. Harap setelah install external dependencies tulis di sprintsheet dan keterangannya
 2. Kalo engga kepake external dependenciesnya tolong hapus karena bisa bikin overload
 #Selamat Bekerja.....
+=======
+#**Selamat Bekerja.....**
+>>>>>>> 31944adae3fc1e23567cdfbfb3b646e4e0256e33
