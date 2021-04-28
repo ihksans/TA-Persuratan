@@ -12,8 +12,9 @@ export const isLoggedIn = (reqCookies = null) => {
 }
 
 export const logIn = (props) => {
+    if (typeof window !== 'undefined') {
     Cookies.set('cake', props, {expires: 86400, sameSite: 'lax'})
-    
+    }
 }
 
 export const logOut = () => {

@@ -24,4 +24,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     // manggil controller dengan mengubah namespace di RouteServiceProvider.php biar bisa kayak versi2 sebelumnya
     Route::post('logoutall', 'AuthController@logoutall');
     Route::post('userInfo', 'AuthController@userInfo');
+    Route::post('cekToken', 'AuthController@checkToken');
 });

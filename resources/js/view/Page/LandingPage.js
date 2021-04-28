@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Login from '../../components/Login'
+import Box from '../../components/Box'
 class LandingPage extends React.Component {
     //deklarasi variabel
     constructor(props){
@@ -24,6 +25,7 @@ class LandingPage extends React.Component {
             <>
           
             <Login/>
+            {/* <Box/> */}
             </>
             
         );

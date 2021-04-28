@@ -1,7 +1,7 @@
 //Template for Paging
 
 import React, {Component} from 'react'
-import {BrowserRouter, Link, Switch, Route, HashRouter} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Switch, Route, HashRouter} from 'react-router-dom';
 import Main from './Router';
 import Footer from './components/Footer/FooterComponent'
 import Header from './components/Header/HeaderComponent'
@@ -22,9 +22,9 @@ class Application extends Component {
         return (
             <div>
                 <HashRouter>
-                    <Header />
+                    {/* <Header /> */}
                     <Route default component={Main}/>
-                    <Footer />  
+                    {/* <Footer />   */}
                 </HashRouter>
             </div>
         );

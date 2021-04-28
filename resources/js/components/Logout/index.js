@@ -1,3 +1,4 @@
+//component logout
 import React,{useState} from 'react'
 import {logoutAuth} from '../../service/auth'
 const Logout = () =>{

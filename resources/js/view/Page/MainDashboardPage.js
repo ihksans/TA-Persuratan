@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import Logout from '../../components/Logout';
 //Ini buat dependecies/library nya
 //import + "nama variabel" + from + "nama librarynya";
-
-class MainDashboardPage extends React.Component {
+import { connect } from 'react-redux';
+import Cookies from 'js-cookie';
+class MainDashboardPage extends Component {
     //deklarasi variabel
     constructor(props){
         super();
@@ -22,15 +23,20 @@ class MainDashboardPage extends React.Component {
 
     }
     render(){
+        // console.log("tokenq"+ this.props.authToken.token)
         return(
             //html
             //js
             <>
             <p>Ini Main Dashboard Page </p>
+            <p>token: { this.props.authToken.token}</p>
+            {Cookies.get('cake') == this.props.authToken.token ?(<><p>True</p></>):(<><p>False</p></>)}
             <Logout/>
             </>
         );
     }
 }
-export default MainDashboardPage;
-
+function mapStateToProps(state) {
+    return state;
+  }
+export default connect(mapStateToProps, null)(MainDashboardPage);

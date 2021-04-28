@@ -77,8 +77,15 @@ class AuthController extends Controller
         $user = $request->user();
         $token =  $user->currentAccessToken();
         $respon = [
-            'userInfo' => $user,
             'token' => $token
+        ];
+        return response()->json($respon, 200);
+    }
+    public function checkToken(Request $request)
+    {
+        $user = $request->user();
+        $respon = [
+            'token' => $user
         ];
         return response()->json($respon, 200);
     }

@@ -1,7 +1,5 @@
-import { Redirect } from 'react-router-dom';
 import api from './api'
 import {logIn, logOut, notLoggedIn} from './token'
-
 export const loginAuth = (props) =>{
     api().get('/sanctum/csrf-cookie').then(() => {
         api().post('api/login', props).then(response => {
@@ -11,8 +9,7 @@ export const loginAuth = (props) =>{
 
             } else {
                 logIn(response.data.content.access_token);
-                window.location.assign("/#/MainDashboard")
-
+                window.location.assign("/")
             }
         })
     })
@@ -26,7 +23,27 @@ export const logoutAuth = () =>{
                 console.log("error login")
             } else {
                 logOut();
-                window.location.assign("/")
+                window.location.assign("/#/Login")
             }
         })  
+}
+
+export const cekAuth = () => {
+    let status ;
+    api().post('api/cekToken')
+    .then(() => {
+            console.log("sudah login")
+            status = true
+    })
+    .catch((err) => {
+        console.log("belum login")
+        status =  false
+      });  
+   
+    // const status = Cookies.get('cake');
+    // if(status == null){
+    //     return false
+    // }
+    console.log("status: "+ status)
+    return status;
 }
