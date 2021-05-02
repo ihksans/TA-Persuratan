@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('login', 'AuthController@login');
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    // manggil controller sesuai bawaan laravel 8
+    Route::post('logout', 'AuthController@logout');
+    // manggil controller dengan mengubah namespace di RouteServiceProvider.php biar bisa kayak versi2 sebelumnya
+    Route::post('logoutall', 'AuthController@logoutall');
+    Route::post('userInfo', 'AuthController@userInfo');
+    Route::post('cekToken', 'AuthController@checkToken');
+});

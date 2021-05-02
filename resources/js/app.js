@@ -13,4 +13,8 @@ require('./bootstrap');
  */
 
 
+<<<<<<< HEAD
 require('./Index');
+=======
+require('./Index');
+>>>>>>> df208185cd36890a2f09032b2b97ea90ca9e0394

@@ -19,6 +19,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+<<<<<<< HEAD
     'App\\Models\\disposisi' => $baseDir . '/app/Models/disposisi.php',
     'App\\Models\\jenis_surat' => $baseDir . '/app/Models/jenis_surat.php',
     'App\\Models\\kode_hal' => $baseDir . '/app/Models/kode_hal.php',
@@ -32,6 +33,8 @@ return array(
     'App\\Models\\sifat_naskah' => $baseDir . '/app/Models/sifat_naskah.php',
     'App\\Models\\surat_keluar' => $baseDir . '/app/Models/surat_keluar.php',
     'App\\Models\\surat_masuk' => $baseDir . '/app/Models/surat_masuk.php',
+=======
+>>>>>>> df208185cd36890a2f09032b2b97ea90ca9e0394
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
@@ -2052,6 +2055,20 @@ return array(
     'Laravel\\Sail\\Console\\InstallCommand' => $vendorDir . '/laravel/sail/src/Console/InstallCommand.php',
     'Laravel\\Sail\\Console\\PublishCommand' => $vendorDir . '/laravel/sail/src/Console/PublishCommand.php',
     'Laravel\\Sail\\SailServiceProvider' => $vendorDir . '/laravel/sail/src/SailServiceProvider.php',
+<<<<<<< HEAD
+=======
+    'Laravel\\Sanctum\\Contracts\\HasAbilities' => $vendorDir . '/laravel/sanctum/src/Contracts/HasAbilities.php',
+    'Laravel\\Sanctum\\Contracts\\HasApiTokens' => $vendorDir . '/laravel/sanctum/src/Contracts/HasApiTokens.php',
+    'Laravel\\Sanctum\\Guard' => $vendorDir . '/laravel/sanctum/src/Guard.php',
+    'Laravel\\Sanctum\\HasApiTokens' => $vendorDir . '/laravel/sanctum/src/HasApiTokens.php',
+    'Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController' => $vendorDir . '/laravel/sanctum/src/Http/Controllers/CsrfCookieController.php',
+    'Laravel\\Sanctum\\Http\\Middleware\\EnsureFrontendRequestsAreStateful' => $vendorDir . '/laravel/sanctum/src/Http/Middleware/EnsureFrontendRequestsAreStateful.php',
+    'Laravel\\Sanctum\\NewAccessToken' => $vendorDir . '/laravel/sanctum/src/NewAccessToken.php',
+    'Laravel\\Sanctum\\PersonalAccessToken' => $vendorDir . '/laravel/sanctum/src/PersonalAccessToken.php',
+    'Laravel\\Sanctum\\Sanctum' => $vendorDir . '/laravel/sanctum/src/Sanctum.php',
+    'Laravel\\Sanctum\\SanctumServiceProvider' => $vendorDir . '/laravel/sanctum/src/SanctumServiceProvider.php',
+    'Laravel\\Sanctum\\TransientToken' => $vendorDir . '/laravel/sanctum/src/TransientToken.php',
+>>>>>>> df208185cd36890a2f09032b2b97ea90ca9e0394
     'Laravel\\Tinker\\ClassAliasAutoloader' => $vendorDir . '/laravel/tinker/src/ClassAliasAutoloader.php',
     'Laravel\\Tinker\\Console\\TinkerCommand' => $vendorDir . '/laravel/tinker/src/Console/TinkerCommand.php',
     'Laravel\\Tinker\\TinkerCaster' => $vendorDir . '/laravel/tinker/src/TinkerCaster.php',

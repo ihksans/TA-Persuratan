@@ -456,6 +456,18 @@
       ),
       'reference' => '66b26181c3e86266b0b98f45a3398b090f37dee9',
     ),
+<<<<<<< HEAD
+=======
+    'laravel/sanctum' => 
+    array (
+      'pretty_version' => 'v2.10.0',
+      'version' => '2.10.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a08cfee365c6b6df3e91c8f43b92f7163ffc8a94',
+    ),
+>>>>>>> df208185cd36890a2f09032b2b97ea90ca9e0394
     'laravel/tinker' => 
     array (
       'pretty_version' => 'v2.6.1',
