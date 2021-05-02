@@ -3,8 +3,9 @@
 Lakukan dengan clean baik push, pull, merge dan lakukan sesuai prosedure
 
 # [Remote Git]
-1. git remote add origin https://github.com/ihksans/TA-Persuratan.git
-
+1. git init
+2. git remote add origin https://github.com/ihksans/TA-Persuratan.git
+3. git pull origin master
 # [Push seremoni]
 1. git add .
 2. git commit -m [Pesan bagian apa yang diperbaharui]
@@ -29,4 +30,7 @@ Lakukan dengan clean baik push, pull, merge dan lakukan sesuai prosedure
 4. Cmd kedua ketik **php artisan serve**
 5. Buka di browser alamat linknya
 
+# [Aturan dependencies]
+1. Harap setelah install external dependencies tulis di sprintsheet dan keterangannya
+2. Kalo engga kepake external dependenciesnya tolong hapus karena bisa bikin overload
 #Selamat Bekerja.....
