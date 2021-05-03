@@ -38,8 +38,8 @@ class MainDashboardPage extends Component {
               <p>False</p>
             </>
           )}
+          <Logout />
         </div>
-        {/* <Logout /> */}
       </>
     )
   }

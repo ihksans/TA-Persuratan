@@ -3906,7 +3906,7 @@ var MainDashboardPage = /*#__PURE__*/function (_Component) {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
                 children: "False"
               })
-            })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Logout__WEBPACK_IMPORTED_MODULE_1__.default, {})]
           })
         })
       );
