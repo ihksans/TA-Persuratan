@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 
-import authToken from './auth_reducers';
+import authToken from './auth_reducers'
 
 const rootReducer = combineReducers({
-    authToken
+  authToken,
 })
 
-export default rootReducer;
+export default rootReducer

@@ -1,16 +1,23 @@
-// import React,{useState} from 'react'
-// import {loginAuth} from '../../service/auth'
+// import React,{useState,useContext} from 'react'
+// import { loginAuth } from "../../service/auth";
+// import {Context as AuthContext} from '../../context/AuthContext';
 
 // const Login = () =>{
 //     const [formInput, setFormInput] = useState({username: '', password: ''})
-
+//     const {state:authState, saveToken } = useContext(AuthContext)
 //     const updateFormInput = e => {
 //         e.persist()
 //         setFormInput(prevState => ({...prevState, [e.target.name]: e.target.value}))
 //     }
 //     const signIn = e => {
 //         e.preventDefault()
-//         loginAuth(formInput)
+//         // loginAuth(formInput)
+//         saveToken("ABCDE");
+//         console.log("token from context:"+ authState.myToken)
+//     }
+//     const cekToken =()=>{
+//         console.log("token from context:"+ authState.myToken)
+
 //     }
 //     return (
 //         <>
@@ -52,110 +59,155 @@
 //                     </div>
 //                     </div>
 //                 </form>
+//                 <button type="submit"
+//                                 onClick={cekToken}
+//                                 className="group relative w-1/12 flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+//                                   <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+//                                     <svg
+//                                         className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
+//                                         fill="currentColor" viewBox="0 0 20 20">
+//                                       <path fillRule="evenodd"
+//                                             d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+//                                             clipRule="evenodd" />
+//                                     </svg>
+//                                   </span>
+//                            cek token
+//                         </button>
 //         </>
 //     )
 // }
 // export default Login;
 
-
-
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 import api from '../../service/api'
-import { connect } from 'react-redux';
-import {logIn, notLoggedIn} from '../../service/token'
-import {addTokenByID} from '../../actions'
-
+import { connect } from 'react-redux'
+import { logIn, notLoggedIn } from '../../service/token'
+import { addTokenByID, removeTokenByID } from '../../actions'
 
 class Login extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            username: "",
-            password: ""
-        }
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleUsername = this.handleUsername.bind(this);
-        this.handlePassword = this.handlePassword.bind(this);
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+      password: '',
+      errorMsg: false,
     }
-    setToken(token){
-        console.log("setToken:"+ token);
-        this.props.addTokenByID(token);
-    }
-    handleSubmit(e){
-        e.preventDefault();
-       
-        let formInput = new FormData;
-        formInput.append("username",this.state.username);
-        formInput.append("password",this.state.password);
-        api().get('/sanctum/csrf-cookie').then(() => {
-            api().post('api/login', formInput).then(response => {
-                if (response.data.error) {
-                    console.log(response.data.error)
-                    notLoggedIn;
-                    
-                } else {
-                    logIn(response.data.content.access_token);
-                    this.setToken(response.data.content.access_token);
-                    window.location.assign("/")
-                }
-            })
-        })
-    }
-    handleUsername(e){
-        let value = e.target.value;
-        this.setState ({
-            username : value
-        })
-    }
-    handlePassword(e){
-        let value = e.target.value;
-        this.setState({
-            password : value
-        })
-    }
-    render(){
-        return(
-            <>
-            <form className="mt-8" action="#" method="POST">
-                <div className=" justify-center">
-                        <div className="rounded-md shadow-sm">
-                                <div>
-                                    <input aria-label="Username" name="username" type="username" required
-                                            onChange={this.handleUsername}
-                                            className="appearance-none rounded-none relative block w-50% px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
-                                        placeholder="username" />
-                            </div>
-                            <div className="-mt-px">
-                                <input aria-label="Password" name="password" type="password" required
-                                        onChange={this.handlePassword}
-                                        className="appearance-none rounded-none relative block w-50% px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 sm:text-sm sm:leading-5"
-                                        placeholder="Password" />
-                            </div>
-                        </div>
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleUsername = this.handleUsername.bind(this)
+    this.handlePassword = this.handlePassword.bind(this)
+    this.handleErrorMsg = this.handleErrorMsg.bind(this)
+    this.test = this.test.bind(this)
+  }
+  setToken(token) {
+    // console.log("setToken:"+ token);
+    this.props.addTokenByID(token)
+  }
+  handleSubmit(e) {
+    e.preventDefault()
 
-                        <div className="mt-6">
-                            <button type="submit"
-                                    onClick={this.handleSubmit}
-                                    className="group relative w-1/12 flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
-                                        <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                                        <svg
-                                            className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
-                                            fill="currentColor" viewBox="0 0 20 20">
-                                        <path fillRule="evenodd"
-                                                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                                                clipRule="evenodd" />
-                                        </svg>
-                                    </span>
-                                Sign In
-                            </button>
-                        </div>
-                </div>
-             </form>
-            </>
-        )
-    }
+    let formInput = new FormData()
+    formInput.append('username', this.state.username)
+    formInput.append('password', this.state.password)
+    api()
+      .get('/sanctum/csrf-cookie')
+      .then(() => {
+        api()
+          .post('api/login', formInput)
+          .then((response) => {
+            logIn(response.data.content.access_token)
+            this.setToken(response.data.content.access_token)
+            window.location.assign('/')
+          })
+          .catch((error) => {
+            notLoggedIn
+            this.handleErrorMsg()
+          })
+      })
+  }
+  handleUsername(e) {
+    let value = e.target.value
+    this.setState({
+      username: value,
+    })
+  }
+  handlePassword(e) {
+    let value = e.target.value
+    this.setState({
+      password: value,
+    })
+  }
+  handleErrorMsg(e) {
+    this.setState({
+      errorMsg: true,
+    })
+  }
+  test() {
+    this.props.removeTokenByID()
+    // console.log("test"+this.props.authToken.token)
+  }
+  render() {
+    return (
+      <>
+        <form className="mt-8" action="#" method="POST">
+          <div>
+            <div className="rounded-md shadow-sm">
+              <div>
+                <div className="text-sm mb-2">Username</div>
+                <input
+                  name="username"
+                  type="username"
+                  required
+                  onChange={this.handleUsername}
+                  className="focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3"
+                  aria-label="Username"
+                  placeholder="username"
+                />
+              </div>
+
+              <div>
+                <div className="text-sm mb-2	">Password</div>
+
+                <input
+                  aria-label="Password"
+                  name="password"
+                  type="password"
+                  required
+                  onChange={this.handlePassword}
+                  className="mb-6 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 "
+                  placeholder="Password"
+                />
+              </div>
+              {this.state.errorMsg ? (
+                <>
+                  <div className="text-xs mb-1 animate-bounce text-red-500 text-center">
+                    *Harap periksa kembali, username atau password yang anda
+                    masukan salah
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+              <div className="flex ">
+                <button
+                  type="submit"
+                  className=" w-full border-2 rounded-md  bg-primary"
+                  onClick={this.handleSubmit}
+                >
+                  <div className="text-sm mb-2 text-white	h-6">Login</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </>
+    )
+  }
 }
 
-             
+function mapStateToProps(state) {
+  return state
+}
 
-export default connect(null, {addTokenByID})(Login);
+export default connect(mapStateToProps, { addTokenByID, removeTokenByID })(
+  Login,
+)

@@ -7,7 +7,7 @@ import rootReducer from './reducers';
 import {addTokenByID} from './actions'
 import {persistor, store} from './store';
 import { PersistGate } from 'redux-persist/integration/react'
-
+import {Provider as AuthContext} from './context/AuthContext'
 // const store = createStore(rootReducer);
 // console.log('store.getState()', store.getState());
 //  store.subscribe(()=>console.log('store', store.getState()));
@@ -16,7 +16,10 @@ import { PersistGate } from 'redux-persist/integration/react'
 ReactDOM.render(
 <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-        <Application />
+        <AuthContext>
+            <Application />
+        </AuthContext>
     </PersistGate>
+   
 </Provider>
 , document.getElementById('root'));
