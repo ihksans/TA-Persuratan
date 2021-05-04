@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { NavLink } from 'react-router-dom'
 const Box = ({ icon, title, url, onClick, setFeedback }) => {
   const onLink = () => {
     console.log('url : ')
@@ -8,8 +8,10 @@ const Box = ({ icon, title, url, onClick, setFeedback }) => {
   return (
     <>
       {onClick ? (
-        <button
+        <NavLink
           className="flex flex-row w-full  border border-black bg-brokenblack"
+          exact
+          to={'/' + url}
           onClick={onLink}
         >
           <div className="text-oren ml-2 mr-2 self-center	">
@@ -18,10 +20,12 @@ const Box = ({ icon, title, url, onClick, setFeedback }) => {
           <div className="text-biru font-semibold	 text-110% self-center		">
             {title}
           </div>
-        </button>
+        </NavLink>
       ) : (
-        <button
+        <NavLink
           className="flex flex-row w-full  border border-black"
+          exact
+          to={'/' + url}
           onClick={onLink}
         >
           <div className="text-oren ml-2 mr-2 self-center	">
@@ -30,7 +34,7 @@ const Box = ({ icon, title, url, onClick, setFeedback }) => {
           <div className="text-oren font-semibold	 text-110% self-center		">
             {title}
           </div>
-        </button>
+        </NavLink>
       )}
     </>
   )
