@@ -4,7 +4,7 @@ import React from 'react'
 const HeaderComponent = () => {
   return (
     <>
-      <div className="grid grid-cols-3 gap-4  h-5% border-2 border-gray-400">
+      <div className="grid grid-cols-3 gap-4  h-5% border border-gray-400">
         <div className="col-span-2 flex justify-start">
           <div className="border-1 border-gray-400">=</div>
           <div className="border-1 border-gray-400  font-semibold">

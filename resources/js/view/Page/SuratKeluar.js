@@ -13,7 +13,9 @@ class SuratKeluar extends Component {
       //html
       //js
       <>
-        <p>Ini Class Komponen SuratKeluar</p>
+        <div className="w-full h-90% bg-gray-200	">
+          <p>Ini Class Komponen SuratKeluar</p>
+        </div>
       </>
     )
   }

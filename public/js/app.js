@@ -2483,7 +2483,7 @@ __webpack_require__.r(__webpack_exports__);
 var Footer = function Footer() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "flex flex-wrap content-end border-2 border-gray-400 h-5% ",
+      className: "flex flex-wrap content-end border border-gray-400 h-5% ",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         className: "ml-4 text-sm\ttext-center mt-6",
         children: "Copyright @2021 NamaAplikasi. All rights reserved"
@@ -2518,7 +2518,7 @@ __webpack_require__.r(__webpack_exports__);
 var HeaderComponent = function HeaderComponent() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      className: "grid grid-cols-3 gap-4  h-5% border-2 border-gray-400",
+      className: "grid grid-cols-3 gap-4  h-5% border border-gray-400",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "col-span-2 flex justify-start",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -4076,8 +4076,11 @@ var Disposisi = /*#__PURE__*/function (_Component) {
         //html
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-            children: "Ini Class Komponen Disposisi"
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "w-full h-90% bg-gray-200\t",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: "Ini Class Komponen Disposisi"
+            })
           })
         })
       );
@@ -4156,8 +4159,11 @@ var KelolaPengguna = /*#__PURE__*/function (_Component) {
         //html
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-            children: "Ini Class Komponen KelolaPengguna"
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "w-full h-90% bg-gray-200\t",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: "Ini Class Komponen Kelola Pengguna"
+            })
           })
         })
       );
@@ -4236,8 +4242,11 @@ var KelolaSurat = /*#__PURE__*/function (_Component) {
         //html
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-            children: "Ini Class Komponen KelolaSurat"
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "w-full h-90% bg-gray-200\t",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: "Ini Class Komponen Kelola Surat"
+            })
           })
         })
       );
@@ -4534,8 +4543,11 @@ var SuratKeluar = /*#__PURE__*/function (_Component) {
         //html
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-            children: "Ini Class Komponen SuratKeluar"
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "w-full h-90% bg-gray-200\t",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: "Ini Class Komponen SuratKeluar"
+            })
           })
         })
       );
@@ -4614,8 +4626,11 @@ var SuratMasuk = /*#__PURE__*/function (_Component) {
         //html
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-            children: "Ini Class Komponen SuratMasuk"
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "w-full h-90% bg-gray-200\t",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+              children: "Ini Class Komponen SuratMasuk"
+            })
           })
         })
       );

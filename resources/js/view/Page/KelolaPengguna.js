@@ -13,7 +13,9 @@ class KelolaPengguna extends Component {
       //html
       //js
       <>
-        <p>Ini Class Komponen KelolaPengguna</p>
+        <div className="w-full h-90% bg-gray-200	">
+          <p>Ini Class Komponen Kelola Pengguna</p>
+        </div>
       </>
     )
   }
