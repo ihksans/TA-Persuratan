@@ -19,7 +19,7 @@ class DashboardAdmin extends Component {
       <>
         <div className="w-full h-90% bg-gray-200	">
           <p>Ini Main Dashboard Page </p>
-          <p>token: {this.props.authToken.token}</p>
+          {/* <p>token: {this.props.authToken.token}</p>
           {Cookies.get('cake') == this.props.authToken.token ? (
             <>
               <p>True</p>
@@ -28,7 +28,7 @@ class DashboardAdmin extends Component {
             <>
               <p>False</p>
             </>
-          )}
+          )} */}
           <Logout />
         </div>
       </>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
 use App\Models\User;
+use App\Models\Pengguna;
 
 
 class AuthController extends Controller

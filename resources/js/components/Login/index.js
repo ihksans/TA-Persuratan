@@ -79,10 +79,17 @@
 // export default Login;
 
 import React, { Component } from 'react'
+import { Redirect, Route } from 'react-router-dom'
+
 import api from '../../service/api'
 import { connect } from 'react-redux'
 import { logIn, notLoggedIn } from '../../service/token'
-import { addTokenByID, removeTokenByID } from '../../actions'
+import {
+  unsetUser,
+  setUser,
+  addTokenByID,
+  removeTokenByID,
+} from '../../actions'
 
 class Login extends Component {
   constructor(props) {
@@ -110,7 +117,9 @@ class Login extends Component {
     // console.log("setToken:"+ token);
     this.props.addTokenByID(token)
   }
-
+  setUserData(userData) {
+    this.props.setUser(userData)
+  }
   handleSubmit(e) {
     e.preventDefault()
     this.handleUnsetError()
@@ -133,7 +142,29 @@ class Login extends Component {
             if (response.data.status == 'success') {
               logIn(response.data.content.access_token)
               this.setToken(response.data.content.access_token)
-              window.location.assign('/')
+              api()
+                .post('api/userInfo')
+                .then((response) => {
+                  if (response.data.error) {
+                    console.log(response.data.error)
+                    console.log('error login')
+                  } else {
+                    let formDataId = new FormData()
+                    formDataId.append('id', response.data.token.tokenable_id)
+                    api()
+                      .post('api/getPenggunaInfo', formDataId)
+                      .then((response) => {
+                        if (response.data.error) {
+                          console.log('error id current user')
+                        } else {
+                          this.setUserData(response.data)
+                          console.log('current user :' + response.data)
+                          window.location.assign('/')
+                          // return <Redirect to="/" />
+                        }
+                      })
+                  }
+                })
             } else if (response.data.status == 'error') {
               if (response.data.errors == 'username') {
                 this.handleErrorUsername()
@@ -290,6 +321,8 @@ function mapStateToProps(state) {
   return state
 }
 
-export default connect(mapStateToProps, { addTokenByID, removeTokenByID })(
-  Login,
-)
+export default connect(mapStateToProps, {
+  addTokenByID,
+  removeTokenByID,
+  setUser,
+})(Login)

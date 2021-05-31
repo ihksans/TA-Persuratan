@@ -1,6 +1,6 @@
 //component logout
 import React, { Component, useState } from 'react'
-import { removeTokenByID } from '../../actions'
+import { removeTokenByID, unsetUser } from '../../actions'
 import { logoutAuth } from '../../service/auth'
 import { connect } from 'react-redux'
 
@@ -9,14 +9,22 @@ class Logout extends Component {
     super(props)
     this.state = {}
     this.removeToken = this.removeToken.bind(this)
+    this.unsetCurrentUser = this.unsetCurrentUser.bind(this)
   }
   signOut() {
     logoutAuth()
     this.removeToken()
+    this.unsetCurrentUser()
   }
   removeToken() {
     this.props.removeTokenByID()
+    this.props.unsetUser()
+
     logoutAuth()
+  }
+  unsetCurrentUser() {
+    console.log('unset user')
+    this.props.unsetUser()
   }
   render() {
     // console.log("last token:"+ this.props.authToken.token);
@@ -55,4 +63,4 @@ class Logout extends Component {
 function mapStateToProps(state) {
   return state
 }
-export default connect(mapStateToProps, { removeTokenByID })(Logout)
+export default connect(mapStateToProps, { removeTokenByID, unsetUser })(Logout)

@@ -27,7 +27,7 @@ export const logoutAuth = () => {
         console.log('error login')
       } else {
         logOut()
-        window.location.assign('/#/Login')
+        //window.location.assign('/#/Login')
       }
     })
 }

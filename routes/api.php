@@ -25,4 +25,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('logoutall', 'AuthController@logoutall');
     Route::post('userInfo', 'AuthController@userInfo');
     Route::post('cekToken', 'AuthController@checkToken');
+    Route::post('getPenggunaInfo', 'PenggunaController@index');
 });
