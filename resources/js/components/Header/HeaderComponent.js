@@ -8,7 +8,7 @@ const HeaderComponent = () => {
         <div className="col-span-2 flex justify-start">
           <div className="border-1 border-gray-400">=</div>
           <div className="border-1 border-gray-400  font-semibold">
-            NAMAAPLIKASI
+            NAMA APLIKASI
           </div>
         </div>
         <div className="flex justify-end border-1 border-gray-400">

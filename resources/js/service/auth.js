@@ -52,3 +52,16 @@ export const cekAuth = () => {
   console.log('status: ' + status)
   return status
 }
+export const userInfo = () => {
+  let status = false
+  api()
+    .post('api/userInfo')
+    .then(() => {
+      status = true
+    })
+    .catch((err) => {
+      status = false
+    })
+  console.log('status:' + status)
+  return status
+}
