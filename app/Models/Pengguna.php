@@ -22,7 +22,8 @@ class Pengguna extends Authenticatable
         'NAMA',
         'USERNAME',
         'ROLE',
-        'TOKEN'
+        'TOKEN',
+        'PASSWORD',
     ];
 
     /**
@@ -30,9 +31,7 @@ class Pengguna extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'PASSWORD',
-    ];
+   
 
     /**
      * The attributes that should be cast to native types.

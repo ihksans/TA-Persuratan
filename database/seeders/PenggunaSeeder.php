@@ -15,10 +15,10 @@ class PenggunaSeeder extends Seeder
     public function run()
     {
         Pengguna::create([
-            'USERNAME' => 'admin',
-            'NAMA' => 'admin',
-            'ROLE' => '1',
-            'Password' => \Hash::make('admin123'),
+            'USERNAME' => 'satria',
+            'NAMA' => 'satria',
+            'ROLE' => '2',
+            'Password' => \Hash::make('satria123'),
         ]);
     }
 }
