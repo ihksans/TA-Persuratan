@@ -1,5 +1,4 @@
 //reducer for auth
-import authToken_json from '../data/authToken_json.json'
 // add a actions
 import { ADD_AUTHTOKEN, DEL_AUTHTOKEN } from '../actions'
 

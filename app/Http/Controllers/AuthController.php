@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 
 //model
 use App\Models\User;
+use App\Models\Pengguna;
 
 
 class AuthController extends Controller
@@ -29,10 +30,26 @@ class AuthController extends Controller
             return response()->json($respon, 200);
         } else {
             $user = User::where('username', $request->username)->first();
-            if (!\Hash::check($request->password, $user->password, [])) {
-                throw new \Exception('Error in Login');
+            if($user == null )
+            {
+                $respon = [
+                    'status' => 'error',
+                    'msg' => 'username not found',
+                    'errors' => 'username',
+                    'content' => null,
+                ];
+                return response()->json($respon);
             }
-
+            if (!\Hash::check($request->password, $user->password)) {
+                // throw new \Exception('Error in Login');
+                $respon = [
+                    'status' => 'error',
+                    'msg' => 'wrong password',
+                    'errors' => 'password',
+                    'content' => null,
+                ];
+                return response()->json($respon);
+            }
             $tokenResult = $user->createToken('token-auth')->plainTextToken;
             //$CurrentUser = $request->user();
             $respon = [

@@ -79,51 +79,111 @@
 // export default Login;
 
 import React, { Component } from 'react'
+import { Redirect, Route } from 'react-router-dom'
+
 import api from '../../service/api'
 import { connect } from 'react-redux'
 import { logIn, notLoggedIn } from '../../service/token'
-import { addTokenByID, removeTokenByID } from '../../actions'
+import {
+  unsetUser,
+  setUser,
+  addTokenByID,
+  removeTokenByID,
+} from '../../actions'
 
 class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      username: '',
-      password: '',
+      username: null,
+      password: null,
       errorMsg: false,
+      errorUsername: false,
+      errorPassword: false,
+      isUsername: false,
+      isPassword: false,
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleUsername = this.handleUsername.bind(this)
     this.handlePassword = this.handlePassword.bind(this)
     this.handleErrorMsg = this.handleErrorMsg.bind(this)
+    this.handleUsername = this.handleUsername.bind(this)
+    this.handlePassword = this.handlePassword.bind(this)
+    this.handleNullPassword = this.handleNullPassword.bind(this)
+    this.handleNullUsername = this.handleNullUsername.bind(this)
     this.test = this.test.bind(this)
   }
   setToken(token) {
     // console.log("setToken:"+ token);
     this.props.addTokenByID(token)
   }
+  setUserData(userData) {
+    this.props.setUser(userData)
+  }
   handleSubmit(e) {
     e.preventDefault()
-
+    this.handleUnsetError()
+    if (this.state.username == null || this.state.username == '') {
+      this.handleNullUsername()
+    }
+    if (this.state.password == null || this.state.password == '') {
+      this.handleNullPassword()
+    }
     let formInput = new FormData()
     formInput.append('username', this.state.username)
     formInput.append('password', this.state.password)
+
     api()
       .get('/sanctum/csrf-cookie')
       .then(() => {
         api()
           .post('api/login', formInput)
           .then((response) => {
-            logIn(response.data.content.access_token)
-            this.setToken(response.data.content.access_token)
-            window.location.assign('/')
+            if (response.data.status == 'success') {
+              logIn(response.data.content.access_token)
+              this.setToken(response.data.content.access_token)
+              api()
+                .post('api/userInfo')
+                .then((response) => {
+                  if (response.data.error) {
+                    console.log(response.data.error)
+                    console.log('error login')
+                  } else {
+                    let formDataId = new FormData()
+                    formDataId.append('id', response.data.token.tokenable_id)
+                    api()
+                      .post('api/getPenggunaInfo', formDataId)
+                      .then((response) => {
+                        if (response.data.error) {
+                          console.log('error id current user')
+                        } else {
+                          this.setUserData(response.data)
+                          console.log('current user :' + response.data)
+                          window.location.assign('/')
+                          // return <Redirect to="/" />
+                        }
+                      })
+                  }
+                })
+            } else if (response.data.status == 'error') {
+              if (response.data.errors == 'username') {
+                this.handleErrorUsername()
+                console.log(response.data)
+                console.log('error username')
+              } else if (response.data.errors == 'password') {
+                console.log('error password')
+                this.handleErrorPassword()
+              }
+            }
           })
           .catch((error) => {
             notLoggedIn
+            console.log('error:' + error.data)
             this.handleErrorMsg()
           })
       })
   }
+
   handleUsername(e) {
     let value = e.target.value
     this.setState({
@@ -139,6 +199,34 @@ class Login extends Component {
   handleErrorMsg(e) {
     this.setState({
       errorMsg: true,
+    })
+  }
+  handleErrorUsername(e) {
+    this.setState({
+      errorUsername: true,
+    })
+  }
+  handleErrorPassword(e) {
+    this.setState({
+      errorPassword: true,
+    })
+  }
+  handleUnsetError() {
+    this.setState({
+      errorPassword: false,
+      errorUsername: false,
+      isUsername: false,
+      isPassword: false,
+    })
+  }
+  handleNullPassword() {
+    this.setState({
+      isPassword: true,
+    })
+  }
+  handleNullUsername() {
+    this.setState({
+      isUsername: true,
     })
   }
   test() {
@@ -164,29 +252,54 @@ class Login extends Component {
                 />
               </div>
 
+              {this.state.isUsername ? (
+                <>
+                  <div className="text-xs mb-1 text-danger italic">
+                    Username harus diisi
+                  </div>
+                </>
+              ) : (
+                <>
+                  {this.state.errorUsername ? (
+                    <>
+                      <div className="text-xs mb-1 text-danger italic">
+                        Username yang dimasukan tidak terdaftar
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              )}
               <div>
                 <div className="text-sm mb-2	">Password</div>
-
                 <input
                   aria-label="Password"
                   name="password"
                   type="password"
                   required
+                  minLength="8"
+                  maxLength="15"
                   onChange={this.handlePassword}
-                  className="mb-6 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 "
+                  className={
+                    this.state.errorPassword
+                      ? 'mb-1 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 '
+                      : 'mb-6 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 '
+                  }
                   placeholder="Password"
                 />
               </div>
-              {this.state.errorMsg ? (
+
+              {this.state.errorPassword ? (
                 <>
-                  <div className="text-xs mb-1 animate-bounce text-red-500 text-center">
-                    *Harap periksa kembali, username atau password yang anda
-                    masukan salah
+                  <div className="text-xs mb-1 text-danger italic ">
+                    Password tidak cocok
                   </div>
                 </>
               ) : (
                 <></>
               )}
+
               <div className="flex ">
                 <button
                   type="submit"
@@ -208,6 +321,8 @@ function mapStateToProps(state) {
   return state
 }
 
-export default connect(mapStateToProps, { addTokenByID, removeTokenByID })(
-  Login,
-)
+export default connect(mapStateToProps, {
+  addTokenByID,
+  removeTokenByID,
+  setUser,
+})(Login)

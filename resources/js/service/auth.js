@@ -27,7 +27,7 @@ export const logoutAuth = () => {
         console.log('error login')
       } else {
         logOut()
-        window.location.assign('/#/Login')
+        //window.location.assign('/#/Login')
       }
     })
 }
@@ -50,5 +50,18 @@ export const cekAuth = () => {
   //     return false
   // }
   console.log('status: ' + status)
+  return status
+}
+export const userInfo = () => {
+  let status = false
+  api()
+    .post('api/userInfo')
+    .then(() => {
+      status = true
+    })
+    .catch((err) => {
+      status = false
+    })
+  console.log('status:' + status)
   return status
 }

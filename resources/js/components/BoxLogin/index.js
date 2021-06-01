@@ -22,7 +22,7 @@ const Box = () => {
         <div className="box-border  h-full w-2/4">
           <img
             className=" h-full w-full object-cover rounded-xl"
-            src="assets/img/gdH.jpg"
+            src="assets/img/gdH.png"
           />
           {/* <div className="text-xs	text-center mt-6">
             Aplikasi pengelolaan persuratan

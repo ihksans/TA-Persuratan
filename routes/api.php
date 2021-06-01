@@ -25,7 +25,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('logoutall', 'AuthController@logoutall');
     Route::get('userInfo', 'AuthController@userInfo');
     Route::post('cekToken', 'AuthController@checkToken');
-    Route::post('','CreateUserController@');
+    Route::post('getPenggunaInfo', 'PenggunaController@index');
+    Route::post('createUser', 'PenggunaController@createUser');
+    Route::put('updateUser', 'PenggunaController@updateUser');
+
+    Route::post('deleteUser', 'PenggunaController@deleteUser');
+
 });
 Route::apiResource('/createuser', "CreateUserController");
 Route::get('/',[App\Http\Controllers\api\CreateUserController::class, 'index']);

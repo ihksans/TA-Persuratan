@@ -2,6 +2,9 @@
 
 import React, { Component } from 'react'
 import { Switch, Route, Router } from 'react-router-dom'
+import api from './service/api'
+import { userInfo } from './service/auth'
+
 import LandingPage from './view/Page/LandingPage'
 import Abouth from './view/Page/Abouth'
 import MainDashboardPage from './view/Page/MainDashboardPage'
@@ -18,6 +21,39 @@ import { PrivateRoute } from './PrivateRoot'
 import { connect } from 'react-redux'
 import Cookies from 'js-cookie'
 class Main extends Component {
+  constructor(props) {
+    super()
+    this.state = {
+      login: false,
+    }
+  }
+  componentDidMount() {
+    // api()
+    //   .post('api/userInfo')
+    //   .then((response) => {
+    //     this.setState({
+    //       login: true,
+    //     })
+    //     console.log('user info:' + response.data.content.token)
+    //   })
+    //   .catch((err) => {
+    //     console.log('belum login')
+    //   })
+    api()
+      .post('api/userInfo')
+      .then((response) => {
+        if (response.data.error) {
+          console.log(response.data.error)
+          console.log('error login')
+        } else {
+          this.setState({
+            login: true,
+          })
+          console.log('user info:' + response)
+        }
+      })
+    console.log('this login: ' + this.state.login)
+  }
   render() {
     // console.log("token ku:"+ this.props.authToken.token)
     return (

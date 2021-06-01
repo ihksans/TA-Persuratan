@@ -20,7 +20,6 @@ class CreatePersonalAccessTokensTable extends Migration
             $table->integer('tokenable_id')->unsigned();
             $table->foreign('tokenable_id')->references('id')->on('users');
             $table->string('name');
-            // $table->integer('role');
             $table->string('token', 64)->unique();
             $table->text('abilities')->nullable();
             $table->timestamp('last_used_at')->nullable();

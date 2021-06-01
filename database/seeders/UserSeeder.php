@@ -17,8 +17,12 @@ class UserSeeder extends Seeder
         User::create([
             'username' => 'admin',
             'name' => 'admin',
-            // 'role' => '1',
+            'role' => '1',
             'password' => \Hash::make('admin123'),
+            // 'id' => '7',
+            // 'username' => 'satria',
+            // 'name' => 'satria',
+            // 'password' => \Hash::make('satria123'),
         ]);
     }
 }
