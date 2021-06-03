@@ -1,49 +1,71 @@
 //this component for header
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import * as FaIcons from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import DataUser from './DataUser'
+import UserButton from './UserButton'
+// class HeaderComponent extends Component {
+//   constructor(props) {
+//     super()
+//     this.state = {}
+//   }
+//   render() {
+//     return (
 
-class HeaderComponent extends Component {
-  constructor(props) {
-    super()
-    this.state = {}
+//     )
+//   }
+// }
+
+// function mapStateToProps(state) {
+//   return state
+// }
+
+// export default connect(mapStateToProps, null)(HeaderComponent)
+
+const HeaderComponent = ({ show }) => {
+  const on = () => {
+    show()
   }
-  render() {
-    return (
+  const handleSubmit = () => {
+    show()
+  }
+  return (
+    <>
       <>
-        <div className="grid grid-cols-3 gap-4  h-5% border border-gray-400">
+        <div className="grid grid-cols-3 gap-4  h-7% border border-gray-400">
           <div className="col-span-2 flex justify-start">
-            <div className="border-1 border-gray-400">=</div>
-            <div className="border-1 border-gray-400  font-semibold">
-              NAMA APLIKASI
-            </div>
+            <Link to="#">
+              <button type="submit" className=" w-full " onClick={handleSubmit}>
+                <img
+                  className=" h-full w-full "
+                  src="assets/img/icon/Menu.png"
+                />
+              </button>
+            </Link>
+            {/* <div className="border-1 border-gray-400  font-semibold ">
+              Aplikasi Pengelolaan Surat Kemahasiswaan
+            </div> */}
           </div>
           <div className="flex justify-end border-1 border-gray-400">
             <div className="border-1 border-gray-400 ">
-              {/* <div className="border-1 border-gray-400  font-semibold">
-              Satria Nata
-            </div> */}
-              <div className="border-1 border-gray-400  font-semibold">
-                {this.props.User.currentUser.NAMA}
-              </div>
-              <div className="border-1 border-gray-400 text-sm ">
-                {this.props.User.currentUser.ROLE == 1
-                  ? 'Administrator'
-                  : 'Staff Pengguna'}
-              </div>
+              <DataUser />
             </div>
+            <UserButton />
 
-            <div className="border-1 border-gray-400">Foto</div>
-            <div className="border-1 border-gray-400">Surat</div>
-            <div className="border-1 border-gray-400">Bel</div>
+            <button type="submit" className="  w-6	h-10 my-2 mx-3">
+              <img
+                className=" h-full w-full "
+                src="assets/img/icon/Surat.png"
+              />
+            </button>
+            <button type="submit" className=" w-6	h-10 my-2 mx-3">
+              <img className=" h-full w-full " src="assets/img/icon/Bell.png" />
+            </button>
           </div>
         </div>
       </>
-    )
-  }
+    </>
+  )
 }
-
-function mapStateToProps(state) {
-  return state
-}
-
-export default connect(mapStateToProps, null)(HeaderComponent)
+export default HeaderComponent

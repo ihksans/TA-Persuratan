@@ -1,6 +1,6 @@
 //component logout
 import React, { Component, useState } from 'react'
-import { removeTokenByID, unsetUser } from '../../actions'
+import { removeTokenByID, unsetUser, unsetPath } from '../../actions'
 import { logoutAuth } from '../../service/auth'
 import { connect } from 'react-redux'
 
@@ -19,7 +19,7 @@ class Logout extends Component {
   removeToken() {
     this.props.removeTokenByID()
     this.props.unsetUser()
-
+    this.props.unsetPath()
     logoutAuth()
   }
   unsetCurrentUser() {
@@ -31,9 +31,7 @@ class Logout extends Component {
 
     return (
       <>
-        <p>{this.props.authToken.token}</p>
-
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <button
             type="submit"
             onClick={this.removeToken}
@@ -54,6 +52,15 @@ class Logout extends Component {
             </span>
             Logout
           </button>
+        </div> */}
+        <div className="absolute">
+          <button
+            type="submit"
+            onClick={this.removeToken}
+            className="group relative w-full flex justify-center py-2 px-4 border  text-xs leading-5  font-medium rounded-md text-white bg-white border-black	 hover:bg-primary focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+          >
+            Logout
+          </button>
         </div>
       </>
     )
@@ -63,4 +70,8 @@ class Logout extends Component {
 function mapStateToProps(state) {
   return state
 }
-export default connect(mapStateToProps, { removeTokenByID, unsetUser })(Logout)
+export default connect(mapStateToProps, {
+  removeTokenByID,
+  unsetUser,
+  unsetPath,
+})(Logout)

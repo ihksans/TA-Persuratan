@@ -29,7 +29,6 @@ class DashboardAdmin extends Component {
               <p>False</p>
             </>
           )} */}
-          <Logout />
         </div>
       </>
     )

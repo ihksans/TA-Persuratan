@@ -89,6 +89,7 @@ import {
   setUser,
   addTokenByID,
   removeTokenByID,
+  setPath,
 } from '../../actions'
 
 class Login extends Component {
@@ -119,6 +120,11 @@ class Login extends Component {
   }
   setUserData(userData) {
     this.props.setUser(userData)
+    if (userData.ROLE == 1) {
+      this.props.setPath('BerandaAdmin')
+    } else {
+      this.props.setPath('Beranda')
+    }
   }
   handleSubmit(e) {
     e.preventDefault()
@@ -325,4 +331,5 @@ export default connect(mapStateToProps, {
   addTokenByID,
   removeTokenByID,
   setUser,
+  setPath,
 })(Login)
