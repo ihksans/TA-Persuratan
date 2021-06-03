@@ -54,13 +54,19 @@ class Logout extends Component {
           </button>
         </div> */}
         <div className="absolute">
-          <button
-            type="submit"
+          <div
             onClick={this.removeToken}
             className="group relative w-full flex justify-center py-2 px-4 border  text-xs leading-5  font-medium rounded-md text-white bg-white border-black	 hover:bg-primary focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
           >
+            {/* <button
+              type="submit"
+              onClick={this.removeToken}
+              className="group relative w-full flex justify-center py-2 px-4 border  text-xs leading-5  font-medium rounded-md text-white bg-white border-black	 hover:bg-primary focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+            >
+              Logout
+            </button> */}
             Logout
-          </button>
+          </div>
         </div>
       </>
     )
