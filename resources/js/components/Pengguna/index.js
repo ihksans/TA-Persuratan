@@ -23,7 +23,7 @@ class CreateUser extends Component {
       // flash:false,
     }
     this.getPengguna = this.getPengguna.bind(this);
-    // this.deletePengguna = this.deletePengguna.bind(this);
+    this.deletePengguna = this.deletePengguna.bind(this);
   }
   hideAlert() {
     this.setState({
@@ -45,17 +45,18 @@ class CreateUser extends Component {
         console.log('pengguna:'+ response.data)
       });
   }
-  // deletePengguna(id){
-    
-  //   api()
-  //   .delete('api/deleteUser')
-  //   // .then(response=>{
-  //   //   console.log('pengguna telah terhapus'+response.data)
-  //   // }).catch((error)=>{
-  //   //   console.log(error)
-  //   // })
-  //   console.log(id)
-  // }
+  deletePengguna(id){
+    let formData = new FormData()
+    formData.append('id',id)
+    api()
+      .delete('api/deleteUser',formData)
+      .then(response=>{
+        console.log('pengguna tidak terhapus'+response.data)
+      }).catch((error)=>{
+        console.log(error)
+      })
+      console.log('id:' +id)
+  }
 
 //   edit(id){
 //       let item=this.state.dir.filter(item = item.id === id)[0]
@@ -68,10 +69,7 @@ class CreateUser extends Component {
 //       }
 //   }
 
-//   delete(id){
-//       axios.delete('/api/createuser/${id}')
-//       .then(res=>this.fetchAll())
-//   }
+
   
 
   render() {
@@ -82,7 +80,6 @@ class CreateUser extends Component {
         <button
                   type="submit"
                   className=" w-full border-2 rounded-md  bg-primary"
-                  // onClick={this.handleSubmit}
                   data-target="#myForm"
                 >
         <div className="text-sm mb-2 text-white	h-6">Tambah data</div>
@@ -94,12 +91,6 @@ class CreateUser extends Component {
           <table  class="border-collapse border border-gray-800">
           <thead>
             <tr class="border border-gray-600 ...">
-              {/* <th class="border border-gray-600 ...">No</th>
-              <th class="border border-gray-600">Nama Pengguna</th>
-              <th class="border border-gray-600">Username</th>
-              <th class="border border-gray-600">Password</th>
-              <th class="border border-gray-600">Role</th>
-              <th class="border border-gray-600">Aksi</th> */}
               <th scope="row">No</th>
               <th scope="row">Nama Pengguna</th>
               <th scope="row">Username</th>
@@ -122,7 +113,6 @@ class CreateUser extends Component {
                   size="sm"
                   type="submit"
                   className=" w-full border-2 rounded-md  bg-primary"
-                  // onClick={e=>this.props.edit(item.id,e)}
                 >
                   <div className="text-sm mb-2 text-white	h-6">Edit</div>
                 </button>
@@ -130,7 +120,7 @@ class CreateUser extends Component {
                   size="sm"
                   type="submit"
                   className=" w-full border-2 rounded-md  bg-brokenblack"
-                  onClick={()=>this.deletePengguna(pengguna.id)}
+                  onClick={() => this.deletePengguna(pengguna.ID_PENGGUNA)}
                 >
                   <div className="text-sm mb-2 text-white	h-6">Hapus</div>
                 </button>

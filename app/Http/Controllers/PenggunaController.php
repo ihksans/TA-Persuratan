@@ -31,6 +31,10 @@ class PenggunaController extends Controller
         return response()->json($user,200);
     }
     public function createUser(Request $request){
+        // $data=[
+        //     'data'=>$request
+        // ];
+        // return response()->json($data);
         $request->validate([
             'USERNAME' => 'required',
             'NAMA' => 'required',
@@ -52,6 +56,7 @@ class PenggunaController extends Controller
             return response()->json($respon);
         }
         return response()->json($user);
+
     }
     public function editUser(Request $request){
         $user = Pengguna::where('ID_PENGGUNA',$request->id)->get();

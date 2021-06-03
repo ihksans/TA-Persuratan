@@ -11089,77 +11089,63 @@ var Form = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.state = {
       dir: [],
-      item: {
-        nama: "",
-        username: "",
-        role: "",
-        password: "" // confirmpassword: ""
-
-      } // isEditing: false,
-      // temp_id: null
-
-    }; // this.handleChange = this.handleChange.bind(this)
-    // this.add = this.add.bind(this)
-    // this.fetchAll = this.fetchAll.bind(this)
-    // this.delete = this.delete.bind(this)
-    // this.edit = this.edit.bind(this)
-
-    _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
+      nama: "",
+      username: "",
+      role: "",
+      password: ""
+    };
+    _this.handleInputNama = _this.handleInputNama.bind(_assertThisInitialized(_this));
     _this.handleInputUsername = _this.handleInputUsername.bind(_assertThisInitialized(_this));
     _this.handleInputRole = _this.handleInputRole.bind(_assertThisInitialized(_this));
     _this.handleInputPassword = _this.handleInputPassword.bind(_assertThisInitialized(_this));
-    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this)); // this.handleInput=this.handleInput.bind(this)
-
+    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
     return _this;
   } //handle input changes and update item state
 
 
   _createClass(Form, [{
-    key: "handleInputChange",
-    value: function handleInputChange(e) {
+    key: "handleInputNama",
+    value: function handleInputNama(e) {
+      var value = e.target.value;
       this.setState({
-        nama: e.target.value
+        nama: value
       });
-      console.log(this.state.nama);
     }
   }, {
     key: "handleInputUsername",
     value: function handleInputUsername(e) {
+      var value = e.target.value;
       this.setState({
-        username: e.target.value
+        username: value
       });
-      console.log(this.state.username);
     }
   }, {
     key: "handleInputRole",
     value: function handleInputRole(e) {
+      var value = e.target.value;
       this.setState({
-        role: e.target.value
+        role: value
       });
-      console.log(this.state.role);
     }
   }, {
     key: "handleInputPassword",
     value: function handleInputPassword(e) {
+      var value = e.target.value;
       this.setState({
-        password: e.target.value
+        password: value
       });
-      console.log(this.state.password);
     }
   }, {
     key: "onSubmit",
     value: function onSubmit(e) {
       var _this2 = this;
 
-      e.preventDefault(); // const PenggunaObject ={
-      //     name: this.state.name,
-      //     username: this.state.username,
-      //     role: this.state.role,
-      //     password: this.state.password
-      // }; 
-
-      (0,_service_api__WEBPACK_IMPORTED_MODULE_1__.default)() // .post('api/createUser', PenggunaObject)
-      .post('api/createUser', {
+      e.preventDefault();
+      console.log('nama final : ' + this.state.nama);
+      console.log('username final : ' + this.state.username);
+      console.log('password final : ' + this.state.password);
+      console.log('role final:' + this.state.role);
+      (0,_service_api__WEBPACK_IMPORTED_MODULE_1__.default)().post('api/createUser', {
         NAMA: this.state.nama,
         USERNAME: this.state.username,
         ROLE: this.state.role,
@@ -11172,8 +11158,7 @@ var Form = /*#__PURE__*/function (_Component) {
             role: "",
             password: ""
           }
-        }); // this.props.history.push('/');
-
+        });
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -11184,7 +11169,7 @@ var Form = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("form", {
           className: "mt-8",
-          action: "#myForm",
+          action: "#",
           method: "POST",
           onSubmit: this.onSubmit,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -11197,15 +11182,13 @@ var Form = /*#__PURE__*/function (_Component) {
                   children: "Nama Pengguna"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
                   type: "text",
-                  name: "nama" // value={this.props.name}
-                  // onChange={(event)=>this.props.hanndleChange(evet)}
-                  ,
+                  name: "nama",
+                  required: true,
                   id: "nama",
                   placeholder: "Masukan Nama Pengguna",
                   className: "focus:form-control focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3",
                   value: this.state.nama,
-                  onChange: this.handleInputChange // onChange={this.handleInput}
-
+                  onChange: this.handleInputNama
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -11214,15 +11197,13 @@ var Form = /*#__PURE__*/function (_Component) {
                   children: "Username"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
                   type: "text",
-                  name: "username" // value={this.props.name}
-                  // onChange={(event)=>this.props.hanndleChange(evet)}
-                  ,
+                  name: "username",
+                  required: true,
                   id: "username",
                   placeholder: "Masukan Username",
                   className: "focus:form-control focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3",
                   value: this.state.username,
-                  onChange: this.handleInputUsername // onChange={this.handleInput}
-
+                  onChange: this.handleInputUsername
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -11231,16 +11212,16 @@ var Form = /*#__PURE__*/function (_Component) {
                   children: "Role"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
                   type: "text",
-                  name: "role" // value={this.props.name}
-                  // onChange={(event)=>this.props.hanndleChange(evet)}
-                  ,
+                  name: "role",
+                  required: true,
                   id: "role",
                   placeholder: "Masukan Role",
                   className: "focus:form-control focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3",
                   value: this.state.role,
-                  onChange: this.handleInputRole // onChange={this.handleInput}
-                  ,
+                  onChange: this.handleInputRole,
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+                    children: "Pengguna sebagai ..."
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
                     value: "1",
                     children: "Administrator"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
@@ -11254,23 +11235,36 @@ var Form = /*#__PURE__*/function (_Component) {
                   className: "text-sm mb-2",
                   children: "Password"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
-                  type: "text",
-                  name: "password" // value={this.props.name}
-                  // onChange={(event)=>this.props.hanndleChange(evet)}
-                  ,
+                  type: "password",
+                  name: "password",
+                  required: true,
                   id: "password",
                   placeholder: "Masukan Password",
                   className: "focus:form-control focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3",
                   value: this.state.password,
-                  onChange: this.handleInputPassword // onChange={this.handleInput}
-
+                  onChange: this.handleInputPassword
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                  htmlFor: "password",
+                  className: "text-sm mb-2",
+                  children: "Connfirm Password"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
+                  type: "password",
+                  name: "password",
+                  required: true,
+                  id: "password",
+                  placeholder: "Masukan Password",
+                  className: "focus:form-control focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3",
+                  value: this.state.password,
+                  onChange: this.handleInputPassword
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                 className: "flex ",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
                   type: "submit",
-                  className: " w-full border-2 rounded-md  bg-primary" // onClick={this.handleSubmit}
-                  ,
+                  className: " w-full border-2 rounded-md  bg-primary",
+                  onClick: this.onSubmit,
                   value: "Add Pengguna",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                     className: "text-sm mb-2 text-white\th-6",
@@ -12239,8 +12233,8 @@ var CreateUser = /*#__PURE__*/function (_Component) {
       // flash:false,
 
     };
-    _this.getPengguna = _this.getPengguna.bind(_assertThisInitialized(_this)); // this.deletePengguna = this.deletePengguna.bind(this);
-
+    _this.getPengguna = _this.getPengguna.bind(_assertThisInitialized(_this));
+    _this.deletePengguna = _this.deletePengguna.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -12268,17 +12262,19 @@ var CreateUser = /*#__PURE__*/function (_Component) {
 
         console.log('pengguna:' + response.data);
       });
-    } // deletePengguna(id){
-    //   api()
-    //   .delete('api/deleteUser')
-    //   // .then(response=>{
-    //   //   console.log('pengguna telah terhapus'+response.data)
-    //   // }).catch((error)=>{
-    //   //   console.log(error)
-    //   // })
-    //   console.log(id)
-    // }
-    //   edit(id){
+    }
+  }, {
+    key: "deletePengguna",
+    value: function deletePengguna(id) {
+      var formData = new FormData();
+      formData.append('id', id);
+      (0,_service_api__WEBPACK_IMPORTED_MODULE_3__.default)()["delete"]('api/deleteUser', formData).then(function (response) {
+        console.log('pengguna tidak terhapus' + response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      console.log('id:' + id);
+    } //   edit(id){
     //       let item=this.state.dir.filter(item = item.id === id)[0]
     //       if(item){
     //           this.setState({
@@ -12287,10 +12283,6 @@ var CreateUser = /*#__PURE__*/function (_Component) {
     //               temp_id:item.id
     //           })
     //       }
-    //   }
-    //   delete(id){
-    //       axios.delete('/api/createuser/${id}')
-    //       .then(res=>this.fetchAll())
     //   }
 
   }, {
@@ -12304,8 +12296,7 @@ var CreateUser = /*#__PURE__*/function (_Component) {
           classNname: "mt-4",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
             type: "submit",
-            className: " w-full border-2 rounded-md  bg-primary" // onClick={this.handleSubmit}
-            ,
+            className: " w-full border-2 rounded-md  bg-primary",
             "data-target": "#myForm",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
               className: "text-sm mb-2 text-white\th-6",
@@ -12363,8 +12354,7 @@ var CreateUser = /*#__PURE__*/function (_Component) {
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
                         size: "sm",
                         type: "submit",
-                        className: " w-full border-2 rounded-md  bg-primary" // onClick={e=>this.props.edit(item.id,e)}
-                        ,
+                        className: " w-full border-2 rounded-md  bg-primary",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                           className: "text-sm mb-2 text-white\th-6",
                           children: "Edit"
@@ -12374,7 +12364,7 @@ var CreateUser = /*#__PURE__*/function (_Component) {
                         type: "submit",
                         className: " w-full border-2 rounded-md  bg-brokenblack",
                         onClick: function onClick() {
-                          return _this3.deletePengguna(pengguna.id);
+                          return _this3.deletePengguna(pengguna.ID_PENGGUNA);
                         },
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                           className: "text-sm mb-2 text-white\th-6",
