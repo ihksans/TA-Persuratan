@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('allPenggunaInfo','PenggunaController@allUser');
     Route::post('editUser','PenggunaController@editUser');
     Route::post('updateUser', 'PenggunaController@updateUser');
-    Route::delete('deleteUser/{id}', 'PenggunaController@deleteUser');
+    Route::delete('deleteUser', 'PenggunaController@deleteUser');
     Route::post('deleteUser', 'PenggunaController@deleteUser');
 
 });

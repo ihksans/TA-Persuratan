@@ -24,7 +24,7 @@ class CreateUser extends Component {
       // alert: null,
     }
     this.getPengguna = this.getPengguna.bind(this);
-    this.deletePengguna = this.deletePengguna.bind(this);
+    // this.deletePengguna = this.deletePengguna.bind(this);
   }
   hideAlert() {
     this.setState({
@@ -46,15 +46,17 @@ class CreateUser extends Component {
         console.log('pengguna:'+ response.data)
       });
   }
-  deletePengguna(id){
-    api()
-    .delete('api/deleteUser/${id}')
-    .then(response=>{
-      console.log('pengguna telah terhapus'+response.data)
-    }).catch((error)=>{
-      console.log(error)
-    })
-  }
+  // deletePengguna(id){
+    
+  //   api()
+  //   .delete('api/deleteUser')
+  //   // .then(response=>{
+  //   //   console.log('pengguna telah terhapus'+response.data)
+  //   // }).catch((error)=>{
+  //   //   console.log(error)
+  //   // })
+  //   console.log(id)
+  // }
 
 //   edit(id){
 //       let item=this.state.dir.filter(item = item.id === id)[0]
@@ -71,33 +73,6 @@ class CreateUser extends Component {
 //       axios.delete('/api/createuser/${id}')
 //       .then(res=>this.fetchAll())
 //   }
-
-//   view(item){
-//       alert(
-//           `
-//           name=${item.name}\n
-//           // dll
-//           `
-//       )
-//   }
-
-// add(e){
-//     e.preventDefault();
-//     axios.post('/api/createuser', this.state.item)
-//         .then(res => {
-//             this.setState({
-//                 item:{
-//                     name:"",
-//                     username1:"",
-//                     // role:"",
-//                     password1:"" 
-//                     // confirmpassword: ""
-//                 },
-//             })
-//             this.fetchAll();
-//         });
-//     // console.log("Pengguna telah dibuat")
-// }
   
 
   render() {
@@ -113,30 +88,8 @@ class CreateUser extends Component {
                 >
         <div className="text-sm mb-2 text-white	h-6">Tambah data</div>
         </button>
+
         </div>
-        {/* <div className="col-md-6">
-          <ul className="list-group">
-          {
-              this.props.dir.map(item =>(
-                <li ClassName="list-group-item"> Test
-              <span className="float-right">
-                <button
-                  className="rounded-md  bg-primary mr-2"
-                >
-                  Edit
-                </button>
-                <button
-                  className="rounded-md  bg-brokenblack mr-2"
-                >
-                  Hapus
-                </button>
-              </span>
-            </li>
-              ))
-            }
-          </ul>
-          
-        </div> */}
         <table>
         <div className="mt-12">
           <table  class="border-collapse border border-gray-800">

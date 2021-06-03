@@ -11177,75 +11177,7 @@ var Form = /*#__PURE__*/function (_Component) {
       })["catch"](function (err) {
         return console.log(err);
       });
-    } // handleInput=(e)=>{
-    //     this.setState({[e.target.name]:e.target.value});
-    // }
-    // handleChange(e){
-    //     const name = e.target.name;
-    //     const value = e.target.value;
-    //     let item = this.state.item;
-    //     item[name] = value;
-    //     this.setState({item: item})
-    //     console.log(this.state.item);
-    // }
-    // }
-    // componentDidMount(){
-    //     this.fetchAll();
-    //     // console.log(this.state.dir);
-    // }
-    // fetchAll(){
-    //     api()
-    //     .get('/api/createUser')
-    //         .then(res => {
-    //             this.state(
-    //                 {
-    //                     dir:res.data
-    //                 }
-    //             )
-    //             // console.log(res);
-    //         });
-    //         // console.log(this.state.dir);
-    // }
-    // edit(id){
-    //     let item=this.state.dir.filter(item = item.id === id)[0]
-    //     if(item){
-    //         this.setState({
-    //             isEditing:true,
-    //             item:item,
-    //             temp_id:item.id
-    //         })
-    //     }
-    // }
-    // delete(id){
-    //     axios.delete('/api/createUser/${id}')
-    //     .then(res=>this.fetchAll())
-    // }
-    // view(item){
-    //     alert(
-    //         `
-    //         name=${item.name}\n
-    //         // dll
-    //         `
-    //     )
-    // }
-    // add(e){
-    //     e.preventDefault();
-    //     axios.post('/api/createUser', this.state.item)
-    //         .then(res => {
-    //             this.setState({
-    //                 item:{
-    //                     name:"",
-    //                     username1:"",
-    //                     // role:"",
-    //                     password1:"" 
-    //                     // confirmpassword: ""
-    //                 },
-    //             })
-    //             this.fetchAll();
-    //         });
-    //     // console.log("Pengguna telah dibuat")
-    // }
-
+    }
   }, {
     key: "render",
     value: function render() {
@@ -12308,8 +12240,8 @@ var CreateUser = /*#__PURE__*/function (_Component) {
       // alert: null,
 
     };
-    _this.getPengguna = _this.getPengguna.bind(_assertThisInitialized(_this));
-    _this.deletePengguna = _this.deletePengguna.bind(_assertThisInitialized(_this));
+    _this.getPengguna = _this.getPengguna.bind(_assertThisInitialized(_this)); // this.deletePengguna = this.deletePengguna.bind(this);
+
     return _this;
   }
 
@@ -12337,16 +12269,17 @@ var CreateUser = /*#__PURE__*/function (_Component) {
 
         console.log('pengguna:' + response.data);
       });
-    }
-  }, {
-    key: "deletePengguna",
-    value: function deletePengguna(id) {
-      (0,_service_api__WEBPACK_IMPORTED_MODULE_3__.default)()["delete"]('api/deleteUser/${id}').then(function (response) {
-        console.log('pengguna telah terhapus' + response.data);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    } //   edit(id){
+    } // deletePengguna(id){
+    //   api()
+    //   .delete('api/deleteUser')
+    //   // .then(response=>{
+    //   //   console.log('pengguna telah terhapus'+response.data)
+    //   // }).catch((error)=>{
+    //   //   console.log(error)
+    //   // })
+    //   console.log(id)
+    // }
+    //   edit(id){
     //       let item=this.state.dir.filter(item = item.id === id)[0]
     //       if(item){
     //           this.setState({
@@ -12360,31 +12293,6 @@ var CreateUser = /*#__PURE__*/function (_Component) {
     //       axios.delete('/api/createuser/${id}')
     //       .then(res=>this.fetchAll())
     //   }
-    //   view(item){
-    //       alert(
-    //           `
-    //           name=${item.name}\n
-    //           // dll
-    //           `
-    //       )
-    //   }
-    // add(e){
-    //     e.preventDefault();
-    //     axios.post('/api/createuser', this.state.item)
-    //         .then(res => {
-    //             this.setState({
-    //                 item:{
-    //                     name:"",
-    //                     username1:"",
-    //                     // role:"",
-    //                     password1:"" 
-    //                     // confirmpassword: ""
-    //                 },
-    //             })
-    //             this.fetchAll();
-    //         });
-    //     // console.log("Pengguna telah dibuat")
-    // }
 
   }, {
     key: "render",
