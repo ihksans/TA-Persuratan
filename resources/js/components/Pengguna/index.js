@@ -21,7 +21,6 @@ class CreateUser extends Component {
       // msg: null,
       // type: null,
       // flash:false,
-      // alert: null,
     }
     this.getPengguna = this.getPengguna.bind(this);
     // this.deletePengguna = this.deletePengguna.bind(this);

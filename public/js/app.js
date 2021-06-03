@@ -12237,7 +12237,6 @@ var CreateUser = /*#__PURE__*/function (_Component) {
       // msg: null,
       // type: null,
       // flash:false,
-      // alert: null,
 
     };
     _this.getPengguna = _this.getPengguna.bind(_assertThisInitialized(_this)); // this.deletePengguna = this.deletePengguna.bind(this);
