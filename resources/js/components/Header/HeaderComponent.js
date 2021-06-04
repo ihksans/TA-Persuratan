@@ -5,6 +5,7 @@ import * as FaIcons from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import DataUser from './DataUser'
 import UserButton from './UserButton'
+import ReminderIcon from './ReminderIcon'
 // class HeaderComponent extends Component {
 //   constructor(props) {
 //     super()
@@ -23,7 +24,7 @@ import UserButton from './UserButton'
 
 // export default connect(mapStateToProps, null)(HeaderComponent)
 
-const HeaderComponent = ({ show }) => {
+const HeaderComponent = ({ show, role }) => {
   const on = () => {
     show()
   }
@@ -33,7 +34,7 @@ const HeaderComponent = ({ show }) => {
   return (
     <>
       <>
-        <div className="grid grid-cols-3 gap-4  h-7% border border-gray-400">
+        <div className="grid grid-cols-3 gap-4  h-7% border border-gray-400 ">
           <div className="col-span-2 flex justify-start">
             <Link to="#">
               <button type="submit" className=" w-full " onClick={handleSubmit}>
@@ -53,12 +54,7 @@ const HeaderComponent = ({ show }) => {
             </div>
             <UserButton />
 
-            <button type="submit" className="  w-6	h-10 my-2 mx-3">
-              <img
-                className=" h-full w-full "
-                src="assets/img/icon/Surat.png"
-              />
-            </button>
+            <ReminderIcon />
             <button type="submit" className=" w-6	h-10 my-2 mx-3">
               <img className=" h-full w-full " src="assets/img/icon/Bell.png" />
             </button>

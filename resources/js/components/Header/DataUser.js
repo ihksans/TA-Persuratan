@@ -10,7 +10,7 @@ class DataUser extends Component {
   render() {
     return (
       <>
-        <div className="border-1 border-gray-400  font-semibold">
+        <div className="border-1 border-gray-400 font-semibold">
           {this.props.User.currentUser.NAMA}
         </div>
         <div className="border-1 border-gray-400 text-sm font-semibold">

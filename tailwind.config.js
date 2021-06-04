@@ -17,26 +17,33 @@ module.exports = {
       birudua: '#49B6FF',
     }),
     textColor: (theme) => theme('colors'),
-    textColor: {
-      primary: '#F9881E',
-      secondary: '#ffed4a',
-      danger: '#e3342f',
-      biru: '#16A7DA',
-      oren: '#F9881E',
-      brokenblack: '#174C54',
-      birudua: '#49B6FF',
+    extends: {
+      textColor: {
+        primary: '#F9881E',
+        secondary: '#ffed4a',
+        danger: '#e3342f',
+        biru: '#16A7DA',
+        oren: '#F9881E',
+        brokenblack: '#174C54',
+        birudua: '#49B6FF',
+      },
     },
-    fontSize: {
-      '5%': '5%',
-      '3%': '3%',
-      '7%': '7%',
-      '50%': '50%',
-      '110%': '110%',
+    extend: {
+      fontSize: {
+        '5%': '5%',
+        '3%': '3%',
+        '7%': '7%',
+        '50%': '50%',
+        '110%': '110%',
+        '200%': '200%',
+      },
     },
 
     extend: {
       width: {
         '93%': '94%',
+        '40%': '40%',
+        '20%': '20%',
         '13%': '13%',
         '10%': '10%',
         '75%': '75%',
@@ -47,7 +54,8 @@ module.exports = {
       },
       height: {
         '90%': '90%',
-        '10%': '10%',
+        '20%': '25%',
+        '10%': '15%',
         '5%': '5%',
       },
     },

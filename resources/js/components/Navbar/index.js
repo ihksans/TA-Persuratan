@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
-import * as FaIcons from 'react-icons/fa'
-import * as AiIcons from 'react-icons/ai'
 import { Link, NavLink, Redirect } from 'react-router-dom'
-import { SidebarData } from './SidebarData'
-import './Navbar.css'
 import { IconContext } from 'react-icons'
-
 import { connect } from 'react-redux'
 import { setPath } from '../../actions'
 //Ini buat dependecies/library nya
@@ -87,24 +82,32 @@ class Navbar extends Component {
                 <>
                   <ul className="w-full mt-2 ml-2 ">
                     {this.props.Path.currentPath == 'BerandaAdmin' ? (
-                      <li className="bg-brokenblack mb-5 w-93% mt-2">
-                        <button>
-                          <img
-                            className=" "
-                            src="assets/img/icon/Beranda-Active.png"
-                          />
-                          <div className="text-biru font-bold	">Beranda</div>
+                      <li className="bg-brokenblack mb-5 w-93% ">
+                        <button className="w-full ">
+                          <div className="flex items-center list-none			">
+                            <img
+                              className=" "
+                              src="assets/img/icon/Beranda-Active.png"
+                            />
+                            <div className="text-biru font-bold	flex items-center ml-4 ">
+                              Beranda
+                            </div>
+                          </div>
                         </button>
                       </li>
                     ) : (
                       <li className="mb-5 	">
                         <button onClick={this.onLink1}>
                           <Link to={'/'} replace>
-                            <img
-                              className=" "
-                              src="assets/img/icon/Beranda-Pasive.png"
-                            />
-                            <div className="text-primary">Beranda</div>
+                            <div className="flex items-center list-none			">
+                              <img
+                                className=" "
+                                src="assets/img/icon/Beranda-Pasive.png"
+                              />
+                              <div className="text-primary flex items-center ml-4">
+                                Beranda
+                              </div>
+                            </div>
                           </Link>
                         </button>
                       </li>
@@ -113,12 +116,14 @@ class Navbar extends Component {
                     {this.props.Path.currentPath == 'Surat' ? (
                       <li className="bg-brokenblack mb-5">
                         <button>
-                          <img
-                            className=" "
-                            src="assets/img/icon/Surat-Active.png"
-                          />{' '}
-                          <div className="text-biru font-bold	">
-                            Kelola Surat
+                          <div className="flex items-center list-none			">
+                            <img
+                              className=" "
+                              src="assets/img/icon/Surat-Active.png"
+                            />{' '}
+                            <div className="text-biru font-bold flex items-center ml-4	">
+                              Kelola Surat
+                            </div>
                           </div>
                         </button>
                       </li>
@@ -126,25 +131,31 @@ class Navbar extends Component {
                       <li className="mb-5">
                         <button onClick={this.onLink2}>
                           <Link to="/KelolaSurat" replace>
-                            <img
-                              className=" "
-                              src="assets/img/icon/Surat-Pasive.png"
-                            />{' '}
-                            <div className="text-primary">Kelola Surat</div>
+                            <div className="flex items-center list-none			">
+                              <img
+                                className=" "
+                                src="assets/img/icon/Surat-Pasive.png"
+                              />{' '}
+                              <div className="text-primary flex items-center ml-4">
+                                Kelola Surat
+                              </div>
+                            </div>
                           </Link>
-                        </button>{' '}
+                        </button>
                       </li>
                     )}
 
                     {this.props.Path.currentPath == 'User' ? (
                       <li className="bg-brokenblack mb-5">
                         <button>
-                          <img
-                            className=" "
-                            src="assets/img/icon/User-Active.png"
-                          />
-                          <div className="text-biru font-bold	">
-                            Kelola Pengguna
+                          <div className="flex items-center list-none			">
+                            <img
+                              className=" "
+                              src="assets/img/icon/User-Active.png"
+                            />
+                            <div className="text-biru font-bold	flex items-center ml-4">
+                              Kelola Pengguna
+                            </div>
                           </div>
                         </button>{' '}
                       </li>
@@ -152,11 +163,15 @@ class Navbar extends Component {
                       <li className="mb-5">
                         <button onClick={this.onLink3}>
                           <Link to="/KelolaPengguna" replace>
-                            <img
-                              className=" "
-                              src="assets/img/icon/User-Pasive.png"
-                            />{' '}
-                            <div className="text-primary">Kelola Pengguna</div>
+                            <div className="flex items-center list-none			">
+                              <img
+                                className=" "
+                                src="assets/img/icon/User-Pasive.png"
+                              />{' '}
+                              <div className="text-primary flex items-center ml-4">
+                                Kelola Pengguna
+                              </div>
+                            </div>
                           </Link>
                         </button>
                       </li>
@@ -170,22 +185,30 @@ class Navbar extends Component {
                     {this.props.Path.currentPath == 'Beranda' ? (
                       <li className="bg-brokenblack mb-5  mt-2">
                         <button>
-                          <img
-                            className=" "
-                            src="assets/img/icon/Beranda-Active.png"
-                          />
-                          <div className="text-biru font-bold	">Beranda</div>
+                          <div className="flex items-center list-none			">
+                            <img
+                              className=" "
+                              src="assets/img/icon/Beranda-Active.png"
+                            />
+                            <div className="text-biru font-bold flex items-center ml-4	">
+                              Beranda
+                            </div>
+                          </div>
                         </button>
                       </li>
                     ) : (
                       <li className="mb-5  mt-2">
                         <button onClick={this.onLink4}>
-                          <Link to={'/Dashboard'} replace>
-                            <img
-                              className=" "
-                              src="assets/img/icon/Beranda-Pasive.png"
-                            />
-                            <div className="text-primary">Beranda</div>
+                          <Link to={'/'} replace>
+                            <div className="flex items-center list-none			">
+                              <img
+                                className=" "
+                                src="assets/img/icon/Beranda-Pasive.png"
+                              />
+                              <div className="text-primary flex items-center ml-4">
+                                Beranda
+                              </div>
+                            </div>
                           </Link>
                         </button>
                       </li>
@@ -194,36 +217,47 @@ class Navbar extends Component {
                     {this.props.Path.currentPath == 'SuratMasuk' ? (
                       <li className="bg-brokenblack mb-5">
                         <button>
-                          <img
-                            className=" "
-                            src="assets/img/icon/Surat-Active.png"
-                          />{' '}
-                          <div className="text-biru font-bold	">Surat Masuk</div>
+                          <div className="flex items-center list-none			">
+                            <img
+                              className=" "
+                              src="assets/img/icon/Surat-Active.png"
+                            />{' '}
+                            <div className="text-biru font-bold	flex items-center ml-4">
+                              Surat Masuk
+                            </div>
+                          </div>
                         </button>
                       </li>
                     ) : (
                       <li className="mb-5">
                         <button onClick={this.onLink5}>
                           <Link to="/SuratMasuk" replace>
-                            <img
-                              className=" "
-                              src="assets/img/icon/Surat-Pasive.png"
-                            />{' '}
-                            <div className="text-primary">Surat Masuk</div>
+                            {' '}
+                            <div className="flex items-center list-none			">
+                              <img
+                                className=" "
+                                src="assets/img/icon/Surat-Pasive.png"
+                              />{' '}
+                              <div className="text-primary flex items-center ml-4">
+                                Surat Masuk
+                              </div>{' '}
+                            </div>
                           </Link>
-                        </button>{' '}
+                        </button>
                       </li>
                     )}
 
                     {this.props.Path.currentPath == 'SuratKeluar' ? (
                       <li className="bg-brokenblack mb-5">
                         <button>
-                          <img
-                            className=" "
-                            src="assets/img/icon/Surat-Active.png"
-                          />
-                          <div className="text-biru font-bold	">
-                            Surat Keluar
+                          <div className="flex items-center list-none			">
+                            <img
+                              className=" "
+                              src="assets/img/icon/Surat-Active.png"
+                            />
+                            <div className="text-biru font-bold flex items-center ml-4	">
+                              Surat Keluar
+                            </div>
                           </div>
                         </button>
                       </li>
@@ -231,11 +265,15 @@ class Navbar extends Component {
                       <li className="mb-5">
                         <button onClick={this.onLink6}>
                           <Link to="/SuratKeluar" replace>
-                            <img
-                              className=" "
-                              src="assets/img/icon/Surat-Pasive.png"
-                            />
-                            <div className="text-primary">Surat Keluar</div>
+                            <div className="flex items-center list-none			">
+                              <img
+                                className=" "
+                                src="assets/img/icon/Surat-Pasive.png"
+                              />
+                              <div className="text-primary flex items-center ml-4">
+                                Surat Keluar
+                              </div>
+                            </div>
                           </Link>
                         </button>
                       </li>
@@ -243,22 +281,30 @@ class Navbar extends Component {
                     {this.props.Path.currentPath == 'Disposisi' ? (
                       <li className="bg-brokenblack mb-5">
                         <button>
-                          <img
-                            className=" "
-                            src="assets/img/icon/Surat-Active.png"
-                          />
-                          <div className="text-biru font-bold	">Disposisi</div>
-                        </button>{' '}
+                          <div className="flex items-center list-none			">
+                            <img
+                              className=" "
+                              src="assets/img/icon/Surat-Active.png"
+                            />
+                            <div className="text-biru font-bold	flex items-center ml-4">
+                              Disposisi
+                            </div>
+                          </div>
+                        </button>
                       </li>
                     ) : (
                       <li className="mb-5">
                         <button onClick={this.onLink7}>
                           <Link to="/Disposisi" replace>
-                            <img
-                              className=" "
-                              src="assets/img/icon/Surat-Pasive.png"
-                            />{' '}
-                            <div className="text-primary">Disposisi</div>
+                            <div className="flex items-center list-none			">
+                              <img
+                                className=" "
+                                src="assets/img/icon/Surat-Pasive.png"
+                              />{' '}
+                              <div className="text-primary flex items-center ml-4">
+                                Disposisi
+                              </div>
+                            </div>
                           </Link>
                         </button>
                       </li>

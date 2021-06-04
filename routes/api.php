@@ -26,9 +26,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('userInfo', 'AuthController@userInfo');
     Route::post('cekToken', 'AuthController@checkToken');
     Route::post('getPenggunaInfo', 'PenggunaController@index');
-    Route::post('createUser', 'PenggunaController@createUser');
     Route::put('updateUser', 'PenggunaController@updateUser');
 
-    Route::post('deleteUser', 'PenggunaController@deleteUser');
 
+    //satria
+    Route::get('getPenggunaInfo', 'PenggunaController@index');
+    Route::post('createUser', 'PenggunaController@createUser');
+    Route::get('allPenggunaInfo','PenggunaController@allUser');
+    Route::post('editUser','PenggunaController@editUser');
+    Route::post('updateUser', 'PenggunaController@updateUser');
+    Route::delete('deleteUser', 'PenggunaController@deleteUser');
+    Route::post('deleteUser', 'PenggunaController@deleteUser');
 });

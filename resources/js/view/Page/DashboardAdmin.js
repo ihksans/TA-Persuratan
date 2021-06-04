@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import Logout from '../../components/Logout'
-//Ini buat dependecies/library nya
-//import + "nama variabel" + from + "nama librarynya";
+
 import { connect } from 'react-redux'
-import Cookies from 'js-cookie'
+import BoxDataBeranda from '../../components/BoxDataBeranda'
+import BoxUserIntro from '../../components/BoxUserIntro'
 class DashboardAdmin extends Component {
   //deklarasi variabel
   constructor(props) {
@@ -17,18 +16,54 @@ class DashboardAdmin extends Component {
       //html
       //js
       <>
-        <div className="w-full h-90% bg-gray-200	">
-          <p>Ini Main Dashboard Page </p>
-          {/* <p>token: {this.props.authToken.token}</p>
-          {Cookies.get('cake') == this.props.authToken.token ? (
-            <>
-              <p>True</p>
-            </>
-          ) : (
-            <>
-              <p>False</p>
-            </>
-          )} */}
+        <div className="w-full h-90% bg-gray-200 p-4	">
+          <BoxUserIntro />
+          <div className=" flex flex-row "></div>
+
+          <div className="grid grid-cols-3 gap-4 mt-10">
+            <div>
+              <BoxDataBeranda
+                count={'12'}
+                info={'Total Surat Masuk'}
+                icon={'Surat.png'}
+              />
+            </div>
+            <div className="">
+              <BoxDataBeranda
+                count={'12'}
+                info={'Total Surat Keluar'}
+                icon={'Surat.png'}
+              />
+            </div>
+            <div className="">
+              <BoxDataBeranda
+                count={'12'}
+                info={'Total Surat Disposisi'}
+                icon={'Surat.png'}
+              />
+            </div>
+            <div>
+              <BoxDataBeranda
+                count={'12'}
+                info={'Total Seluruh Surat'}
+                icon={'Surat.png'}
+              />
+            </div>
+            <div className="">
+              <BoxDataBeranda
+                count={'12'}
+                info={'Total Pengguna'}
+                icon={'User.png'}
+              />
+            </div>
+            <div className="">
+              <BoxDataBeranda
+                count={'1.0.0'}
+                info={'Versi Aplikasi'}
+                icon={'Version.png'}
+              />
+            </div>
+          </div>
         </div>
       </>
     )

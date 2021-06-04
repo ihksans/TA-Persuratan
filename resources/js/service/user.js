@@ -13,3 +13,15 @@ export const getCurrentUser = (props) => {
       }
     })
 }
+
+export const getAllPenggunaInfo = () => {
+  api()
+    .get('api/allPenggunaInfo')
+    .then((response) => {
+      if (response.data.error) {
+        console.log('error current user')
+      } else {
+        return response
+      }
+    })
+}
