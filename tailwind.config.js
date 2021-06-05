@@ -17,17 +17,18 @@ module.exports = {
       birudua: '#49B6FF',
     }),
     textColor: (theme) => theme('colors'),
-    extends: {
-      textColor: {
-        primary: '#F9881E',
-        secondary: '#ffed4a',
-        danger: '#e3342f',
-        biru: '#16A7DA',
-        oren: '#F9881E',
-        brokenblack: '#174C54',
-        birudua: '#49B6FF',
-      },
+
+    textColor: {
+      primary: '#F9881E',
+      secondary: '#ffed4a',
+      danger: '#e3342f',
+      biru: '#16A7DA',
+      oren: '#F9881E',
+      brokenblack: '#174C54',
+      birudua: '#49B6FF',
+      abu: '#929292',
     },
+
     extend: {
       fontSize: {
         '5%': '5%',

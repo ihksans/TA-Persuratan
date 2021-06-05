@@ -23,7 +23,7 @@ class BoxDataBeranda extends Component {
 
         <div className=" p-4 grid grid-rows-2 grid-flow-col gap-2 bg-white border-2 border-grey shadow-md ">
           <div className="flex  text-primary font-bold">
-            <p className="text-4xl">{this.props.count}</p>
+            <p className="text-4xl text-primary ">{this.props.count}</p>
           </div>
           <div className=" font-bold">
             <div>{this.props.info}</div>

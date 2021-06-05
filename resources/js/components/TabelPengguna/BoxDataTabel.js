@@ -5,23 +5,23 @@ const BoxData = ({ No, NamaPengguna, Username, Role, Aksi }) => {
     <>
       <div className="grid grid-cols-9 mt-4 border-b-2 border-black p-2">
         <div className="flex flex-row">
-          <div className="font-bold">{No}.</div>
+          <div className="">{No}.</div>
         </div>
         <div className="flex flex-row col-span-2">
-          <div className="font-bold">{NamaPengguna}</div>
+          <div className="">{NamaPengguna}</div>
         </div>
 
         <div className="flex flex-row col-span-2">
-          <div className="font-bold">{Username}</div>
+          <div className="">{Username}</div>
         </div>
 
-        <div className="font-bold">********</div>
+        <div className="">********</div>
 
         <div className="flex flex-row ">
           {Role == 1 ? (
-            <div className="font-bold">Administrator</div>
+            <div className="">Administrator</div>
           ) : (
-            <div className="font-bold">Staff Pengguna</div>
+            <div className="">Staff Pengguna</div>
           )}
         </div>
         <div className="col-span-2">
