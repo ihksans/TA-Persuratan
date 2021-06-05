@@ -65,18 +65,16 @@ class Main extends Component {
           {Cookies.get('cake') == this.props.authToken.token ? (
             <>
               {' '}
-              <PrivateRoute exact path="/" component={DashboardAdmin} />
+              {this.props.User.currentUser.ROLE == 1 ? (
+                <PrivateRoute exact path="/" component={DashboardAdmin} />
+              ) : (
+                <PrivateRoute exact path="/" component={Dashboard} />
+              )}
               <PrivateRoute exact path="/KelolaSurat" component={KelolaSurat} />
               <PrivateRoute
                 exact
                 path="/KelolaPengguna"
                 component={KelolaPengguna}
-              />
-              <PrivateRoute exact path="/Dashboard" component={Dashboard} />
-              <PrivateRoute
-                exact
-                path="/DashboardAdmin"
-                component={DashboardAdmin}
               />
               <PrivateRoute exact path="/SuratMasuk" component={SuratMasuk} />
               <PrivateRoute exact path="/SuratKeluar" component={SuratKeluar} />
