@@ -1,22 +1,25 @@
 import React from 'react'
 import api from '../../service/api'
+import ModalKonfirmDelete from '../ModalKonfirmDelete'
 
 const BoxData = ({ IdPengguna, No, NamaPengguna, Username, Role, Aksi }) => {
-  const deletePengguna =(id)=>{
-    console.log('id:' + id)
-    console.log('id Pengguna:' + IdPengguna)
-    let formData = new FormData()
-    formData.append('id',id)
-    api()
-      // .delete('api/deleteUser'+formData)
-      .delete('api/deleteUser/' + id)
-      .then(response=>{
-        console.log("respon:"+response)
-        console.log('pengguna telah terhapus')
-      }).catch((error)=>{
-        console.log(error)
-      })
-  }
+  // const confirmDelete=(id)=>{
+  //   const getAlert=()=>(
+  //     <SweetAllert
+  //     warning
+  //     showCancel
+  //     confirmBtnText="Hapus"
+  //     cancelBtnText="Ga jadi"
+  //     confirmBtnBsStyle="default"
+  //     cancelBtnBsStyle="dager"
+  //     onConfirm={() =>deletePengguna(IdPengguna)}
+  //     onCancel={()=>this.hideAlert()}>
+  //     </SweetAllert>
+  //   );
+  //   this.setState({
+  //     alert: null
+  //   })
+  // }
   return (
     <>
       <div className="grid grid-cols-9 mt-4 border-b-2 border-black p-2">
@@ -54,14 +57,13 @@ const BoxData = ({ IdPengguna, No, NamaPengguna, Username, Role, Aksi }) => {
               <img className="" src="assets/img/icon/Pencil.png" />
               <div className="font-bold text-xs text-white ml-2	">Edit</div>
             </button>
-            <button
-              type="submit"
-              className="ml-2 bg-biru flex flex-row ml-2 w-20	 p-1 items-center	shadow-sm"
-              onClick={() =>deletePengguna(IdPengguna)}
-            >
-              <img className="" src="assets/img/icon/Trash.png" />
-              <div className="font-bold text-xs text-white ml-2	">Hapus</div>
-            </button>
+            <div>
+              <ModalKonfirmDelete 
+              IdPengguna={IdPengguna}
+              NamaPengguna={NamaPengguna}
+              />
+            </div>
+              
           </div>
         </div>
       </div>

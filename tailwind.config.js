@@ -15,6 +15,7 @@ module.exports = {
       oren: '#F9881E',
       brokenblack: '#174C54',
       birudua: '#49B6FF',
+      abu:'#DADADA',
     }),
     textColor: (theme) => theme('colors'),
 
@@ -60,6 +61,9 @@ module.exports = {
         '5%': '5%',
       },
     },
+    borderRadius:{
+      DEFAULT: '4px',
+    }
   },
 
   variants: {

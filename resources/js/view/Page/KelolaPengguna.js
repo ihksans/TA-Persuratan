@@ -18,7 +18,7 @@ class KelolaPengguna extends Component {
     // this.deletePengguna = this.deletePengguna.bind(this);
   }
   async getPengguna() {
-   await api()
+  await api()
       .get('api/allPenggunaInfo')
       .then((response) => {
         this.props.setAllUser(response.data)
@@ -28,6 +28,7 @@ class KelolaPengguna extends Component {
         console.log('pengguna:' + this.props.AllUser.allUserInfo)
       })
   }
+  
   componentDidMount() {
     this.getPengguna()
   }
@@ -62,6 +63,7 @@ class KelolaPengguna extends Component {
 
             <div>
               <TabelPengguna Pengguna={this.props.AllUser.allUserInfo} />
+              {/* <TabelPengguna pengguna={this.state.pengguna} /> */}
             </div>
           </div>
         </div>
