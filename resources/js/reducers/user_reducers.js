@@ -14,7 +14,7 @@ const applyUnsetCurrentUser = (state) => ({
   ...state,
   currentUser: [],
 })
-
+//manggil nya disini nama method + nama variabel
 function User(state = INITIAL_STATE, action) {
   switch (action.type) {
     case SET_USER:

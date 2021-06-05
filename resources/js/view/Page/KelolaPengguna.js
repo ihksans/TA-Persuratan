@@ -18,17 +18,14 @@ class KelolaPengguna extends Component {
     // this.deletePengguna = this.deletePengguna.bind(this);
   }
   async getPengguna() {
-  await api()
+    await api()
       .get('api/allPenggunaInfo')
       .then((response) => {
         this.props.setAllUser(response.data)
-        this.setState({
-          pengguna: this.props.AllUser.allUserInfo,
-        })
         console.log('pengguna:' + this.props.AllUser.allUserInfo)
       })
   }
-  
+
   componentDidMount() {
     this.getPengguna()
   }
@@ -62,8 +59,11 @@ class KelolaPengguna extends Component {
             <ModalAddPengguna />
 
             <div>
-              <TabelPengguna Pengguna={this.props.AllUser.allUserInfo} />
-              {/* <TabelPengguna pengguna={this.state.pengguna} /> */}
+              {this.props.AllUser.allUserInfo == null ? (
+                <TabelPengguna Pengguna={this.state.Pengguna} />
+              ) : (
+                <TabelPengguna Pengguna={this.props.AllUser.allUserInfo} />
+              )}
             </div>
           </div>
         </div>

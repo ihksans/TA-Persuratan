@@ -110,6 +110,20 @@ class PenggunaController extends Controller
             'NAMA' => $request->NAMA,
             'ROLE' => $request->ROLE,
         ]);
+        if($user){
+            $pengguna = User::where('id',$request->id)
+        ->update([
+            'USERNAME' => $request->USERNAME,
+            'PASSWORD' => Hash::make($request->PASSWORD),
+        ]);
+            if(!$pengguna){
+                $respon = [
+                    'msg' => 'update failed',
+                    'error' => 'updateUser'
+                ];
+                return response()->json($respon);
+            }
+        }
         if(!$user){
             $respon = [
                 'msg' => 'update failed',

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+//ini buat ngekoneksi redux
 import { connect } from 'react-redux'
 import {} from '../../actions'
 //Ini buat dependecies/library nya
@@ -34,4 +35,6 @@ class ClassReducers extends Component {
 function mapStateToProps(state) {
   return state
 }
-export default connect(mapStateToProps, {})(ClassReducers)
+export default connect(mapStateToProps, {
+  //nama methodnya apa
+})(ClassReducers)

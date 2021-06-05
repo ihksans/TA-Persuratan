@@ -1,25 +1,9 @@
-import React from 'react'
-import api from '../../service/api'
+import React, { useState } from 'react'
+import FormUserEdit from '../FormUserEdit'
 import ModalKonfirmDelete from '../ModalKonfirmDelete'
 
-const BoxData = ({ IdPengguna, No, NamaPengguna, Username, Role, Aksi }) => {
-  // const confirmDelete=(id)=>{
-  //   const getAlert=()=>(
-  //     <SweetAllert
-  //     warning
-  //     showCancel
-  //     confirmBtnText="Hapus"
-  //     cancelBtnText="Ga jadi"
-  //     confirmBtnBsStyle="default"
-  //     cancelBtnBsStyle="dager"
-  //     onConfirm={() =>deletePengguna(IdPengguna)}
-  //     onCancel={()=>this.hideAlert()}>
-  //     </SweetAllert>
-  //   );
-  //   this.setState({
-  //     alert: null
-  //   })
-  // }
+const BoxData = ({ No, NamaPengguna, Username, Role, Id, IdPengguna }) => {
+  const [formEdit, setFormEdit] = useState(false)
   return (
     <>
       <div className="grid grid-cols-9 mt-4 border-b-2 border-black p-2">
@@ -45,25 +29,23 @@ const BoxData = ({ IdPengguna, No, NamaPengguna, Username, Role, Aksi }) => {
         </div>
         <div className="col-span-2">
           <div className=" flex flex-row">
-            {/* <div type="submit" className="ml-2 bg-primary flex flex-row ">
-              <img className="" src="assets/img/icon/Pencil.png" />
-              <div className="font-bold text-xs text-white	">Edit</div>
-            </div> */}
-
-            <button
+            <div
               type="submit"
               className="ml-2 bg-primary flex flex-row w-20	 p-1 items-center	shadow-sm "
             >
-              <img className="" src="assets/img/icon/Pencil.png" />
-              <div className="font-bold text-xs text-white ml-2	">Edit</div>
-            </button>
-            <div>
-              <ModalKonfirmDelete 
-              IdPengguna={IdPengguna}
-              NamaPengguna={NamaPengguna}
+              <FormUserEdit
+                nama={NamaPengguna}
+                username={Username}
+                role={Role}
+                id={Id}
               />
             </div>
-              
+            <div>
+              <ModalKonfirmDelete
+                IdPengguna={IdPengguna}
+                NamaPengguna={NamaPengguna}
+              />
+            </div>
           </div>
         </div>
       </div>
