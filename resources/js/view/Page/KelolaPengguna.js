@@ -3,9 +3,10 @@ import TabelPengguna from '../../components/TabelPengguna/TabelPengguna'
 import BoxDataTabel from '../../components/TabelPengguna/BoxDataTabel'
 import { PenggunaData } from './PenggunaData'
 import FormUser from '../../components/FormUser'
-
+import { connect } from 'react-redux'
+import { setAllUser } from '../../actions'
 import api from '../../service/api'
-
+import ModalAddPengguna from '../../components/ModalAddPengguna'
 class KelolaPengguna extends Component {
   //deklarasi variabel
   constructor(props) {
@@ -16,14 +17,15 @@ class KelolaPengguna extends Component {
     this.getPengguna = this.getPengguna.bind(this)
     // this.deletePengguna = this.deletePengguna.bind(this);
   }
-  getPengguna() {
-    api()
+  async getPengguna() {
+   await api()
       .get('api/allPenggunaInfo')
       .then((response) => {
+        this.props.setAllUser(response.data)
         this.setState({
-          pengguna: response.data,
+          pengguna: this.props.AllUser.allUserInfo,
         })
-        console.log('pengguna:' + response.data)
+        console.log('pengguna:' + this.props.AllUser.allUserInfo)
       })
   }
   componentDidMount() {
@@ -55,21 +57,11 @@ class KelolaPengguna extends Component {
               </div>
               <div className="font-bold ml-4 text-2xl	">Kelola Pengguna</div>
             </div>
-            <button className="flex flex-row bg-primary p-2 mt-4">
-              <div>
-                <img
-                  className="justify-center items-center"
-                  src="assets/img/icon/Tambah.png"
-                />
-              </div>
-              <div className="font-bold ml-1">Buat / Tambah</div>
-            </button>
+
+            <ModalAddPengguna />
+
             <div>
-              <TabelPengguna Pengguna={PenggunaData} />
-              {/* <Pengguna /> */}
-            </div>
-            <div>
-              <FormUser />
+              <TabelPengguna Pengguna={this.props.AllUser.allUserInfo} />
             </div>
           </div>
         </div>
@@ -77,4 +69,7 @@ class KelolaPengguna extends Component {
     )
   }
 }
-export default KelolaPengguna
+function mapStateToProps(state) {
+  return state
+}
+export default connect(mapStateToProps, { setAllUser })(KelolaPengguna)

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengguna;
+use App\Models\User;
+
 use Illuminate\Support\Facades\Hash;
 
 class PenggunaController extends Controller
@@ -35,6 +37,14 @@ class PenggunaController extends Controller
         //     'data'=>$request
         // ];
         // return response()->json($data);
+        $user = Pengguna::where('USERNAME', $request->USERNAME)->first();
+        if($user !== null){
+            $respon = [
+                'msg' => 'created failed Username unavailable',
+                'error' => 'Username'
+            ];
+            return response()->json($respon);
+        }
         $request->validate([
             'USERNAME' => 'required',
             'NAMA' => 'required',
@@ -47,7 +57,9 @@ class PenggunaController extends Controller
             'NAMA' => $request->NAMA,
             'ROLE' => $request->ROLE,
         ];
+        
         $user = Pengguna::create($data);
+
         if(!$user){
             $respon = [
                 'msg' => 'created failed',
@@ -55,7 +67,27 @@ class PenggunaController extends Controller
             ];
             return response()->json($respon);
         }
-        return response()->json($user);
+        $data2 =[
+            'username' =>$request->USERNAME,
+            'password' => Hash::make($request->PASSWORD),
+            'name' => $request->NAMA,
+            'id'=> $user->id
+        ];
+        $user2 = User::create($data2);
+        if(!$user2){
+            $respon = [
+                'msg' => 'created failed',
+                'error' => 'createdUser'
+            ];
+            return response()->json($respon);
+        }
+        $result=[
+            'msg' => 'succes',
+            'pengguna'=> $user,
+            'user' => $user2
+
+        ];
+        return response()->json($result);
 
     }
     public function editUser(Request $request){
@@ -88,8 +120,8 @@ class PenggunaController extends Controller
         return response()->json($user);
     }
 
-    public function deleteUser(Request $request){
-        $user = Pengguna::where('ID_PENGGUNA', $request->id);
+    public function deleteUser($id){
+        $user = Pengguna::where('ID_PENGGUNA', $id);
         $user->delete();
         if(!$user){
             $respon = [
@@ -97,7 +129,38 @@ class PenggunaController extends Controller
                 'error' => 'deletePengguna'
             ];
             return response()->json($respon);
+        
         }
+        if($id==null){
+            $respon = [
+                'msg' => 'delete failed',
+                'error' => 'deletePengguna'
+            ];
+            return response()->json($respon);
+        }
+        
         return response()->json($user);
+
     }
+    
+    // public function deleteUser($id){
+    //     // $user = Pengguna::where('ID_PENGGUNA', $request->id)->first();
+    //     if($id == null){
+    //         $respon = [
+    //             'msg' => 'failed',
+    //             'error' => 'Pengguna',
+    //             'request' => $id
+    //         ];
+    //         return response()->json($respon);
+    //     }else{
+            
+    //             $respon = [
+    //                 'msg' => 'succes',
+    //                 'error' => 'null',
+    //                 'request' => $id
+    //             ];
+    //             return response()->json($respon);
+    //     }
+    // }
+
 }
