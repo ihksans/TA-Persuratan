@@ -23,7 +23,7 @@ class CreateUser extends Component {
       // flash:false,
     }
     this.getPengguna = this.getPengguna.bind(this);
-    this.deletePengguna = this.deletePengguna.bind(this);
+    // this.deletePengguna = this.deletePengguna.bind(this);
   }
   hideAlert() {
     this.setState({
@@ -45,18 +45,19 @@ class CreateUser extends Component {
         console.log('pengguna:'+ response.data)
       });
   }
-  deletePengguna(id){
-    let formData = new FormData()
-    formData.append('id',id)
-    api()
-      .delete('api/deleteUser',formData)
-      .then(response=>{
-        console.log('pengguna tidak terhapus'+response.data)
-      }).catch((error)=>{
-        console.log(error)
-      })
-      console.log('id:' +id)
-  }
+  // deletePengguna(id){
+  //   let formData = new FormData()
+  //   formData.append('id',id)
+  //   api()
+  //     // .delete('api/deleteUser/${formData}',formData)
+  //     .delete('api/deleteUser/${formData}')
+  //     .then(response=>{
+  //       console.log('pengguna tidak terhapus'+response.data)
+  //     }).catch((error)=>{
+  //       console.log(error)
+  //     })
+  //     console.log('id:' +id)
+  // }
 
 //   edit(id){
 //       let item=this.state.dir.filter(item = item.id === id)[0]
