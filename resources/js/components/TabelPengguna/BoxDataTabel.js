@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+import FormUserEdit from '../FormUserEdit'
 
-const BoxData = ({ No, NamaPengguna, Username, Role, Aksi }) => {
+const BoxData = ({ No, NamaPengguna, Username, Role, Id }) => {
+  const [formEdit, setFormEdit] = useState(false)
   return (
     <>
       <div className="grid grid-cols-9 mt-4 border-b-2 border-black p-2">
@@ -26,18 +28,17 @@ const BoxData = ({ No, NamaPengguna, Username, Role, Aksi }) => {
         </div>
         <div className="col-span-2">
           <div className=" flex flex-row">
-            {/* <div type="submit" className="ml-2 bg-primary flex flex-row ">
-              <img className="" src="assets/img/icon/Pencil.png" />
-              <div className="font-bold text-xs text-white	">Edit</div>
-            </div> */}
-
-            <button
+            <div
               type="submit"
               className="ml-2 bg-primary flex flex-row w-20	 p-1 items-center	shadow-sm "
             >
-              <img className="" src="assets/img/icon/Pencil.png" />
-              <div className="font-bold text-xs text-white ml-2	">Edit</div>
-            </button>
+              <FormUserEdit
+                nama={NamaPengguna}
+                username={Username}
+                role={Role}
+                id={Id}
+              />
+            </div>
             <button
               type="submit"
               className="ml-2 bg-biru flex flex-row ml-2 w-20	 p-1 items-center	shadow-sm"

@@ -3,63 +3,47 @@ import api from '../../service/api'
 import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 // import createuser from "./index";
-class FormUser extends Component {
+class FormUserEdit extends Component {
   constructor(props) {
     super(props)
     this.state = {
       dir: [],
-      nama: '',
-      username: '',
-      role: '',
+      nama: this.props.nama,
+      username: this.props.username,
+      role: this.props.role,
       password: '',
       confirmPass: '',
+      id: this.props.id,
       showModal: false,
       errorNama: false,
-      errorUsername: false,
       errorRole: false,
       errorPassword: false,
       errorConfirmPass: false,
-      errorAvailableUsername: false,
     }
 
     this.handleInputNama = this.handleInputNama.bind(this)
-    this.handleInputUsername = this.handleInputUsername.bind(this)
     this.handleInputRole = this.handleInputRole.bind(this)
     this.handleInputPassword = this.handleInputPassword.bind(this)
     this.handleInputConfirmPass = this.handleInputConfirmPass.bind(this)
     this.handleErrorNama = this.handleErrorNama.bind(this)
-    this.handleErrorUsername = this.handleErrorUsername.bind(this)
     this.handleErrorRole = this.handleErrorRole.bind(this)
     this.handleErrorPassword = this.handleErrorPassword.bind(this)
     this.handleErrorConfirmPassword = this.handleErrorConfirmPassword.bind(this)
-    this.handleErrorAvailableUsername = this.handleErrorAvailableUsername.bind(
-      this,
-    )
-
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
     this.validateInputNama = this.validateInputNama.bind(this)
-    this.validateInputUsername = this.validateInputUsername.bind(this)
     this.validateInputRole = this.validateInputRole.bind(this)
-
     this.validateInputPassword = this.validateInputPassword.bind(this)
     this.validateInputConfirmPass = this.validateInputConfirmPass.bind(this)
-    this.validateAvailableUsername = this.validateAvailableUsername.bind(this)
   }
   //handle input changes and update item state
-  handleErrorAvailableUsername(props) {
-    this.setState({ errorAvailableUsername: props })
-  }
+
   handleErrorNama(props) {
     this.setState({
       errorNama: props,
     })
   }
-  handleErrorUsername(props) {
-    this.setState({
-      errorUsername: props,
-    })
-  }
+
   handleErrorPassword(props) {
     this.setState({
       errorPassword: props,
@@ -87,10 +71,7 @@ class FormUser extends Component {
       nama: value,
     })
   }
-  handleInputUsername(e) {
-    let value = e.target.value
-    this.setState({ username: value })
-  }
+
   handleInputRole(e) {
     let value = e.target.value
     this.setState({ role: value })
@@ -105,29 +86,25 @@ class FormUser extends Component {
   }
   async onSubmit(e) {
     e.preventDefault()
-    await this.validateInputUsername(this.state.username)
     await this.validateInputNama(this.state.nama)
     await this.validateInputRole(this.state.role)
     await this.validateInputPassword(this.state.password)
     await this.validateInputConfirmPass(this.state.confirmPass)
-    await this.validateAvailableUsername(this.state.username)
     // console.log('length' + this.state.username.length)
     // console.log('con pass:' + this.state.confirmPass)
-    console.log('available us :' + this.state.errorAvailableUsername)
     if (
       this.state.errorNama == false &&
-      this.state.errorUsername == false &&
       this.state.errorPassword == false &&
       this.state.errorConfirmPass == false &&
-      this.state.errorRole == false &&
-      this.state.errorAvailableUsername == false
+      this.state.errorRole == false
     ) {
       api()
-        .post('api/createUser', {
+        .post('api/updateUser', {
           NAMA: this.state.nama,
           USERNAME: this.state.username,
           ROLE: this.state.role,
           PASSWORD: this.state.password,
+          id: this.state.id,
         })
         .then((response) => {
           this.setState({
@@ -159,20 +136,7 @@ class FormUser extends Component {
       this.handleErrorNama(true)
     }
   }
-  validateInputUsername(input) {
-    const re = /^[a-zA-Z0-9]*$/
-    let result = input.match(re)
-    if (result) {
-      if (input.length <= 0 || input.length >= 20) {
-        this.handleErrorUsername(true)
-      } else {
-        this.handleErrorUsername(false)
-        this.validateAvailableUsername()
-      }
-    } else {
-      this.handleErrorUsername(true)
-    }
-  }
+
   validateInputRole(input) {
     if (
       this.state.role == null ||
@@ -205,52 +169,22 @@ class FormUser extends Component {
       this.handleErrorConfirmPassword(false)
     }
   }
-  validateAvailableUsername() {
-    let result = false
-    // this.props.AllUser.allUserInfo.map((item) => {
-    //   if (item.USERNAME == this.state.username) {
-    //     console.log('username invailable')
-    //     console.log('item equals:' + item.USERNAME + '&' + this.state.username)
-    //     console.log('result validate:' + this.state.errorAvailableUsername)
-    //     return this.handleErrorAvailableUsername(true)
-    //   } else {
-    //     this.handleErrorAvailableUsername(false)
-    //   }
-    // })
-    const data = this.props.AllUser.allUserInfo
-    let a = 0
-    for (a = 0; a < data.length; a++) {
-      console.log('data' + data[a])
-      console.log('a' + a)
-      if (data[a].USERNAME == this.state.username) {
-        console.log('username invailable')
-        console.log(
-          'item equals:' + data[a].USERNAME + '&' + this.state.username,
-        )
-        console.log('result validate:' + this.state.errorAvailableUsername)
-        console.log('leng' + data.length)
-        this.handleErrorAvailableUsername(true)
-        a = data.length
-      } else {
-        this.handleErrorAvailableUsername(false)
-      }
-    }
-  }
+
   render() {
     return (
       <>
         <button
-          className="flex flex-row bg-primary p-2 mt-4"
+          className="flex flex-row bg-primary "
           type="button"
           onClick={this.handleModal}
         >
           <div>
             <img
               className="justify-center items-center"
-              src="assets/img/icon/Tambah.png"
+              src="assets/img/icon/Pencil.png"
             />
           </div>
-          <div className="font-bold ml-1">Buat / Tambah</div>
+          <div className="font-bold text-xs text-white ml-2">Edit</div>
         </button>
 
         {this.state.showModal ? (
@@ -280,7 +214,7 @@ class FormUser extends Component {
                     </div>
                     <div className="flex justify-center">
                       <h3 className="text-3xl font-semibold  ">
-                        Tambah Pengguna
+                        Edit Data Pengguna
                       </h3>
                     </div>
                   </div>
@@ -355,54 +289,9 @@ class FormUser extends Component {
                                 <div className="text-danger ml-2"> *</div>
                               </div>
                               <div className="justify-end ">
-                                <input
-                                  type="text"
-                                  name="username"
-                                  required
-                                  id="username"
-                                  placeholder="Masukan Username"
-                                  className={
-                                    this.state.errorUsername
-                                      ? 'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-red-500 border border-red-200 rounded-md py-2 pl-2 '
-                                      : 'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  value={this.state.username}
-                                  onChange={this.handleInputUsername}
-                                />
-
-                                {this.state.errorUsername &&
-                                (this.state.username == '' ||
-                                  this.state.username == null) ? (
-                                  <>
-                                    <div className="text-danger text-xs mb-3">
-                                      Username harus diisi
-                                    </div>
-                                  </>
-                                ) : (
-                                  <>
-                                    {this.state.errorUsername ? (
-                                      <>
-                                        <div className="text-danger text-xs mb-3">
-                                          Hanya terdiri dari huruf abjad dan
-                                          angka saja
-                                        </div>
-                                      </>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </>
-                                )}
-
-                                {this.state.errorAvailableUsername ? (
-                                  <>
-                                    <div className="text-danger text-xs mb-3">
-                                      Username yang anda masukan sudah
-                                      digunakan, silahkan gunakan yang lain
-                                    </div>
-                                  </>
-                                ) : (
-                                  <></>
-                                )}
+                                <div className="focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3">
+                                  {this.state.username}
+                                </div>
                               </div>
                             </div>
                             <div className="flex flex-row grid grid-cols-2">
@@ -556,7 +445,7 @@ class FormUser extends Component {
                                 value="Add Pengguna"
                               >
                                 <div className="text-sm mb-2 text-white	h-6 font-bold ">
-                                  Tambah
+                                  Simpan
                                 </div>
                               </button>
                             </div>
@@ -596,4 +485,4 @@ class FormUser extends Component {
 function mapStateToProps(state) {
   return state
 }
-export default connect(mapStateToProps, {})(FormUser)
+export default connect(mapStateToProps, {})(FormUserEdit)

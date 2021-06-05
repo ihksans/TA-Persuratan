@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import TabelPengguna from '../../components/TabelPengguna/TabelPengguna'
-import { PenggunaData } from './PenggunaData'
-import FormUser from '../../components/FormUser'
 import { connect } from 'react-redux'
 import { setAllUser } from '../../actions'
 import api from '../../service/api'
@@ -15,14 +13,11 @@ class KelolaPengguna extends Component {
     }
     this.getPengguna = this.getPengguna.bind(this)
   }
-  getPengguna() {
-    api()
+  async getPengguna() {
+    await api()
       .get('api/allPenggunaInfo')
       .then((response) => {
         this.props.setAllUser(response.data)
-        this.setState({
-          pengguna: this.props.AllUser.allUserInfo,
-        })
         console.log('pengguna:' + this.props.AllUser.allUserInfo)
       })
   }
@@ -46,7 +41,11 @@ class KelolaPengguna extends Component {
             <ModalAddPengguna />
 
             <div>
-              <TabelPengguna Pengguna={this.props.AllUser.allUserInfo} />
+              {this.props.AllUser.allUserInfo == null ? (
+                <TabelPengguna Pengguna={this.state.Pengguna} />
+              ) : (
+                <TabelPengguna Pengguna={this.props.AllUser.allUserInfo} />
+              )}
             </div>
           </div>
         </div>

@@ -19,6 +19,7 @@ const TabelPengguna = ({ Pengguna }) => {
                 NamaPengguna={item.NAMA}
                 Username={item.USERNAME}
                 Role={item.ROLE}
+                Id={item.ID_PENGGUNA}
               />
             </li>
           )

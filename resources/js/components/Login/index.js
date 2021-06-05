@@ -166,6 +166,7 @@ class Login extends Component {
                           this.setUserData(response.data)
                           console.log('current user :' + response.data)
                           window.location.assign('/')
+
                           // return <Redirect to="/" />
                         }
                       })
