@@ -18,10 +18,10 @@ const Box = () => {
   </div>
  
 </div> */}
-      <div className="flex flex-row self-center box-border  h-5/6 w-65%  border-4 shadow-2xl rounded-xl bg-white	">
-        <div className="box-border  h-full w-2/4">
+      <div className="flex flex-row self-center box-border h-5/6 w-65% shadow-2xl rounded-xl bg-white">
+        <div className="box-border h-full w-2/4">
           <img
-            className=" h-full w-full object-cover rounded-xl"
+            className=" h-full w-full object-cover rounded-l-lg"
             src="assets/img/gdH.png"
           />
           {/* <div className="text-xs	text-center mt-6">
@@ -29,16 +29,13 @@ const Box = () => {
           </div>
           <div className="text-xs	text-center mt-6">Kemahasiswaan Polban</div> */}
         </div>
-        <div className="box-border py-32 px-16 h-full w-2/4 ">
-          <div className="text-110%	text-center mb-8 font-semibold">
-            Nama Aplikasi
-          </div>
-          <div className="text-sm font-semibold text-opacity-50">
+        <div className="box-border py-40 px-16 h-full w-2/4 content-end">
+          <div className="text-sm font-semibold text-abu">
             Silahkan login untuk masuk ke dalam aplikasi
           </div>
           <Login />
-          <div className="text-50%	text-center mt-6">
-            Copyright @2021 NamaAplikasi. All rights reserved
+          <div className="text-xs	text-center text-abu mt-6">
+            Copyright @2021 NamaAplikasi. All rights reserved.
           </div>
         </div>
       </div>

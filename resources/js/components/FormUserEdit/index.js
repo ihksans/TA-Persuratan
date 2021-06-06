@@ -174,23 +174,23 @@ class FormUserEdit extends Component {
     return (
       <>
         <button
-          className="flex flex-row bg-primary "
+          className="flex flex-row bg-primary rounded"
           type="button"
           onClick={this.handleModal}
         >
           <div>
             <img
-              className="justify-center items-center"
+              className="justify-center items-center ml-1 mt-1"
               src="assets/img/icon/Pencil.png"
             />
           </div>
-          <div className="font-bold text-xs text-white ml-2">Edit</div>
+          <div className="font-bold ml-1 mr-2">Edit</div>
         </button>
 
         {this.state.showModal ? (
           <>
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-              <div className="relative w-auto my-6 mx-auto max-w-6xl">
+              <div className="relative w-2/5 mx-auto max-w-6xl">
                 {/*content*/}
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   {/*header*/}
@@ -205,15 +205,15 @@ class FormUserEdit extends Component {
                       />
                     </button>
                   </div>
-                  <div className=" items-start justify-center p-5 border-b border-solid border-blueGray-200 rounded-t">
+                  <div className=" items-start justify-center rounded-t">
                     <div className=" flex justify-center">
                       <img
-                        className="justify-self-center"
+                        className="justify-self-center w-20"
                         src="assets/img/icon/User-Circle.png"
                       />
                     </div>
                     <div className="flex justify-center">
-                      <h3 className="text-3xl font-semibold  ">
+                      <h3 className="text-xl font-semibold  mt-3">
                         Edit Data Pengguna
                       </h3>
                     </div>
@@ -230,8 +230,8 @@ class FormUserEdit extends Component {
                         onSubmit={this.onSubmit}
                       >
                         <div>
-                          <div className="rounded-md shadow-sm ">
-                            <div className="flex flex-row grid grid-cols-2">
+                          <div className="w-full rounded-md shadow-sm ml-8">
+                            <div className="flex flex-row grid grid-cols-3">
                               <div
                                 htmlFor="nama"
                                 className="text-sm mb-2 font-bold flex flex-row "
@@ -239,7 +239,7 @@ class FormUserEdit extends Component {
                                 <div>Nama Pengguna </div>
                                 <div className="text-danger ml-2"> *</div>
                               </div>
-                              <div className="justify-end ">
+                              <div className="col-span-2 justify-end ">
                                 <input
                                   type="text"
                                   name="nama"
@@ -280,7 +280,7 @@ class FormUserEdit extends Component {
                               </div>
                             </div>
 
-                            <div className="flex flex-row grid grid-cols-2">
+                            <div className="flex flex-row grid grid-cols-3">
                               <div
                                 htmlFor="username"
                                 className="text-sm mb-2 font-bold flex flex-row "
@@ -288,13 +288,13 @@ class FormUserEdit extends Component {
                                 <div>Username</div>
                                 <div className="text-danger ml-2"> *</div>
                               </div>
-                              <div className="justify-end ">
+                              <div className="col-span-2 justify-end ">
                                 <div className="focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3">
                                   {this.state.username}
                                 </div>
                               </div>
                             </div>
-                            <div className="flex flex-row grid grid-cols-2">
+                            <div className="flex flex-row grid grid-cols-3">
                               <div
                                 htmlFor="role"
                                 className="text-sm mb-2 font-bold flex flex-row "
@@ -302,7 +302,7 @@ class FormUserEdit extends Component {
                                 <div>Role</div>
                                 <div className="text-danger ml-2"> *</div>
                               </div>
-                              <div className="justify-end ">
+                              <div className="col-span-2 justify-end ">
                                 <select
                                   type="text"
                                   name="role"
@@ -335,7 +335,7 @@ class FormUserEdit extends Component {
                               </div>
                             </div>
 
-                            <div className="flex flex-row grid grid-cols-2">
+                            <div className="flex flex-row grid grid-cols-3">
                               <div
                                 htmlFor="password"
                                 className="text-sm mb-2 font-bold flex flex-row "
@@ -343,7 +343,7 @@ class FormUserEdit extends Component {
                                 <div>Password</div>
                                 <div className="text-danger ml-2"> *</div>
                               </div>
-                              <div className="justify-end ">
+                              <div className="col-span-2 justify-end ">
                                 <input
                                   type="password"
                                   name="password"
@@ -384,7 +384,7 @@ class FormUserEdit extends Component {
                                 )}
                               </div>
                             </div>
-                            <div className="flex flex-row grid grid-cols-2">
+                            <div className="flex flex-row grid grid-cols-3">
                               <div
                                 htmlFor="password"
                                 className="text-sm mb-2 font-bold flex flex-row "
@@ -392,7 +392,7 @@ class FormUserEdit extends Component {
                                 <div>Confirm Password </div>
                                 <div className="text-danger ml-2"> *</div>
                               </div>{' '}
-                              <div className="justify-end ">
+                              <div className="col-span-2 justify-end ">
                                 <input
                                   type="password"
                                   name="confirm password"
@@ -430,13 +430,13 @@ class FormUserEdit extends Component {
                                 )}
                               </div>
                             </div>
-                            <div className="flex flex-row grid grid-cols-2 mb-4 mt-4">
+                            <div className="flex flex-row grid grid-cols-3 mb-4 mt-4">
                               <div></div>
-                              <div className=" text-xs text-abu ">
+                              <div className="col-span-2  text-xs text-abu ">
                                 Keterangan (*): data wajib diisi.
                               </div>
                             </div>
-                            <div className="flex flex-row grid grid-cols-2">
+                            <div className="flex flex-row grid grid-cols-3">
                               <div></div>
                               <button
                                 type="submit"
@@ -444,7 +444,7 @@ class FormUserEdit extends Component {
                                 onClick={this.onSubmit}
                                 value="Add Pengguna"
                               >
-                                <div className="text-sm mb-2 text-white	h-6 font-bold ">
+                                <div className="col-span-2 text-md mb-1 text-white	h-6 font-bold ">
                                   Simpan
                                 </div>
                               </button>

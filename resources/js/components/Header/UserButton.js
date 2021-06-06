@@ -9,7 +9,7 @@ const UserButton = () => {
   return (
     <>
       <div className="flex flex-col">
-        <button type="submit" className=" w-6	h-10 my-2 mx-3" onClick={Click}>
+        <button type="submit" className="h-10 my-2 mx-1" onClick={Click}>
           <img
             className=" h-full w-full "
             src="assets/img/icon/User-Rounded-2.png"

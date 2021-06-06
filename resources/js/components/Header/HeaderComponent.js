@@ -34,12 +34,12 @@ const HeaderComponent = ({ show, role }) => {
   return (
     <>
       <>
-        <div className="grid grid-cols-3 gap-4  h-7% border border-gray-400 ">
-          <div className="col-span-2 flex justify-start">
+        <div className="grid grid-cols-3 gap-4  h-17 border shadow-3xl">
+          <div className="col-span-2 flex items-center p-1 ml-1.5 mt-1.5">
             <Link to="#">
-              <button type="submit" className=" w-full " onClick={handleSubmit}>
+              <button type="submit" className="w-full" onClick={handleSubmit}>
                 <img
-                  className=" h-full w-full "
+                  className="object-fill h-10"
                   src="assets/img/icon/Menu.png"
                 />
               </button>
@@ -49,13 +49,13 @@ const HeaderComponent = ({ show, role }) => {
             </div> */}
           </div>
           <div className="flex justify-end border-1 border-gray-400">
-            <div className="border-1 border-gray-400 ">
+            <div className="flex justify-items-center p-1.5">
               <DataUser />
             </div>
             <UserButton />
 
             <ReminderIcon />
-            <button type="submit" className=" w-6	h-10 my-2 mx-3">
+            <button type="submit" className="justify-items-center h-10 my-2 mx-2">
               <img className=" h-full w-full " src="assets/img/icon/Bell.png" />
             </button>
           </div>

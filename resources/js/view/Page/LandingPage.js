@@ -21,7 +21,7 @@ class LandingPage extends React.Component {
 
     return (
       <>
-        <div className="bg-gradient-to-r from-black to-blue-500 flex justify-center h-screen">
+        <div className="bg-gradient-to-tr from-black to-blue-500 flex justify-center h-screen">
           <BoxLogin />
         </div>
         {/* <Footer /> */}

@@ -16,11 +16,10 @@ class DashboardAdmin extends Component {
       //html
       //js
       <>
-        <div className="w-full h-90% bg-gray-200 p-4	">
+        <div className="w-full h-90% bg-gray-200 p-4">
           <BoxUserIntro />
-          <div className=" flex flex-row "></div>
-
-          <div className="grid grid-cols-3 gap-4 mt-10">
+          {/* <div className=" flex flex-row "></div> */}
+          <div className="grid grid-cols-3 gap-4 mt-3">
             <div>
               <BoxDataBeranda
                 count={'12'}

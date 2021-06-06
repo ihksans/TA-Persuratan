@@ -25,27 +25,30 @@ class ClassReducers extends Component {
       //js
       <>
         {this.state.isNotif ? (
-          <div className="grid grid-cols-3 gap-4 bg-biru h-5%  w-93% border border-gray-400 flex justify-start items-center list-none shadow-md">
+          <div className="grid grid-cols-3 gap-4 bg-birudua h-5% rounded flex justify-start items-center list-none shadow-md">
             <div className="col-span-2 flex justify-start">
-              <div className=" flex ">
-                <div className="flex items-center list-none			">
-                  <div className="text-sm	flex items-center mr-4 ml-4 ">
+              <div className="flex">
+                <div className="flex items-center list-none">
+                  <div className="text-sm	flex items-center mr-1 ml-4 ">
                     Selamat datang,
                   </div>
                 </div>
               </div>
-              <div className="flex  items-center border-1 border-gray-400">
-                <div className="flex items-center list-none			">
+              <div className="flex  items-center">
+                <div className="flex items-center list-none">
                   <div className="text-sm	font-bold flex items-center mr-4 ">
                     {this.props.User.currentUser.NAMA}!
                   </div>
                 </div>
               </div>
             </div>
-            <div className="flex justify-end  border-1 border-gray-400 mr-4">
-              <div onClick={this.handleX}>
+            <div className="flex justify-end mr-2.5">
+              {/* <div onClick={this.handleX}>
                 <img className=" " src="assets/img/icon/x.png" />
-              </div>
+              </div> */}
+              <button onClick={this.handleX}>
+              <img className=" " src="assets/img/icon/x.png" />
+              </button>
             </div>
           </div>
         ) : (

@@ -247,7 +247,7 @@ class Login extends Component {
           <div>
             <div className="rounded-md shadow-sm">
               <div>
-                <div className="text-sm mb-2">Username</div>
+                <div className="text-abu text-sm mb-2">Username</div>
                 <input
                   name="username"
                   type="username"
@@ -255,7 +255,7 @@ class Login extends Component {
                   onChange={this.handleUsername}
                   className="focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3"
                   aria-label="Username"
-                  placeholder="username"
+                  placeholder="Username"
                 />
               </div>
 
@@ -279,7 +279,7 @@ class Login extends Component {
                 </>
               )}
               <div>
-                <div className="text-sm mb-2	">Password</div>
+                <div className="text-abu text-sm mb-2">Password</div>
                 <input
                   aria-label="Password"
                   name="password"
@@ -307,13 +307,13 @@ class Login extends Component {
                 <></>
               )}
 
-              <div className="flex ">
+              <div className="flex h-9">
                 <button
                   type="submit"
-                  className=" w-full border-2 rounded-md  bg-primary"
+                  className="w-full border-2 rounded-md bg-primary"
                   onClick={this.handleSubmit}
                 >
-                  <div className="text-sm mb-2 text-white	h-6">Login</div>
+                  <div className="text-sm mb-2 text-putih h-4 font-semibold">Login</div>
                 </button>
               </div>
             </div>
