@@ -10,14 +10,19 @@ class DataUser extends Component {
   render() {
     return (
       <>
-        <div className="border-1 border-gray-400 font-semibold">
-          {this.props.User.currentUser.NAMA}
+        <div className="font-semibold">
+        {/* {this.props.User.currentUser.NAMA} */}
+          <p className="font-semibold text-right text-md">{this.props.User.currentUser.NAMA}</p>
+          <p className="font-semibold text-right text-xs">
+            {this.props.User.currentUser.ROLE == 1
+            ? 'ADMINISTRATOR'
+            : 'STAF PENGGUNA'}</p>
         </div>
-        <div className="border-1 border-gray-400 text-sm font-semibold">
+        {/* <div className="text-sm font-semibold text-right text-xs">
           {this.props.User.currentUser.ROLE == 1
-            ? 'Administrator'
-            : 'Staff Pengguna'}
-        </div>
+            ? 'ADMINISTRATOR'
+            : 'STAF PENGGUNA'}  
+        </div> */}
       </>
     )
   }

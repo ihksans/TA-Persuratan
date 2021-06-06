@@ -10,17 +10,17 @@ const Footer = () => {
         </div>
       </div> */}
 
-      <div className="grid grid-cols-3 gap-4  h-5% border border-gray-400 flex items-center list-none">
+      <div className="grid grid-cols-3 gap-4  h-5% flex items-center list-none">
         <div className="col-span-2 flex justify-start">
-          <div className="flex items-center list-none			">
-            <div className="text-sm	flex items-center mr-4 ml-4 ">
-              Copyright @2021 NamaAplikasi. All rights reserved
+          <div className="flex items-center list-none">
+            <div className="text-xs	text-bb flex items-center mr-4 ml-4">
+              COPYRIGHT © 2021 NAMAAPLIKASI. ALL RIGHTS RESERVED.
             </div>
           </div>
         </div>
         <div className="flex  items-center justify-end border-1 border-gray-400">
-          <div className="flex items-center list-none			">
-            <div className="text-sm	flex items-center mr-4 ">Versi 1.0</div>
+          <div className="flex items-center list-none">
+            <div className="text-xs	text-bb	flex items-center mr-4 ">Versi 1.0.0</div>
           </div>
         </div>
       </div>

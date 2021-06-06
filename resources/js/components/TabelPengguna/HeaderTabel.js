@@ -9,11 +9,11 @@ const HeaderTabel = () => {
 
   return (
     <>
-      <div className="grid grid-cols-9 mt-4 border-b-2 border-black">
-        <div className="flex flex-row">
-          <div className="font-bold">No</div>
+      <div className="grid grid-cols-9 mt-4 border-b-2 border-gray-400 p-2">
+        <div className="flex flex-row ml-2">
+          <div className="font-bold">#</div>
           <div>
-            <button type="submit" className="ml-2">
+            <button type="submit" className="ml-2 mt-2">
               <img className="" src="assets/img/icon/Sort.png" />
             </button>
           </div>
@@ -21,7 +21,7 @@ const HeaderTabel = () => {
         <div className="flex flex-row col-span-2">
           <div className="font-bold">Nama Pengguna</div>
           <div>
-            <button type="submit" className="ml-2">
+            <button type="submit" className="ml-2 mt-1.5">
               <img className="" src="assets/img/icon/Sort-2.png" />
             </button>
           </div>
@@ -30,7 +30,7 @@ const HeaderTabel = () => {
         <div className="flex flex-row col-span-2">
           <div className="font-bold">Username</div>
           <div>
-            <button type="submit" className="ml-2">
+            <button type="submit" className="ml-2 mt-1.5">
               <img className="" src="assets/img/icon/Sort-2.png" />
             </button>
           </div>
@@ -41,7 +41,7 @@ const HeaderTabel = () => {
         <div className="flex flex-row ">
           <div className="font-bold">Role</div>
           <div>
-            <button type="submit" className="ml-2">
+            <button type="submit" className="ml-2 mt-1.5">
               <img className="" src="assets/img/icon/Sort-2.png" />
             </button>
           </div>

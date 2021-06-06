@@ -22,13 +22,13 @@ class BoxDataBeranda extends Component {
         </div> */}
 
         <div className=" p-4 grid grid-rows-2 grid-flow-col gap-2 bg-white border-2 border-grey shadow-md ">
-          <div className="flex  text-primary font-bold">
-            <p className="text-4xl text-primary ">{this.props.count}</p>
+          <div className="flex items-center">
+            <p className="text-3xl text-primary font-extrabold">{this.props.count}</p>
           </div>
-          <div className=" font-bold">
-            <div>{this.props.info}</div>
+          <div className="flex items-center">
+            <p className="text-bb font-semibold">{this.props.info}</p>
           </div>
-          <div className="row-span-2 justify-center">
+          <div className="row-span-2 justify-center ml-20">
             <img className=" " src={'assets/img/icon/' + this.props.icon} />
           </div>
         </div>

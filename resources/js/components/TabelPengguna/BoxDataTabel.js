@@ -6,21 +6,21 @@ const BoxData = ({ No, NamaPengguna, Username, Role, Id, IdPengguna }) => {
   const [formEdit, setFormEdit] = useState(false)
   return (
     <>
-      <div className="grid grid-cols-9 mt-4 border-b-2 border-black p-2">
-        <div className="flex flex-row">
+      <div className="grid grid-cols-9 border-b-2 border-gray-400 p-2">
+        <div className="flex flex-row ml-2 mt-1">
           <div className="">{No}.</div>
         </div>
-        <div className="flex flex-row col-span-2">
+        <div className="flex flex-row col-span-2 mt-1">
           <div className="">{NamaPengguna}</div>
         </div>
 
-        <div className="flex flex-row col-span-2">
+        <div className="flex flex-row col-span-2 mt-1">
           <div className="">{Username}</div>
         </div>
 
-        <div className="">********</div>
+        <div className="mt-1">●●●●●●●</div>
 
-        <div className="flex flex-row ">
+        <div className="flex flex-row mt-1">
           {Role == 1 ? (
             <div className="">Administrator</div>
           ) : (
@@ -31,7 +31,7 @@ const BoxData = ({ No, NamaPengguna, Username, Role, Id, IdPengguna }) => {
           <div className=" flex flex-row">
             <div
               type="submit"
-              className="ml-2 bg-primary flex flex-row w-20	 p-1 items-center	shadow-sm "
+              className="bg-primary flex flex-row rounded p-1 items-center shadow-sm"
             >
               <FormUserEdit
                 nama={NamaPengguna}
@@ -40,7 +40,7 @@ const BoxData = ({ No, NamaPengguna, Username, Role, Id, IdPengguna }) => {
                 id={Id}
               />
             </div>
-            <div>
+            <div className="rounded">
               <ModalKonfirmDelete
                 IdPengguna={IdPengguna}
                 NamaPengguna={NamaPengguna}
