@@ -13,7 +13,7 @@ class KelolaSurat extends Component {
       //html
       //js
       <>
-        <div className="w-full h-90% bg-gray-200	">
+        <div className="w-full h-5/6 bg-gray-200	">
           <p>Ini Class Komponen Kelola Surat</p>
         </div>
       </>

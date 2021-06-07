@@ -16,49 +16,49 @@ class DashboardAdmin extends Component {
       //html
       //js
       <>
-        <div className="w-full h-90% bg-gray-200 p-4">
+        <div className="w-full h-5/6 bg-gray-200 p-4">
           <BoxUserIntro />
           {/* <div className=" flex flex-row "></div> */}
           <div className="grid grid-cols-3 gap-4 mt-3">
             <div>
               <BoxDataBeranda
                 count={'12'}
-                info={'Total Surat Masuk'}
+                info={'TOTAL SURAT MASUK'}
                 icon={'Surat.png'}
               />
             </div>
             <div className="">
               <BoxDataBeranda
-                count={'12'}
-                info={'Total Surat Keluar'}
+                count={'8'}
+                info={'TOTAL SURAT KELUAR'}
                 icon={'Surat.png'}
               />
             </div>
             <div className="">
               <BoxDataBeranda
-                count={'12'}
-                info={'Total Surat Disposisi'}
+                count={'6'}
+                info={'TOTAL DISPOSISI'}
                 icon={'Surat.png'}
               />
             </div>
             <div>
               <BoxDataBeranda
-                count={'12'}
-                info={'Total Seluruh Surat'}
+                count={'26'}
+                info={'TOTAL SURAT'}
                 icon={'Surat.png'}
               />
             </div>
             <div className="">
               <BoxDataBeranda
-                count={'12'}
-                info={'Total Pengguna'}
+                count={'2'}
+                info={'TOTAL PENGGUNA'}
                 icon={'User.png'}
               />
             </div>
             <div className="">
               <BoxDataBeranda
                 count={'1.0.0'}
-                info={'Versi Aplikasi'}
+                info={'VERSI APLIKASI'}
                 icon={'Version.png'}
               />
             </div>

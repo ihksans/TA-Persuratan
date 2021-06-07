@@ -2669,21 +2669,21 @@ var BoxDataBeranda = /*#__PURE__*/function (_Component) {
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: " p-4 grid grid-rows-2 grid-flow-col gap-2 bg-white border-2 border-grey shadow-md ",
+            className: "p-4 grid grid-rows-2 grid-flow-col gap-2 bg-white border-2 border-grey shadow-md ",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-              className: "flex items-center",
+              className: "flex items-center ml-3",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
                 className: "text-3xl text-primary font-extrabold",
                 children: this.props.count
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-              className: "flex items-center",
+              className: "flex items-center ml-3",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
                 className: "text-bb font-semibold",
                 children: this.props.info
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-              className: "row-span-2 justify-center ml-20",
+              className: "row-span-2 flex justify-end",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
                 className: " ",
                 src: 'assets/img/icon/' + this.props.icon
@@ -2905,15 +2905,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Footer = function Footer() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "w-full h-4 bg-gray-200"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       className: "grid grid-cols-3 gap-4  h-5% flex items-center list-none",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         className: "col-span-2 flex justify-start",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
           className: "flex items-center list-none",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-            className: "text-xs\ttext-bb flex items-center mr-4 ml-4",
+            className: "text-xs\ttext-bb flex items-center mr-4 ml-4 mt-2",
             children: "COPYRIGHT \xA9 2021 NAMAAPLIKASI. ALL RIGHTS RESERVED."
           })
         })
@@ -2922,12 +2924,12 @@ var Footer = function Footer() {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
           className: "flex items-center list-none",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-            className: "text-xs\ttext-bb\tflex items-center mr-4 ",
+            className: "text-xs\ttext-bb\tflex items-center mr-4 mt-2",
             children: "Versi 1.0.0"
           })
         })
       })]
-    })
+    })]
   });
 };
 
@@ -3152,6 +3154,7 @@ var FormUserEdit = /*#__PURE__*/function (_Component) {
                     return console.log(err);
                   });
                   console.log('valid form');
+                  window.location.reload('/#/KelolaPengguna');
                 } else {
                   console.log('error form');
                 }
@@ -3287,9 +3290,10 @@ var FormUserEdit = /*#__PURE__*/function (_Component) {
                               htmlFor: "nama",
                               className: "text-sm mb-2 font-bold flex flex-row ",
                               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                                className: "mt-2",
                                 children: "Nama Pengguna "
                               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                                className: "text-danger ml-2",
+                                className: "text-danger ml-2 mt-1.5",
                                 children: " *"
                               })]
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -3323,9 +3327,10 @@ var FormUserEdit = /*#__PURE__*/function (_Component) {
                               htmlFor: "username",
                               className: "text-sm mb-2 font-bold flex flex-row ",
                               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                                className: "mt-2",
                                 children: "Username"
                               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                                className: "text-danger ml-2",
+                                className: "text-danger ml-2 mt-1.5",
                                 children: " *"
                               })]
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -3341,9 +3346,10 @@ var FormUserEdit = /*#__PURE__*/function (_Component) {
                               htmlFor: "role",
                               className: "text-sm mb-2 font-bold flex flex-row ",
                               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                                className: "mt-2",
                                 children: "Role"
                               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                                className: "text-danger ml-2",
+                                className: "text-danger ml-2 mt-1.5",
                                 children: " *"
                               })]
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -3380,9 +3386,10 @@ var FormUserEdit = /*#__PURE__*/function (_Component) {
                               htmlFor: "password",
                               className: "text-sm mb-2 font-bold flex flex-row ",
                               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                                className: "mt-2",
                                 children: "Password"
                               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                                className: "text-danger ml-2",
+                                className: "text-danger ml-2 mt-1.5",
                                 children: " *"
                               })]
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -3416,9 +3423,10 @@ var FormUserEdit = /*#__PURE__*/function (_Component) {
                               htmlFor: "password",
                               className: "text-sm mb-2 font-bold flex flex-row ",
                               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                                className: "mt-2",
                                 children: "Confirm Password "
                               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                                className: "text-danger ml-2",
+                                className: "text-danger ml-2 mt-1.5",
                                 children: " *"
                               })]
                             }), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -3745,6 +3753,7 @@ var FormUser = /*#__PURE__*/function (_Component) {
                     return console.log(err);
                   });
                   console.log('valid form');
+                  window.location.reload('/#/KelolaPengguna');
                 } else {
                   console.log('error form');
                 }
@@ -3931,9 +3940,10 @@ var FormUser = /*#__PURE__*/function (_Component) {
                               htmlFor: "nama",
                               className: "text-sm mb-2 font-bold flex flex-row ",
                               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                                className: "mt-2",
                                 children: "Nama Pengguna "
                               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                                className: "text-danger ml-2",
+                                className: "text-danger ml-2 mt-1.5",
                                 children: "*"
                               })]
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -3967,9 +3977,10 @@ var FormUser = /*#__PURE__*/function (_Component) {
                               htmlFor: "username",
                               className: "text-sm mb-2 font-bold flex flex-row ",
                               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                                className: "mt-2",
                                 children: "Username"
                               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                                className: "text-danger ml-2",
+                                className: "text-danger ml-2 mt-1.5",
                                 children: " *"
                               })]
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -4008,9 +4019,10 @@ var FormUser = /*#__PURE__*/function (_Component) {
                               htmlFor: "role",
                               className: "text-sm mb-2 font-bold flex flex-row ",
                               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                                className: "mt-2",
                                 children: "Role"
                               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                                className: "text-danger ml-2",
+                                className: "text-danger ml-2 mt-1.5",
                                 children: " *"
                               })]
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -4047,9 +4059,10 @@ var FormUser = /*#__PURE__*/function (_Component) {
                               htmlFor: "password",
                               className: "text-sm mb-2 font-bold flex flex-row ",
                               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                                className: "mt-2",
                                 children: "Password"
                               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                                className: "text-danger ml-2",
+                                className: "text-danger ml-2 mt-1.5",
                                 children: " *"
                               })]
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -4083,9 +4096,10 @@ var FormUser = /*#__PURE__*/function (_Component) {
                               htmlFor: "password",
                               className: "text-sm mb-2 font-bold flex flex-row ",
                               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+                                className: "mt-2",
                                 children: "Confirm Password "
                               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                                className: "text-danger ml-2",
+                                className: "text-danger ml-2 mt-1.5",
                                 children: " *"
                               })]
                             }), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -4326,7 +4340,7 @@ var HeaderComponent = function HeaderComponent(_ref) {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_DataUser__WEBPACK_IMPORTED_MODULE_2__.default, {})
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_UserButton__WEBPACK_IMPORTED_MODULE_3__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_ReminderIcon__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
             type: "submit",
-            className: "justify-items-center h-10 my-2 mx-2",
+            className: "justify-items-center h-9 my-2.5 mx-2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
               className: " h-full w-full ",
               src: "assets/img/icon/Bell.png"
@@ -4405,10 +4419,10 @@ var ReminderIcon = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
         children: this.props.User.currentUser.ROLE == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
           type: "submit",
-          className: "  w-6\th-10 my-2 mx-3",
+          className: "justify-items-center w-8\th-6 my-4 mx-2",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
             className: " h-full w-full ",
-            src: "assets/img/icon/Reminder.png"
+            src: "assets/img/icon/surat_icon_2.png"
           })
         })
       });
@@ -4979,10 +4993,11 @@ var Logout = /*#__PURE__*/function (_Component) {
       // console.log("last token:"+ this.props.authToken.token);
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          className: "absolute",
+          className: "absolute spacing-0",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             onClick: this.removeToken,
-            className: "group relative w-full flex justify-center py-2 px-4 border  text-xs leading-5  font-medium rounded-md text-black bg-white border-black\t hover:bg-primary focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
+            className: "group relative w-full flex justify-center py-2 px-4 text-xs leading-5 font-medium rounded shadow-md text-black bg-white hover:bg-primary focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out" // className="h-5 w-5 bg-black ml-3 -rotate-45 transform origin-top-left"
+            ,
             children: "Logout"
           })
         })
@@ -5098,6 +5113,7 @@ function ModalKonfirmDelete(_ref) {
       console.log('respon:' + response);
       console.log('pengguna telah terhapus');
       setShowModal(false);
+      window.location.reload('/#/KelolaPengguna');
     })["catch"](function (error) {
       console.log(error);
     });
@@ -5335,102 +5351,125 @@ var Navbar = /*#__PURE__*/function (_Component) {
                 className: this.props.bar ? 'left-0	duration-300' : 'bg-white	 w-12	 flex justify-center	fixed top-0 -left-full  duration-700	',
                 children: this.props.User.currentUser.ROLE == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("ul", {
-                    className: "w-full mt-2 ml-2 ",
+                    className: "w-full",
                     children: [this.props.Path.currentPath == 'BerandaAdmin' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "bg-brokenblack mb-5 w-93% ",
+                      className: "bg-brokenblack w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                        className: "w-full ",
+                        className: "w-full h-17 text-birudua",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                          className: "flex items-center list-none\t\t\t",
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                            className: " ",
-                            src: "assets/img/icon/Beranda-Active.png"
+                          className: "flex items-center py-2.5 px-3",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                            className: "rounded-full bg-birudua h-11 w-11 flex items-center justify-center",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                              className: "flex justify-center",
+                              src: "assets/img/icon/beranda_icon.png"
+                            })
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                            className: "text-biru font-bold\tflex items-center ml-4 ",
+                            className: "text-birudua font-bold flex items-center ml-4",
                             children: "Beranda"
                           })]
                         })
                       })
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "mb-5 \t",
+                      className: "w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
                         onClick: this.onLink1,
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
                           to: '/',
                           replace: true,
                           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                            className: "flex items-center list-none\t\t\t",
-                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                              className: " ",
-                              src: "assets/img/icon/Beranda-Pasive.png"
+                            className: "flex items-center py-2.5 px-3",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                              className: "rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                                className: "flex justify-center",
+                                src: "assets/img/icon/beranda_icon.png"
+                              })
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                              className: "text-primary flex items-center ml-4",
+                              className: "font-bold flex items-center ml-4",
                               children: "Beranda"
                             })]
                           })
                         })
                       })
                     }), this.props.Path.currentPath == 'Surat' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "bg-brokenblack mb-5",
+                      className: "bg-brokenblack w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "w-full h-17 text-birudua",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                          className: "flex items-center list-none\t\t\t",
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                            className: " ",
-                            src: "assets/img/icon/Surat-Active.png"
-                          }), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                            className: "text-biru font-bold flex items-center ml-4\t",
+                          className: "flex items-center py-2.5 px-3",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                            className: "rounded-full bg-birudua h-11 w-11 flex items-center justify-center",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                              className: "flex justify-center h-4",
+                              src: "assets/img/icon/surat_icon.png"
+                            })
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                            className: "text-birudua font-bold flex items-center ml-4",
                             children: "Kelola Surat"
                           })]
                         })
                       })
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "mb-5",
+                      className: "w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
                         onClick: this.onLink2,
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
                           to: "/KelolaSurat",
                           replace: true,
                           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                            className: "flex items-center list-none\t\t\t",
-                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                              className: " ",
-                              src: "assets/img/icon/Surat-Pasive.png"
-                            }), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                              className: "text-primary flex items-center ml-4",
+                            className: "flex items-center py-2.5 px-3",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                              className: "rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                                className: "flex justify-center h-4",
+                                src: "assets/img/icon/surat_icon.png"
+                              })
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                              className: "font-bold flex items-center ml-4",
                               children: "Kelola Surat"
                             })]
                           })
                         })
                       })
-                    }), this.props.Path.currentPath == 'User' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("li", {
-                      className: "bg-brokenblack mb-5",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                    }), this.props.Path.currentPath == 'User' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
+                      className: "bg-brokenblack w-full h-full",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "w-full h-17 text-birudua",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                          className: "flex items-center list-none\t\t\t",
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                            className: " ",
-                            src: "assets/img/icon/User-Active.png"
+                          className: "flex items-center py-2.5 px-3",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                            className: "rounded-full bg-birudua h-11 w-11 flex items-center justify-center",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                              className: "flex justify-center h-6",
+                              src: "assets/img/icon/user_icon_2.png"
+                            })
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                            className: "text-biru font-bold\tflex items-center ml-4",
+                            className: "text-birudua font-bold flex items-center ml-4",
                             children: "Kelola Pengguna"
                           })]
                         })
-                      }), ' ']
+                      })
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "mb-5",
+                      className: "w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
                         onClick: this.onLink3,
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
                           to: "/KelolaPengguna",
                           replace: true,
                           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                            className: "flex items-center list-none\t\t\t",
-                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                              className: " ",
-                              src: "assets/img/icon/User-Pasive.png"
-                            }), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                              className: "text-primary flex items-center ml-4",
+                            className: "flex items-center py-2.5 px-3",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                              className: "rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                                className: "flex justify-center h-6",
+                                src: "assets/img/icon/user_icon_2.png"
+                              })
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                              className: "font-bold flex items-center ml-4",
                               children: "Kelola Pengguna"
                             })]
                           })
@@ -5442,132 +5481,164 @@ var Navbar = /*#__PURE__*/function (_Component) {
                   children: [' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("ul", {
                     className: "w-full",
                     children: [this.props.Path.currentPath == 'Beranda' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "bg-brokenblack mb-5  mt-2",
+                      className: "bg-brokenblack w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "w-full h-17 text-birudua",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                          className: "flex items-center list-none\t\t\t",
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                            className: " ",
-                            src: "assets/img/icon/Beranda-Active.png"
+                          className: "flex items-center py-2.5 px-3",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                            className: "rounded-full bg-birudua h-11 w-11 flex items-center justify-center",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                              className: "flex justify-center",
+                              src: "assets/img/icon/beranda_icon.png"
+                            })
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                            className: "text-biru font-bold flex items-center ml-4\t",
+                            className: "text-birudua font-bold flex items-center ml-4",
                             children: "Beranda"
                           })]
                         })
                       })
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "mb-5  mt-2",
+                      className: "w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
                         onClick: this.onLink4,
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
                           to: '/',
                           replace: true,
                           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                            className: "flex items-center list-none\t\t\t",
-                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                              className: " ",
-                              src: "assets/img/icon/Beranda-Pasive.png"
+                            className: "flex items-center py-2.5 px-3",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                              className: "rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                                className: "flex justify-center",
+                                src: "assets/img/icon/beranda_icon.png"
+                              })
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                              className: "text-primary flex items-center ml-4",
+                              className: "font-bold flex items-center ml-4",
                               children: "Beranda"
                             })]
                           })
                         })
                       })
                     }), this.props.Path.currentPath == 'SuratMasuk' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "bg-brokenblack mb-5",
+                      className: "bg-brokenblack w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "w-full h-17 text-birudua",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                          className: "flex items-center list-none\t\t\t",
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                            className: " ",
-                            src: "assets/img/icon/Surat-Active.png"
-                          }), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                            className: "text-biru font-bold\tflex items-center ml-4",
+                          className: "flex items-center py-2.5 px-3",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                            className: "rounded-full bg-birudua h-11 w-11 flex items-center justify-center",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                              className: "flex justify-center h-4",
+                              src: "assets/img/icon/surat_icon.png"
+                            })
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                            className: "text-birudua font-bold flex items-center ml-4",
                             children: "Surat Masuk"
                           })]
                         })
                       })
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "mb-5",
+                      className: "w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
                         onClick: this.onLink5,
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
                           to: "/SuratMasuk",
                           replace: true,
-                          children: [' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                            className: "flex items-center list-none\t\t\t",
-                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                              className: " ",
-                              src: "assets/img/icon/Surat-Pasive.png"
-                            }), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                              className: "text-primary flex items-center ml-4",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                            className: "flex items-center py-2.5 px-3",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                              className: "rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                                className: "flex justify-center h-4",
+                                src: "assets/img/icon/surat_icon.png"
+                              })
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                              className: "font-bold flex items-center ml-4",
                               children: "Surat Masuk"
-                            }), ' ']
-                          })]
+                            })]
+                          })
                         })
                       })
                     }), this.props.Path.currentPath == 'SuratKeluar' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "bg-brokenblack mb-5",
+                      className: "bg-brokenblack w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "w-full h-17 text-birudua",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                          className: "flex items-center list-none\t\t\t",
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                            className: " ",
-                            src: "assets/img/icon/Surat-Active.png"
+                          className: "flex items-center py-2.5 px-3",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                            className: "rounded-full bg-birudua h-11 w-11 flex items-center justify-center",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                              className: "flex justify-center h-4",
+                              src: "assets/img/icon/surat_icon.png"
+                            })
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                            className: "text-biru font-bold flex items-center ml-4\t",
+                            className: "text-birudua font-bold flex items-center ml-4",
                             children: "Surat Keluar"
                           })]
                         })
                       })
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "mb-5",
+                      className: "w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
                         onClick: this.onLink6,
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
                           to: "/SuratKeluar",
                           replace: true,
                           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                            className: "flex items-center list-none\t\t\t",
-                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                              className: " ",
-                              src: "assets/img/icon/Surat-Pasive.png"
+                            className: "flex items-center py-2.5 px-3",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                              className: "rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                                className: "flex justify-center h-4",
+                                src: "assets/img/icon/surat_icon.png"
+                              })
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                              className: "text-primary flex items-center ml-4",
+                              className: "font-bold flex items-center ml-4",
                               children: "Surat Keluar"
                             })]
                           })
                         })
                       })
                     }), this.props.Path.currentPath == 'Disposisi' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "bg-brokenblack mb-5",
+                      className: "bg-brokenblack w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "w-full h-17 text-birudua",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                          className: "flex items-center list-none\t\t\t",
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                            className: " ",
-                            src: "assets/img/icon/Surat-Active.png"
+                          className: "flex items-center py-2.5 px-3",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                            className: "rounded-full bg-birudua h-11 w-11 flex items-center justify-center",
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                              className: "flex justify-center h-4",
+                              src: "assets/img/icon/surat_icon.png"
+                            })
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                            className: "text-biru font-bold\tflex items-center ml-4",
+                            className: "text-birudua font-bold flex items-center ml-4",
                             children: "Disposisi"
                           })]
                         })
                       })
                     }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
-                      className: "mb-5",
+                      className: "w-full h-full",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        className: "group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
                         onClick: this.onLink7,
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
                           to: "/Disposisi",
                           replace: true,
                           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                            className: "flex items-center list-none\t\t\t",
-                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                              className: " ",
-                              src: "assets/img/icon/Surat-Pasive.png"
-                            }), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                              className: "text-primary flex items-center ml-4",
+                            className: "flex items-center py-2.5 px-3",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                              className: "rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out",
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                                className: "flex justify-center h-4",
+                                src: "assets/img/icon/surat_icon.png"
+                              })
+                            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                              className: "font-bold flex items-center ml-4",
                               children: "Disposisi"
                             })]
                           })
@@ -5667,7 +5738,7 @@ var BoxData = function BoxData(_ref) {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "mt-1",
-        children: "\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF"
+        children: "\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "flex flex-row mt-1",
         children: Role == 1 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -6725,29 +6796,27 @@ var Dashboard = /*#__PURE__*/function (_Component) {
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-            className: "w-full h-90% bg-gray-200 p-4\t",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_BoxUserIntro__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-              className: " flex flex-row "
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-              className: "grid grid-cols-3 gap-4 mt-10",
+            className: "w-full h-5/6 bg-gray-200 p-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_BoxUserIntro__WEBPACK_IMPORTED_MODULE_4__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              className: "grid grid-cols-3 gap-4 mt-3",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_BoxDataBeranda__WEBPACK_IMPORTED_MODULE_3__.default, {
                   count: '12',
-                  info: 'Total Surat Masuk',
+                  info: 'TOTAL SURAT MASUK',
                   icon: 'Surat.png'
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_BoxDataBeranda__WEBPACK_IMPORTED_MODULE_3__.default, {
-                  count: '12',
-                  info: 'Total Surat Keluar',
+                  count: '8',
+                  info: 'TOTAL SURAT KELUAR',
                   icon: 'Surat.png'
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                 className: "",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_BoxDataBeranda__WEBPACK_IMPORTED_MODULE_3__.default, {
-                  count: '12',
-                  info: 'Total Surat Disposisi',
+                  count: '6',
+                  info: 'TOTAL DISPOSISI',
                   icon: 'Surat.png'
                 })
               })]
@@ -6841,47 +6910,47 @@ var DashboardAdmin = /*#__PURE__*/function (_Component) {
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-            className: "w-full h-90% bg-gray-200 p-4",
+            className: "w-full h-5/6 bg-gray-200 p-4",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_BoxUserIntro__WEBPACK_IMPORTED_MODULE_3__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "grid grid-cols-3 gap-4 mt-3",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_BoxDataBeranda__WEBPACK_IMPORTED_MODULE_2__.default, {
                   count: '12',
-                  info: 'Total Surat Masuk',
+                  info: 'TOTAL SURAT MASUK',
                   icon: 'Surat.png'
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_BoxDataBeranda__WEBPACK_IMPORTED_MODULE_2__.default, {
-                  count: '12',
-                  info: 'Total Surat Keluar',
+                  count: '8',
+                  info: 'TOTAL SURAT KELUAR',
                   icon: 'Surat.png'
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_BoxDataBeranda__WEBPACK_IMPORTED_MODULE_2__.default, {
-                  count: '12',
-                  info: 'Total Surat Disposisi',
+                  count: '6',
+                  info: 'TOTAL DISPOSISI',
                   icon: 'Surat.png'
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_BoxDataBeranda__WEBPACK_IMPORTED_MODULE_2__.default, {
-                  count: '12',
-                  info: 'Total Seluruh Surat',
+                  count: '26',
+                  info: 'TOTAL SURAT',
                   icon: 'Surat.png'
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_BoxDataBeranda__WEBPACK_IMPORTED_MODULE_2__.default, {
-                  count: '12',
-                  info: 'Total Pengguna',
+                  count: '2',
+                  info: 'TOTAL PENGGUNA',
                   icon: 'User.png'
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                 className: "",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_BoxDataBeranda__WEBPACK_IMPORTED_MODULE_2__.default, {
                   count: '1.0.0',
-                  info: 'Versi Aplikasi',
+                  info: 'VERSI APLIKASI',
                   icon: 'Version.png'
                 })
               })]
@@ -6969,7 +7038,7 @@ var Disposisi = /*#__PURE__*/function (_Component) {
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-            className: "w-full h-90% bg-gray-200\t",
+            className: "w-full h-5/6 bg-gray-200\t",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
               children: "Ini Class Komponen Disposisi"
             })
@@ -7128,7 +7197,7 @@ var KelolaPengguna = /*#__PURE__*/function (_Component) {
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-            className: "w-full h-90% bg-gray-200 p-4",
+            className: "w-full h-5/6 bg-gray-200 p-4",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
               className: "bg-white shadow-md rounded p-6",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
@@ -7235,7 +7304,7 @@ var KelolaSurat = /*#__PURE__*/function (_Component) {
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-            className: "w-full h-90% bg-gray-200\t",
+            className: "w-full h-5/6 bg-gray-200\t",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
               children: "Ini Class Komponen Kelola Surat"
             })
@@ -7565,7 +7634,7 @@ var SuratKeluar = /*#__PURE__*/function (_Component) {
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-            className: "w-full h-90% bg-gray-200\t",
+            className: "w-full h-5/6 bg-gray-200\t",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
               children: "Ini Class Komponen SuratKeluar"
             })
@@ -7648,7 +7717,7 @@ var SuratMasuk = /*#__PURE__*/function (_Component) {
         //js
         (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-            className: "w-full h-90% bg-gray-200\t",
+            className: "w-full h-5/6 bg-gray-200\t",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
               children: "Ini Class Komponen SuratMasuk"
             })

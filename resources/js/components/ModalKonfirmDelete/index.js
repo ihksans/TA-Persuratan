@@ -15,6 +15,7 @@ export default function ModalKonfirmDelete({ IdPengguna, NamaPengguna }) {
         console.log('respon:' + response)
         console.log('pengguna telah terhapus')
         setShowModal(false)
+        window.location.reload('/#/KelolaPengguna')
       })
       .catch((error) => {
         console.log(error)

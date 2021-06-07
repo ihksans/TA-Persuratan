@@ -13,10 +13,10 @@ class ReminderIcon extends Component {
         {this.props.User.currentUser.ROLE == 1 ? (
           <></>
         ) : (
-          <button type="submit" className="  w-6	h-10 my-2 mx-3">
+          <button type="submit" className="justify-items-center w-8	h-6 my-4 mx-2">
             <img
               className=" h-full w-full "
-              src="assets/img/icon/Reminder.png"
+              src="assets/img/icon/surat_icon_2.png"
             />
           </button>
         )}

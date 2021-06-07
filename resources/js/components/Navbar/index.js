@@ -80,31 +80,36 @@ class Navbar extends Component {
             >
               {this.props.User.currentUser.ROLE == 1 ? (
                 <>
-                  <ul className="w-full mt-2 ml-2 ">
+                  <ul className="w-full">
                     {this.props.Path.currentPath == 'BerandaAdmin' ? (
-                      <li className="bg-brokenblack mb-5 w-93% ">
-                        <button className="w-full ">
-                          <div className="flex items-center list-none			">
-                            <img
-                              className=" "
-                              src="assets/img/icon/Beranda-Active.png"
-                            />
-                            <div className="text-biru font-bold	flex items-center ml-4 ">
+                      <li className="bg-brokenblack w-full h-full">
+                        <button className="w-full h-17 text-birudua">
+                          <div className="flex items-center py-2.5 px-3">
+                            <div className="rounded-full bg-birudua h-11 w-11 flex items-center justify-center">
+                              <img
+                                className="flex justify-center"
+                                src="assets/img/icon/beranda_icon.png"
+                              />
+                            </div>
+                            <div className="text-birudua font-bold flex items-center ml-4">
                               Beranda
                             </div>
                           </div>
                         </button>
                       </li>
                     ) : (
-                      <li className="mb-5 	">
-                        <button onClick={this.onLink1}>
+                      <li className="w-full h-full">
+                        <button className="group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                        onClick={this.onLink1}>
                           <Link to={'/'} replace>
-                            <div className="flex items-center list-none			">
-                              <img
-                                className=" "
-                                src="assets/img/icon/Beranda-Pasive.png"
-                              />
-                              <div className="text-primary flex items-center ml-4">
+                            <div className="flex items-center py-2.5 px-3">
+                              <div className="rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                                <img
+                                  className="flex justify-center"
+                                  src="assets/img/icon/beranda_icon.png"
+                                />
+                              </div>
+                              <div className="font-bold flex items-center ml-4">
                                 Beranda
                               </div>
                             </div>
@@ -114,29 +119,34 @@ class Navbar extends Component {
                     )}
 
                     {this.props.Path.currentPath == 'Surat' ? (
-                      <li className="bg-brokenblack mb-5">
-                        <button>
-                          <div className="flex items-center list-none			">
-                            <img
-                              className=" "
-                              src="assets/img/icon/Surat-Active.png"
-                            />{' '}
-                            <div className="text-biru font-bold flex items-center ml-4	">
+                      <li className="bg-brokenblack w-full h-full">
+                        <button className="w-full h-17 text-birudua">
+                          <div className="flex items-center py-2.5 px-3">
+                            <div className="rounded-full bg-birudua h-11 w-11 flex items-center justify-center">
+                              <img
+                                className="flex justify-center h-4"
+                                src="assets/img/icon/surat_icon.png"
+                              />
+                            </div>
+                            <div className="text-birudua font-bold flex items-center ml-4">
                               Kelola Surat
                             </div>
                           </div>
                         </button>
                       </li>
                     ) : (
-                      <li className="mb-5">
-                        <button onClick={this.onLink2}>
+                      <li className="w-full h-full">
+                        <button className="group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                        onClick={this.onLink2}>
                           <Link to="/KelolaSurat" replace>
-                            <div className="flex items-center list-none			">
-                              <img
-                                className=" "
-                                src="assets/img/icon/Surat-Pasive.png"
-                              />{' '}
-                              <div className="text-primary flex items-center ml-4">
+                            <div className="flex items-center py-2.5 px-3">
+                              <div className="rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                                <img
+                                  className="flex justify-center h-4"
+                                  src="assets/img/icon/surat_icon.png"
+                                />
+                              </div>
+                              <div className="font-bold flex items-center ml-4">
                                 Kelola Surat
                               </div>
                             </div>
@@ -146,29 +156,34 @@ class Navbar extends Component {
                     )}
 
                     {this.props.Path.currentPath == 'User' ? (
-                      <li className="bg-brokenblack mb-5">
-                        <button>
-                          <div className="flex items-center list-none			">
-                            <img
-                              className=" "
-                              src="assets/img/icon/User-Active.png"
-                            />
-                            <div className="text-biru font-bold	flex items-center ml-4">
+                      <li className="bg-brokenblack w-full h-full">
+                        <button className="w-full h-17 text-birudua">
+                          <div className="flex items-center py-2.5 px-3">
+                            <div className="rounded-full bg-birudua h-11 w-11 flex items-center justify-center">
+                              <img
+                                className="flex justify-center h-6"
+                                src="assets/img/icon/user_icon_2.png"
+                              />
+                            </div>
+                            <div className="text-birudua font-bold flex items-center ml-4">
                               Kelola Pengguna
                             </div>
                           </div>
-                        </button>{' '}
+                        </button>
                       </li>
                     ) : (
-                      <li className="mb-5">
-                        <button onClick={this.onLink3}>
+                      <li className="w-full h-full">
+                        <button className="group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                        onClick={this.onLink3}>
                           <Link to="/KelolaPengguna" replace>
-                            <div className="flex items-center list-none			">
-                              <img
-                                className=" "
-                                src="assets/img/icon/User-Pasive.png"
-                              />{' '}
-                              <div className="text-primary flex items-center ml-4">
+                            <div className="flex items-center py-2.5 px-3">
+                              <div className="rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                                <img
+                                  className="flex justify-center h-6"
+                                  src="assets/img/icon/user_icon_2.png"
+                                />
+                              </div>
+                              <div className="font-bold flex items-center ml-4">
                                 Kelola Pengguna
                               </div>
                             </div>
@@ -183,29 +198,34 @@ class Navbar extends Component {
                   {' '}
                   <ul className="w-full">
                     {this.props.Path.currentPath == 'Beranda' ? (
-                      <li className="bg-brokenblack mb-5  mt-2">
-                        <button>
-                          <div className="flex items-center list-none			">
-                            <img
-                              className=" "
-                              src="assets/img/icon/Beranda-Active.png"
-                            />
-                            <div className="text-biru font-bold flex items-center ml-4	">
+                      <li className="bg-brokenblack w-full h-full">
+                        <button className="w-full h-17 text-birudua">
+                          <div className="flex items-center py-2.5 px-3">
+                            <div className="rounded-full bg-birudua h-11 w-11 flex items-center justify-center">
+                              <img
+                                className="flex justify-center"
+                                src="assets/img/icon/beranda_icon.png"
+                              />
+                            </div>
+                            <div className="text-birudua font-bold flex items-center ml-4">
                               Beranda
                             </div>
                           </div>
                         </button>
                       </li>
                     ) : (
-                      <li className="mb-5  mt-2">
-                        <button onClick={this.onLink4}>
+                      <li className="w-full h-full">
+                        <button className="group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                        onClick={this.onLink4}>
                           <Link to={'/'} replace>
-                            <div className="flex items-center list-none			">
-                              <img
-                                className=" "
-                                src="assets/img/icon/Beranda-Pasive.png"
-                              />
-                              <div className="text-primary flex items-center ml-4">
+                            <div className="flex items-center py-2.5 px-3">
+                              <div className="rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                                <img
+                                  className="flex justify-center"
+                                  src="assets/img/icon/beranda_icon.png"
+                                />
+                              </div>
+                              <div className="font-bold flex items-center ml-4">
                                 Beranda
                               </div>
                             </div>
@@ -215,32 +235,36 @@ class Navbar extends Component {
                     )}
 
                     {this.props.Path.currentPath == 'SuratMasuk' ? (
-                      <li className="bg-brokenblack mb-5">
-                        <button>
-                          <div className="flex items-center list-none			">
+                      <li className="bg-brokenblack w-full h-full">
+                      <button className="w-full h-17 text-birudua">
+                        <div className="flex items-center py-2.5 px-3">
+                          <div className="rounded-full bg-birudua h-11 w-11 flex items-center justify-center">
                             <img
-                              className=" "
-                              src="assets/img/icon/Surat-Active.png"
-                            />{' '}
-                            <div className="text-biru font-bold	flex items-center ml-4">
-                              Surat Masuk
-                            </div>
+                              className="flex justify-center h-4"
+                              src="assets/img/icon/surat_icon.png"
+                            />
                           </div>
-                        </button>
-                      </li>
+                          <div className="text-birudua font-bold flex items-center ml-4">
+                            Surat Masuk
+                          </div>
+                        </div>
+                      </button>
+                    </li>
                     ) : (
-                      <li className="mb-5">
-                        <button onClick={this.onLink5}>
+                      <li className="w-full h-full">
+                        <button className="group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                        onClick={this.onLink5}>
                           <Link to="/SuratMasuk" replace>
-                            {' '}
-                            <div className="flex items-center list-none			">
-                              <img
-                                className=" "
-                                src="assets/img/icon/Surat-Pasive.png"
-                              />{' '}
-                              <div className="text-primary flex items-center ml-4">
+                            <div className="flex items-center py-2.5 px-3">
+                              <div className="rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                                <img
+                                  className="flex justify-center h-4"
+                                  src="assets/img/icon/surat_icon.png"
+                                />
+                              </div>
+                              <div className="font-bold flex items-center ml-4">
                                 Surat Masuk
-                              </div>{' '}
+                              </div>
                             </div>
                           </Link>
                         </button>
@@ -248,29 +272,34 @@ class Navbar extends Component {
                     )}
 
                     {this.props.Path.currentPath == 'SuratKeluar' ? (
-                      <li className="bg-brokenblack mb-5">
-                        <button>
-                          <div className="flex items-center list-none			">
-                            <img
-                              className=" "
-                              src="assets/img/icon/Surat-Active.png"
-                            />
-                            <div className="text-biru font-bold flex items-center ml-4	">
+                      <li className="bg-brokenblack w-full h-full">
+                        <button className="w-full h-17 text-birudua">
+                          <div className="flex items-center py-2.5 px-3">
+                            <div className="rounded-full bg-birudua h-11 w-11 flex items-center justify-center">
+                              <img
+                                className="flex justify-center h-4"
+                                src="assets/img/icon/surat_icon.png"
+                              />
+                            </div>
+                            <div className="text-birudua font-bold flex items-center ml-4">
                               Surat Keluar
                             </div>
                           </div>
                         </button>
                       </li>
                     ) : (
-                      <li className="mb-5">
-                        <button onClick={this.onLink6}>
+                      <li className="w-full h-full">
+                        <button className="group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                        onClick={this.onLink6}>
                           <Link to="/SuratKeluar" replace>
-                            <div className="flex items-center list-none			">
-                              <img
-                                className=" "
-                                src="assets/img/icon/Surat-Pasive.png"
-                              />
-                              <div className="text-primary flex items-center ml-4">
+                            <div className="flex items-center py-2.5 px-3">
+                              <div className="rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                                <img
+                                  className="flex justify-center h-4"
+                                  src="assets/img/icon/surat_icon.png"
+                                />
+                              </div>
+                              <div className="font-bold flex items-center ml-4">
                                 Surat Keluar
                               </div>
                             </div>
@@ -279,29 +308,34 @@ class Navbar extends Component {
                       </li>
                     )}
                     {this.props.Path.currentPath == 'Disposisi' ? (
-                      <li className="bg-brokenblack mb-5">
-                        <button>
-                          <div className="flex items-center list-none			">
-                            <img
-                              className=" "
-                              src="assets/img/icon/Surat-Active.png"
-                            />
-                            <div className="text-biru font-bold	flex items-center ml-4">
+                      <li className="bg-brokenblack w-full h-full">
+                        <button className="w-full h-17 text-birudua">
+                          <div className="flex items-center py-2.5 px-3">
+                            <div className="rounded-full bg-birudua h-11 w-11 flex items-center justify-center">
+                              <img
+                                className="flex justify-center h-4"
+                                src="assets/img/icon/surat_icon.png"
+                              />
+                            </div>
+                            <div className="text-birudua font-bold flex items-center ml-4">
                               Disposisi
                             </div>
                           </div>
                         </button>
                       </li>
                     ) : (
-                      <li className="mb-5">
-                        <button onClick={this.onLink7}>
+                      <li className="w-full h-full">
+                        <button className="group w-full h-full text-primary hover:bg-brokenblack hover:text-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                        onClick={this.onLink7}>
                           <Link to="/Disposisi" replace>
-                            <div className="flex items-center list-none			">
-                              <img
-                                className=" "
-                                src="assets/img/icon/Surat-Pasive.png"
-                              />{' '}
-                              <div className="text-primary flex items-center ml-4">
+                            <div className="flex items-center py-2.5 px-3">
+                              <div className="rounded-full bg-primary h-11 w-11 flex items-center justify-center group-hover:bg-birudua focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+                                <img
+                                  className="flex justify-center h-4"
+                                  src="assets/img/icon/surat_icon.png"
+                                />
+                              </div>
+                              <div className="font-bold flex items-center ml-4">
                                 Disposisi
                               </div>
                             </div>
