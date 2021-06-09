@@ -47,7 +47,7 @@ class KelolaPengguna extends Component {
       //html
       //js
       <>
-        <div className="w-full h-90% bg-gray-200 p-4">
+        <div className="w-full h-5/6 bg-gray-200 p-4">
           <div className="bg-white shadow-md rounded p-6">
             <div className="flex flex-row">
               <div>

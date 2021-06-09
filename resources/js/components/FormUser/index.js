@@ -142,6 +142,7 @@ class FormUser extends Component {
         })
         .catch((err) => console.log(err))
       console.log('valid form')
+      window.location.reload('/#/KelolaPengguna')
     } else {
       console.log('error form')
     }
@@ -302,8 +303,8 @@ class FormUser extends Component {
                                 htmlFor="nama"
                                 className="text-sm mb-2 font-bold flex flex-row "
                               >
-                                <div>Nama Pengguna </div>
-                                <div className="text-danger ml-2">*</div>
+                                <div className="mt-2">Nama Pengguna </div>
+                                <div className="text-danger ml-2 mt-1.5">*</div>
                               </div>
                               <div className="col-span-2 justify-end">
                                 <input
@@ -351,8 +352,8 @@ class FormUser extends Component {
                                 htmlFor="username"
                                 className="text-sm mb-2 font-bold flex flex-row "
                               >
-                                <div>Username</div>
-                                <div className="text-danger ml-2"> *</div>
+                                <div className="mt-2">Username</div>
+                                <div className="text-danger ml-2 mt-1.5"> *</div>
                               </div>
                               <div className="col-span-2 justify-end">
                                 <input
@@ -410,8 +411,8 @@ class FormUser extends Component {
                                 htmlFor="role"
                                 className="text-sm mb-2 font-bold flex flex-row "
                               >
-                                <div>Role</div>
-                                <div className="text-danger ml-2"> *</div>
+                                <div className="mt-2">Role</div>
+                                <div className="text-danger ml-2 mt-1.5"> *</div>
                               </div>
                               <div className="col-span-2 justify-end ">
                                 <select
@@ -451,8 +452,8 @@ class FormUser extends Component {
                                 htmlFor="password"
                                 className="text-sm mb-2 font-bold flex flex-row "
                               >
-                                <div>Password</div>
-                                <div className="text-danger ml-2"> *</div>
+                                <div className="mt-2">Password</div>
+                                <div className="text-danger ml-2 mt-1.5"> *</div>
                               </div>
                               <div className="col-span-2 justify-end ">
                                 <input
@@ -500,8 +501,8 @@ class FormUser extends Component {
                                 htmlFor="password"
                                 className="text-sm mb-2 font-bold flex flex-row "
                               >
-                                <div>Confirm Password </div>
-                                <div className="text-danger ml-2"> *</div>
+                                <div className="mt-2">Confirm Password </div>
+                                <div className="text-danger ml-2 mt-1.5"> *</div>
                               </div>{' '}
                               <div className="col-span-2 justify-end ">
                                 <input

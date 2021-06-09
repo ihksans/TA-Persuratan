@@ -18,7 +18,7 @@ const BoxData = ({ No, NamaPengguna, Username, Role, Id, IdPengguna }) => {
           <div className="">{Username}</div>
         </div>
 
-        <div className="mt-1">●●●●●●●</div>
+        <div className="mt-1">●●●●●●●●●</div>
 
         <div className="flex flex-row mt-1">
           {Role == 1 ? (

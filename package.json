@@ -31,14 +31,9 @@
         "tailwindcss": "^2.1.4"
     },
     "dependencies": {
-        "@babel/core": "^7.14.3",
-        "@babel/preset-env": "^7.14.4",
         "@craco/craco": "^6.1.2",
-        "babel-core": "^6.26.3",
-        "babel-loader": "^6.4.1",
         "connected-next-router": "^4.0.1",
         "cookie": "^0.4.1",
-        "cross-env": "^7.0.3",
         "js-cookie": "^2.2.1",
         "leaflet": "^1.7.1",
         "next": "^10.2.3",
