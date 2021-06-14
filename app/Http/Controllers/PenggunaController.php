@@ -15,7 +15,8 @@ class PenggunaController extends Controller
         if($user == null){
             $respon = [
                 'msg' => 'failed',
-                'error' => 'Pengguna'
+                'error' => 'Pengguna',
+                'content'=> $request->id
             ];
             return response()->json($respon);
         }
@@ -135,6 +136,17 @@ class PenggunaController extends Controller
     }
 
     public function deleteUser($id){
+        $userAuth = User::where('id',$id);
+        $username = $userAuth->get();
+        if($username == 'admin')
+        {
+            $respon = [
+                'msg' => 'delete failed admin cant to be delete',
+                'error' => 'deletePengguna'
+            ];
+            return response()->json($userAuth,400);
+        }
+        $userAuth->delete();
         $user = Pengguna::where('ID_PENGGUNA', $id);
         $user->delete();
         if(!$user){
