@@ -63,7 +63,7 @@ const PdfReader = () => {
       <div className="flex justify-center items-center w-75% h-90%">
         <Document
           file={
-            'https://storage.googleapis.com/petanas-1efe5.appspot.com/Document/Latihan%20Topic%206.pdf?GoogleAccessId=firebase-adminsdk-efoz1%40petanas-1efe5.iam.gserviceaccount.com&Expires=1623715200&Signature=uk5JYtSVmfCjTFrTYiWo%2BsomVEeyEW9%2B2fk%2BJR7BEAS0yiY6i%2FjpihkbzgYx28UHzaXh1VAUqVPZxZp9%2BEzjkKcaCGwMiiZt8Fdu6MU2F4jsdFKgWNvd42kPz1jOtpPMgvkW434mvsIlLMtrY7z8QDFA1WYOtu4OrTNp28p%2FQzPT1Vqu%2BBrHECXJhNfE0yM3XpjQdUxbw9AnHyQy9f30Z7ZggF3F8v6K%2BM6%2BErJLLhOpNN371tH72Uw%2Fs4eFQ6ZqMiu28DOXXgCrU8FQ%2BpnTmzrZnXnH%2BHCJyty7e4%2FyCEyper5D%2BYrcHYy3RK3uSZRSIxKOyhkl61P4Iof9znomNg%3D%3D'
+            'https://storage.googleapis.com/petanas-1efe5.appspot.com/Document/Latihan%20Topic%206.pdf?GoogleAccessId=firebase-adminsdk-efoz1%40petanas-1efe5.iam.gserviceaccount.com&Expires=1623801600&Signature=UvxMFnZDUdaSlB%2FtY3ZbCPYUDGEnkF6GgGZbxxjbOUb%2FI4YA%2FQLiKw28JNE%2BqpjZYvq8%2Bo%2BF9DnY%2FdA%2BcP4A0dPpRXCNkDrwtbh6%2BcAytIVtrAnAs6w5nsvY5eAJyqgY5ggUiMTcc7nWJXKMuZLGeptLwVkRtWccUZikWpfnHcgbuGM2uYtW%2FKYP0Dkio5WoPTylfe%2B8TWha%2BpkYZGzhYwBOgwTrWsHfAudjtL93RGCT39iwlzo1jiFqazjynd5Otkr7wPqlkiP0IsiK10u4KeaS%2FrCIMuSBmr0mON2kY1EJ7ILduxufwxgyM36fypy%2BoGSVIWYJsIQ09byK7Ihehg%3D%3D'
           }
           // file={'/data_files.pdf'}
           onLoadSuccess={onDocumentLoadSuccess}

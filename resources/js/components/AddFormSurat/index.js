@@ -2,6 +2,7 @@ import axios from 'axios'
 import api from '../../service/api'
 import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
+import Kalender from './Kalender'
 // import createuser from "./index";
 class AddFormSurat extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class AddFormSurat extends Component {
       dir: [],
       surat: null,
       jenisSurat: [],
+      firstDate: new Date(),
       lampiran: null,
       idPencatatan: null,
       idPengguna: null,
@@ -28,6 +30,21 @@ class AddFormSurat extends Component {
       perihal: null,
       tglDiterima: null,
       tglSurat: null,
+      errSurat: false,
+      errJenisSurat: false,
+      errLampiran: false,
+      errKodeArsipKom: false,
+      errKodeArsipHML: false,
+      errKodeArsipManual: false,
+      errDerajatSurat: false,
+      errNomorSurat: false,
+      errUnitPengirim: false,
+      errTujuanSurat: false,
+      errPerihal: false,
+      errTglDiterima: false,
+      errTglSurat: false,
+      errPenandatangan: false,
+      errNamaPengirim: false,
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
@@ -50,6 +67,220 @@ class AddFormSurat extends Component {
     this.handlePerihal = this.handlePerihal.bind(this)
     this.handleTglDiterima = this.handleTglDiterima.bind(this)
     this.handleTglSurat = this.handleTglSurat.bind(this)
+
+    this.handleErrSurat = this.handleErrSurat.bind(this)
+    this.handleErrJenisSurat = this.handleErrJenisSurat.bind(this)
+    this.handleErrLampiran = this.handleErrLampiran.bind(this)
+    this.handleErrKodeArsipKom = this.handleErrKodeArsipKom.bind(this)
+    this.handleErrKodeArsipHlm = this.handleErrKodeArsipHlm.bind(this)
+    this.handleErrKodeArsipManual = this.handleErrKodeArsipManual.bind(this)
+    this.handleErrDerajatSurat = this.handleErrDerajatSurat.bind(this)
+    this.handleErrNomorSurat = this.handleErrNomorSurat.bind(this)
+    this.handleErrNamaPengirim = this.handleErrNamaPengirim.bind(this)
+
+    this.handleErrUnitPengirim = this.handleErrUnitPengirim.bind(this)
+    this.handleErrTujuanSurat = this.handleErrTujuanSurat.bind(this)
+    this.handleErrPerihal = this.handleErrPerihal.bind(this)
+    this.handleErrTglDiterima = this.handleErrTglDiterima.bind(this)
+    this.handleErrTglSurat = this.handleErrTglSurat.bind(this)
+    this.handleErrorPenandatangan = this.handleErrorPenandatangan.bind(this)
+    this.validateNomorSurat = this.validateNomorSurat.bind(this)
+    this.validateTanggalSurat = this.validateTanggalSurat.bind(this)
+    this.validateTanggalDiterima = this.validateTanggalDiterima.bind(this)
+    this.validatePerihal = this.validatePerihal.bind(this)
+    this.validateTujuanSurat = this.validateTujuanSurat.bind(this)
+    this.validateUnitPengirim = this.validateUnitPengirim.bind(this)
+    this.validateNamaPengirim = this.validateNamaPengirim.bind(this)
+    this.validatePenandatangan = this.validatePenandatangan.bind(this)
+    this.validateJenisSurat = this.validateJenisSurat.bind(this)
+    this.validateDerajatSurat = this.validateDerajatSurat.bind(this)
+    this.validateKodeArsipKom = this.validateKodeArsipKom.bind(this)
+    this.validateKodeArsipManual = this.validateKodeArsipHlm.bind(this)
+    this.validateKodeArsipHlm = this.validateKodeArsipHlm.bind(this)
+    this.validateSurat = this.validateSurat.bind(this)
+    this.validateLampiran = this.validateLampiran.bind(this)
+  }
+  validateLampiran(input) {
+    if (input == null) {
+      this.handleErrLampiran(true)
+    } else {
+      this.handleErrLampiran(false)
+    }
+  }
+  validateSurat(input) {
+    if (input == null) {
+      this.handleErrSurat(true)
+    } else {
+      this.handleErrSurat(false)
+    }
+  }
+  validateKodeArsipHlm(input) {
+    if (input == null || input == '') {
+      this.handleErrKodeArsipHlm(true)
+    } else {
+      this.handleErrKodeArsipHlm(false)
+    }
+  }
+  validateKodeArsipKom(input) {
+    if (input == null || input == '') {
+      this.handleErrKodeArsipKom(true)
+    } else {
+      this.handleErrKodeArsipKom(false)
+    }
+  }
+  validateDerajatSurat(input) {
+    if (input == 0 || input == null || input == '') {
+      this.handleErrDerajatSurat(true)
+    } else {
+      this.handleErrDerajatSurat(false)
+    }
+  }
+  validateJenisSurat(input) {
+    if (input == 0 || input == null || input == '') {
+      this.handleErrJenisSurat(true)
+    } else {
+      this.handleErrJenisSurat(false)
+    }
+  }
+  validatePenandatangan(input) {
+    const re = /^[a-zA-Z0-9]*$/
+    let result = input.match(re)
+    if (result) {
+      this.handleErrorPenandatangan(false)
+    } else {
+      this.handleErrorPenandatangan(true)
+    }
+  }
+  validateNamaPengirim(input) {
+    const re = /^[a-zA-Z0-9]*$/
+    let result = input.match(re)
+    if (result) {
+      this.handleErrorNamaPengirim(false)
+    } else {
+      this.handleErrorNamaPengirim(true)
+    }
+  }
+  validateUnitPengirim(input) {
+    if (input == 0 || input == null || input == '') {
+      this.handleErrUnitPengirim(true)
+    } else {
+      this.handleErrUnitPengirim(false)
+    }
+  }
+  validateTujuanSurat(input) {
+    if (input == 0 || input == null || input == '') {
+      this.handleErrTujuanSurat(true)
+    } else {
+      this.handleErrTujuanSurat(false)
+    }
+  }
+  validatePerihal(input) {
+    if (input == null || input == '') {
+      this.handleErrPerihal(true)
+    } else {
+      this.handleErrPerihal(false)
+    }
+  }
+  validateTanggalDiterima(input) {
+    if (input == null) {
+      this.handleErrTglDiterima(true)
+    } else {
+      this.handleErrTglDiterima(false)
+    }
+  }
+  validateTanggalSurat(input) {
+    if (input == null) {
+      this.handleErrTglSurat(true)
+    } else {
+      this.handleErrTglSurat(false)
+    }
+  }
+  validateNomorSurat(input) {
+    let str = ''
+    if (input != null) {
+      str = input.replace(/\s\s+/g, '')
+    }
+    if (str == null || str == '') {
+      this.handleErrNomorSurat(true)
+    } else {
+      this.handleErrNomorSurat(false)
+    }
+    console.log('str:' + str)
+  }
+  handleErrSurat(props) {
+    this.setState({
+      errSurat: props,
+    })
+  }
+  handleErrJenisSurat(props) {
+    this.setState({
+      errJenisSurat: props,
+    })
+  }
+  handleErrLampiran(props) {
+    this.setState({
+      errLampiran: props,
+    })
+  }
+  handleErrKodeArsipKom(props) {
+    this.setState({
+      errKodeArsipKom: props,
+    })
+  }
+  handleErrKodeArsipHlm(props) {
+    this.setState({
+      errKodeArsipHML: props,
+    })
+  }
+  handleErrKodeArsipManual(props) {
+    this.setState({
+      errKodeArsipManual: props,
+    })
+  }
+  handleErrDerajatSurat(props) {
+    this.setState({
+      errDerajatSurat: props,
+    })
+  }
+  handleErrNomorSurat(props) {
+    this.setState({
+      errNomorSurat: props,
+    })
+  }
+  handleErrUnitPengirim(props) {
+    this.setState({
+      errUnitPengirim: props,
+    })
+  }
+  handleErrTujuanSurat(props) {
+    this.setState({
+      errTujuanSurat: props,
+    })
+  }
+  handleErrPerihal(props) {
+    this.setState({
+      errPerihal: props,
+    })
+  }
+  handleErrTglDiterima(props) {
+    this.setState({
+      errTglDiterima: props,
+    })
+  }
+  handleErrTglSurat(props) {
+    this.setState({
+      errTglSurat: props,
+    })
+  }
+  handleErrorPenandatangan(props) {
+    this.setState({
+      errPenandatangan: props,
+    })
+  }
+  handleErrNamaPengirim(props) {
+    this.setState({
+      errNamaPengirim: props,
+    })
   }
   handleIdPencatatan(e) {
     let value = e.target.value
@@ -156,19 +387,20 @@ class AddFormSurat extends Component {
       perihal: value,
     })
   }
-  handleTglDiterima(e) {
-    let value = e.target.value
-
+  handleTglDiterima(value) {
     this.setState({
       tglDiterima: value,
     })
+    console.log('tgl2:' + value)
   }
-  handleTglSurat(e) {
-    let value = e.target.value
-
+  handleTglSurat(exDate, value) {
     this.setState({
-      tglSurat: value,
+      tglSurat: exDate,
     })
+    this.setState({
+      firstDate: value,
+    })
+    console.log('tgl1:' + value)
   }
   handleModal() {
     this.setState({
@@ -184,81 +416,84 @@ class AddFormSurat extends Component {
     // Update the state
     this.setState({ lampiran: event.target.files[0] })
   }
+
   async onSubmit(e) {
     e.preventDefault()
 
-    let formData = new FormData()
-    formData.append('id_pengguna', 51)
-    formData.append('id_jenis_surat', this.state.idJenisSurat)
-    formData.append('kode_arsip_kom', this.state.kodeArsipKom)
-    formData.append('kode_arsip_hlm', this.state.kodeArsipHlm)
-    formData.append('kode_arsip_manual', this.state.kodeArsipManual)
-    formData.append('nama_file_surat', this.state.nomorSurat)
-    formData.append('nama_file_lampiran', this.state.nomorSurat + '_lampiran')
-    formData.append('derajat_surat', this.state.derajatSurat)
+    await this.validateNomorSurat(this.state.nomorSurat)
+    await this.validateSurat(this.state.tglSurat)
+    // let formData = new FormData()
+    // formData.append('id_pengguna', 51)
+    // formData.append('id_jenis_surat', this.state.idJenisSurat)
+    // formData.append('kode_arsip_kom', this.state.kodeArsipKom)
+    // formData.append('kode_arsip_hlm', this.state.kodeArsipHlm)
+    // formData.append('kode_arsip_manual', this.state.kodeArsipManual)
+    // formData.append('nama_file_surat', this.state.nomorSurat)
+    // formData.append('nama_file_lampiran', this.state.nomorSurat + '_lampiran')
+    // formData.append('derajat_surat', this.state.derajatSurat)
 
-    let fd = new FormData()
-    fd.append('id_pengguna', 51)
-    fd.append('id_jenis_surat', this.state.idJenisSurat)
-    fd.append('kode_arsip_kom', this.state.kodeArsipKom)
-    fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
-    fd.append('kode_arsip_manual', this.state.kodeArsipManual)
-    fd.append('nama_file_surat', this.state.nomorSurat)
-    fd.append('nama_file_lampiran', this.state.nomorSurat + '_lampiran')
-    fd.append('derajat_surat', this.state.derajatSurat)
-    fd.append('nomor_surat', this.state.nomorSurat)
-    fd.append('unit_pengirim', this.state.unitPengirim)
-    fd.append('penandatangan', this.state.penandatangan)
-    fd.append('nama_pengirim', this.state.namaPengirim)
-    fd.append('tujuan_surat', this.state.tujuanSurat)
-    fd.append('perihal', this.state.perihal)
-    fd.append('tgl_diterima', this.state.tglDiterima)
-    fd.append('tgl_surat', this.state.tglSurat)
-    await api()
-      .post('api/setPencatatan', formData)
-      .then((response) => {
-        this.setState({
-          idPencatatan: response.data.content.id,
-        })
-        console.log('pencatatan form' + response.data.content.id)
-        console.log('pencatatan form 2' + response.data)
+    // let fd = new FormData()
+    // fd.append('id_pengguna', 51)
+    // fd.append('id_jenis_surat', this.state.idJenisSurat)
+    // fd.append('kode_arsip_kom', this.state.kodeArsipKom)
+    // fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
+    // fd.append('kode_arsip_manual', this.state.kodeArsipManual)
+    // fd.append('nama_file_surat', this.state.nomorSurat)
+    // fd.append('nama_file_lampiran', this.state.nomorSurat + '_lampiran')
+    // fd.append('derajat_surat', this.state.derajatSurat)
+    // fd.append('nomor_surat', this.state.nomorSurat)
+    // fd.append('unit_pengirim', this.state.unitPengirim)
+    // fd.append('penandatangan', this.state.penandatangan)
+    // fd.append('nama_pengirim', this.state.namaPengirim)
+    // fd.append('tujuan_surat', this.state.tujuanSurat)
+    // fd.append('perihal', this.state.perihal)
+    // fd.append('tgl_diterima', this.state.tglDiterima)
+    // fd.append('tgl_surat', this.state.tglSurat)
+    // await api()
+    //   .post('api/setPencatatan', formData)
+    //   .then((response) => {
+    //     this.setState({
+    //       idPencatatan: response.data.content.id,
+    //     })
+    //     console.log('pencatatan form' + response.data.content.id)
+    //     console.log('pencatatan form 2' + response.data)
 
-        fd.append('id_pencatatan', response.data.content.id)
+    //     fd.append('id_pencatatan', response.data.content.id)
 
-        api()
-          .post('api/setSuratMasuk', fd)
-          .then((response) => {
-            console.log('surat Masuk form' + response)
-          })
-          .catch((err) => console.log(err))
-      })
-      .catch((err) => console.log(err))
+    //     api()
+    //       .post('api/setSuratMasuk', fd)
+    //       .then((response) => {
+    //         console.log('surat Masuk form' + response)
+    //       })
+    //       .catch((err) => console.log(err))
+    //   })
+    //   .catch((err) => console.log(err))
 
-    let fd2 = new FormData()
+    // let fd2 = new FormData()
 
-    fd2.append('myFile', this.state.surat)
-    fd2.append('namefile', this.state.nomorSurat)
+    // fd2.append('myFile', this.state.surat)
+    // fd2.append('namefile', this.state.nomorSurat)
 
-    api()
-      .post('api/addSurat', fd2)
-      .then((response) => {
-        console.log('valid form' + response)
-        // this.handleModal()
-      })
-      .catch((err) => console.log(err))
+    // api()
+    //   .post('api/addSurat', fd2)
+    //   .then((response) => {
+    //     console.log('valid form' + response)
+    //     // this.handleModal()
+    //   })
+    //   .catch((err) => console.log(err))
 
-    let fd3 = new FormData()
+    // let fd3 = new FormData()
 
-    fd3.append('myFile', this.state.lampiran)
-    fd3.append('namefile', this.state.nomorSurat + '_lampiran')
+    // fd3.append('myFile', this.state.lampiran)
+    // fd3.append('namefile', this.state.nomorSurat + '_lampiran')
 
-    api()
-      .post('api/addSurat', fd3)
-      .then((response) => {
-        console.log('valid form' + response)
-        this.handleModal()
-      })
-      .catch((err) => console.log(err))
+    // api()
+    //   .post('api/addSurat', fd3)
+    //   .then((response) => {
+    //     console.log('valid form' + response)
+    //     this.handleModal()
+    //   })
+    //   .catch((err) => console.log(err))
   }
   componentDidMount() {
     api()
@@ -348,8 +583,16 @@ class AddFormSurat extends Component {
                                   }
                                   onChange={this.handleNomorSurat}
                                 />
+                                {this.state.errNomorSurat ? (
+                                  <div className="text-danger text-xs mb-3">
+                                    Nomor surat harus diisi
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
                               </div>
                             </div>
+
                             <div className="flex flex-row grid grid-cols-2">
                               <div
                                 htmlFor="nama"
@@ -359,7 +602,7 @@ class AddFormSurat extends Component {
                                 <div className="text-danger ml-2"> *</div>
                               </div>
                               <div className="justify-end ">
-                                <input
+                                <div
                                   type="text"
                                   name="tglSurat"
                                   required
@@ -367,8 +610,13 @@ class AddFormSurat extends Component {
                                   className={
                                     'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                   }
-                                  onChange={this.handleTglSurat}
-                                />
+                                >
+                                  <Kalender
+                                    onChange={(exDate, value) =>
+                                      this.handleTglSurat(exDate, value)
+                                    }
+                                  />
+                                </div>
                               </div>
                             </div>
                             <div className="flex flex-row grid grid-cols-2">
@@ -380,7 +628,7 @@ class AddFormSurat extends Component {
                                 <div className="text-danger ml-2"> *</div>
                               </div>
                               <div className="justify-end ">
-                                <input
+                                <div
                                   type="text"
                                   name="tglDiterima"
                                   required
@@ -388,8 +636,14 @@ class AddFormSurat extends Component {
                                   className={
                                     'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                   }
-                                  onChange={this.handleTglDiterima}
-                                />
+                                >
+                                  <Kalender
+                                    onChange={(exDate) =>
+                                      this.handleTglDiterima(exDate)
+                                    }
+                                    minDate={this.state.firstDate}
+                                  />
+                                </div>
                               </div>
                             </div>
                             <div className="flex flex-row grid grid-cols-2">
