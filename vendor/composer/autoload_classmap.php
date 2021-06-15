@@ -10,11 +10,15 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+<<<<<<< HEAD
     'App\\Http\\Controllers\\FirebaseController' => $baseDir . '/app/Http/Controllers/FirebaseController.php',
     'App\\Http\\Controllers\\JenisSuratController' => $baseDir . '/app/Http/Controllers/JenisSuratController.php',
     'App\\Http\\Controllers\\PencatatanController' => $baseDir . '/app/Http/Controllers/PencatatanController.php',
     'App\\Http\\Controllers\\PenggunaController' => $baseDir . '/app/Http/Controllers/PenggunaController.php',
     'App\\Http\\Controllers\\SuratMasukController' => $baseDir . '/app/Http/Controllers/SuratMasukController.php',
+=======
+    'App\\Http\\Controllers\\PenggunaController' => $baseDir . '/app/Http/Controllers/PenggunaController.php',
+>>>>>>> 4819e1a23fd30923b5c4829e83027b6a0a7314b7
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',

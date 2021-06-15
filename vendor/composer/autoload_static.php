@@ -670,11 +670,15 @@ class ComposerStaticInit10cc89b3ae7a05555ed629e4177e35c2
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+<<<<<<< HEAD
         'App\\Http\\Controllers\\FirebaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/FirebaseController.php',
         'App\\Http\\Controllers\\JenisSuratController' => __DIR__ . '/../..' . '/app/Http/Controllers/JenisSuratController.php',
         'App\\Http\\Controllers\\PencatatanController' => __DIR__ . '/../..' . '/app/Http/Controllers/PencatatanController.php',
         'App\\Http\\Controllers\\PenggunaController' => __DIR__ . '/../..' . '/app/Http/Controllers/PenggunaController.php',
         'App\\Http\\Controllers\\SuratMasukController' => __DIR__ . '/../..' . '/app/Http/Controllers/SuratMasukController.php',
+=======
+        'App\\Http\\Controllers\\PenggunaController' => __DIR__ . '/../..' . '/app/Http/Controllers/PenggunaController.php',
+>>>>>>> 4819e1a23fd30923b5c4829e83027b6a0a7314b7
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
