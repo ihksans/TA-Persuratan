@@ -3,6 +3,7 @@ import api from '../../service/api'
 import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import PdfReader from '../PdfReader'
+import Pencatat from './Data'
 // import createuser from "./index";
 class DetailSuratMasuk extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class DetailSuratMasuk extends Component {
       pageNumber: '',
       url: '',
       showModal: false,
+      pengguna: this.props.AllUser.allUserInfo,
     }
 
     this.onSubmit = this.onSubmit.bind(this)
@@ -44,10 +46,15 @@ class DetailSuratMasuk extends Component {
           url: response.data.url,
         }),
       )
-    console.log('url file:' + this.state.url)
-    console.log('item:' + this.props.SuratDetail.NO_SURAT)
-    console.log('item:' + this.props.SuratDetail)
+
+    // console.log('url file:' + this.state.url)
+    // console.log('item:' + this.props.SuratDetail.NOMOR_SURAT)
+    // console.log('item2:' + this.props.SuratDetail.PERIHAL)
+    console.log('pengguna:' + this.state.pengguna)
+    console.log('all user:' + this.props.AllUser.allUserInfo)
   }
+
+  pencatat() {}
 
   render() {
     return (
@@ -129,54 +136,103 @@ class DetailSuratMasuk extends Component {
                         </button>
                       </div>
                       <div className="font-bold">Dicatat oleh </div>
-                      <div className="col-span-2">Satria</div>
+
+                      <div className="col-span-2">
+                        {this.state.pengguna.map((item, index) => {
+                          const temp = item.ID_PENGGUNA
+                          const temp2 = this.props.SuratDetail.ID_PENGGUNA
+                          return (
+                            <div key={index}>
+                              {temp == temp2 ? <div>{item.NAMA}</div> : null}
+                            </div>
+                          )
+                        })}
+                      </div>
                       <div className="font-bold">No Agenda </div>
-                      <div className=" col-span-2">5</div>
+                      <div className=" col-span-2">{this.props.NoAgenda}</div>
                       <div className="font-bold">Dari </div>
                       <div className="font-bold">Nama</div>
-                      <div className="">: KO </div>
+                      <div className="">
+                        : {this.props.SuratDetail.NAMA_PENGIRIM}{' '}
+                      </div>
                       <div></div>
                       <div className="font-bold">Unit</div>
-                      <div className="">: KO - Jurusan Teknik Komputer</div>
+                      <div className="">
+                        : {this.props.SuratDetail.UNIT_PENGIRIM}
+                      </div>
                       <div> </div>
                       <div className="font-bold">Penandatangan</div>
-                      <div className="">: KO</div>
+                      <div className="">
+                        : {this.props.SuratDetail.PENANDATANGAN}
+                      </div>
                       <div className="font-bold">Tujuan</div>
                       <div className=" col-span-2">
-                        R3-Pembantu Direktur Bidang Kemahasiswaan
+                        {' '}
+                        {this.props.SuratDetail.TUJUAN_SURAT}
                       </div>
                       <div className="font-bold">Nomor Surat</div>
                       <div className=" col-span-2">
-                        B/16/PL1.KO/KM.01.00/2020
+                        {this.props.SuratDetail.NOMOR_SURAT}
                       </div>
                       <div className="font-bold">Tanggal Surat</div>
-                      <div className=" col-span-2">27 April 2021</div>
+                      <div className=" col-span-2">
+                        {' '}
+                        {this.props.SuratDetail.TGL_SURAT}
+                      </div>
                       <div className="font-bold">Tanggal Terima</div>
-                      <div className=" col-span-2">28 April 2021</div>
+                      <div className=" col-span-2">
+                        {' '}
+                        {this.props.SuratDetail.TGL_DITERIMA}
+                      </div>
                       <div className="font-bold">Perihal / Ringkasa</div>
                       <div className=" col-span-2">
-                        Laporan Pertanggungjawaban beasiswa kwartal 1 TA
-                        2019/2020
+                        {' '}
+                        {this.props.SuratDetail.PERIHAL}
                       </div>
                       <div className="font-bold">Kode Hal</div>
                       <div className=" col-span-2">KM.01.00</div>
                       <div className="font-bold">Jenis Surat</div>
                       <div className=" col-span-2">
-                        Khusus, Surat Keterangan
+                        {this.props.AllJenisSurat.allJenisSurat.map(
+                          (item, index) => {
+                            const temp = this.props.SuratDetail.ID_JENIS_SURAT
+                            const temp2 = item.ID_JENIS_SURAT
+                            return (
+                              <div key={index}>
+                                {temp == temp2 ? (
+                                  <>
+                                    {item.JENIS_SURAT}, {item.KETERANGAN}
+                                  </>
+                                ) : (
+                                  <></>
+                                )}
+                              </div>
+                            )
+                          },
+                        )}
                       </div>
                       <div className="font-bold">Sifat Surat</div>
                       <div className=" col-span-2">Biasa</div>
                       <div className="font-bold">Derajat Surat</div>
-                      <div className="col-span-2">Segera</div>
+                      <div className="col-span-2">
+                        {' '}
+                        {this.props.SuratDetail.DERAJAT_SURAT}
+                      </div>
                       <div className="font-bold">Kode Arsip</div>
                       <div className="font-bold">Kom</div>
-                      <div className="">:TUKAKCIA</div>
+                      <div className="">
+                        :{this.props.SuratDetail.KODE_ARSIP_KOM}
+                      </div>
                       <div></div>
                       <div className="font-bold">Hlm</div>
-                      <div className="">: 3</div>
+                      <div className="">
+                        : {this.props.SuratDetail.KODE_ARSIP_HLM}
+                      </div>
                       <div></div>
                       <div className="font-bold">Manual</div>
-                      <div className="">: TUAK.00.00-0001</div>
+                      <div className="">
+                        : {this.props.SuratDetail.KODE_ARSIP_MANUAL}
+                      </div>
                       <div className="font-bold">Keterangan</div>
                       <div className="col-span-2">-</div>
 

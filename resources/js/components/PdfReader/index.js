@@ -59,6 +59,7 @@ const PdfReader = ({ urlFile }) => {
       </div>
     )
   }
+
   return (
     <div>
       <div className="">

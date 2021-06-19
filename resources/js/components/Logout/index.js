@@ -1,6 +1,13 @@
 //component logout
 import React, { Component, useState } from 'react'
-import { removeTokenByID, unsetUser, unsetPath } from '../../actions'
+import {
+  removeTokenByID,
+  unsetUser,
+  unsetPath,
+  unsetAllSuratMasuk,
+  unsetJenisSurat,
+  unsetAllUser,
+} from '../../actions'
 import { logoutAuth } from '../../service/auth'
 import { connect } from 'react-redux'
 
@@ -20,6 +27,9 @@ class Logout extends Component {
     this.props.removeTokenByID()
     this.props.unsetUser()
     this.props.unsetPath()
+    this.props.unsetAllSuratMasuk()
+    this.props.unsetJenisSurat()
+    this.props.unsetAllUser()
     logoutAuth()
   }
   unsetCurrentUser() {
@@ -81,4 +91,7 @@ export default connect(mapStateToProps, {
   removeTokenByID,
   unsetUser,
   unsetPath,
+  unsetAllSuratMasuk,
+  unsetJenisSurat,
+  unsetAllUser,
 })(Logout)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AddFormSurat from '../../components/AddFormSurat'
 import PdfReader from '../../components/PdfReader'
 import { connect } from 'react-redux'
-import { setAllSuratMasuk } from '../../actions'
+import { setAllSuratMasuk, setJenisSurat } from '../../actions'
 
 //Ini buat dependecies/library nya
 //import + "nama variabel" + from + "nama librarynya";
@@ -37,6 +37,7 @@ class SuratMasuk extends Component {
         this.setState({
           jenisSurat: response.data,
         })
+        this.props.setJenisSurat(response.data)
       })
     console.log('jenis surat:' + this.state.jenisSurat)
   }
@@ -80,4 +81,6 @@ class SuratMasuk extends Component {
 function mapStateToProps(state) {
   return state
 }
-export default connect(mapStateToProps, { setAllSuratMasuk })(SuratMasuk)
+export default connect(mapStateToProps, { setAllSuratMasuk, setJenisSurat })(
+  SuratMasuk,
+)

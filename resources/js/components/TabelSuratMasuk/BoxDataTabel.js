@@ -90,6 +90,7 @@ class BoxDataTabel extends Component {
           <DetailSuratMasuk
             namaFile={this.props.NoSurat}
             SuratDetail={this.props.Surat}
+            NoAgenda={this.props.No}
           />
         </div>
       </>

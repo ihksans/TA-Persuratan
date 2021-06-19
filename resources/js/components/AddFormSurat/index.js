@@ -110,6 +110,10 @@ class AddFormSurat extends Component {
         this.handleErrLampiran('Ukuran file melebihi 10 Mb')
       } else {
         this.handleErrLampiran('')
+        let namasurat = this.state.nomorSurat.split('/').join('_')
+        this.setState({
+          namaFileLampiran: namasurat,
+        })
       }
     } else {
       this.handleErrLampiran('Lampiran file harus pdf')
@@ -123,6 +127,11 @@ class AddFormSurat extends Component {
         this.handleErrSurat('Ukuran file surat melebihi 10 Mb')
       } else {
         this.handleErrSurat('')
+        let namasurat = this.state.nomorSurat.split('/').join('_')
+        console.log('nama surat:' + namasurat)
+        this.setState({
+          namaFileSurat: namasurat,
+        })
       }
     } else {
       this.handleErrSurat('Surat file harus pdf')
@@ -164,7 +173,7 @@ class AddFormSurat extends Component {
     }
   }
   validatePenandatangan(input) {
-    const re = /^[a-zA-Z0-9]*$/
+    const re = /^[a-zA-Z0-9 ]*$/
     if (input.length <= 0 || input.length >= 20 || input == null) {
       this.handleErrorPenandatangan(true)
     } else {
@@ -510,8 +519,8 @@ class AddFormSurat extends Component {
       fd.append('kode_arsip_kom', this.state.kodeArsipKom)
       fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
       fd.append('kode_arsip_manual', this.state.kodeArsipManual)
-      fd.append('nama_file_surat', this.state.nomorSurat)
-      fd.append('nama_file_lampiran', this.state.nomorSurat + '_lampiran')
+      fd.append('nama_file_surat', this.state.namaFileSurat)
+      fd.append('nama_file_lampiran', this.state.namaFileLampiran + '_lampiran')
       fd.append('derajat_surat', this.state.derajatSurat)
       fd.append('nomor_surat', this.state.nomorSurat)
       fd.append('unit_pengirim', this.state.unitPengirim)
