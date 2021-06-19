@@ -26,12 +26,14 @@
 //export default PdfReader
 
 import React, { useState } from 'react'
-import { Document, Page, pdfjs } from 'react-pdf'
-import './App.css'
+import { Document, Page, pdfjs } from 'react-pdf/dist/esm/entry.webpack'
 import api from '../../service/api'
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
+import ReactLoading from 'react-loading'
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
-const PdfReader = () => {
+const PdfReader = ({ urlFile }) => {
   const [numPages, setNumPages] = useState(null)
   const [pageNumber, setPageNumber] = useState(1)
   const [url, setUrl] = useState(null)
@@ -50,30 +52,25 @@ const PdfReader = () => {
   const downloadFile = () => {
     api().post('/api/saveSurat').then()
   }
+  const Loading = () => {
+    return (
+      <div>
+        <ReactLoading type="spin" color="white" height={150} width={150} />
+      </div>
+    )
+  }
   return (
     <div>
-      <div input="button" className="b-2" onClick={getData}>
-        {' '}
-        get data
-      </div>
-      <div input="button" className="b-2" onClick={downloadFile}>
-        {' '}
-        download
-      </div>
-      <div className="flex justify-center items-center w-75% h-90%">
+      <div className="">
         <Document
-          file={
-            'https://storage.googleapis.com/petanas-1efe5.appspot.com/Document/Latihan%20Topic%206.pdf?GoogleAccessId=firebase-adminsdk-efoz1%40petanas-1efe5.iam.gserviceaccount.com&Expires=1623801600&Signature=UvxMFnZDUdaSlB%2FtY3ZbCPYUDGEnkF6GgGZbxxjbOUb%2FI4YA%2FQLiKw28JNE%2BqpjZYvq8%2Bo%2BF9DnY%2FdA%2BcP4A0dPpRXCNkDrwtbh6%2BcAytIVtrAnAs6w5nsvY5eAJyqgY5ggUiMTcc7nWJXKMuZLGeptLwVkRtWccUZikWpfnHcgbuGM2uYtW%2FKYP0Dkio5WoPTylfe%2B8TWha%2BpkYZGzhYwBOgwTrWsHfAudjtL93RGCT39iwlzo1jiFqazjynd5Otkr7wPqlkiP0IsiK10u4KeaS%2FrCIMuSBmr0mON2kY1EJ7ILduxufwxgyM36fypy%2BoGSVIWYJsIQ09byK7Ihehg%3D%3D'
-          }
+          file={urlFile}
           // file={'/data_files.pdf'}
           onLoadSuccess={onDocumentLoadSuccess}
-          onContextMenu={(e) => e.preventDefault()}
+          noData={Loading}
+          // width="350"
           className="pdf-container"
         >
-          <Page pageNumber={pageNumber} />
-          <p>
-            Page {pageNumber} of {numPages}
-          </p>
+          <Page height={600} pageNumber={pageNumber} />
         </Document>
       </div>
     </div>

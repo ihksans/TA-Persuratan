@@ -1,5 +1,5 @@
 @media print {
   .pdf-container {
-    display: none;
+    display: inline-block;
   }
 }

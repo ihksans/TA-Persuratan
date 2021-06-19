@@ -16,25 +16,25 @@ class AddFormSurat extends Component {
       idPencatatan: null,
       idPengguna: null,
       idJenisSurat: '',
-      kodeArsipKom: null,
-      kodeArsipHlm: null,
-      kodeArsipManual: null,
+      kodeArsipKom: '',
+      kodeArsipHlm: '',
+      kodeArsipManual: '',
       namaFileSurat: null,
       namaFileLampiran: null,
       derajatSurat: '',
       nomorSurat: null,
       unitPengirim: '',
-      penandatangan: null,
-      namaPengirim: null,
+      penandatangan: '',
+      namaPengirim: '',
       tujuanSurat: '',
       perihal: null,
       tglDiterima: null,
       tglSurat: null,
-      errSurat: false,
+      errSurat: '',
       errJenisSurat: false,
-      errLampiran: false,
+      errLampiran: '',
       errKodeArsipKom: false,
-      errKodeArsipHML: false,
+      errKodeArsipHlm: false,
       errKodeArsipManual: false,
       errDerajatSurat: false,
       errNomorSurat: false,
@@ -45,6 +45,7 @@ class AddFormSurat extends Component {
       errTglSurat: false,
       errPenandatangan: false,
       errNamaPengirim: false,
+      errMsgFileLampiran: '',
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
@@ -83,6 +84,7 @@ class AddFormSurat extends Component {
     this.handleErrPerihal = this.handleErrPerihal.bind(this)
     this.handleErrTglDiterima = this.handleErrTglDiterima.bind(this)
     this.handleErrTglSurat = this.handleErrTglSurat.bind(this)
+
     this.handleErrorPenandatangan = this.handleErrorPenandatangan.bind(this)
     this.validateNomorSurat = this.validateNomorSurat.bind(this)
     this.validateTanggalSurat = this.validateTanggalSurat.bind(this)
@@ -95,34 +97,53 @@ class AddFormSurat extends Component {
     this.validateJenisSurat = this.validateJenisSurat.bind(this)
     this.validateDerajatSurat = this.validateDerajatSurat.bind(this)
     this.validateKodeArsipKom = this.validateKodeArsipKom.bind(this)
-    this.validateKodeArsipManual = this.validateKodeArsipHlm.bind(this)
+    this.validateKodeArsipManual = this.validateKodeArsipManual.bind(this)
     this.validateKodeArsipHlm = this.validateKodeArsipHlm.bind(this)
     this.validateSurat = this.validateSurat.bind(this)
     this.validateLampiran = this.validateLampiran.bind(this)
   }
   validateLampiran(input) {
-    if (input == null) {
-      this.handleErrLampiran(true)
+    const extension = '.pdf'
+    let result = this.state.lampiran.name.match(extension)
+    if (result) {
+      if (this.state.lampiran.size > '10485760') {
+        this.handleErrLampiran('Ukuran file melebihi 10 Mb')
+      } else {
+        this.handleErrLampiran('')
+      }
     } else {
-      this.handleErrLampiran(false)
+      this.handleErrLampiran('Lampiran file harus pdf')
     }
   }
   validateSurat(input) {
-    if (input == null) {
-      this.handleErrSurat(true)
+    const extension = '.pdf'
+    let result2 = this.state.surat.name.match(extension)
+    if (result2) {
+      if (this.state.surat.size > '10485760') {
+        this.handleErrSurat('Ukuran file surat melebihi 10 Mb')
+      } else {
+        this.handleErrSurat('')
+      }
     } else {
-      this.handleErrSurat(false)
+      this.handleErrSurat('Surat file harus pdf')
+    }
+  }
+  validateKodeArsipManual(input) {
+    if (input == null || input == '' || input == ' ') {
+      this.handleErrKodeArsipManual(true)
+    } else {
+      this.handleErrKodeArsipManual(false)
     }
   }
   validateKodeArsipHlm(input) {
-    if (input == null || input == '') {
+    if (input == null || input == '' || input == ' ') {
       this.handleErrKodeArsipHlm(true)
     } else {
       this.handleErrKodeArsipHlm(false)
     }
   }
   validateKodeArsipKom(input) {
-    if (input == null || input == '') {
+    if (input == null || input == '' || input == ' ') {
       this.handleErrKodeArsipKom(true)
     } else {
       this.handleErrKodeArsipKom(false)
@@ -144,20 +165,30 @@ class AddFormSurat extends Component {
   }
   validatePenandatangan(input) {
     const re = /^[a-zA-Z0-9]*$/
-    let result = input.match(re)
-    if (result) {
-      this.handleErrorPenandatangan(false)
-    } else {
+    if (input.length <= 0 || input.length >= 20 || input == null) {
       this.handleErrorPenandatangan(true)
+    } else {
+      let result = input.match(re)
+
+      if (result) {
+        this.handleErrorPenandatangan(false)
+      } else {
+        this.handleErrorPenandatangan(true)
+      }
     }
   }
   validateNamaPengirim(input) {
     const re = /^[a-zA-Z0-9]*$/
-    let result = input.match(re)
-    if (result) {
-      this.handleErrorNamaPengirim(false)
+
+    if (input.length <= 0 || input.length >= 20 || input == null) {
+      this.handleErrNamaPengirim(true)
     } else {
-      this.handleErrorNamaPengirim(true)
+      let result = input.match(re)
+      if (result) {
+        this.handleErrNamaPengirim(false)
+      } else {
+        this.handleErrNamaPengirim(true)
+      }
     }
   }
   validateUnitPengirim(input) {
@@ -196,16 +227,11 @@ class AddFormSurat extends Component {
     }
   }
   validateNomorSurat(input) {
-    let str = ''
-    if (input != null) {
-      str = input.replace(/\s\s+/g, '')
-    }
-    if (str == null || str == '') {
+    if (input == null || input == '') {
       this.handleErrNomorSurat(true)
     } else {
       this.handleErrNomorSurat(false)
     }
-    console.log('str:' + str)
   }
   handleErrSurat(props) {
     this.setState({
@@ -229,7 +255,7 @@ class AddFormSurat extends Component {
   }
   handleErrKodeArsipHlm(props) {
     this.setState({
-      errKodeArsipHML: props,
+      errKodeArsipHlm: props,
     })
   }
   handleErrKodeArsipManual(props) {
@@ -305,23 +331,29 @@ class AddFormSurat extends Component {
   }
   handleKodeArsipKom(e) {
     let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      kodeArsipKom: value,
+      kodeArsipKom: str,
     })
   }
   handleKodeArsipManual(e) {
     let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      kodeArsipManual: value,
+      kodeArsipManual: str,
     })
   }
   handleKodeArsipHlm(e) {
     let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      kodeArsipHlm: value,
+      kodeArsipHlm: str,
     })
   }
   handleNamaFileSurat(e) {
@@ -347,51 +379,62 @@ class AddFormSurat extends Component {
   }
   handleNomorSurat(e) {
     let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      nomorSurat: value,
+      nomorSurat: str,
     })
   }
   handleUnitPengirim(e) {
     let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      unitPengirim: value,
+      unitPengirim: str,
     })
   }
   handlePenandatangan(e) {
     let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      penandatangan: value,
+      penandatangan: str,
     })
   }
   handleNamaPengirim(e) {
     let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      namaPengirim: value,
+      namaPengirim: str,
     })
   }
   handleTujuanSurat(e) {
     let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      tujuanSurat: value,
+      tujuanSurat: str,
     })
   }
   handlePerihal(e) {
     let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      perihal: value,
+      perihal: str,
     })
   }
   handleTglDiterima(value) {
     this.setState({
       tglDiterima: value,
     })
-    console.log('tgl2:' + value)
   }
   handleTglSurat(exDate, value) {
     this.setState({
@@ -400,7 +443,6 @@ class AddFormSurat extends Component {
     this.setState({
       firstDate: value,
     })
-    console.log('tgl1:' + value)
   }
   handleModal() {
     this.setState({
@@ -419,81 +461,109 @@ class AddFormSurat extends Component {
 
   async onSubmit(e) {
     e.preventDefault()
-
     await this.validateNomorSurat(this.state.nomorSurat)
-    await this.validateSurat(this.state.tglSurat)
-    // let formData = new FormData()
-    // formData.append('id_pengguna', 51)
-    // formData.append('id_jenis_surat', this.state.idJenisSurat)
-    // formData.append('kode_arsip_kom', this.state.kodeArsipKom)
-    // formData.append('kode_arsip_hlm', this.state.kodeArsipHlm)
-    // formData.append('kode_arsip_manual', this.state.kodeArsipManual)
-    // formData.append('nama_file_surat', this.state.nomorSurat)
-    // formData.append('nama_file_lampiran', this.state.nomorSurat + '_lampiran')
-    // formData.append('derajat_surat', this.state.derajatSurat)
-
-    // let fd = new FormData()
-    // fd.append('id_pengguna', 51)
-    // fd.append('id_jenis_surat', this.state.idJenisSurat)
-    // fd.append('kode_arsip_kom', this.state.kodeArsipKom)
-    // fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
-    // fd.append('kode_arsip_manual', this.state.kodeArsipManual)
-    // fd.append('nama_file_surat', this.state.nomorSurat)
-    // fd.append('nama_file_lampiran', this.state.nomorSurat + '_lampiran')
-    // fd.append('derajat_surat', this.state.derajatSurat)
-    // fd.append('nomor_surat', this.state.nomorSurat)
-    // fd.append('unit_pengirim', this.state.unitPengirim)
-    // fd.append('penandatangan', this.state.penandatangan)
-    // fd.append('nama_pengirim', this.state.namaPengirim)
-    // fd.append('tujuan_surat', this.state.tujuanSurat)
-    // fd.append('perihal', this.state.perihal)
-    // fd.append('tgl_diterima', this.state.tglDiterima)
-    // fd.append('tgl_surat', this.state.tglSurat)
-    // await api()
-    //   .post('api/setPencatatan', formData)
-    //   .then((response) => {
-    //     this.setState({
-    //       idPencatatan: response.data.content.id,
-    //     })
-    //     console.log('pencatatan form' + response.data.content.id)
-    //     console.log('pencatatan form 2' + response.data)
-
-    //     fd.append('id_pencatatan', response.data.content.id)
-
-    //     api()
-    //       .post('api/setSuratMasuk', fd)
-    //       .then((response) => {
-    //         console.log('surat Masuk form' + response)
-    //       })
-    //       .catch((err) => console.log(err))
-    //   })
-    //   .catch((err) => console.log(err))
-
-    // let fd2 = new FormData()
-
-    // fd2.append('myFile', this.state.surat)
-    // fd2.append('namefile', this.state.nomorSurat)
-
-    // api()
-    //   .post('api/addSurat', fd2)
-    //   .then((response) => {
-    //     console.log('valid form' + response)
-    //     // this.handleModal()
-    //   })
-    //   .catch((err) => console.log(err))
-
-    // let fd3 = new FormData()
-
-    // fd3.append('myFile', this.state.lampiran)
-    // fd3.append('namefile', this.state.nomorSurat + '_lampiran')
-
-    // api()
-    //   .post('api/addSurat', fd3)
-    //   .then((response) => {
-    //     console.log('valid form' + response)
-    //     this.handleModal()
-    //   })
-    //   .catch((err) => console.log(err))
+    await this.validateTanggalSurat(this.state.tglSurat)
+    await this.validateTanggalDiterima(this.state.tglDiterima)
+    await this.validatePerihal(this.state.perihal)
+    await this.validateTujuanSurat(this.state.tujuanSurat)
+    await this.validateUnitPengirim(this.state.unitPengirim)
+    await this.validateNamaPengirim(this.state.namaPengirim)
+    await this.validatePenandatangan(this.state.penandatangan)
+    await this.validateJenisSurat(this.state.idJenisSurat)
+    await this.validateDerajatSurat(this.state.derajatSurat)
+    await this.validateKodeArsipHlm(this.state.kodeArsipHlm)
+    await this.validateKodeArsipKom(this.state.kodeArsipKom)
+    await this.validateKodeArsipManual(this.state.kodeArsipManual)
+    if (this.state.surat != null) {
+      await this.validateSurat(this.state.surat)
+    }
+    if (this.state.lampiran != null) {
+      await this.validateLampiran(this.state.lampiran)
+    }
+    if (
+      this.state.errNomorSurat == false &&
+      this.state.errTglDiterima == false &&
+      this.state.errTglSurat == false &&
+      this.state.errPerihal == false &&
+      this.state.errTujuanSurat == false &&
+      this.state.errUnitPengirim == false &&
+      this.state.errNamaPengirim == false &&
+      this.state.errPenandatangan == false &&
+      this.state.errJenisSurat == false &&
+      this.state.errDerajatSurat == false &&
+      this.state.errKodeArsipHlm == false &&
+      this.state.errKodeArsipKom == false &&
+      this.state.errKodeArsipManual == false
+    ) {
+      let formData = new FormData()
+      formData.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
+      formData.append('id_jenis_surat', this.state.idJenisSurat)
+      formData.append('kode_arsip_kom', this.state.kodeArsipKom)
+      formData.append('kode_arsip_hlm', this.state.kodeArsipHlm)
+      formData.append('kode_arsip_manual', this.state.kodeArsipManual)
+      formData.append('nama_file_surat', this.state.nomorSurat)
+      formData.append('nama_file_lampiran', this.state.nomorSurat + '_lampiran')
+      formData.append('derajat_surat', this.state.derajatSurat)
+      let fd = new FormData()
+      fd.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
+      fd.append('id_jenis_surat', this.state.idJenisSurat)
+      fd.append('kode_arsip_kom', this.state.kodeArsipKom)
+      fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
+      fd.append('kode_arsip_manual', this.state.kodeArsipManual)
+      fd.append('nama_file_surat', this.state.nomorSurat)
+      fd.append('nama_file_lampiran', this.state.nomorSurat + '_lampiran')
+      fd.append('derajat_surat', this.state.derajatSurat)
+      fd.append('nomor_surat', this.state.nomorSurat)
+      fd.append('unit_pengirim', this.state.unitPengirim)
+      fd.append('penandatangan', this.state.penandatangan)
+      fd.append('nama_pengirim', this.state.namaPengirim)
+      fd.append('tujuan_surat', this.state.tujuanSurat)
+      fd.append('perihal', this.state.perihal)
+      fd.append('tgl_diterima', this.state.tglDiterima)
+      fd.append('tgl_surat', this.state.tglSurat)
+      await api()
+        .post('api/setPencatatan', formData)
+        .then((response) => {
+          this.setState({
+            idPencatatan: response.data.content.id,
+          })
+          fd.append('id_pencatatan', response.data.content.id)
+          api()
+            .post('api/setSuratMasuk', fd)
+            .then((response) => {
+              if (this.state.surat == null && this.state.lampiran == null) {
+                this.handleModal()
+              }
+            })
+        })
+      if (this.state.surat != null && this.state.errSurat == '') {
+        let fd2 = new FormData()
+        fd2.append('myFile', this.state.surat)
+        fd2.append('namefile', this.state.nomorSurat)
+        await api()
+          .post('api/addSurat', fd2)
+          .then((response) => {
+            if (this.state.lampiran == null) {
+              this.handleModal()
+            }
+          })
+      }
+      if (this.state.lampiran != null && this.state.errLampiran == '') {
+        let fd3 = new FormData()
+        fd3.append('myFile', this.state.lampiran)
+        fd3.append('namefile', this.state.nomorSurat + '_lampiran')
+        await api()
+          .post('api/addSurat', fd3)
+          .then((response) => {
+            //this.handleModal()
+            if ((response.data.msg = 'errorPdf')) {
+              //jika dari BE error
+            } else {
+              this.handleModal()
+            }
+          })
+      }
+    }
   }
   componentDidMount() {
     api()
@@ -502,7 +572,6 @@ class AddFormSurat extends Component {
         this.setState({
           jenisSurat: response.data,
         })
-        console.log('jenis surat:', this.state.jenisSurat)
       })
   }
   render() {
@@ -513,13 +582,13 @@ class AddFormSurat extends Component {
           type="button"
           onClick={this.handleModal}
         >
-          <div>
+          <div className="ml-1">
             <img
-              className="justify-center items-center"
+              className="h-6 align-middle"
               src="assets/img/icon/Tambah.png"
             />
           </div>
-          <div className="font-bold ml-1">Tambah Surat</div>
+          <div className="font-bold ml-1 mr-2">Tambah Surat</div>
         </button>
 
         {this.state.showModal ? (
@@ -540,15 +609,12 @@ class AddFormSurat extends Component {
                       />
                     </button>
                   </div>
-                  <div className=" items-start justify-center p-5 border-b border-solid border-blueGray-200 rounded-t">
-                    <div className=" flex justify-center">
-                      <img
-                        className="justify-self-center"
-                        src="assets/img/icon/User-Circle.png"
-                      />
+                  <div className="flex flex-row items-start p-2 border-b ml-6 border-solid border-blueGray-200 rounded-t">
+                    <div>
+                      <img className="w-8" src="assets/img/icon/Surat.png" />
                     </div>
-                    <div className="flex justify-center">
-                      <h3 className="text-3xl font-semibold  ">Tambah Surat</h3>
+                    <div className="flex ">
+                      <h3 className="text-xl font-semibold  ">Tambah Surat</h3>
                     </div>
                   </div>
 
@@ -563,394 +629,506 @@ class AddFormSurat extends Component {
                         onSubmit={this.onSubmit}
                       >
                         <div>
-                          <div className="rounded-md shadow-sm ">
+                          <div className="">
                             <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Nomor Surat </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <input
-                                  type="text"
-                                  name="nomorSurat"
-                                  required
-                                  id="nomorSurat"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  onChange={this.handleNomorSurat}
-                                />
-                                {this.state.errNomorSurat ? (
-                                  <div className="text-danger text-xs mb-3">
-                                    Nomor surat harus diisi
+                              <div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Nomor Surat </div>
+                                    <div className="text-danger ml-2"> *</div>
                                   </div>
-                                ) : (
-                                  <></>
-                                )}
-                              </div>
-                            </div>
-
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Tanggal Surat </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <div
-                                  type="text"
-                                  name="tglSurat"
-                                  required
-                                  id="tglSurat"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                >
-                                  <Kalender
-                                    onChange={(exDate, value) =>
-                                      this.handleTglSurat(exDate, value)
-                                    }
-                                  />
+                                  <div className="justify-end ">
+                                    <input
+                                      type="text"
+                                      name="nomorSurat"
+                                      required
+                                      id="nomorSurat"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	mr-4  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      onChange={this.handleNomorSurat}
+                                    />
+                                    {this.state.errNomorSurat ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Nomor surat harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
                                 </div>
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Tanggal Diterima </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <div
-                                  type="text"
-                                  name="tglDiterima"
-                                  required
-                                  id="tglDiterima"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                >
-                                  <Kalender
-                                    onChange={(exDate) =>
-                                      this.handleTglDiterima(exDate)
-                                    }
-                                    minDate={this.state.firstDate}
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Perihal </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <input
-                                  type="text"
-                                  name="perihal"
-                                  required
-                                  id="perihal"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  onChange={this.handlePerihal}
-                                />
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Tujuan Surat </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <select
-                                  type="text"
-                                  name="tujuanSurat"
-                                  required
-                                  id="tujuanSurat"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  value={this.state.tujuanSurat}
-                                  onChange={this.handleTujuanSurat}
-                                >
-                                  <option value="0">Pilih tujuan ...</option>
-                                  <option value="1">R-1</option>
-                                  <option value="2">R-2</option>
-                                </select>
-                              </div>
-                            </div>
 
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Unit Pengirim </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <select
-                                  type="text"
-                                  name="unitPengirim"
-                                  required
-                                  id="unitPengirim"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  value={this.state.unitPengirim}
-                                  onChange={this.handleUnitPengirim}
-                                >
-                                  <option value="0">Pilit unit pengirim</option>
-                                  <option value="1">JTK</option>
-                                  <option value="2">KIMIA</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Nama Pengirim </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <input
-                                  type="text"
-                                  name="namaPengirim"
-                                  required
-                                  id="namaPengirim"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  onChange={this.handleNamaPengirim}
-                                />
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Penandatangan </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <input
-                                  type="text"
-                                  name="penandatangan"
-                                  required
-                                  id="penandatangan"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  onChange={this.handlePenandatangan}
-                                />
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Jenis Surat </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <select
-                                  type="text"
-                                  name="jenisSurat"
-                                  required
-                                  id="jenisSurat"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  value={this.state.idJenisSurat}
-                                  onChange={this.handleIdJenisSurat}
-                                >
-                                  <option value="0">
-                                    Pilih Jenis Surat ...
-                                  </option>
-                                  {this.state.jenisSurat.map((item, index) => {
-                                    return (
-                                      <option
-                                        key={item.ID_JENIS_SURAT}
-                                        value={item.ID_JENIS_SURAT}
-                                      >
-                                        {item.JENIS_SURAT}
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Tanggal Surat </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <div
+                                      type="text"
+                                      name="tglSurat"
+                                      required
+                                      id="tglSurat"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                    >
+                                      <Kalender
+                                        onChange={(exDate, value) =>
+                                          this.handleTglSurat(exDate, value)
+                                        }
+                                      />
+                                    </div>
+
+                                    {this.state.errTglSurat ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Tanggal surat harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Tanggal Diterima </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <div
+                                      type="text"
+                                      name="tglDiterima"
+                                      required
+                                      id="tglDiterima"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                    >
+                                      <Kalender
+                                        onChange={(exDate) =>
+                                          this.handleTglDiterima(exDate)
+                                        }
+                                        minDate={this.state.firstDate}
+                                      />
+                                    </div>
+                                    {this.state.errTglDiterima ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Tanggal diterima harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Perihal </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <input
+                                      type="text"
+                                      name="perihal"
+                                      required
+                                      id="perihal"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none  w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      onChange={this.handlePerihal}
+                                    />
+                                    {this.state.errPerihal ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Perihal harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Tujuan Surat </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <select
+                                      type="text"
+                                      name="tujuanSurat"
+                                      required
+                                      id="tujuanSurat"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      value={this.state.tujuanSurat}
+                                      onChange={this.handleTujuanSurat}
+                                    >
+                                      <option value="0">
+                                        Pilih tujuan ...
                                       </option>
-                                    )
-                                  })}
-                                  {/* <option value="1">Khusus</option>
-                                  <option value="2">Arahan</option> */}
-                                </select>
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Derajat Surat </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <select
-                                  type="text"
-                                  name="derajatSurat"
-                                  required
-                                  id="derajatSurat"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  value={this.state.derajatSurat}
-                                  onChange={this.handleDerajatSurat}
-                                >
-                                  <option value="0">
-                                    Pilih Derajat Surat ...
-                                  </option>
-                                  <option value="1">Segera</option>
-                                  <option value="2">Biasa</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Kode Arsip Komputer </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <input
-                                  type="text"
-                                  name="kodeArsipKom"
-                                  required
-                                  id="kodeArsipKom"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  onChange={this.handleKodeArsipKom}
-                                />
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Kode Arsip Hlm </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <input
-                                  type="text"
-                                  name="kodeArsipHlm"
-                                  required
-                                  id="kodeArsipHlm"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  onChange={this.handleKodeArsipHlm}
-                                />
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Kode Arsip Manual </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <input
-                                  type="text"
-                                  name="kodeArsipManual"
-                                  required
-                                  id="kodeArsipManual"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  onChange={this.handleKodeArsipManual}
-                                />
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Surat </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <input
-                                  type="file"
-                                  name="surat"
-                                  required
-                                  id="surat"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  onChange={this.onFileChange}
-                                />
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div
-                                htmlFor="nama"
-                                className="text-sm mb-2 font-bold flex flex-row "
-                              >
-                                <div>Lampiran </div>
-                                <div className="text-danger ml-2"> *</div>
-                              </div>
-                              <div className="justify-end ">
-                                <input
-                                  type="file"
-                                  name="lampiran"
-                                  required
-                                  id="lampiran"
-                                  className={
-                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-80	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                  }
-                                  onChange={this.onFileChange2}
-                                />
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2 mb-4 mt-4">
-                              <div></div>
-                              <div className=" text-xs text-abu ">
-                                Keterangan (*): data wajib diisi.
-                              </div>
-                            </div>
-                            <div className="flex flex-row grid grid-cols-2">
-                              <div></div>
-                              <button
-                                type="submit"
-                                className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center align-center"
-                                onClick={this.onSubmit}
-                                value="Add Pengguna"
-                              >
-                                <div className="text-sm mb-2 text-white	h-6 font-bold ">
-                                  Tambah
+                                      <option value="1">R-1</option>
+                                      <option value="2">R-2</option>
+                                    </select>
+                                    {this.state.errTujuanSurat ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Tujuan surat harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
                                 </div>
-                              </button>
+
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Unit Pengirim </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <select
+                                      type="text"
+                                      name="unitPengirim"
+                                      required
+                                      id="unitPengirim"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      value={this.state.unitPengirim}
+                                      onChange={this.handleUnitPengirim}
+                                    >
+                                      <option value="0">
+                                        Pilit unit pengirim
+                                      </option>
+                                      <option value="1">JTK</option>
+                                      <option value="2">KIMIA</option>
+                                    </select>
+                                    {this.state.errUnitPengirim ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Unit Pengirim harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Nama Pengirim </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <input
+                                      type="text"
+                                      name="namaPengirim"
+                                      required
+                                      id="namaPengirim"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      onChange={this.handleNamaPengirim}
+                                    />
+                                    {this.state.errNamaPengirim ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Nama Pengirim harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Penandatangan </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <input
+                                      type="text"
+                                      name="penandatangan"
+                                      required
+                                      id="penandatangan"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      onChange={this.handlePenandatangan}
+                                    />
+
+                                    {this.state.errPenandatangan ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Penandatangan harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                              <div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Jenis Surat </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <select
+                                      type="text"
+                                      name="jenisSurat"
+                                      required
+                                      id="jenisSurat"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	 w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      value={this.state.idJenisSurat}
+                                      onChange={this.handleIdJenisSurat}
+                                    >
+                                      <option value="0">
+                                        Pilih Jenis Surat ...
+                                      </option>
+                                      {this.state.jenisSurat.map(
+                                        (item, index) => {
+                                          return (
+                                            <option
+                                              key={item.ID_JENIS_SURAT}
+                                              value={item.ID_JENIS_SURAT}
+                                            >
+                                              {item.JENIS_SURAT}
+                                            </option>
+                                          )
+                                        },
+                                      )}
+                                      {/* <option value="1">Khusus</option>
+                                  <option value="2">Arahan</option> */}
+                                    </select>
+                                    {this.state.errJenisSurat ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Jenis surat harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Derajat Surat </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <select
+                                      type="text"
+                                      name="derajatSurat"
+                                      required
+                                      id="derajatSurat"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      value={this.state.derajatSurat}
+                                      onChange={this.handleDerajatSurat}
+                                    >
+                                      <option value="0">
+                                        Pilih Derajat Surat ...
+                                      </option>
+                                      <option value="1">Segera</option>
+                                      <option value="2">Biasa</option>
+                                    </select>
+                                    {this.state.errDerajatSurat ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Derajat surat harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Kode Arsip Komputer </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <input
+                                      type="text"
+                                      name="kodeArsipKom"
+                                      required
+                                      id="kodeArsipKom"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      onChange={this.handleKodeArsipKom}
+                                    />
+                                    {this.state.errKodeArsipKom ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Kode arsip harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Kode Arsip Hlm </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <input
+                                      type="text"
+                                      name="kodeArsipHlm"
+                                      required
+                                      id="kodeArsipHlm"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      onChange={this.handleKodeArsipHlm}
+                                    />
+                                    {this.state.errKodeArsipHlm ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        kode arsip surat harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Kode Arsip Manual </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <input
+                                      type="text"
+                                      name="kodeArsipManual"
+                                      required
+                                      id="kodeArsipManual"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      onChange={this.handleKodeArsipManual}
+                                    />
+                                    {this.state.errKodeArsipManual ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Kode arsip surat harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Surat </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <input
+                                      type="file"
+                                      name="surat"
+                                      required
+                                      id="surat"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      onChange={this.onFileChange}
+                                    />
+                                    {this.state.errSurat != '' ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        {this.state.errSurat}
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Lampiran </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <input
+                                      type="file"
+                                      name="lampiran"
+                                      required
+                                      id="lampiran"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      onChange={this.onFileChange2}
+                                    />
+                                    {this.state.errLampiran != '' ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        {this.state.errLampiran}
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2 mb-4 mt-4  p-2">
+                                  <div></div>
+                                  <div className=" text-xs text-abu ">
+                                    Keterangan (*): data wajib diisi.
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div></div>
+                                  <button
+                                    type="submit"
+                                    className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center align-center"
+                                    onClick={this.onSubmit}
+                                    value="Add Pengguna"
+                                  >
+                                    <div className="text-sm mb-2 text-white	h-6 font-bold justify-center ">
+                                      Simpan
+                                    </div>
+                                  </button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>

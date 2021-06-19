@@ -6,6 +6,8 @@ export const UNSET_USER = 'UNSET_USER'
 export const SET_PATH = 'SET_PATH'
 export const UNSET_PATH = 'UNSET_PATH'
 export const SET_ALL_USER = 'SET_ALL_USER'
+export const SET_ALL_SURAT_MASUK = 'SET_ALL_SURAT_MASUK'
+export const UNSET_ALL_SURAT_MASUK = 'UNSET_ALL_SURAT_MASUK'
 //list of method actions
 //to save current token by user
 export function addTokenByID(payload) {
@@ -56,6 +58,21 @@ export function setAllUser(payload) {
   const action = {
     type: SET_ALL_USER,
     payload,
+  }
+  return action
+}
+
+export function setAllSuratMasuk(payload) {
+  const action = {
+    type: SET_ALL_SURAT_MASUK,
+    payload,
+  }
+  return action
+}
+
+export function unsetAllSuratMasuk() {
+  const action = {
+    type: UNSET_ALL_SURAT_MASUK,
   }
   return action
 }

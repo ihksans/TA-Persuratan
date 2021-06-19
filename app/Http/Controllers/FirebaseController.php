@@ -29,6 +29,15 @@ class FirebaseController extends Controller
         $name     = $Documet->id();  
         $localfolder = public_path('firebase-temp-uploads') .'/';  
         $extension = $surat->getClientOriginalExtension();  
+        if($extension != 'pdf')
+        {
+            $response =[
+                'msg' => 'errorPdf',
+                'file' => 'not pdf'
+    
+            ];
+            return response()->json($response);
+        }
         $file      = $request->namefile. '.' . $extension;  
         if ($surat->move($localfolder, $file)) {  
             $uploadedfile = fopen($localfolder.$file, 'r');  
@@ -57,14 +66,18 @@ class FirebaseController extends Controller
             $image = $imageReference->signedUrl($expiresAt);  
         }  
          $localfolder = 'data_files.pdf';  
-        if($imageReference->downloadToFile($localfolder)){
-            $response =[
-                'msg' => 'success',
-                'file' => 'null',
-                'url' => $image
-            ];
-        }
-       
+        // if($imageReference->downloadToFile($localfolder)){
+        //     $response =[
+        //         'msg' => 'success',
+        //         'file' => 'null',
+        //         'url' => $image
+        //     ];
+        // }
+        $response =[
+                    'msg' => 'success',
+                    'file' => 'null',
+                    'url' => $image
+                ];
         return response()->json($response,200);
     }
     public function deleteFile(Request $request){
