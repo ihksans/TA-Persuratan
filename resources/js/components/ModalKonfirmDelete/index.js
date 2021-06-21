@@ -72,21 +72,23 @@ export default function ModalKonfirmDelete({ IdPengguna, NamaPengguna }) {
                 {/*footer*/}
                 <div className="flex items-center justify-center p-6 rounded-b grid grid-cols-2">
                   <div className="flex items-center justify-center content-center">
-                  <button
-                    className="rounded bg-abu text-red-500 background-transparent font-bold w-36 px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Tidak
-                  </button></div>
+                    <button
+                      className="rounded bg-abu text-red-500 background-transparent font-bold w-36 px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
+                      type="button"
+                      onClick={() => setShowModal(false)}
+                    >
+                      Tidak
+                    </button>
+                  </div>
                   <div className="flex items-center justify-center content-center">
-                  <button
-                    type="submit"
-                    className="rounded bg-danger text-red-500 background-transparent font-bold w-36 px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
-                    onClick={() => deletePengguna(IdPengguna)}
-                  >
-                    Ya
-                  </button></div>
+                    <button
+                      type="submit"
+                      className="rounded bg-danger text-red-500 background-transparent font-bold w-36 px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
+                      onClick={() => deletePengguna(IdPengguna)}
+                    >
+                      Ya
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

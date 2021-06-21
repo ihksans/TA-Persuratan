@@ -4,6 +4,8 @@ import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import PdfReader from '../PdfReader'
 import Pencatat from './Data'
+import ModalKonfirmDeleteSM from '../ModalKonfirmDeleteSM.js'
+import EditFormSurat from '../EditFormSurat'
 // import createuser from "./index";
 class DetailSuratMasuk extends Component {
   constructor(props) {
@@ -13,6 +15,7 @@ class DetailSuratMasuk extends Component {
       numPages: '',
       pageNumber: '',
       url: '',
+      urlLampiran: '',
       showModal: false,
       pengguna: this.props.AllUser.allUserInfo,
     }
@@ -36,24 +39,39 @@ class DetailSuratMasuk extends Component {
     e.preventDefault()
   }
   async getFileSuratMasuk() {
-    let formData = new FormData()
-    formData.append('namafile', this.props.namaFile)
+    if (this.props.namaFile != null) {
+      let formData = new FormData()
+      formData.append('namafile', this.props.namaFile)
 
-    await api()
-      .post('/api/getSurat', formData)
-      .then((response) =>
-        this.setState({
-          url: response.data.url,
-        }),
-      )
+      await api()
+        .post('/api/getSurat', formData)
+        .then((response) =>
+          this.setState({
+            url: response.data.url,
+          }),
+        )
+    }
+    if (this.props.namaLampiran != null) {
+      let formData = new FormData()
+      formData.append('namafile', this.props.namaLampiran)
 
+      await api()
+        .post('/api/getSurat', formData)
+        .then((response) =>
+          this.setState({
+            urlLampiran: response.data.url,
+          }),
+        )
+    }
     // console.log('url file:' + this.state.url)
     // console.log('item:' + this.props.SuratDetail.NOMOR_SURAT)
     // console.log('item2:' + this.props.SuratDetail.PERIHAL)
     console.log('pengguna:' + this.state.pengguna)
     console.log('all user:' + this.props.AllUser.allUserInfo)
   }
-
+  // handlePage(){
+  //   if
+  // }
   pencatat() {}
 
   render() {
@@ -64,7 +82,7 @@ class DetailSuratMasuk extends Component {
           className="bg-primary font-bold  self-center ml-2 mt-1  rounded p-1 shadow-sm w-75%"
           onClick={this.handleModal}
         >
-          Detail
+          Lihat Detail
         </button>
 
         {this.state.showModal ? (
@@ -102,7 +120,7 @@ class DetailSuratMasuk extends Component {
                         </div>
                       </div>
                       <div className="flex flex-row  col-span-3 mb-4 border-b-2">
-                        <button
+                        {/* <button
                           type="submit"
                           className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
                         >
@@ -113,8 +131,8 @@ class DetailSuratMasuk extends Component {
                             />
                           </div>
                           <div className="font-bold ml-1 mr-2">Edit</div>
-                        </button>
-
+                        </button> */}
+                        <EditFormSurat SuratDetail={this.props.SuratDetail} />
                         <button
                           type="submit"
                           className="bg-primary font-bold  self-center ml-2 mt-1  rounded p-1 shadow-sm w-full"
@@ -128,12 +146,10 @@ class DetailSuratMasuk extends Component {
                         >
                           Ekspor ke PDF
                         </button>
-                        <button
-                          type="submit"
-                          className="bg-danger font-bold text-putih self-center ml-2 mt-1  rounded p-1 shadow-sm w-full"
-                        >
-                          Hapus Surat
-                        </button>
+                        <ModalKonfirmDeleteSM
+                          NomorSurat={this.props.SuratDetail.NOMOR_SURAT}
+                          IdSurat={this.props.SuratDetail.ID_PENCATATAN}
+                        />
                       </div>
                       <div className="font-bold">Dicatat oleh </div>
 
@@ -267,7 +283,20 @@ class DetailSuratMasuk extends Component {
                     </div>
                     <div className="flex justify-center p-2 ">
                       <div className="w-auto">
-                        <PdfReader urlFile={this.state.url} />
+                        {this.props.namaFile == null ? (
+                          <> File kosong</>
+                        ) : (
+                          <>
+                            <PdfReader
+                              urlFile={this.state.url}
+                              namaFile={this.props.SuratDetail.NAMA_FILE_SURAT}
+                              namaLampiran={
+                                this.props.SuratDetail.NAMA_FILE_LAMPIRAN
+                              }
+                              urlLampiran={this.state.urlLampiran}
+                            />
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>

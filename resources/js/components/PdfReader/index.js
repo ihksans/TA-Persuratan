@@ -30,27 +30,54 @@ import { Document, Page, pdfjs } from 'react-pdf/dist/esm/entry.webpack'
 import api from '../../service/api'
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css'
 import ReactLoading from 'react-loading'
+import UnduhFile from './UnduhFile'
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
-const PdfReader = ({ urlFile }) => {
+const PdfReader = ({ urlFile, namaFile, namaLampiran }) => {
   const [numPages, setNumPages] = useState(null)
   const [pageNumber, setPageNumber] = useState(1)
+  const [downloadModal, setDownloadModal] = useState(false)
+
   const [url, setUrl] = useState(null)
+
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages)
+    setPageNumber(1)
   }
-  const getData = () => {
-    let formData = new FormData()
-    formData.append('namafile', '17893-1-33923-1-10-20160115')
 
-    api()
-      .post('/api/getSurat', formData)
-      .then((response) => setUrl(response))
-    console.log('url file:' + url)
+  function changePage(offset) {
+    setPageNumber((prevPageNumber) => prevPageNumber + offset)
   }
-  const downloadFile = () => {
-    api().post('/api/saveSurat').then()
+
+  function previousPage() {
+    changePage(-1)
+  }
+
+  function nextPage() {
+    changePage(1)
+  }
+  // const getData = () => {
+  //   let formData = new FormData()
+  //   formData.append('namafile', '17893-1-33923-1-10-20160115')
+
+  //   api()
+  //     .post('/api/getSurat', formData)
+  //     .then((response) => setUrl(response))
+  //   console.log('url file:' + url)
+  // }
+  const downloadFile = async () => {
+    let formData = new FormData()
+    formData.append('namafile', namaFile)
+    console.log('nama file:' + namaFile)
+    await api()
+      .post('/api/donwloadFile', formData)
+      .then((response) => {
+        console.log(response.data)
+        setDownloadModal(true)
+        console.log('modal:' + downloadModal)
+        // window.open('/data_files.pdf', '_blank')
+      })
   }
   const Loading = () => {
     return (
@@ -72,6 +99,46 @@ const PdfReader = ({ urlFile }) => {
           className="pdf-container"
         >
           <Page height={600} pageNumber={pageNumber} />
+          <div>
+            <div className="ml-1 rounded p-1 shadow-sm w-auto text-sm ">
+              Halaman : {pageNumber || (numPages ? 1 : '--')} /{' '}
+              {numPages || '--'}
+            </div>
+            <button
+              type="button"
+              disabled={pageNumber <= 1}
+              onClick={previousPage}
+              className="bg-danger  text-sm font-bold text-putih self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
+            >
+              Previous
+            </button>
+            <button
+              type="button"
+              disabled={pageNumber >= numPages}
+              onClick={nextPage}
+              className="bg-danger  text-sm font-bold text-putih self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
+            >
+              Next
+            </button>
+
+            <UnduhFile link={namaFile} namaFile={namaFile} title={'Surat'} />
+            {namaLampiran != null ? (
+              <UnduhFile
+                link={namaLampiran}
+                namaFile={namaLampiran}
+                title={'Lampiran'}
+              />
+            ) : null}
+
+            <a
+              href={urlFile}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-primary text-sm font-bold text-putih self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
+            >
+              Lihat Lebih Detail
+            </a>
+          </div>
         </Document>
       </div>
     </div>

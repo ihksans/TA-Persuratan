@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FirebaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -62,7 +63,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     //firebase surat
     Route::post('addSurat', 'FirebaseController@setFile');
     Route::post('getSurat','FirebaseController@getFile');
-    Route::post('saveSurat','FirebaseController@donwloadFile');
+    Route::post('donwloadFile','FirebaseController@donwloadFile');
+    Route::delete('delSurat/{id}','FirebaseController@delSurat');
 
 
 

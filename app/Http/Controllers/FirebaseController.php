@@ -14,7 +14,6 @@ class FirebaseController extends Controller
     //
     public function index(){
         $response =[
-            'msg' => 'success',
             'file' => 'null'
 
         ];
@@ -32,7 +31,6 @@ class FirebaseController extends Controller
         if($extension != 'pdf')
         {
             $response =[
-                'msg' => 'errorPdf',
                 'file' => 'not pdf'
     
             ];
@@ -65,7 +63,6 @@ class FirebaseController extends Controller
         if($imageReference->exists()){
             $image = $imageReference->signedUrl($expiresAt);  
         }  
-         $localfolder = 'data_files.pdf';  
         // if($imageReference->downloadToFile($localfolder)){
         //     $response =[
         //         'msg' => 'success',
@@ -74,29 +71,33 @@ class FirebaseController extends Controller
         //     ];
         // }
         $response =[
-                    'msg' => 'success',
-                    'file' => 'null',
                     'url' => $image
                 ];
         return response()->json($response,200);
     }
-    public function deleteFile(Request $request){
-        $resource = 'Document/'. $request->namafile. '.pdf';
+    public function delSurat($id){
+        $resource = 'Document/'. $id. '.pdf';
         $imageDeleted = app('firebase.storage')->getBucket()->object($resource)->delete();  
         $response =[
-            'msg' => 'success',
-            'file' => 'null',
             'url' => $imageDeleted
 
         ];
-        return response()->json($imageDeleted,200);
+        return response()->json($response,200);
 
     }
     public function donwloadFile(Request $request){
-        $myFile = public_path("data_files.pdf");
+        $resource = 'Document/'. $request->namafile. '.pdf';
+        $imageReference = app('firebase.storage')->getBucket()->object($resource);  
+        $localfolder = public_path('/'.$request->namafile.'.pdf');  
+        if($imageReference->downloadToFile($localfolder)){
+            $response =[
+                'msg' => 'success',
+                'file' => 'null',
+                'url' => $localfolder
+            ];
+        }
 
-
-    	return response()->download($myFile)->deleteFileAfterSend(true);
+    	return response()->json($response);
     }
 
 }

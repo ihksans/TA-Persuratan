@@ -9,9 +9,9 @@ class AddFormSurat extends Component {
     super(props)
     this.state = {
       dir: [],
-      surat: null,
       jenisSurat: [],
       firstDate: new Date(),
+      surat: null,
       lampiran: null,
       idPencatatan: null,
       idPengguna: null,
@@ -49,10 +49,13 @@ class AddFormSurat extends Component {
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
+
     this.onFileChange = this.onFileChange.bind(this)
     this.onFileChange2 = this.onFileChange2.bind(this)
+
     this.handleIdPencatatan = this.handleIdPencatatan.bind(this)
     this.handleIdPengguna = this.handleIdPengguna.bind(this)
+
     this.handleIdJenisSurat = this.handleIdJenisSurat.bind(this)
     this.handleKodeArsipKom = this.handleKodeArsipKom.bind(this)
     this.handleKodeArsipManual = this.handleKodeArsipManual.bind(this)
@@ -78,14 +81,13 @@ class AddFormSurat extends Component {
     this.handleErrDerajatSurat = this.handleErrDerajatSurat.bind(this)
     this.handleErrNomorSurat = this.handleErrNomorSurat.bind(this)
     this.handleErrNamaPengirim = this.handleErrNamaPengirim.bind(this)
-
     this.handleErrUnitPengirim = this.handleErrUnitPengirim.bind(this)
     this.handleErrTujuanSurat = this.handleErrTujuanSurat.bind(this)
     this.handleErrPerihal = this.handleErrPerihal.bind(this)
     this.handleErrTglDiterima = this.handleErrTglDiterima.bind(this)
     this.handleErrTglSurat = this.handleErrTglSurat.bind(this)
-
     this.handleErrorPenandatangan = this.handleErrorPenandatangan.bind(this)
+
     this.validateNomorSurat = this.validateNomorSurat.bind(this)
     this.validateTanggalSurat = this.validateTanggalSurat.bind(this)
     this.validateTanggalDiterima = this.validateTanggalDiterima.bind(this)
@@ -187,7 +189,7 @@ class AddFormSurat extends Component {
     }
   }
   validateNamaPengirim(input) {
-    const re = /^[a-zA-Z0-9]*$/
+    const re = /^[a-zA-Z0-9 ]*$/
 
     if (input.length <= 0 || input.length >= 20 || input == null) {
       this.handleErrNamaPengirim(true)
@@ -456,6 +458,39 @@ class AddFormSurat extends Component {
   handleModal() {
     this.setState({
       showModal: !this.state.showModal,
+      idJenisSurat: '',
+      kodeArsipKom: '',
+      kodeArsipHlm: '',
+      kodeArsipManual: '',
+      namaFileSurat: null,
+      namaFileLampiran: null,
+      derajatSurat: '',
+      nomorSurat: null,
+      unitPengirim: '',
+      penandatangan: '',
+      namaPengirim: '',
+      tujuanSurat: '',
+      perihal: null,
+      tglDiterima: null,
+      tglSurat: null,
+      errSurat: '',
+      errJenisSurat: false,
+      errLampiran: '',
+      errKodeArsipKom: false,
+      errKodeArsipHlm: false,
+      errKodeArsipManual: false,
+      errDerajatSurat: false,
+      errNomorSurat: false,
+      errUnitPengirim: false,
+      errTujuanSurat: false,
+      errPerihal: false,
+      errTglDiterima: false,
+      errTglSurat: false,
+      errPenandatangan: false,
+      errNamaPengirim: false,
+      errMsgFileLampiran: '',
+      surat: null,
+      lampiran: null,
     })
   }
 
@@ -510,8 +545,15 @@ class AddFormSurat extends Component {
       formData.append('kode_arsip_kom', this.state.kodeArsipKom)
       formData.append('kode_arsip_hlm', this.state.kodeArsipHlm)
       formData.append('kode_arsip_manual', this.state.kodeArsipManual)
-      formData.append('nama_file_surat', this.state.nomorSurat)
-      formData.append('nama_file_lampiran', this.state.nomorSurat + '_lampiran')
+      if (this.state.surat != null) {
+        formData.append('nama_file_surat', this.state.namaFileSurat)
+      }
+      if (this.state.lampiran != null) {
+        formData.append(
+          'nama_file_lampiran',
+          this.state.namaFileLampiran + '_lampiran',
+        )
+      }
       formData.append('derajat_surat', this.state.derajatSurat)
       let fd = new FormData()
       fd.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
@@ -519,8 +561,16 @@ class AddFormSurat extends Component {
       fd.append('kode_arsip_kom', this.state.kodeArsipKom)
       fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
       fd.append('kode_arsip_manual', this.state.kodeArsipManual)
-      fd.append('nama_file_surat', this.state.namaFileSurat)
-      fd.append('nama_file_lampiran', this.state.namaFileLampiran + '_lampiran')
+      if (this.state.surat != null) {
+        fd.append('nama_file_surat', this.state.namaFileSurat)
+      }
+      if (this.state.lampiran != null) {
+        fd.append(
+          'nama_file_lampiran',
+          this.state.namaFileLampiran + '_lampiran',
+        )
+      }
+
       fd.append('derajat_surat', this.state.derajatSurat)
       fd.append('nomor_surat', this.state.nomorSurat)
       fd.append('unit_pengirim', this.state.unitPengirim)
@@ -542,34 +592,34 @@ class AddFormSurat extends Component {
             .then((response) => {
               if (this.state.surat == null && this.state.lampiran == null) {
                 this.handleModal()
+                window.location.reload('/#/SuratMasuk')
               }
             })
         })
       if (this.state.surat != null && this.state.errSurat == '') {
         let fd2 = new FormData()
         fd2.append('myFile', this.state.surat)
-        fd2.append('namefile', this.state.nomorSurat)
+        fd2.append('namefile', this.state.namaFileSurat)
         await api()
           .post('api/addSurat', fd2)
           .then((response) => {
             if (this.state.lampiran == null) {
               this.handleModal()
+              window.location.reload('/#/SuratMasuk')
             }
           })
       }
       if (this.state.lampiran != null && this.state.errLampiran == '') {
         let fd3 = new FormData()
         fd3.append('myFile', this.state.lampiran)
-        fd3.append('namefile', this.state.nomorSurat + '_lampiran')
+        fd3.append('namefile', this.state.namaFileLampiran + '_lampiran')
         await api()
           .post('api/addSurat', fd3)
           .then((response) => {
             //this.handleModal()
-            if ((response.data.msg = 'errorPdf')) {
-              //jika dari BE error
-            } else {
-              this.handleModal()
-            }
+            //jika dari BE error
+            this.handleModal()
+            window.location.reload('/#/SuratMasuk')
           })
       }
     }

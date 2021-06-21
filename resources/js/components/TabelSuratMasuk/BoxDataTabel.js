@@ -54,10 +54,22 @@ class BoxDataTabel extends Component {
           </div>
 
           <div className="flex flex-row  items-center ml-2 mt-1">
-            <div className="">{this.props.NoSurat}</div>
+            <div className="">
+              {this.props.NoSurat.length > 12 ? (
+                <>{this.props.NoSurat.slice(0, 12)} ...</>
+              ) : (
+                <>{this.props.NoSurat}</>
+              )}
+            </div>
           </div>
           <div className="flex flex-row  col-span-2  items-center ml-2 mt-1">
-            <div className="">{this.props.Perihal}</div>
+            <div className="">
+              {this.props.Perihal.length > 25 ? (
+                <>{this.props.Perihal.slice(0, 25)}...</>
+              ) : (
+                <>{this.props.Perihal}</>
+              )}
+            </div>
           </div>
           <div className="flex flex-row  items-center ml-2 mt-1 ">
             <ul>
@@ -65,7 +77,13 @@ class BoxDataTabel extends Component {
                 return (
                   <li key={index}>
                     {this.props.JenisSurat == item.ID_JENIS_SURAT ? (
-                      <div className="">{item.JENIS_SURAT}</div>
+                      <div className="">
+                        {item.JENIS_SURAT.length > 15 ? (
+                          <>{item.JENIS_SURAT.slice(0, 15)}...</>
+                        ) : (
+                          <>{item.JENIS_SURAT}</>
+                        )}
+                      </div>
                     ) : (
                       <></>
                     )}
@@ -75,11 +93,29 @@ class BoxDataTabel extends Component {
             </ul>
           </div>
           <div className="flex flex-row items-center ml-2 mt-1">
-            <div className="">{this.props.TujuanSurat}</div>
+            <div className="">
+              {this.props.TujuanSurat.length > 12 ? (
+                <>{this.props.TujuanSurat.slice(0, 12)}...</>
+              ) : (
+                <>{this.props.TujuanSurat}</>
+              )}
+            </div>
           </div>
           <div className="   items-center ml-2 mt-1">
-            <div className="font-bold">{this.props.NamaPengirim}</div>
-            <div>{this.props.UnitPengirim}</div>
+            <div className="font-bold">
+              {this.props.NamaPengirim.length > 12 ? (
+                <>{this.props.NamaPengirim.slice(0, 12)}...</>
+              ) : (
+                <>{this.props.NamaPengirim}</>
+              )}
+            </div>
+            <div>
+              {this.props.UnitPengirim.length > 12 ? (
+                <>{this.props.UnitPengirim.slice(0, 12)}</>
+              ) : (
+                <>{this.props.UnitPengirim}</>
+              )}
+            </div>
           </div>
           {/* <button
             type="submit"
@@ -88,9 +124,10 @@ class BoxDataTabel extends Component {
             Detail
           </button> */}
           <DetailSuratMasuk
-            namaFile={this.props.NoSurat}
+            namaFile={this.props.NamaFileSurat}
             SuratDetail={this.props.Surat}
             NoAgenda={this.props.No}
+            namaLampiran={this.props.NamaFileLampiran}
           />
         </div>
       </>

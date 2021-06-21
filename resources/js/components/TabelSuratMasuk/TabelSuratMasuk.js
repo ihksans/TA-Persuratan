@@ -25,6 +25,8 @@ const TabelSuratMasuk = ({ SuratMasuk, IdJenisSurat }) => {
                 NamaPengirim={item.NAMA_PENGIRIM}
                 UnitPengirim={item.UNIT_PENGIRIM}
                 IdJenisSurat={IdJenisSurat}
+                NamaFileSurat={item.NAMA_FILE_SURAT}
+                NamaFileLampiran={item.NAMA_FILE_LAMPIRAN}
                 Surat={item}
               />
             </li>
