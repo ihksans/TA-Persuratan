@@ -14,6 +14,13 @@ export default function UnduhFile({ link, namaFile, title }) {
       })
     setShowModal(true)
   }
+  const cancelDownload = async () => {
+    await api()
+      .delete('/api/cancelDownload/' + namaFile)
+      .then((response) => {
+        setShowModal(false)
+      })
+  }
   return (
     <>
       <button
@@ -71,7 +78,7 @@ export default function UnduhFile({ link, namaFile, title }) {
                     <button
                       className="rounded bg-abu text-red-500 background-transparent font-bold w-36 px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
                       type="button"
-                      onClick={() => setShowModal(false)}
+                      onClick={() => cancelDownload()}
                     >
                       Tidak
                     </button>

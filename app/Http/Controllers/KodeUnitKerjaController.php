@@ -38,14 +38,14 @@ class KodeUnitKerjaController extends Controller
             return response()->json($respon);
         }
     }
-    public function getKodeUnit(Request $request)
+    public function getKodeUnit($id)
     {
 
-        $kodeUnit = KodeUnitKerja::where('ID_KODE_UNIT_KERJA', $request->id)->first();
+        $kodeUnit = KodeUnitKerja::where('ID_KODE_UNIT_KERJA', $id)->first();
         if($kodeUnit == null){
             $respon =[
             'Msg' => 'error',
-            'content' =>  $request,
+            'content' =>  $id,
             ];
         return response()->json($respon);
         }

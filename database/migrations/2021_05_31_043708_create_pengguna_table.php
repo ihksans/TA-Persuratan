@@ -19,7 +19,8 @@ class CreatePenggunaTable extends Migration
             $table->string('PASSWORD');
             $table->string('NAMA');
             $table->integer('ROLE');
-            $table->string('TOKEN');
+            $table->string('JABATAN');
+            $table->string('NIP');
             $table->timestamps();
         });
     }

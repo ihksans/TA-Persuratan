@@ -21,6 +21,14 @@ class JenisSuratController extends Controller
             'JENIS_SURAT' => $request->jenisSurat,
             'KETERANGAN' => $request->keterangan,
         ];
+        if($request->jenisSurat==null||$request->keterangan == null){
+            $respon = [
+                'Msg' => 'error null content',
+            
+                ];
+                return response()->json($respon,200);
+
+        }
         $jenisSurat = JenisSurat::create($data);
         if($jenisSurat)
         {
@@ -38,14 +46,14 @@ class JenisSuratController extends Controller
             return response()->json($respon);
         }
     }
-    public function getJenisSurat(Request $request)
+    public function getJenisSurat($id)
     {
 
-        $jenisSurat = JenisSurat::where('ID_JENIS_SURAT', $request->id)->first();
+        $jenisSurat = JenisSurat::where('ID_JENIS_SURAT', $id)->first();
         if($jenisSurat == null){
             $respon =[
             'Msg' => 'error',
-            'content' =>  $request,
+            'content' =>  $id,
             ];
         return response()->json($respon);
         }

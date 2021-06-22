@@ -1,25 +1,3 @@
-// import React from 'react'
-
-// const BoxDataTabel = ({
-//   IdSuratMasuk,
-//   No,
-//   TglSurat,
-//   TglDiterima,
-//   NoSurat,
-//   Perihal,
-//   JenisSurat,
-//   TujuanSurat,
-//   NamaPengirim,
-//   UnitPengirim,
-// }) => {
-//   return (
-// <>
-
-// </>
-//   )
-// }
-// export default BoxDataTabel
-
 import React, { Component } from 'react'
 import api from '../../service/api'
 import DetailSuratMasuk from '../DetailSuratMasuk'
@@ -27,7 +5,9 @@ class BoxDataTabel extends Component {
   //deklarasi variabel
   constructor(props) {
     super()
-    this.state = {}
+    this.state = {
+      jenisSurat: '',
+    }
   }
 
   render() {
@@ -93,13 +73,26 @@ class BoxDataTabel extends Component {
             </ul>
           </div>
           <div className="flex flex-row items-center ml-2 mt-1">
-            <div className="">
-              {this.props.TujuanSurat.length > 12 ? (
-                <>{this.props.TujuanSurat.slice(0, 12)}...</>
-              ) : (
-                <>{this.props.TujuanSurat}</>
-              )}
-            </div>
+            {/* <ul>
+              {this.props.IdUnitKerja.map((item, index) => {
+                return (
+                  <li key={index}>
+                    {this.props.UnitKerja == item.ID_KODE_UNIT_KERJA ? (
+                      <div className="">
+                        {item.NAMA_UNIT_KERJA.length > 15 ? (
+                          <>{item.NAMA_UNIT_KERJA.slice(0, 15)}...</>
+                        ) : (
+                          <>{item.NAMA_UNIT_KERJA}</>
+                        )}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </li>
+                )
+              })}
+            </ul> */}
+            {this.props.TujuanSurat}
           </div>
           <div className="   items-center ml-2 mt-1">
             <div className="font-bold">
@@ -109,25 +102,33 @@ class BoxDataTabel extends Component {
                 <>{this.props.NamaPengirim}</>
               )}
             </div>
-            <div>
-              {this.props.UnitPengirim.length > 12 ? (
-                <>{this.props.UnitPengirim.slice(0, 12)}</>
-              ) : (
-                <>{this.props.UnitPengirim}</>
-              )}
-            </div>
+            <ul>
+              {this.props.IdUnitKerja.map((item, index) => {
+                return (
+                  <li key={index}>
+                    {this.props.UnitKerja == item.ID_KODE_UNIT_KERJA ? (
+                      <div className="">
+                        {item.KODE_UNIT_KERJA.length > 15 ? (
+                          <>{item.KODE_UNIT_KERJA.slice(0, 15)}...</>
+                        ) : (
+                          <>{item.KODE_UNIT_KERJA}</>
+                        )}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
           </div>
-          {/* <button
-            type="submit"
-            className="bg-primary font-bold  self-center ml-2 mt-1  rounded p-1 shadow-sm w-75%"
-          >
-            Detail
-          </button> */}
+
           <DetailSuratMasuk
             namaFile={this.props.NamaFileSurat}
             SuratDetail={this.props.Surat}
-            NoAgenda={this.props.No}
             namaLampiran={this.props.NamaFileLampiran}
+            jenisSurat={this.props.jenisSurat}
+            IdUnitKerja={this.props.IdUnitKerja}
           />
         </div>
       </>

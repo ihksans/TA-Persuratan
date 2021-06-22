@@ -1,6 +1,6 @@
 import React from 'react'
 import api from '../../service/api'
-
+import ModalLoading from '../ModalLoading'
 export default function ModalKonfirmDeleteSM({
   IdSurat,
   NomorSurat,
@@ -8,7 +8,12 @@ export default function ModalKonfirmDeleteSM({
   NamaLampiran,
 }) {
   const [showModal, setShowModal] = React.useState(false)
+  const [showLoading, setLoading] = React.useState(false)
+  const handleLoading = () => {
+    setLoading(!showLoading)
+  }
   const deletePengguna = async (id) => {
+    handleLoading()
     let formData = new FormData()
     formData.append('id', id)
     console.log('id' + id)
@@ -27,6 +32,7 @@ export default function ModalKonfirmDeleteSM({
         console.log('respon:' + response)
         console.log('Pencatatan telah terhapus')
         if (NamaSurat == null && NamaLampiran == null) {
+          handleLoading()
           setShowModal(false)
           window.location.reload('/#/SuratMasuk')
         }
@@ -41,6 +47,7 @@ export default function ModalKonfirmDeleteSM({
           console.log('respon:' + response)
           console.log('File surat telah terhapus')
           if (NamaLampiran == null) {
+            handleLoading()
             setShowModal(false)
             window.location.reload('/#/SuratMasuk')
           }
@@ -56,6 +63,7 @@ export default function ModalKonfirmDeleteSM({
         .then((response) => {
           console.log('respon:' + response)
           console.log('File surat telah terhapus')
+          handleLoading()
           setShowModal(false)
           window.location.reload('/#/SuratMasuk')
         })
@@ -67,12 +75,17 @@ export default function ModalKonfirmDeleteSM({
   return (
     <>
       <button
-        className="bg-danger font-bold text-putih self-center ml-2 mt-1  rounded p-1 shadow-sm w-full"
+        className="flex flex-row bg-danger font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
         type="button"
         onClick={() => setShowModal(true)}
       >
-        {/* <img className="ml-1" src="assets/img/icon/Trash.png" /> */}
-        <div className="font-bold ">Hapus</div>
+        <div className="ml-1">
+          <img
+            className="h-auto align-middle"
+            src="assets/img/icon/Trash.png"
+          />
+        </div>
+        <div className="font-bold text-putih ml-1 mr-2">Hapus</div>
       </button>
       {showModal ? (
         <>
@@ -139,6 +152,7 @@ export default function ModalKonfirmDeleteSM({
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
+      <ModalLoading loading={showLoading} title={'Sedang diproses sistem'} />
     </>
   )
 }

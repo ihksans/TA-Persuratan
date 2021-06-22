@@ -22,7 +22,7 @@ class PenggunaController extends Controller
         }
         return response()->json($user,200);
     }
-    public function allUser(Request $request){
+    public function allUser(){
         $user = Pengguna::all();
         if($user==null){
             $respon=[
@@ -34,10 +34,6 @@ class PenggunaController extends Controller
         return response()->json($user,200);
     }
     public function createUser(Request $request){
-        // $data=[
-        //     'data'=>$request
-        // ];
-        // return response()->json($data);
         $user = Pengguna::where('USERNAME', $request->USERNAME)->first();
         if($user !== null){
             $respon = [
@@ -51,12 +47,15 @@ class PenggunaController extends Controller
             'NAMA' => 'required',
             'PASSWORD' => 'required',
             'ROLE' => 'required',
+            
         ]);
         $data=[
             'USERNAME' => $request->USERNAME,
             'PASSWORD' => Hash::make($request->PASSWORD),
             'NAMA' => $request->NAMA,
             'ROLE' => $request->ROLE,
+            'JABATAN' => $request->JABATAN,
+            'NIP' => $request->NIP
         ];
         
         $user = Pengguna::create($data);
@@ -110,6 +109,8 @@ class PenggunaController extends Controller
             'PASSWORD' => Hash::make($request->PASSWORD),
             'NAMA' => $request->NAMA,
             'ROLE' => $request->ROLE,
+            'JABATAN' => $request->JABATAN,
+            'NIP' => $request->NIP
         ]);
         if($user){
             $pengguna = User::where('id',$request->id)
@@ -163,30 +164,7 @@ class PenggunaController extends Controller
                 'error' => 'deletePengguna'
             ];
             return response()->json($respon);
-        }
-        
+        }      
         return response()->json($user);
-
     }
-    
-    // public function deleteUser($id){
-    //     // $user = Pengguna::where('ID_PENGGUNA', $request->id)->first();
-    //     if($id == null){
-    //         $respon = [
-    //             'msg' => 'failed',
-    //             'error' => 'Pengguna',
-    //             'request' => $id
-    //         ];
-    //         return response()->json($respon);
-    //     }else{
-            
-    //             $respon = [
-    //                 'msg' => 'succes',
-    //                 'error' => 'null',
-    //                 'request' => $id
-    //             ];
-    //             return response()->json($respon);
-    //     }
-    // }
-
 }

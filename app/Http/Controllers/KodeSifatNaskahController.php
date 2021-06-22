@@ -38,21 +38,21 @@ class KodeSifatNaskahController extends Controller
             return response()->json($respon);
         }
     }
-    public function getSifatSurat(Request $request)
+    public function getSifatNaskah($id)
     {
 
-        $sifatNaskah = KodeSifatNaskah::where('ID_SIFAT_NASKAH', $request->id)->first();
+        $sifatNaskah = KodeSifatNaskah::where('ID_SIFAT_NASKAH', $id)->first();
         if($sifatNaskah == null){
             $respon =[
             'Msg' => 'error',
-            'content' =>  $request,
+            'content' =>  $id,
             ];
         return response()->json($respon);
         }
         return response()->json($sifatNaskah);
 
     }
-    public function getAllSifatSurat()
+    public function getAllSifatNaskah()
     {
         $sifatNaskah = KodeSifatNaskah::all();
         if($sifatNaskah == null){
@@ -65,7 +65,7 @@ class KodeSifatNaskahController extends Controller
         return response()->json($sifatNaskah);
 
     }
-    public function delAllSifatSurat()
+    public function delAllSifatNaskah()
     {
         $sifatNaskah = KodeSifatNaskah::truncate();
         if($sifatNaskah == null){
@@ -78,7 +78,7 @@ class KodeSifatNaskahController extends Controller
         return response()->json($sifatNaskah);
 
     }
-    public function delSifatSurat($id)
+    public function delSifatNaskah($id)
     {
         $sifatNaskah = KodeSifatNaskah::where('ID_SIFAT_NASKAH', $id);
         $sifatNaskah->delete();
@@ -97,7 +97,7 @@ class KodeSifatNaskahController extends Controller
 
     }
    
-    public function updateSifatSurat(Request $request)
+    public function updateSifatNaskah(Request $request)
     {
         $sifatNaskah = KodeSifatNaskah::where('ID_SIFAT_NASKAH', $request->id)
         ->update([

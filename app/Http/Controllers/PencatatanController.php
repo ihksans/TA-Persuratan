@@ -24,7 +24,7 @@ class PencatatanController extends Controller
             'KODE_ARSIP_MANUAL'=>$request->kode_arsip_manual,
             'NAMA_FILE_SURAT'=>$request->nama_file_surat,
             'NAMA_FILE_LAMPIRAN'=>$request->nama_file_lampiran,
-            'DERAJAT_SURAT'=>$request->derajat_surat,
+            'ID_DERAJAT_SURAT'=>$request->id_derajat_surat,
         ];
         $pencatatan = Pencatatan::create($data);
 
@@ -86,7 +86,7 @@ class PencatatanController extends Controller
             'KODE_ARSIP_MANUAL'=>$request->kode_arsip_manual,
             'NAMA_FILE_SURAT'=>$request->nama_file_surat,
             'NAMA_FILE_LAMPIRAN'=>$request->nama_file_lampiran,
-            'DERAJAT_SURAT'=>$request->derajat_surat,
+            'ID_DERAJAT_SURAT'=>$request->id_derajat_surat,
         ]);
         if(!$pencatatan){
             $respon =[

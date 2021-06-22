@@ -5,7 +5,7 @@ import {} from '../../actions'
 import HeaderTabel from './HeaderTabel'
 import BoxData from './BoxDataTabel'
 
-const TabelSuratMasuk = ({ SuratMasuk, IdJenisSurat }) => {
+const TabelSuratMasuk = ({ SuratMasuk, IdJenisSurat, IdUnitKerja }) => {
   return (
     <>
       <ul>
@@ -28,6 +28,8 @@ const TabelSuratMasuk = ({ SuratMasuk, IdJenisSurat }) => {
                 NamaFileSurat={item.NAMA_FILE_SURAT}
                 NamaFileLampiran={item.NAMA_FILE_LAMPIRAN}
                 Surat={item}
+                IdUnitKerja={IdUnitKerja}
+                UnitKerja={item.ID_KODE_UNIT_KERJA}
               />
             </li>
           )

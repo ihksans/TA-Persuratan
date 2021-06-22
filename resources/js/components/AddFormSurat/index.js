@@ -3,12 +3,14 @@ import api from '../../service/api'
 import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import Kalender from './Kalender'
+import ModalLoading from '../ModalLoading'
 // import createuser from "./index";
 class AddFormSurat extends Component {
   constructor(props) {
     super(props)
     this.state = {
       dir: [],
+      modalLoading: false,
       jenisSurat: [],
       firstDate: new Date(),
       surat: null,
@@ -30,6 +32,9 @@ class AddFormSurat extends Component {
       perihal: null,
       tglDiterima: null,
       tglSurat: null,
+      sifatNaskah: '',
+      lastAgenda: null,
+
       errSurat: '',
       errJenisSurat: false,
       errLampiran: '',
@@ -45,17 +50,17 @@ class AddFormSurat extends Component {
       errTglSurat: false,
       errPenandatangan: false,
       errNamaPengirim: false,
+      errSifatNaskah: false,
       errMsgFileLampiran: '',
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
-
+    this.handleLoading = this.handleLoading.bind(this)
     this.onFileChange = this.onFileChange.bind(this)
     this.onFileChange2 = this.onFileChange2.bind(this)
 
     this.handleIdPencatatan = this.handleIdPencatatan.bind(this)
     this.handleIdPengguna = this.handleIdPengguna.bind(this)
-
     this.handleIdJenisSurat = this.handleIdJenisSurat.bind(this)
     this.handleKodeArsipKom = this.handleKodeArsipKom.bind(this)
     this.handleKodeArsipManual = this.handleKodeArsipManual.bind(this)
@@ -71,6 +76,7 @@ class AddFormSurat extends Component {
     this.handlePerihal = this.handlePerihal.bind(this)
     this.handleTglDiterima = this.handleTglDiterima.bind(this)
     this.handleTglSurat = this.handleTglSurat.bind(this)
+    this.handleSifatSurat = this.handleSifatSurat.bind(this)
 
     this.handleErrSurat = this.handleErrSurat.bind(this)
     this.handleErrJenisSurat = this.handleErrJenisSurat.bind(this)
@@ -87,6 +93,7 @@ class AddFormSurat extends Component {
     this.handleErrTglDiterima = this.handleErrTglDiterima.bind(this)
     this.handleErrTglSurat = this.handleErrTglSurat.bind(this)
     this.handleErrorPenandatangan = this.handleErrorPenandatangan.bind(this)
+    this.handleErrSifatSurat = this.handleErrSifatSurat.bind(this)
 
     this.validateNomorSurat = this.validateNomorSurat.bind(this)
     this.validateTanggalSurat = this.validateTanggalSurat.bind(this)
@@ -103,7 +110,9 @@ class AddFormSurat extends Component {
     this.validateKodeArsipHlm = this.validateKodeArsipHlm.bind(this)
     this.validateSurat = this.validateSurat.bind(this)
     this.validateLampiran = this.validateLampiran.bind(this)
+    this.validateSifatSurat = this.validateSifatSurat.bind(this)
   }
+
   validateLampiran(input) {
     const extension = '.pdf'
     let result = this.state.lampiran.name.match(extension)
@@ -174,6 +183,14 @@ class AddFormSurat extends Component {
       this.handleErrJenisSurat(false)
     }
   }
+  validateSifatSurat(input) {
+    if (input == 0 || input == null || input == '') {
+      this.handleErrSifatSurat(true)
+    } else {
+      this.handleErrSifatSurat(false)
+    }
+  }
+
   validatePenandatangan(input) {
     const re = /^[a-zA-Z0-9 ]*$/
     if (input.length <= 0 || input.length >= 20 || input == null) {
@@ -244,6 +261,7 @@ class AddFormSurat extends Component {
       this.handleErrNomorSurat(false)
     }
   }
+
   handleErrSurat(props) {
     this.setState({
       errSurat: props,
@@ -252,6 +270,11 @@ class AddFormSurat extends Component {
   handleErrJenisSurat(props) {
     this.setState({
       errJenisSurat: props,
+    })
+  }
+  handleErrSifatSurat(props) {
+    this.setState({
+      errSifatNaskah: props,
     })
   }
   handleErrLampiran(props) {
@@ -317,6 +340,12 @@ class AddFormSurat extends Component {
   handleErrNamaPengirim(props) {
     this.setState({
       errNamaPengirim: props,
+    })
+  }
+  handleSifatSurat(e) {
+    let value = e.target.value
+    this.setState({
+      sifatNaskah: value,
     })
   }
   handleIdPencatatan(e) {
@@ -399,11 +428,11 @@ class AddFormSurat extends Component {
   }
   handleUnitPengirim(e) {
     let value = e.target.value
-    let str = ''
-    str = value.replace(/\s\s+/g, '')
+    // let str = ''
+    // str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      unitPengirim: str,
+      unitPengirim: value,
     })
   }
   handlePenandatangan(e) {
@@ -426,11 +455,11 @@ class AddFormSurat extends Component {
   }
   handleTujuanSurat(e) {
     let value = e.target.value
-    let str = ''
-    str = value.replace(/\s\s+/g, '')
+    // let str = ''
+    // str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      tujuanSurat: str,
+      tujuanSurat: value,
     })
   }
   handlePerihal(e) {
@@ -455,9 +484,16 @@ class AddFormSurat extends Component {
       firstDate: value,
     })
   }
+  handleLoading() {
+    this.setState({
+      modalLoading: !this.state.modalLoading,
+    })
+  }
   handleModal() {
     this.setState({
       showModal: !this.state.showModal,
+      modalLoading: false,
+
       idJenisSurat: '',
       kodeArsipKom: '',
       kodeArsipHlm: '',
@@ -491,6 +527,7 @@ class AddFormSurat extends Component {
       errMsgFileLampiran: '',
       surat: null,
       lampiran: null,
+      sifatNaskah: '',
     })
   }
 
@@ -514,6 +551,7 @@ class AddFormSurat extends Component {
     await this.validateNamaPengirim(this.state.namaPengirim)
     await this.validatePenandatangan(this.state.penandatangan)
     await this.validateJenisSurat(this.state.idJenisSurat)
+    await this.validateSifatSurat(this.state.sifatNaskah)
     await this.validateDerajatSurat(this.state.derajatSurat)
     await this.validateKodeArsipHlm(this.state.kodeArsipHlm)
     await this.validateKodeArsipKom(this.state.kodeArsipKom)
@@ -537,10 +575,13 @@ class AddFormSurat extends Component {
       this.state.errDerajatSurat == false &&
       this.state.errKodeArsipHlm == false &&
       this.state.errKodeArsipKom == false &&
-      this.state.errKodeArsipManual == false
+      this.state.errKodeArsipManual == false &&
+      this.state.errSifatNaskah == false
     ) {
+      this.handleLoading()
       let formData = new FormData()
       formData.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
+      formData.append('id_derajat_surat', this.state.derajatSurat)
       formData.append('id_jenis_surat', this.state.idJenisSurat)
       formData.append('kode_arsip_kom', this.state.kodeArsipKom)
       formData.append('kode_arsip_hlm', this.state.kodeArsipHlm)
@@ -554,10 +595,10 @@ class AddFormSurat extends Component {
           this.state.namaFileLampiran + '_lampiran',
         )
       }
-      formData.append('derajat_surat', this.state.derajatSurat)
       let fd = new FormData()
       fd.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
       fd.append('id_jenis_surat', this.state.idJenisSurat)
+      fd.append('id_derajat_surat', this.state.derajatSurat)
       fd.append('kode_arsip_kom', this.state.kodeArsipKom)
       fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
       fd.append('kode_arsip_manual', this.state.kodeArsipManual)
@@ -570,16 +611,16 @@ class AddFormSurat extends Component {
           this.state.namaFileLampiran + '_lampiran',
         )
       }
-
-      fd.append('derajat_surat', this.state.derajatSurat)
+      fd.append('id_kode_unit', this.state.unitPengirim)
+      fd.append('id_sifat_naskah', this.state.sifatNaskah)
       fd.append('nomor_surat', this.state.nomorSurat)
-      fd.append('unit_pengirim', this.state.unitPengirim)
-      fd.append('penandatangan', this.state.penandatangan)
       fd.append('nama_pengirim', this.state.namaPengirim)
       fd.append('tujuan_surat', this.state.tujuanSurat)
       fd.append('perihal', this.state.perihal)
       fd.append('tgl_diterima', this.state.tglDiterima)
       fd.append('tgl_surat', this.state.tglSurat)
+      fd.append('penandatangan', this.state.penandatangan)
+      fd.append('no_agenda', this.state.lastAgenda)
       await api()
         .post('api/setPencatatan', formData)
         .then((response) => {
@@ -591,6 +632,7 @@ class AddFormSurat extends Component {
             .post('api/setSuratMasuk', fd)
             .then((response) => {
               if (this.state.surat == null && this.state.lampiran == null) {
+                this.handleLoading()
                 this.handleModal()
                 window.location.reload('/#/SuratMasuk')
               }
@@ -604,6 +646,7 @@ class AddFormSurat extends Component {
           .post('api/addSurat', fd2)
           .then((response) => {
             if (this.state.lampiran == null) {
+              this.handleLoading()
               this.handleModal()
               window.location.reload('/#/SuratMasuk')
             }
@@ -616,8 +659,7 @@ class AddFormSurat extends Component {
         await api()
           .post('api/addSurat', fd3)
           .then((response) => {
-            //this.handleModal()
-            //jika dari BE error
+            this.handleLoading()
             this.handleModal()
             window.location.reload('/#/SuratMasuk')
           })
@@ -626,12 +668,13 @@ class AddFormSurat extends Component {
   }
   componentDidMount() {
     api()
-      .get('api/getAllJenisSurat')
+      .get('api/getLast')
       .then((response) => {
         this.setState({
-          jenisSurat: response.data,
+          lastAgenda: response.data.content + 1,
         })
       })
+    console.log('no agenda:' + this.state.lastAgenda)
   }
   render() {
     return (
@@ -653,7 +696,7 @@ class AddFormSurat extends Component {
         {this.state.showModal ? (
           <>
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-              <div className="relative w-auto my-6 mx-auto max-w-6xl">
+              <div className="relative w-auto h-95% my-6 mx-auto max-w-6xl">
                 {/*content*/}
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   {/*header*/}
@@ -691,6 +734,24 @@ class AddFormSurat extends Component {
                           <div className="">
                             <div className="flex flex-row grid grid-cols-2">
                               <div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Nomor Agenda </div>
+                                    <div className="text-danger ml-2"> </div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <div
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	mr-4  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                    >
+                                      {this.state.lastAgenda}
+                                    </div>
+                                  </div>
+                                </div>
                                 <div className="flex flex-row grid grid-cols-2">
                                   <div
                                     htmlFor="nama"
@@ -742,6 +803,7 @@ class AddFormSurat extends Component {
                                         onChange={(exDate, value) =>
                                           this.handleTglSurat(exDate, value)
                                         }
+                                        data={null}
                                       />
                                     </div>
 
@@ -777,6 +839,7 @@ class AddFormSurat extends Component {
                                           this.handleTglDiterima(exDate)
                                         }
                                         minDate={this.state.firstDate}
+                                        data={null}
                                       />
                                     </div>
                                     {this.state.errTglDiterima ? (
@@ -839,8 +902,18 @@ class AddFormSurat extends Component {
                                       <option value="0">
                                         Pilih tujuan ...
                                       </option>
-                                      <option value="1">R-1</option>
-                                      <option value="2">R-2</option>
+                                      {this.props.RUnitKerja.allUnitKerjaInfo.map(
+                                        (item) => {
+                                          return (
+                                            <option
+                                              key={item.ID_KODE_UNIT_KERJA}
+                                              value={item.KODE_UNIT_KERJA}
+                                            >
+                                              {item.KODE_UNIT_KERJA}
+                                            </option>
+                                          )
+                                        },
+                                      )}
                                     </select>
                                     {this.state.errTujuanSurat ? (
                                       <div className="text-danger text-xs mb-3">
@@ -875,8 +948,18 @@ class AddFormSurat extends Component {
                                       <option value="0">
                                         Pilit unit pengirim
                                       </option>
-                                      <option value="1">JTK</option>
-                                      <option value="2">KIMIA</option>
+                                      {this.props.RUnitKerja.allUnitKerjaInfo.map(
+                                        (item) => {
+                                          return (
+                                            <option
+                                              key={item.ID_KODE_UNIT_KERJA}
+                                              value={item.ID_KODE_UNIT_KERJA}
+                                            >
+                                              {item.KODE_UNIT_KERJA}
+                                            </option>
+                                          )
+                                        },
+                                      )}
                                     </select>
                                     {this.state.errUnitPengirim ? (
                                       <div className="text-danger text-xs mb-3">
@@ -969,7 +1052,7 @@ class AddFormSurat extends Component {
                                       <option value="0">
                                         Pilih Jenis Surat ...
                                       </option>
-                                      {this.state.jenisSurat.map(
+                                      {this.props.AllJenisSurat.allJenisSurat.map(
                                         (item, index) => {
                                           return (
                                             <option
@@ -981,12 +1064,55 @@ class AddFormSurat extends Component {
                                           )
                                         },
                                       )}
-                                      {/* <option value="1">Khusus</option>
-                                  <option value="2">Arahan</option> */}
                                     </select>
                                     {this.state.errJenisSurat ? (
                                       <div className="text-danger text-xs mb-3">
                                         Jenis surat harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Sifat Surat </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <select
+                                      type="text"
+                                      name="jenisSurat"
+                                      required
+                                      id="jenisSurat"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	 w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      value={this.state.sifatNaskah}
+                                      onChange={this.handleSifatSurat}
+                                    >
+                                      <option value="0">
+                                        Pilih Sifat Surat ...
+                                      </option>
+                                      {this.props.RSifatSurat.allSifatSuratInfo.map(
+                                        (item, index) => {
+                                          return (
+                                            <option
+                                              key={item.ID_SIFAT_NASKAH}
+                                              value={item.ID_SIFAT_NASKAH}
+                                            >
+                                              {item.SIFAT_NASKAH}
+                                            </option>
+                                          )
+                                        },
+                                      )}
+                                    </select>
+                                    {this.state.errSifatNaskah ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Sifat surat harus diisi
                                       </div>
                                     ) : (
                                       <></>
@@ -1016,8 +1142,18 @@ class AddFormSurat extends Component {
                                       <option value="0">
                                         Pilih Derajat Surat ...
                                       </option>
-                                      <option value="1">Segera</option>
-                                      <option value="2">Biasa</option>
+                                      {this.props.RDerajatSurat.allDerajatSuratInfo.map(
+                                        (item) => {
+                                          return (
+                                            <option
+                                              key={item.ID_DERAJAT_SURAT}
+                                              value={item.ID_DERAJAT_SURAT}
+                                            >
+                                              {item.DERAJAT_SURAT}
+                                            </option>
+                                          )
+                                        },
+                                      )}
                                     </select>
                                     {this.state.errDerajatSurat ? (
                                       <div className="text-danger text-xs mb-3">
@@ -1200,6 +1336,10 @@ class AddFormSurat extends Component {
             <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
           </>
         ) : null}
+        <ModalLoading
+          loading={this.state.modalLoading}
+          title={'Sinkronisasi Data'}
+        />
       </>
     )
   }

@@ -39,14 +39,14 @@ class DerajatSuratController extends Controller
             return response()->json($respon);
         }
     }
-    public function getDerajatSurat(Request $request)
+    public function getDerajatSurat($id)
     {
 
-        $DerajatSurat = DerajatSurat::where('ID_DERAJAT_SURAT', $request->id)->first();
+        $DerajatSurat = DerajatSurat::where('ID_DERAJAT_SURAT', $id)->first();
         if($DerajatSurat == null){
             $respon =[
             'Msg' => 'error',
-            'content' =>  $request,
+            'content' =>  $id,
             ];
         return response()->json($respon);
         }

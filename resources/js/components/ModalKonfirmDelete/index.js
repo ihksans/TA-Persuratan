@@ -1,11 +1,16 @@
 import React from 'react'
 import api from '../../service/api'
-
+import ModalLoading from '../ModalLoading'
 export default function ModalKonfirmDelete({ IdPengguna, NamaPengguna }) {
   const [showModal, setShowModal] = React.useState(false)
+  const [showLoading, setLoading] = React.useState(false)
+  const handleLoading = () => {
+    setLoading(!showLoading)
+  }
   const deletePengguna = (id) => {
     console.log('id:' + id)
     console.log('id Pengguna:' + IdPengguna)
+    handleLoading()
     let formData = new FormData()
     formData.append('id', id)
     api()
@@ -14,11 +19,13 @@ export default function ModalKonfirmDelete({ IdPengguna, NamaPengguna }) {
       .then((response) => {
         console.log('respon:' + response)
         console.log('pengguna telah terhapus')
+        handleLoading()
         setShowModal(false)
         window.location.reload('/#/KelolaPengguna')
       })
       .catch((error) => {
         console.log(error)
+        handleLoading()
       })
   }
   return (
@@ -28,8 +35,8 @@ export default function ModalKonfirmDelete({ IdPengguna, NamaPengguna }) {
         type="button"
         onClick={() => setShowModal(true)}
       >
-        <img className="ml-1" src="assets/img/icon/Trash.png" />
-        <div className="font-bold text-putih ml-1 mr-2">Hapus</div>
+        <img className=" w-4" src="assets/img/icon/Trash.png" />
+        <div className="font-bold text-putih text-sm ml-1 mr-2">Hapus</div>
       </button>
       {showModal ? (
         <>
@@ -96,6 +103,7 @@ export default function ModalKonfirmDelete({ IdPengguna, NamaPengguna }) {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
+      <ModalLoading loading={showLoading} title={'Sistem sedang memproses'} />
     </>
   )
 }

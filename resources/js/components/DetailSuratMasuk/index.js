@@ -3,9 +3,9 @@ import api from '../../service/api'
 import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import PdfReader from '../PdfReader'
-import Pencatat from './Data'
 import ModalKonfirmDeleteSM from '../ModalKonfirmDeleteSM.js'
 import EditFormSurat from '../EditFormSurat'
+import ModalLoading from '../ModalLoading'
 // import createuser from "./index";
 class DetailSuratMasuk extends Component {
   constructor(props) {
@@ -18,11 +18,15 @@ class DetailSuratMasuk extends Component {
       urlLampiran: '',
       showModal: false,
       pengguna: this.props.AllUser.allUserInfo,
+      tglSurat: this.props.SuratDetail.TGL_SURAT,
+      tglDiterima: this.props.SuratDetail.TGL_DITERIMA,
+      modalLodaing: false,
     }
 
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
     this.getFileSuratMasuk = this.getFileSuratMasuk.bind(this)
+    this.reserveTgl = this.reserveTgl.bind(this)
   }
   //handle input changes and update item state
 
@@ -32,9 +36,18 @@ class DetailSuratMasuk extends Component {
     })
     if (this.state.showModal == true) {
       this.getFileSuratMasuk()
+      this.reserveTgl()
     }
   }
+  reserveTgl() {
+    let a = this.state.tglSurat.split('-')
+    let b = this.state.tglDiterima.split('-')
 
+    this.setState({
+      tglSurat: a[2] + '-' + a[1] + '-' + a[0],
+      tglDiterima: b[2] + '-' + b[1] + '-' + b[0],
+    })
+  }
   async onSubmit(e) {
     e.preventDefault()
   }
@@ -92,17 +105,6 @@ class DetailSuratMasuk extends Component {
                 {/*content*/}
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-abu outline-none focus:outline-none">
                   {/* header*/}
-                  <div className="flex items-start justify-center ">
-                    <button
-                      className="p-1 ml-auto leading-none  outline-none focus:outline-none"
-                      onClick={this.handleModal}
-                    >
-                      <img
-                        className="justify-center items-center"
-                        src="assets/img/icon/x.png"
-                      />
-                    </button>
-                  </div>
 
                   <div className="flex flex-row grid grid-cols-2 mr-8">
                     <div className="flex flex-row grid grid-cols-3 bg-white p-4">
@@ -134,18 +136,26 @@ class DetailSuratMasuk extends Component {
                         </button> */}
                         <EditFormSurat SuratDetail={this.props.SuratDetail} />
                         <button
-                          type="submit"
-                          className="bg-primary font-bold  self-center ml-2 mt-1  rounded p-1 shadow-sm w-full"
+                          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
+                          type="button"
                         >
-                          Lihat Disposisi
+                          <div className="ml-1">
+                            <img
+                              className="h-4 align-middle"
+                              src="assets/img/icon/Surat.png"
+                            />
+                          </div>
+                          <div className="font-bold text-putih ml-1 mr-2">
+                            Lihat Disposisi
+                          </div>
                         </button>
-
-                        <button
+                        <ModalLoading loading={this.state.modalLodaing} />
+                        {/* <button
                           type="submit"
                           className="bg-primary font-bold 	self-center ml-2 mt-1  rounded p-1 shadow-sm w-full"
                         >
                           Ekspor ke PDF
-                        </button>
+                        </button> */}
                         <ModalKonfirmDeleteSM
                           NomorSurat={this.props.SuratDetail.NOMOR_SURAT}
                           IdSurat={this.props.SuratDetail.ID_PENCATATAN}
@@ -165,7 +175,9 @@ class DetailSuratMasuk extends Component {
                         })}
                       </div>
                       <div className="font-bold">No Agenda </div>
-                      <div className=" col-span-2">{this.props.NoAgenda}</div>
+                      <div className=" col-span-2">
+                        {this.props.SuratDetail.NOMOR_AGENDA}
+                      </div>
                       <div className="font-bold">Dari </div>
                       <div className="font-bold">Nama</div>
                       <div className="">
@@ -174,7 +186,28 @@ class DetailSuratMasuk extends Component {
                       <div></div>
                       <div className="font-bold">Unit</div>
                       <div className="">
-                        : {this.props.SuratDetail.UNIT_PENGIRIM}
+                        <ul>
+                          {this.props.IdUnitKerja.map((item, index) => {
+                            return (
+                              <li key={index}>
+                                {this.props.SuratDetail.ID_KODE_UNIT_KERJA ==
+                                item.ID_KODE_UNIT_KERJA ? (
+                                  <div className="">
+                                    {item.KODE_UNIT_KERJA.length > 15 ? (
+                                      <>
+                                        : {item.KODE_UNIT_KERJA.slice(0, 15)}...
+                                      </>
+                                    ) : (
+                                      <>: {item.KODE_UNIT_KERJA}</>
+                                    )}
+                                  </div>
+                                ) : (
+                                  <></>
+                                )}
+                              </li>
+                            )
+                          })}
+                        </ul>
                       </div>
                       <div> </div>
                       <div className="font-bold">Penandatangan</div>
@@ -183,7 +216,6 @@ class DetailSuratMasuk extends Component {
                       </div>
                       <div className="font-bold">Tujuan</div>
                       <div className=" col-span-2">
-                        {' '}
                         {this.props.SuratDetail.TUJUAN_SURAT}
                       </div>
                       <div className="font-bold">Nomor Surat</div>
@@ -192,21 +224,18 @@ class DetailSuratMasuk extends Component {
                       </div>
                       <div className="font-bold">Tanggal Surat</div>
                       <div className=" col-span-2">
-                        {' '}
-                        {this.props.SuratDetail.TGL_SURAT}
+                        {/* {this.props.SuratDetail.TGL_SURAT} */}
+                        {this.state.tglSurat}
                       </div>
                       <div className="font-bold">Tanggal Terima</div>
                       <div className=" col-span-2">
-                        {' '}
-                        {this.props.SuratDetail.TGL_DITERIMA}
+                        {/* {this.props.SuratDetail.TGL_DITERIMA} */}
+                        {this.state.tglDiterima}
                       </div>
                       <div className="font-bold">Perihal / Ringkasa</div>
                       <div className=" col-span-2">
-                        {' '}
                         {this.props.SuratDetail.PERIHAL}
                       </div>
-                      <div className="font-bold">Kode Hal</div>
-                      <div className=" col-span-2">KM.01.00</div>
                       <div className="font-bold">Jenis Surat</div>
                       <div className=" col-span-2">
                         {this.props.AllJenisSurat.allJenisSurat.map(
@@ -228,11 +257,40 @@ class DetailSuratMasuk extends Component {
                         )}
                       </div>
                       <div className="font-bold">Sifat Surat</div>
-                      <div className=" col-span-2">Biasa</div>
+                      <div className=" col-span-2">
+                        {this.props.RSifatSurat.allSifatSuratInfo.map(
+                          (item, index) => {
+                            const temp = this.props.SuratDetail.ID_SIFAT_NASKAH
+                            const temp2 = item.ID_SIFAT_NASKAH
+                            return (
+                              <div key={index}>
+                                {temp == temp2 ? (
+                                  <>{item.SIFAT_NASKAH}</>
+                                ) : (
+                                  <></>
+                                )}
+                              </div>
+                            )
+                          },
+                        )}
+                      </div>
                       <div className="font-bold">Derajat Surat</div>
                       <div className="col-span-2">
-                        {' '}
-                        {this.props.SuratDetail.DERAJAT_SURAT}
+                        {this.props.RDerajatSurat.allDerajatSuratInfo.map(
+                          (item, index) => {
+                            const temp = this.props.SuratDetail.ID_DERAJAT_SURAT
+                            const temp2 = item.ID_DERAJAT_SURAT
+                            return (
+                              <div key={index}>
+                                {temp == temp2 ? (
+                                  <>{item.DERAJAT_SURAT}</>
+                                ) : (
+                                  <></>
+                                )}
+                              </div>
+                            )
+                          },
+                        )}{' '}
                       </div>
                       <div className="font-bold">Kode Arsip</div>
                       <div className="font-bold">Kom</div>
@@ -281,22 +339,31 @@ class DetailSuratMasuk extends Component {
                         Belum ditindak lanjuti
                       </div>
                     </div>
-                    <div className="flex justify-center p-2 ">
-                      <div className="w-auto">
-                        {this.props.namaFile == null ? (
-                          <> File kosong</>
-                        ) : (
-                          <>
-                            <PdfReader
-                              urlFile={this.state.url}
-                              namaFile={this.props.SuratDetail.NAMA_FILE_SURAT}
-                              namaLampiran={
-                                this.props.SuratDetail.NAMA_FILE_LAMPIRAN
-                              }
-                              urlLampiran={this.state.urlLampiran}
-                            />
-                          </>
-                        )}
+                    <div>
+                      <div className=" flex justify-end   ">
+                        <button onClick={this.handleModal}>
+                          <img src="assets/img/icon/x.png" />
+                        </button>
+                      </div>
+                      <div className="flex justify-center p-2 ">
+                        <div className="w-auto">
+                          {this.props.namaFile == null ? (
+                            <> File kosong</>
+                          ) : (
+                            <>
+                              <PdfReader
+                                urlFile={this.state.url}
+                                namaFile={
+                                  this.props.SuratDetail.NAMA_FILE_SURAT
+                                }
+                                namaLampiran={
+                                  this.props.SuratDetail.NAMA_FILE_LAMPIRAN
+                                }
+                                urlLampiran={this.state.urlLampiran}
+                              />
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>

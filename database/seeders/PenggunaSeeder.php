@@ -15,17 +15,21 @@ class PenggunaSeeder extends Seeder
     public function run()
     {
         Pengguna::create([
-            'USERNAME' => 'admin',
-            'NAMA' => 'admin',
-            'ROLE' => '1',
-            // 'TOKEN' => 'null',
-            'Password' => \Hash::make('admin123'),
-
-            // 'USERNAME' => 'satrioo',
-            // 'NAMA' => 'satrioo',
+            // 'NAMA' => 'nadia',
+            // 'USERNAME' => 'nadia',
             // 'ROLE' => '2',
-            // // 'TOKEN' => 'null',
-            // 'Password' => \Hash::make('satrio123'),
+            // 'JABATAN' => 'staf arsip',
+            // 'NIP' => '181511047',
+            // 'Password' => \Hash::make('nadia123'),
+            // 'ID_PENGGUNA' => '2'
+            'NAMA' => 'admin',
+            'USERNAME' => 'admin',
+            'ROLE' => '1',
+            'JABATAN' => null,
+            'NIP' => null,
+            'Password' => \Hash::make('admin123'),
+            'ID_PENGGUNA' => '1'
+           
         ]);
     }
 }

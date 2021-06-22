@@ -7,12 +7,18 @@ export const SET_PATH = 'SET_PATH'
 export const UNSET_PATH = 'UNSET_PATH'
 export const SET_ALL_USER = 'SET_ALL_USER'
 export const UNSET_ALL_USER = 'UNSET_ALL_USER'
-
 export const SET_ALL_SURAT_MASUK = 'SET_ALL_SURAT_MASUK'
 export const UNSET_ALL_SURAT_MASUK = 'UNSET_ALL_SURAT_MASUK'
 export const SET_JENIS_SURAT = 'SET_JENIS_SURAT'
 export const UNSET_JENIS_SURAT = 'UNSET_JENIS_SURAT'
 export const SET_ALL_USER2 = 'SET_ALL_USER2'
+export const SET_ALL_UNIT_KERJA = 'SET_ALL_UNIT_KERJA'
+export const UNSET_ALL_UNIT_KERJA = 'UNSET_ALL_UNIT_KERJA'
+export const SET_ALL_DERAJAT_SURAT = 'SET_ALL_DERAJAT_SURAT'
+export const UNSET_ALL_DERAJAT_SURAT = 'UNSET_ALL_DERAJAT_SURAT'
+export const SET_ALL_SIFAT_SURAT = 'SET_ALL_SIFAT_SURAT'
+export const UNSET_ALL_SIFAT_SURAT = 'UNSET_ALL_SIFAT_SURAT'
+
 //list of method actions
 //to save current token by user
 export function addTokenByID(payload) {
@@ -103,6 +109,46 @@ export function unsetJenisSurat() {
 export function setAllUser2(payload) {
   const action = {
     type: SET_ALL_USER2,
+    payload,
+  }
+  return action
+}
+
+export function unsetUnitKerja() {
+  const action = {
+    type: UNSET_ALL_UNIT_KERJA,
+  }
+  return action
+}
+export function setUnitKerja(payload) {
+  const action = {
+    type: SET_ALL_UNIT_KERJA,
+    payload,
+  }
+  return action
+}
+export function unsetDerajatSurat() {
+  const action = {
+    type: UNSET_ALL_DERAJAT_SURAT,
+  }
+  return action
+}
+export function setDerajatSurat(payload) {
+  const action = {
+    type: SET_ALL_DERAJAT_SURAT,
+    payload,
+  }
+  return action
+}
+export function unsetSifatSurat() {
+  const action = {
+    type: UNSET_ALL_SIFAT_SURAT,
+  }
+  return action
+}
+export function setSifatSurat(payload) {
+  const action = {
+    type: SET_ALL_SIFAT_SURAT,
     payload,
   }
   return action

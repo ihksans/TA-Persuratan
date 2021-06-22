@@ -12,6 +12,7 @@ class Pengguna extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
     protected $table = 'pengguna';
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -22,8 +23,9 @@ class Pengguna extends Authenticatable
         'NAMA',
         'USERNAME',
         'ROLE',
-        'TOKEN',
         'PASSWORD',
+        'JABATAN',
+        'NIP'
     ];
 
     /**

@@ -3,6 +3,8 @@ import api from '../../service/api'
 import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import Kalender from './Kalender'
+import ModalLoading from '../ModalLoading'
+
 // import createuser from "./index";
 class EditFormSurat extends Component {
   constructor(props) {
@@ -10,9 +12,12 @@ class EditFormSurat extends Component {
     this.state = {
       dir: [],
       jenisSurat: [],
+      modalLoading: false,
+
       firstDate: new Date(),
       surat: null,
       lampiran: null,
+      showModal: false,
       idPencatatan: this.props.SuratDetail.ID_PENCATATAN,
       idPengguna: this.props.SuratDetail.ID_PENGGUNA,
       idJenisSurat: this.props.SuratDetail.ID_JENIS_SURAT,
@@ -21,15 +26,17 @@ class EditFormSurat extends Component {
       kodeArsipManual: this.props.SuratDetail.KODE_ARSIP_MANUAL,
       namaFileSurat: this.props.SuratDetail.NAMA_FILE_SURAT,
       namaFileLampiran: this.props.SuratDetail.NAMA_FILE_LAMPIRAN,
-      derajatSurat: this.props.SuratDetail.DERAJAT_SURAT,
+      derajatSurat: this.props.SuratDetail.ID_DERAJAT_SURAT,
       nomorSurat: this.props.SuratDetail.NOMOR_SURAT,
-      unitPengirim: this.props.SuratDetail.UNIT_PENGIRIM,
+      unitPengirim: this.props.SuratDetail.ID_KODE_UNIT_KERJA,
       penandatangan: this.props.SuratDetail.PENANDATANGAN,
       namaPengirim: this.props.SuratDetail.NAMA_PENGIRIM,
       tujuanSurat: this.props.SuratDetail.TUJUAN_SURAT,
       perihal: this.props.SuratDetail.PERIHAL,
       tglDiterima: this.props.SuratDetail.TGL_DITERIMA,
       tglSurat: this.props.SuratDetail.TGL_SURAT,
+      sifatNaskah: this.props.SuratDetail.ID_SIFAT_NASKAH,
+      lastAgenda: this.props.SuratDetail.NOMOR_AGENDA,
       errSurat: '',
       errJenisSurat: false,
       errLampiran: '',
@@ -45,10 +52,12 @@ class EditFormSurat extends Component {
       errTglSurat: false,
       errPenandatangan: false,
       errNamaPengirim: false,
+      errSifatNaskah: false,
       errMsgFileLampiran: '',
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
+    this.handleLoading = this.handleLoading.bind(this)
 
     this.onFileChange = this.onFileChange.bind(this)
     this.onFileChange2 = this.onFileChange2.bind(this)
@@ -71,6 +80,7 @@ class EditFormSurat extends Component {
     this.handlePerihal = this.handlePerihal.bind(this)
     this.handleTglDiterima = this.handleTglDiterima.bind(this)
     this.handleTglSurat = this.handleTglSurat.bind(this)
+    this.handleSifatSurat = this.handleSifatSurat.bind(this)
 
     this.handleErrSurat = this.handleErrSurat.bind(this)
     this.handleErrJenisSurat = this.handleErrJenisSurat.bind(this)
@@ -87,6 +97,7 @@ class EditFormSurat extends Component {
     this.handleErrTglDiterima = this.handleErrTglDiterima.bind(this)
     this.handleErrTglSurat = this.handleErrTglSurat.bind(this)
     this.handleErrorPenandatangan = this.handleErrorPenandatangan.bind(this)
+    this.handleErrSifatSurat = this.handleErrSifatSurat.bind(this)
 
     this.validateNomorSurat = this.validateNomorSurat.bind(this)
     this.validateTanggalSurat = this.validateTanggalSurat.bind(this)
@@ -103,6 +114,7 @@ class EditFormSurat extends Component {
     this.validateKodeArsipHlm = this.validateKodeArsipHlm.bind(this)
     this.validateSurat = this.validateSurat.bind(this)
     this.validateLampiran = this.validateLampiran.bind(this)
+    this.validateSifatSurat = this.validateSifatSurat.bind(this)
   }
   validateLampiran(input) {
     const extension = '.pdf'
@@ -172,6 +184,13 @@ class EditFormSurat extends Component {
       this.handleErrJenisSurat(true)
     } else {
       this.handleErrJenisSurat(false)
+    }
+  }
+  validateSifatSurat(input) {
+    if (input == 0 || input == null || input == '') {
+      this.handleErrSifatSurat(true)
+    } else {
+      this.handleErrSifatSurat(false)
     }
   }
   validatePenandatangan(input) {
@@ -254,6 +273,11 @@ class EditFormSurat extends Component {
       errJenisSurat: props,
     })
   }
+  handleErrSifatSurat(props) {
+    this.setState({
+      errSifatNaskah: props,
+    })
+  }
   handleErrLampiran(props) {
     this.setState({
       errLampiran: props,
@@ -317,6 +341,12 @@ class EditFormSurat extends Component {
   handleErrNamaPengirim(props) {
     this.setState({
       errNamaPengirim: props,
+    })
+  }
+  handleSifatSurat(e) {
+    let value = e.target.value
+    this.setState({
+      sifatNaskah: value,
     })
   }
   handleIdPencatatan(e) {
@@ -399,11 +429,11 @@ class EditFormSurat extends Component {
   }
   handleUnitPengirim(e) {
     let value = e.target.value
-    let str = ''
-    str = value.replace(/\s\s+/g, '')
+    // let str = ''
+    // str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      unitPengirim: str,
+      unitPengirim: value,
     })
   }
   handlePenandatangan(e) {
@@ -426,11 +456,11 @@ class EditFormSurat extends Component {
   }
   handleTujuanSurat(e) {
     let value = e.target.value
-    let str = ''
-    str = value.replace(/\s\s+/g, '')
+    // let str = ''
+    // str = value.replace(/\s\s+/g, '')
 
     this.setState({
-      tujuanSurat: str,
+      tujuanSurat: value,
     })
   }
   handlePerihal(e) {
@@ -455,9 +485,15 @@ class EditFormSurat extends Component {
       firstDate: value,
     })
   }
+  handleLoading() {
+    this.setState({
+      modalLoading: !this.state.modalLoading,
+    })
+  }
   handleModal() {
     this.setState({
       showModal: !this.state.showModal,
+      modalLoading: false,
       idPencatatan: this.props.SuratDetail.ID_PENCATATAN,
       idPengguna: this.props.SuratDetail.ID_PENGGUNA,
       idJenisSurat: this.props.SuratDetail.ID_JENIS_SURAT,
@@ -466,15 +502,17 @@ class EditFormSurat extends Component {
       kodeArsipManual: this.props.SuratDetail.KODE_ARSIP_MANUAL,
       namaFileSurat: this.props.SuratDetail.NAMA_FILE_SURAT,
       namaFileLampiran: this.props.SuratDetail.NAMA_FILE_LAMPIRAN,
-      derajatSurat: this.props.SuratDetail.DERAJAT_SURAT,
+      derajatSurat: this.props.SuratDetail.ID_DERAJAT_SURAT,
       nomorSurat: this.props.SuratDetail.NOMOR_SURAT,
-      unitPengirim: this.props.SuratDetail.UNIT_PENGIRIM,
+      unitPengirim: this.props.SuratDetail.ID_KODE_UNIT_KERJA,
       penandatangan: this.props.SuratDetail.PENANDATANGAN,
       namaPengirim: this.props.SuratDetail.NAMA_PENGIRIM,
       tujuanSurat: this.props.SuratDetail.TUJUAN_SURAT,
       perihal: this.props.SuratDetail.PERIHAL,
       tglDiterima: this.props.SuratDetail.TGL_DITERIMA,
       tglSurat: this.props.SuratDetail.TGL_SURAT,
+      sifatNaskah: this.props.SuratDetail.ID_SIFAT_NASKAH,
+      lastAgenda: this.props.SuratDetail.NOMOR_AGENDA,
 
       errSurat: '',
       errJenisSurat: false,
@@ -491,6 +529,7 @@ class EditFormSurat extends Component {
       errTglSurat: false,
       errPenandatangan: false,
       errNamaPengirim: false,
+      errSifatNaskah: false,
       errMsgFileLampiran: '',
       surat: null,
       lampiran: null,
@@ -509,134 +548,158 @@ class EditFormSurat extends Component {
 
   async onSubmit(e) {
     e.preventDefault()
-    await this.validateNomorSurat(this.state.nomorSurat)
-    await this.validateTanggalSurat(this.state.tglSurat)
-    await this.validateTanggalDiterima(this.state.tglDiterima)
-    await this.validatePerihal(this.state.perihal)
-    await this.validateTujuanSurat(this.state.tujuanSurat)
-    await this.validateUnitPengirim(this.state.unitPengirim)
-    await this.validateNamaPengirim(this.state.namaPengirim)
-    await this.validatePenandatangan(this.state.penandatangan)
-    await this.validateJenisSurat(this.state.idJenisSurat)
-    await this.validateDerajatSurat(this.state.derajatSurat)
-    await this.validateKodeArsipHlm(this.state.kodeArsipHlm)
-    await this.validateKodeArsipKom(this.state.kodeArsipKom)
-    await this.validateKodeArsipManual(this.state.kodeArsipManual)
-    if (this.state.surat != null) {
-      await this.validateSurat(this.state.surat)
-    }
-    if (this.state.lampiran != null) {
-      await this.validateLampiran(this.state.lampiran)
-    }
     if (
-      this.state.errNomorSurat == false &&
-      this.state.errTglDiterima == false &&
-      this.state.errTglSurat == false &&
-      this.state.errPerihal == false &&
-      this.state.errTujuanSurat == false &&
-      this.state.errUnitPengirim == false &&
-      this.state.errNamaPengirim == false &&
-      this.state.errPenandatangan == false &&
-      this.state.errJenisSurat == false &&
-      this.state.errDerajatSurat == false &&
-      this.state.errKodeArsipHlm == false &&
-      this.state.errKodeArsipKom == false &&
-      this.state.errKodeArsipManual == false
+      this.state.idJenisSurat != this.props.SuratDetail.ID_JENIS_SURAT ||
+      this.state.kodeArsipKom != this.props.SuratDetail.KODE_ARSIP_KOM ||
+      this.state.kodeArsipHlm != this.props.SuratDetail.KODE_ARSIP_HLM ||
+      this.state.kodeArsipManual != this.props.SuratDetail.KODE_ARSIP_MANUAL ||
+      this.state.namaFileSurat != this.props.SuratDetail.NAMA_FILE_SURAT ||
+      this.state.namaFileLampiran !=
+        this.props.SuratDetail.NAMA_FILE_LAMPIRAN ||
+      this.state.derajatSurat != this.props.SuratDetail.ID_DERAJAT_SURAT ||
+      this.state.nomorSurat != this.props.SuratDetail.NOMOR_SURAT ||
+      this.state.unitPengirim != this.props.SuratDetail.ID_KODE_UNIT_KERJA ||
+      this.state.penandatangan != this.props.SuratDetail.PENANDATANGAN ||
+      this.state.namaPengirim != this.props.SuratDetail.NAMA_PENGIRIM ||
+      this.state.tujuanSurat != this.props.SuratDetail.TUJUAN_SURAT ||
+      this.state.perihal != this.props.SuratDetail.PERIHAL ||
+      this.state.tglDiterima != this.props.SuratDetail.TGL_DITERIMA ||
+      this.state.tglSurat != this.props.SuratDetail.TGL_SURAT ||
+      this.state.sifatNaskah != this.props.SuratDetail.ID_SIFAT_NASKAH ||
+      this.state.lastAgenda != this.props.SuratDetail.NOMOR_AGENDA ||
+      this.state.surat != null ||
+      this.state.lampiran != null
     ) {
-      let formData = new FormData()
-      formData.append('id', this.state.idPencatatan)
-
-      formData.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
-      formData.append('id_jenis_surat', this.state.idJenisSurat)
-      formData.append('kode_arsip_kom', this.state.kodeArsipKom)
-      formData.append('kode_arsip_hlm', this.state.kodeArsipHlm)
-      formData.append('kode_arsip_manual', this.state.kodeArsipManual)
+      await this.validateNomorSurat(this.state.nomorSurat)
+      await this.validateTanggalSurat(this.state.tglSurat)
+      await this.validateTanggalDiterima(this.state.tglDiterima)
+      await this.validatePerihal(this.state.perihal)
+      await this.validateTujuanSurat(this.state.tujuanSurat)
+      await this.validateUnitPengirim(this.state.unitPengirim)
+      await this.validateNamaPengirim(this.state.namaPengirim)
+      await this.validatePenandatangan(this.state.penandatangan)
+      await this.validateJenisSurat(this.state.idJenisSurat)
+      await this.validateSifatSurat(this.state.sifatNaskah)
+      await this.validateDerajatSurat(this.state.derajatSurat)
+      await this.validateKodeArsipHlm(this.state.kodeArsipHlm)
+      await this.validateKodeArsipKom(this.state.kodeArsipKom)
+      await this.validateKodeArsipManual(this.state.kodeArsipManual)
       if (this.state.surat != null) {
-        formData.append('nama_file_surat', this.state.namaFileSurat)
+        await this.validateSurat(this.state.surat)
       }
       if (this.state.lampiran != null) {
-        formData.append(
-          'nama_file_lampiran',
-          this.state.namaFileLampiran + '_lampiran',
-        )
+        await this.validateLampiran(this.state.lampiran)
       }
-      formData.append('derajat_surat', this.state.derajatSurat)
-      let fd = new FormData()
-      fd.append('id_pencatatan', this.state.idPencatatan)
+      if (
+        this.state.errNomorSurat == false &&
+        this.state.errTglDiterima == false &&
+        this.state.errTglSurat == false &&
+        this.state.errPerihal == false &&
+        this.state.errTujuanSurat == false &&
+        this.state.errUnitPengirim == false &&
+        this.state.errNamaPengirim == false &&
+        this.state.errPenandatangan == false &&
+        this.state.errJenisSurat == false &&
+        this.state.errDerajatSurat == false &&
+        this.state.errKodeArsipHlm == false &&
+        this.state.errKodeArsipKom == false &&
+        this.state.errKodeArsipManual == false &&
+        this.state.errSifatNaskah == false
+      ) {
+        this.handleLoading()
+        let formData = new FormData()
+        formData.append('id', this.state.idPencatatan)
+        formData.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
+        formData.append('id_derajat_surat', this.state.derajatSurat)
+        formData.append('id_jenis_surat', this.state.idJenisSurat)
+        formData.append('kode_arsip_kom', this.state.kodeArsipKom)
+        formData.append('kode_arsip_hlm', this.state.kodeArsipHlm)
+        formData.append('kode_arsip_manual', this.state.kodeArsipManual)
+        if (this.state.namaFileSurat != null) {
+          formData.append('nama_file_surat', this.state.namaFileSurat)
+        }
+        if (this.state.namaFileLampiran != null) {
+          formData.append(
+            'nama_file_lampiran',
+            this.state.namaFileLampiran + '_lampiran',
+          )
+        }
+        let fd = new FormData()
+        fd.append('id_pencatatan', this.state.idPencatatan)
+        fd.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
+        fd.append('id_jenis_surat', this.state.idJenisSurat)
+        fd.append('kode_arsip_kom', this.state.kodeArsipKom)
+        fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
+        fd.append('kode_arsip_manual', this.state.kodeArsipManual)
+        if (this.state.namaFileSurat != null) {
+          fd.append('nama_file_surat', this.state.namaFileSurat)
+        }
+        if (this.state.namaFileLampiran != null) {
+          fd.append(
+            'nama_file_lampiran',
+            this.state.namaFileLampiran + '_lampiran',
+          )
+        }
 
-      fd.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
-      fd.append('id_jenis_surat', this.state.idJenisSurat)
-      fd.append('kode_arsip_kom', this.state.kodeArsipKom)
-      fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
-      fd.append('kode_arsip_manual', this.state.kodeArsipManual)
-      if (this.state.surat != null) {
-        fd.append('nama_file_surat', this.state.namaFileSurat)
-      }
-      if (this.state.lampiran != null) {
-        fd.append(
-          'nama_file_lampiran',
-          this.state.namaFileLampiran + '_lampiran',
-        )
-      }
+        fd.append('id_derajat_surat', this.state.derajatSurat)
+        fd.append('nomor_surat', this.state.nomorSurat)
+        fd.append('id_kode_unit', this.state.unitPengirim)
+        fd.append('id_sifat_naskah', this.state.sifatNaskah)
+        fd.append('penandatangan', this.state.penandatangan)
+        fd.append('nama_pengirim', this.state.namaPengirim)
+        fd.append('tujuan_surat', this.state.tujuanSurat)
+        fd.append('perihal', this.state.perihal)
+        fd.append('tgl_diterima', this.state.tglDiterima)
+        fd.append('tgl_surat', this.state.tglSurat)
+        fd.append('no_agenda', this.state.lastAgenda)
 
-      fd.append('derajat_surat', this.state.derajatSurat)
-      fd.append('nomor_surat', this.state.nomorSurat)
-      fd.append('unit_pengirim', this.state.unitPengirim)
-      fd.append('penandatangan', this.state.penandatangan)
-      fd.append('nama_pengirim', this.state.namaPengirim)
-      fd.append('tujuan_surat', this.state.tujuanSurat)
-      fd.append('perihal', this.state.perihal)
-      fd.append('tgl_diterima', this.state.tglDiterima)
-      fd.append('tgl_surat', this.state.tglSurat)
-      await api()
-        .post('api/updatePencatatan', formData)
-        .then((response) => {
-          api()
-            .post('api/updateSuratMasuk', fd)
+        await api()
+          .post('api/updatePencatatan', formData)
+          .then((response) => {
+            api()
+              .post('api/updateSuratMasuk', fd)
+              .then((response) => {
+                if (this.state.surat == null && this.state.lampiran == null) {
+                  this.handleLoading()
+                  this.handleModal()
+                  window.location.reload('/#/SuratMasuk')
+                }
+              })
+          })
+        if (this.state.surat != null && this.state.errSurat == '') {
+          let fd2 = new FormData()
+          fd2.append('myFile', this.state.surat)
+          fd2.append('namefile', this.state.namaFileSurat)
+          await api()
+            .post('api/addSurat', fd2)
             .then((response) => {
-              if (this.state.surat == null && this.state.lampiran == null) {
-                // this.handleModal()
-                //  window.location.reload('/#/SuratMasuk')
+              if (this.state.lampiran == null) {
+                this.handleLoading()
+                this.handleModal()
+                window.location.reload('/#/SuratMasuk')
               }
             })
-        })
-      if (this.state.surat != null && this.state.errSurat == '') {
-        let fd2 = new FormData()
-        fd2.append('myFile', this.state.surat)
-        fd2.append('namefile', this.state.namaFileSurat)
-        await api()
-          .post('api/addSurat', fd2)
-          .then((response) => {
-            if (this.state.lampiran == null) {
-              // this.handleModal()
-              // window.location.reload('/#/SuratMasuk')
-            }
-          })
+        }
+        if (this.state.lampiran != null && this.state.errLampiran == '') {
+          let fd3 = new FormData()
+          fd3.append('myFile', this.state.lampiran)
+          fd3.append('namefile', this.state.namaFileLampiran + '_lampiran')
+          await api()
+            .post('api/addSurat', fd3)
+            .then((response) => {
+              //this.handleModal()
+              //jika dari BE error
+              this.handleLoading()
+              this.handleModal()
+              window.location.reload('/#/SuratMasuk')
+            })
+        }
       }
-      if (this.state.lampiran != null && this.state.errLampiran == '') {
-        let fd3 = new FormData()
-        fd3.append('myFile', this.state.lampiran)
-        fd3.append('namefile', this.state.namaFileLampiran + '_lampiran')
-        await api()
-          .post('api/addSurat', fd3)
-          .then((response) => {
-            //this.handleModal()
-            //jika dari BE error
-            //  this.handleModal()
-            //  window.location.reload('/#/SuratMasuk')
-          })
-      }
+    } else {
+      this.handleModal()
     }
   }
-  componentDidMount() {
-    api()
-      .get('api/getAllJenisSurat')
-      .then((response) => {
-        this.setState({
-          jenisSurat: response.data,
-        })
-      })
-  }
+
   render() {
     return (
       <>
@@ -651,7 +714,7 @@ class EditFormSurat extends Component {
               src="assets/img/icon/Pencil.png"
             />
           </div>
-          <div className="font-bold ml-1 mr-2">Edit</div>
+          <div className="font-bold text-putih ml-1 mr-2">Edit Data Surat</div>
         </button>
 
         {this.state.showModal ? (
@@ -697,6 +760,24 @@ class EditFormSurat extends Component {
                           <div className="">
                             <div className="flex flex-row grid grid-cols-2">
                               <div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Nomor Agenda </div>
+                                    <div className="text-danger ml-2"> </div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <div
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	mr-4  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                    >
+                                      {this.state.lastAgenda}
+                                    </div>
+                                  </div>
+                                </div>
                                 <div className="flex flex-row grid grid-cols-2">
                                   <div
                                     htmlFor="nama"
@@ -852,8 +933,18 @@ class EditFormSurat extends Component {
                                       <option value="0">
                                         Pilih tujuan ...
                                       </option>
-                                      <option value="1">R-1</option>
-                                      <option value="2">R-2</option>
+                                      {this.props.RUnitKerja.allUnitKerjaInfo.map(
+                                        (item) => {
+                                          return (
+                                            <option
+                                              key={item.ID_KODE_UNIT_KERJA}
+                                              value={item.KODE_UNIT_KERJA}
+                                            >
+                                              {item.KODE_UNIT_KERJA}
+                                            </option>
+                                          )
+                                        },
+                                      )}
                                     </select>
                                     {this.state.errTujuanSurat ? (
                                       <div className="text-danger text-xs mb-3">
@@ -888,8 +979,18 @@ class EditFormSurat extends Component {
                                       <option value="0">
                                         Pilit unit pengirim
                                       </option>
-                                      <option value="1">JTK</option>
-                                      <option value="2">KIMIA</option>
+                                      {this.props.RUnitKerja.allUnitKerjaInfo.map(
+                                        (item) => {
+                                          return (
+                                            <option
+                                              key={item.ID_KODE_UNIT_KERJA}
+                                              value={item.ID_KODE_UNIT_KERJA}
+                                            >
+                                              {item.KODE_UNIT_KERJA}
+                                            </option>
+                                          )
+                                        },
+                                      )}
                                     </select>
                                     {this.state.errUnitPengirim ? (
                                       <div className="text-danger text-xs mb-3">
@@ -984,7 +1085,7 @@ class EditFormSurat extends Component {
                                       <option value="0">
                                         Pilih Jenis Surat ...
                                       </option>
-                                      {this.state.jenisSurat.map(
+                                      {this.props.AllJenisSurat.allJenisSurat.map(
                                         (item, index) => {
                                           return (
                                             <option
@@ -996,12 +1097,55 @@ class EditFormSurat extends Component {
                                           )
                                         },
                                       )}
-                                      {/* <option value="1">Khusus</option>
-                                  <option value="2">Arahan</option> */}
                                     </select>
                                     {this.state.errJenisSurat ? (
                                       <div className="text-danger text-xs mb-3">
                                         Jenis surat harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="flex flex-row grid grid-cols-2">
+                                  <div
+                                    htmlFor="nama"
+                                    className="text-sm mb-2 font-bold flex flex-row "
+                                  >
+                                    <div>Sifat Surat </div>
+                                    <div className="text-danger ml-2"> *</div>
+                                  </div>
+                                  <div className="justify-end ">
+                                    <select
+                                      type="text"
+                                      name="jenisSurat"
+                                      required
+                                      id="jenisSurat"
+                                      className={
+                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	 w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                      }
+                                      value={this.state.sifatNaskah}
+                                      onChange={this.handleSifatSurat}
+                                    >
+                                      <option value="0">
+                                        Pilih Sifat Surat ...
+                                      </option>
+                                      {this.props.RSifatSurat.allSifatSuratInfo.map(
+                                        (item, index) => {
+                                          return (
+                                            <option
+                                              key={item.ID_SIFAT_NASKAH}
+                                              value={item.ID_SIFAT_NASKAH}
+                                            >
+                                              {item.SIFAT_NASKAH}
+                                            </option>
+                                          )
+                                        },
+                                      )}
+                                    </select>
+                                    {this.state.errSifatNaskah ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Sifat surat harus diisi
                                       </div>
                                     ) : (
                                       <></>
@@ -1031,8 +1175,18 @@ class EditFormSurat extends Component {
                                       <option value="0">
                                         Pilih Derajat Surat ...
                                       </option>
-                                      <option value="1">Segera</option>
-                                      <option value="2">Biasa</option>
+                                      {this.props.RDerajatSurat.allDerajatSuratInfo.map(
+                                        (item) => {
+                                          return (
+                                            <option
+                                              key={item.ID_DERAJAT_SURAT}
+                                              value={item.ID_DERAJAT_SURAT}
+                                            >
+                                              {item.DERAJAT_SURAT}
+                                            </option>
+                                          )
+                                        },
+                                      )}
                                     </select>
                                     {this.state.errDerajatSurat ? (
                                       <div className="text-danger text-xs mb-3">
@@ -1218,6 +1372,10 @@ class EditFormSurat extends Component {
             <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
           </>
         ) : null}
+        <ModalLoading
+          loading={this.state.modalLoading}
+          title={'Sedang diproses sistem'}
+        />
       </>
     )
   }

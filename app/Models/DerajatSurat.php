@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class DerajatSurat extends Model
 {
     use HasFactory;
+    protected $table = 'derajat_surat';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'NOMOR_SURAT',
+        'DERAJAT_SURAT',
+        'DESKRIPSI'
+    ];
 }

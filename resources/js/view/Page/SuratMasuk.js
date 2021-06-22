@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import AddFormSurat from '../../components/AddFormSurat'
 import PdfReader from '../../components/PdfReader'
 import { connect } from 'react-redux'
-import { setAllSuratMasuk, setJenisSurat } from '../../actions'
+import {
+  setAllSuratMasuk,
+  setJenisSurat,
+  setUnitKerja,
+  setDerajatSurat,
+  setSifatSurat,
+} from '../../actions'
 
 //Ini buat dependecies/library nya
 //import + "nama variabel" + from + "nama librarynya";
@@ -16,6 +22,7 @@ class SuratMasuk extends Component {
     this.state = {
       suratMasuk: [],
       jenisSurat: [],
+      unitKerja: [],
     }
     this.getSuratMasuk = this.getSuratMasuk.bind(this)
   }
@@ -26,10 +33,7 @@ class SuratMasuk extends Component {
         this.setState({
           suratMasuk: response.data.content,
         })
-        // this.props.setAllUser(response.data)
         this.props.setAllSuratMasuk(response.data.content)
-
-        console.log('surat masuk:' + this.state.suratMasuk)
       })
     await api()
       .get('api/getAllJenisSurat')
@@ -39,7 +43,24 @@ class SuratMasuk extends Component {
         })
         this.props.setJenisSurat(response.data)
       })
-    console.log('jenis surat:' + this.state.jenisSurat)
+    await api()
+      .get('api/getAllKodeUnit')
+      .then((response) => {
+        this.setState({
+          unitKerja: response.data,
+        })
+        this.props.setUnitKerja(response.data)
+      })
+    await api()
+      .get('api/getAllDerajatSurat')
+      .then((response) => {
+        this.props.setDerajatSurat(response.data)
+      })
+    await api()
+      .get('api/getAllSifatNaskah')
+      .then((response) => {
+        this.props.setSifatSurat(response.data)
+      })
   }
   componentDidMount() {
     this.getSuratMasuk()
@@ -60,17 +81,23 @@ class SuratMasuk extends Component {
             <AddFormSurat />
 
             <div>
-              {/* {this.props.SuratMasuk.allSuratMasukInfo == null ? (
-                <TabelSuratMasuk SuratMasuk={this.state.suratMasuk} />
+              {this.props.SuratMasuk.allSuratMasukInfo == null ? (
+                <TabelSuratMasuk
+                  SuratMasuk={this.state.suratMasuk}
+                  IdJenisSurat={this.state.jenisSurat}
+                  IdUnitKerja={this.state.unitKerja}
+                />
               ) : (
                 <TabelSuratMasuk
                   SuratMasuk={this.props.SuratMasuk.allSuratMasukInfo}
+                  IdJenisSurat={this.state.jenisSurat}
+                  IdUnitKerja={this.state.unitKerja}
                 />
-              )} */}
-              <TabelSuratMasuk
+              )}
+              {/* <TabelSuratMasuk
                 SuratMasuk={this.props.SuratMasuk.allSuratMasukInfo}
                 IdJenisSurat={this.state.jenisSurat}
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -81,6 +108,10 @@ class SuratMasuk extends Component {
 function mapStateToProps(state) {
   return state
 }
-export default connect(mapStateToProps, { setAllSuratMasuk, setJenisSurat })(
-  SuratMasuk,
-)
+export default connect(mapStateToProps, {
+  setAllSuratMasuk,
+  setJenisSurat,
+  setUnitKerja,
+  setDerajatSurat,
+  setSifatSurat,
+})(SuratMasuk)

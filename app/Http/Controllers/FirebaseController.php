@@ -99,5 +99,9 @@ class FirebaseController extends Controller
 
     	return response()->json($response);
     }
-
+     public function cancelDownload($id){
+        $localfolder = public_path('/'.$id.'.pdf');  
+        unlink($localfolder);
+        return response()->json($localfolder);
+     }
 }
