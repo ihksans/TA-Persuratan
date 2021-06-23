@@ -76,7 +76,6 @@ const PdfReader = ({ urlFile, namaFile, namaLampiran }) => {
         console.log(response.data)
         setDownloadModal(true)
         console.log('modal:' + downloadModal)
-        // window.open('/data_files.pdf', '_blank')
       })
   }
   const Loading = () => {
@@ -98,19 +97,23 @@ const PdfReader = ({ urlFile, namaFile, namaLampiran }) => {
           // width="350"
           className="pdf-container"
         >
-          <Page height={600} pageNumber={pageNumber} />
-          <div>
-            <div className="ml-1 rounded p-1 shadow-sm w-auto text-sm ">
-              Halaman : {pageNumber || (numPages ? 1 : '--')} /{' '}
-              {numPages || '--'}
-            </div>
+          <div className="shadow-lg mb-2">
+            <Page height={600} pageNumber={pageNumber} />
+          </div>
+
+          <div className="ml-1 rounded p-1 shadow-sm w-auto text-sm ">
+            Halaman : {pageNumber || (numPages ? 1 : '--')} / {numPages || '--'}
+          </div>
+          <div className="flex flex-row border-b-2 border-t-2 border-black	border-opacity-5	">
             <button
               type="button"
               disabled={pageNumber <= 1}
               onClick={previousPage}
               className="bg-danger  text-sm font-bold text-putih self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
             >
-              Previous
+              <div>
+                <img className="w-6" src="assets/img/icon/Previous.png" />
+              </div>
             </button>
             <button
               type="button"
@@ -118,7 +121,9 @@ const PdfReader = ({ urlFile, namaFile, namaLampiran }) => {
               onClick={nextPage}
               className="bg-danger  text-sm font-bold text-putih self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
             >
-              Next
+              <div>
+                <img className="w-6" src="assets/img/icon/Next.png" />
+              </div>
             </button>
 
             <UnduhFile link={namaFile} namaFile={namaFile} title={'Surat'} />
@@ -134,9 +139,10 @@ const PdfReader = ({ urlFile, namaFile, namaLampiran }) => {
               href={urlFile}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary text-sm font-bold text-putih self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
+              className="bg-primary flex flex-row text-sm font-bold text-putih self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
             >
-              Lihat Lebih Detail
+              <img className="w-4 ml-1 mr-1" src="assets/img/icon/search.png" />
+              <p>Lihat Lebih Detail</p>
             </a>
           </div>
         </Document>

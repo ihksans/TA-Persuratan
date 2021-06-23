@@ -22,9 +22,7 @@ class BoxDataTabel extends Component {
 
               <div className="   col-span-2 ">
                 <div className="flex flex-row">
-                  <div className="flex flex-row ml-4">
-                    {this.props.TglSurat}
-                  </div>
+                  <div className="flex flex-row ">{this.props.TglSurat}</div>
                   <div className="flex flex-row ml-4">
                     {this.props.TglDiterima}
                   </div>
@@ -33,31 +31,19 @@ class BoxDataTabel extends Component {
             </div>
           </div>
 
-          <div className="flex flex-row  items-center ml-2 mt-1">
-            <div className="">
-              {this.props.NoSurat.length > 12 ? (
-                <>{this.props.NoSurat.slice(0, 12)} ...</>
-              ) : (
-                <>{this.props.NoSurat}</>
-              )}
-            </div>
+          <div className="flex flex-row  items-center mt-1">
+            <p className="truncate text-sm">{this.props.NoSurat}</p>
           </div>
-          <div className="flex flex-row  col-span-2  items-center ml-2 mt-1">
-            <div className="">
-              {this.props.Perihal.length > 25 ? (
-                <>{this.props.Perihal.slice(0, 25)}...</>
-              ) : (
-                <>{this.props.Perihal}</>
-              )}
-            </div>
+          <div className="flex flex-row  col-span-2  items-center mt-1">
+            <p className="truncate text-sm">{this.props.Perihal}</p>
           </div>
-          <div className="flex flex-row  items-center ml-2 mt-1 ">
+          <div className="flex flex-row  items-center  mt-1 ">
             <ul>
               {this.props.IdJenisSurat.map((item, index) => {
                 return (
                   <li key={index}>
                     {this.props.JenisSurat == item.ID_JENIS_SURAT ? (
-                      <div className="">
+                      <div className="ml-2">
                         {item.JENIS_SURAT.length > 15 ? (
                           <>{item.JENIS_SURAT.slice(0, 15)}...</>
                         ) : (

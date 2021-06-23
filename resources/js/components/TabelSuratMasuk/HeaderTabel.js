@@ -21,8 +21,8 @@ const HeaderTabel = () => {
               </div>
             </div>
 
-            <div className=" font-bold  col-span-2 justify-center">
-              <div className="font-bold place-self-center">Tanggal</div>
+            <div className=" grid  justify-items-stretch font-bold  col-span-2 justify-center">
+              <div className="font-bold justify-self-center">Tanggal</div>
               <div className="flex flex-row">
                 <div className="flex flex-row ml-4">
                   <div className="font-bold">Surat </div>
@@ -58,7 +58,7 @@ const HeaderTabel = () => {
           </div>
         </div>
         <div className="flex flex-row  items-center ">
-          <div className="font-bold">Jenis Surat</div>
+          <div className="font-bold ml-2">Jenis Surat</div>
           <div>
             <button type="submit" className="ml-2 mt-1.5">
               <img className="" src="assets/img/icon/Sort-2.png" />

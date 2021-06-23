@@ -193,13 +193,10 @@ class DetailSuratMasuk extends Component {
                                 {this.props.SuratDetail.ID_KODE_UNIT_KERJA ==
                                 item.ID_KODE_UNIT_KERJA ? (
                                   <div className="">
-                                    {item.KODE_UNIT_KERJA.length > 15 ? (
-                                      <>
-                                        : {item.KODE_UNIT_KERJA.slice(0, 15)}...
-                                      </>
-                                    ) : (
-                                      <>: {item.KODE_UNIT_KERJA}</>
-                                    )}
+                                    <p>
+                                      : {item.KODE_UNIT_KERJA} -{' '}
+                                      {item.NAMA_UNIT_KERJA}
+                                    </p>
                                   </div>
                                 ) : (
                                   <></>
@@ -234,7 +231,9 @@ class DetailSuratMasuk extends Component {
                       </div>
                       <div className="font-bold">Perihal / Ringkasa</div>
                       <div className=" col-span-2">
-                        {this.props.SuratDetail.PERIHAL}
+                        <p className="text-left overflow-ellipsis overflow-hidden">
+                          {this.props.SuratDetail.PERIHAL}
+                        </p>
                       </div>
                       <div className="font-bold">Jenis Surat</div>
                       <div className=" col-span-2">
@@ -295,7 +294,7 @@ class DetailSuratMasuk extends Component {
                       <div className="font-bold">Kode Arsip</div>
                       <div className="font-bold">Kom</div>
                       <div className="">
-                        :{this.props.SuratDetail.KODE_ARSIP_KOM}
+                        : {this.props.SuratDetail.KODE_ARSIP_KOM}
                       </div>
                       <div></div>
                       <div className="font-bold">Hlm</div>

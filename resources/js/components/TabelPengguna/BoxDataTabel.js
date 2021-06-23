@@ -21,16 +21,16 @@ const BoxData = ({
             <div className="">{No}.</div>
           </div>
           <div className="flex col-span-3">
-            <div className="flex flex-row col-span-2 mt-1">
-              <div className="">{NamaPengguna}</div>
+            <div className="flex col-span-2 mt-1">
+              <p className="truncate">{NamaPengguna}</p>
             </div>
           </div>
         </div>
         <div className="flex flex-row col-span-2">
-          <div className="">{Jabatan}</div>
+          <p className="truncate ">{Jabatan}</p>
         </div>
         <div className="flex ">
-          <div className="">{NIP}</div>
+          <p className="truncate ">{NIP}</p>
         </div>
         <div className="flex flex-row mt-1">
           <div className="">{Username}</div>

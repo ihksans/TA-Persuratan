@@ -860,7 +860,7 @@ class AddFormSurat extends Component {
                                     <div className="text-danger ml-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
-                                    <input
+                                    <textarea
                                       type="text"
                                       name="perihal"
                                       required
@@ -1169,7 +1169,7 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Kode Arsip Komputer </div>
+                                    <div>Kode Arsip Kom </div>
                                     <div className="text-danger ml-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
@@ -1310,17 +1310,15 @@ class AddFormSurat extends Component {
                                     Keterangan (*): data wajib diisi.
                                   </div>
                                 </div>
-                                <div className="flex flex-row grid grid-cols-2">
+                                <div className="flex flex-row grid grid-cols-2 items-center">
                                   <div></div>
                                   <button
                                     type="submit"
-                                    className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center align-center"
+                                    className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center items-center"
                                     onClick={this.onSubmit}
                                     value="Add Pengguna"
                                   >
-                                    <div className="text-sm mb-2 text-white	h-6 font-bold justify-center ">
-                                      Simpan
-                                    </div>
+                                    Simpan
                                   </button>
                                 </div>
                               </div>
