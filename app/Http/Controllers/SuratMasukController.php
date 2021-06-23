@@ -129,7 +129,7 @@ class SuratMasukController extends Controller
     }
     public function getAllSuratMasuk()
     {
-        $suratMasuk = SuratMasuk::all();
+        $suratMasuk = SuratMasuk::orderBy('ID_PENCATATAN','desc')->get();
         if(!$suratMasuk){
             $respon = [
                 'Msg' => 'error',

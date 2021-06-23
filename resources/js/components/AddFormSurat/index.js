@@ -33,8 +33,13 @@ class AddFormSurat extends Component {
       tglDiterima: null,
       tglSurat: null,
       sifatNaskah: '',
-      lastAgenda: null,
-
+      lastAgenda: 1,
+      customInputTujuan: false,
+      customNamaTujuan: '',
+      customKodeTujuan: '',
+      customInputPengirim: false,
+      customNamaPengirim: '',
+      customKodePengirim: '',
       errSurat: '',
       errJenisSurat: false,
       errLampiran: '',
@@ -52,6 +57,10 @@ class AddFormSurat extends Component {
       errNamaPengirim: false,
       errSifatNaskah: false,
       errMsgFileLampiran: '',
+      errCustomTujuanNamaUnit: false,
+      errCustomTujuanKodeUnit: false,
+      errCustomPengirimNamaUnit: false,
+      errCustomPengirimKodeUnit: false,
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
@@ -77,6 +86,12 @@ class AddFormSurat extends Component {
     this.handleTglDiterima = this.handleTglDiterima.bind(this)
     this.handleTglSurat = this.handleTglSurat.bind(this)
     this.handleSifatSurat = this.handleSifatSurat.bind(this)
+    this.handleCustomTujuan = this.handleCustomTujuan.bind(this)
+    this.handleCustomNamaUnit = this.handleCustomNamaUnit.bind(this)
+    this.handleCustomKodeUnit = this.handleCustomKodeUnit.bind(this)
+    this.handleCustomPengirim = this.handleCustomPengirim.bind(this)
+    this.handleCustomNamaPengirim = this.handleCustomNamaPengirim.bind(this)
+    this.handleCustomKodePengirim = this.handleCustomKodePengirim.bind(this)
 
     this.handleErrSurat = this.handleErrSurat.bind(this)
     this.handleErrJenisSurat = this.handleErrJenisSurat.bind(this)
@@ -94,6 +109,14 @@ class AddFormSurat extends Component {
     this.handleErrTglSurat = this.handleErrTglSurat.bind(this)
     this.handleErrorPenandatangan = this.handleErrorPenandatangan.bind(this)
     this.handleErrSifatSurat = this.handleErrSifatSurat.bind(this)
+    this.handleErrCustomKodeUnit = this.handleErrCustomKodeUnit.bind(this)
+    this.handleErrCustomNamaUnit = this.handleErrCustomNamaUnit.bind(this)
+    this.handleErrCustomNamaPengirim = this.handleErrCustomNamaPengirim.bind(
+      this,
+    )
+    this.handleErrCustomKodePengirim = this.handleErrCustomKodePengirim.bind(
+      this,
+    )
 
     this.validateNomorSurat = this.validateNomorSurat.bind(this)
     this.validateTanggalSurat = this.validateTanggalSurat.bind(this)
@@ -111,6 +134,10 @@ class AddFormSurat extends Component {
     this.validateSurat = this.validateSurat.bind(this)
     this.validateLampiran = this.validateLampiran.bind(this)
     this.validateSifatSurat = this.validateSifatSurat.bind(this)
+    this.validateCustomNamaUnit = this.validateCustomNamaUnit.bind(this)
+    this.validateCustomKodeUnit = this.validateCustomKodeUnit.bind(this)
+    this.validateCustomNamaPengirim = this.validateCustomNamaPengirim.bind(this)
+    this.validateCustomKodePengirim = this.validateCustomKodePengirim.bind(this)
   }
 
   validateLampiran(input) {
@@ -219,6 +246,7 @@ class AddFormSurat extends Component {
       }
     }
   }
+
   validateUnitPengirim(input) {
     if (input == 0 || input == null || input == '') {
       this.handleErrUnitPengirim(true)
@@ -261,7 +289,62 @@ class AddFormSurat extends Component {
       this.handleErrNomorSurat(false)
     }
   }
+  validateCustomNamaUnit(input) {
+    const re = /^[a-zA-Z0-9 ]*$/
 
+    if (input.length <= 0 || input.length >= 20 || input == null) {
+      this.handleErrCustomNamaUnit(true)
+    } else {
+      let result = input.match(re)
+      if (result) {
+        this.handleErrCustomNamaUnit(false)
+      } else {
+        this.handleErrCustomNamaUnit(true)
+      }
+    }
+  }
+  validateCustomKodeUnit(input) {
+    const re = /^[a-zA-Z0-9 ]*$/
+
+    if (input.length <= 0 || input.length >= 20 || input == null) {
+      this.handleErrCustomKodeUnit(true)
+    } else {
+      let result = input.match(re)
+      if (result) {
+        this.handleErrCustomKodeUnit(false)
+      } else {
+        this.handleErrCustomKodeUnit(true)
+      }
+    }
+  }
+  validateCustomNamaPengirim(input) {
+    const re = /^[a-zA-Z0-9 ]*$/
+
+    if (input.length <= 0 || input.length >= 20 || input == null) {
+      this.handleErrCustomNamaPengirim(true)
+    } else {
+      let result = input.match(re)
+      if (result) {
+        this.handleErrCustomNamaPengirim(false)
+      } else {
+        this.handleErrCustomNamaPengirim(true)
+      }
+    }
+  }
+  validateCustomKodePengirim(input) {
+    const re = /^[a-zA-Z0-9 ]*$/
+
+    if (input.length <= 0 || input.length >= 20 || input == null) {
+      this.handleErrCustomKodePengirim(true)
+    } else {
+      let result = input.match(re)
+      if (result) {
+        this.handleErrCustomKodePengirim(false)
+      } else {
+        this.handleErrCustomKodePengirim(true)
+      }
+    }
+  }
   handleErrSurat(props) {
     this.setState({
       errSurat: props,
@@ -340,6 +423,29 @@ class AddFormSurat extends Component {
   handleErrNamaPengirim(props) {
     this.setState({
       errNamaPengirim: props,
+    })
+  }
+
+  handleErrCustomKodeUnit(props) {
+    this.setState({
+      errCustomTujuanKodeUnit: props,
+    })
+  }
+
+  handleErrCustomNamaUnit(props) {
+    this.setState({
+      errCustomTujuanNamaUnit: props,
+    })
+  }
+  handleErrCustomKodePengirim(props) {
+    this.setState({
+      errCustomPengirimKodeUnit: props,
+    })
+  }
+
+  handleErrCustomNamaPengirim(props) {
+    this.setState({
+      errCustomPengirimNamaUnit: props,
     })
   }
   handleSifatSurat(e) {
@@ -489,11 +595,65 @@ class AddFormSurat extends Component {
       modalLoading: !this.state.modalLoading,
     })
   }
+  handleCustomTujuan() {
+    this.setState({
+      customInputTujuan: !this.state.customInputTujuan,
+      customNamaTujuan: '',
+      customKodeTujuan: '',
+      errCustomTujuanKodeUnit: false,
+      errCustomTujuanNamaUnit: false,
+    })
+  }
+  handleCustomKodeUnit(e) {
+    let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
+
+    this.setState({
+      customKodeTujuan: str,
+    })
+  }
+  handleCustomNamaUnit(e) {
+    let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
+
+    this.setState({
+      customNamaTujuan: str,
+    })
+  }
+  handleCustomPengirim() {
+    this.setState({
+      customInputPengirim: !this.state.customInputPengirim,
+      customNamaPengirim: '',
+      customKodePengirim: '',
+      errCustomPengirimNamaUnit: false,
+      errCustomPengirimKodeUnit: false,
+    })
+  }
+  handleCustomKodePengirim(e) {
+    let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
+
+    this.setState({
+      customKodePengirim: str,
+    })
+  }
+  handleCustomNamaPengirim(e) {
+    let value = e.target.value
+    let str = ''
+    str = value.replace(/\s\s+/g, '')
+
+    this.setState({
+      customNamaPengirim: str,
+    })
+  }
+
   handleModal() {
     this.setState({
       showModal: !this.state.showModal,
       modalLoading: false,
-
       idJenisSurat: '',
       kodeArsipKom: '',
       kodeArsipHlm: '',
@@ -525,9 +685,20 @@ class AddFormSurat extends Component {
       errPenandatangan: false,
       errNamaPengirim: false,
       errMsgFileLampiran: '',
+      errSifatNaskah: false,
       surat: null,
       lampiran: null,
       sifatNaskah: '',
+      customInputTujuan: false,
+      customNamaTujuan: '',
+      customKodeTujuan: '',
+      customInputPengirim: false,
+      customNamaPengirim: '',
+      customKodePengirim: '',
+      errCustomTujuanNamaUnit: false,
+      errCustomTujuanKodeUnit: false,
+      errCustomPengirimNamaUnit: false,
+      errCustomPengirimKodeUnit: false,
     })
   }
 
@@ -546,8 +717,6 @@ class AddFormSurat extends Component {
     await this.validateTanggalSurat(this.state.tglSurat)
     await this.validateTanggalDiterima(this.state.tglDiterima)
     await this.validatePerihal(this.state.perihal)
-    await this.validateTujuanSurat(this.state.tujuanSurat)
-    await this.validateUnitPengirim(this.state.unitPengirim)
     await this.validateNamaPengirim(this.state.namaPengirim)
     await this.validatePenandatangan(this.state.penandatangan)
     await this.validateJenisSurat(this.state.idJenisSurat)
@@ -556,11 +725,29 @@ class AddFormSurat extends Component {
     await this.validateKodeArsipHlm(this.state.kodeArsipHlm)
     await this.validateKodeArsipKom(this.state.kodeArsipKom)
     await this.validateKodeArsipManual(this.state.kodeArsipManual)
+    if (this.state.customInputTujuan) {
+      await this.validateCustomKodeUnit(this.state.customKodeTujuan)
+      await this.validateCustomNamaUnit(this.state.customNamaTujuan)
+    } else {
+      await this.validateTujuanSurat(this.state.tujuanSurat)
+    }
+    if (this.state.customInputPengirim) {
+      await this.validateCustomKodePengirim(this.state.customKodePengirim)
+      await this.validateCustomNamaPengirim(this.state.customNamaPengirim)
+    } else {
+      await this.validateUnitPengirim(this.state.unitPengirim)
+    }
     if (this.state.surat != null) {
       await this.validateSurat(this.state.surat)
     }
     if (this.state.lampiran != null) {
       await this.validateLampiran(this.state.lampiran)
+    }
+    if (this.state.customInputTujuan) {
+      this.handleErrTujuanSurat(false)
+    }
+    if (this.state.customInputPengirim) {
+      this.handleErrUnitPengirim(false)
     }
     if (
       this.state.errNomorSurat == false &&
@@ -576,9 +763,42 @@ class AddFormSurat extends Component {
       this.state.errKodeArsipHlm == false &&
       this.state.errKodeArsipKom == false &&
       this.state.errKodeArsipManual == false &&
-      this.state.errSifatNaskah == false
+      this.state.errSifatNaskah == false &&
+      this.state.errCustomTujuanKodeUnit == false &&
+      this.state.errCustomTujuanNamaUnit == false &&
+      this.state.errCustomPengirimKodeUnit == false &&
+      this.state.errCustomPengirimNamaUnit == false
     ) {
+      // console.log('kode:' + this.state.customKodeTujuan)
+      // console.log('nama:' + this.state.customNamaTujuan)
+      // console.log('errKode:' + this.state.errCustomTujuanKodeUnit)
+      // console.log('errNama:' + this.state.errCustomTujuanNamaUnit)
       this.handleLoading()
+      let fd = new FormData()
+
+      let forDataCustom = new FormData()
+      forDataCustom.append('kodeUnit', this.state.customKodeTujuan)
+      forDataCustom.append('namaUnit', this.state.customNamaTujuan)
+      await api()
+        .post('api/setKodeUnit', forDataCustom)
+        .then((response) => {
+          console.log('setKodeUnit:' + response.data.content)
+        })
+
+      let forDataCustom2 = new FormData()
+      forDataCustom2.append('kodeUnit', this.state.customKodePengirim)
+      forDataCustom2.append('namaUnit', this.state.customNamaPengirim)
+      await api()
+        .post('api/setKodeUnit', forDataCustom2)
+        .then((response) => {
+          console.log('setKodeUnit2:' + response.data.content.id)
+          if (this.state.customInputPengirim == false) {
+            fd.append('id_kode_unit', this.state.unitPengirim)
+          } else {
+            fd.append('id_kode_unit', response.data.content.id)
+          }
+        })
+
       let formData = new FormData()
       formData.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
       formData.append('id_derajat_surat', this.state.derajatSurat)
@@ -595,7 +815,6 @@ class AddFormSurat extends Component {
           this.state.namaFileLampiran + '_lampiran',
         )
       }
-      let fd = new FormData()
       fd.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
       fd.append('id_jenis_surat', this.state.idJenisSurat)
       fd.append('id_derajat_surat', this.state.derajatSurat)
@@ -611,11 +830,14 @@ class AddFormSurat extends Component {
           this.state.namaFileLampiran + '_lampiran',
         )
       }
-      fd.append('id_kode_unit', this.state.unitPengirim)
       fd.append('id_sifat_naskah', this.state.sifatNaskah)
       fd.append('nomor_surat', this.state.nomorSurat)
       fd.append('nama_pengirim', this.state.namaPengirim)
-      fd.append('tujuan_surat', this.state.tujuanSurat)
+      if (this.state.customInputTujuan) {
+        fd.append('tujuan_surat', this.state.customNamaTujuan)
+      } else {
+        fd.append('tujuan_surat', this.state.tujuanSurat)
+      }
       fd.append('perihal', this.state.perihal)
       fd.append('tgl_diterima', this.state.tglDiterima)
       fd.append('tgl_surat', this.state.tglSurat)
@@ -664,15 +886,22 @@ class AddFormSurat extends Component {
             window.location.reload('/#/SuratMasuk')
           })
       }
+      console.log('error form add surat' + this.state.errTujuanSurat)
     }
   }
   componentDidMount() {
     api()
       .get('api/getLast')
       .then((response) => {
-        this.setState({
-          lastAgenda: response.data.content + 1,
-        })
+        if (response.data.content == null) {
+          this.setState({
+            lastAgenda: 1,
+          })
+        } else {
+          this.setState({
+            lastAgenda: response.data.content + 1,
+          })
+        }
       })
     console.log('no agenda:' + this.state.lastAgenda)
   }
@@ -888,36 +1117,99 @@ class AddFormSurat extends Component {
                                     <div className="text-danger ml-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
-                                    <select
-                                      type="text"
-                                      name="tujuanSurat"
-                                      required
-                                      id="tujuanSurat"
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      value={this.state.tujuanSurat}
-                                      onChange={this.handleTujuanSurat}
-                                    >
-                                      <option value="0">
-                                        Pilih tujuan ...
-                                      </option>
-                                      {this.props.RUnitKerja.allUnitKerjaInfo.map(
-                                        (item) => {
-                                          return (
-                                            <option
-                                              key={item.ID_KODE_UNIT_KERJA}
-                                              value={item.KODE_UNIT_KERJA}
-                                            >
-                                              {item.KODE_UNIT_KERJA}
-                                            </option>
-                                          )
-                                        },
+                                    <div className="flex flex-row">
+                                      {this.state.customInputTujuan ? (
+                                        <input
+                                          type="text"
+                                          name="tujuanSurat"
+                                          placeholder="Silahkan isi nama unit"
+                                          required
+                                          id="tujuanSurat"
+                                          className={
+                                            'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none  w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                          }
+                                          onChange={this.handleCustomNamaUnit}
+                                        />
+                                      ) : (
+                                        <select
+                                          type="text"
+                                          name="tujuanSurat"
+                                          required
+                                          id="tujuanSurat"
+                                          className={
+                                            'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                          }
+                                          value={this.state.tujuanSurat}
+                                          onChange={this.handleTujuanSurat}
+                                        >
+                                          <option value="0">
+                                            Pilih tujuan ...
+                                          </option>
+                                          {this.props.RUnitKerja.allUnitKerjaInfo.map(
+                                            (item) => {
+                                              return (
+                                                <option
+                                                  key={item.ID_KODE_UNIT_KERJA}
+                                                  value={item.KODE_UNIT_KERJA}
+                                                >
+                                                  {item.KODE_UNIT_KERJA}
+                                                </option>
+                                              )
+                                            },
+                                          )}
+                                        </select>
                                       )}
-                                    </select>
-                                    {this.state.errTujuanSurat ? (
+
+                                      <div>
+                                        <div
+                                          onClick={this.handleCustomTujuan}
+                                          className="mr-2 ml-2 w-auto p-1 border-2 rounded-md  bg-primary justify-center items-center 		"
+                                        >
+                                          <p
+                                            className={
+                                              this.state.customInputTujuan
+                                                ? 'transform rotate-45 font-bold text-putih text-sm'
+                                                : 'font-bold text-putih text-sm'
+                                            }
+                                          >
+                                            +
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    {this.state.errTujuanSurat &&
+                                    this.state.customInputTujuan == false ? (
                                       <div className="text-danger text-xs mb-3">
                                         Tujuan surat harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {this.state.errCustomTujuanNamaUnit &&
+                                    this.state.customInputTujuan ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Nama unit harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {this.state.customInputTujuan ? (
+                                      <input
+                                        type="text"
+                                        name="tujuanSurat"
+                                        placeholder="Silahkan isi kode unit"
+                                        required
+                                        id="tujuanSurat"
+                                        className={
+                                          'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none  w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                        }
+                                        onChange={this.handleCustomKodeUnit}
+                                      />
+                                    ) : null}
+                                    {this.state.errCustomTujuanKodeUnit &&
+                                    this.state.customInputTujuan ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Kode unit harus diisi
                                       </div>
                                     ) : (
                                       <></>
@@ -934,36 +1226,102 @@ class AddFormSurat extends Component {
                                     <div className="text-danger ml-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
-                                    <select
-                                      type="text"
-                                      name="unitPengirim"
-                                      required
-                                      id="unitPengirim"
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      value={this.state.unitPengirim}
-                                      onChange={this.handleUnitPengirim}
-                                    >
-                                      <option value="0">
-                                        Pilit unit pengirim
-                                      </option>
-                                      {this.props.RUnitKerja.allUnitKerjaInfo.map(
-                                        (item) => {
-                                          return (
-                                            <option
-                                              key={item.ID_KODE_UNIT_KERJA}
-                                              value={item.ID_KODE_UNIT_KERJA}
-                                            >
-                                              {item.KODE_UNIT_KERJA}
-                                            </option>
-                                          )
-                                        },
+                                    <div className="flex flex-row">
+                                      {this.state.customInputPengirim ? (
+                                        <input
+                                          type="text"
+                                          name="namaUnitPengirim"
+                                          placeholder="Silahkan isi nama unit"
+                                          required
+                                          id="namaUnitPengirim"
+                                          className={
+                                            'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none  w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                          }
+                                          onChange={
+                                            this.handleCustomNamaPengirim
+                                          }
+                                        />
+                                      ) : (
+                                        <select
+                                          type="text"
+                                          name="unitPengirim"
+                                          required
+                                          id="unitPengirim"
+                                          className={
+                                            'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                          }
+                                          value={this.state.unitPengirim}
+                                          onChange={this.handleUnitPengirim}
+                                        >
+                                          <option value="0">
+                                            Pilit unit pengirim
+                                          </option>
+                                          {this.props.RUnitKerja.allUnitKerjaInfo.map(
+                                            (item) => {
+                                              return (
+                                                <option
+                                                  key={item.ID_KODE_UNIT_KERJA}
+                                                  value={
+                                                    item.ID_KODE_UNIT_KERJA
+                                                  }
+                                                >
+                                                  {item.KODE_UNIT_KERJA}
+                                                </option>
+                                              )
+                                            },
+                                          )}
+                                        </select>
                                       )}
-                                    </select>
-                                    {this.state.errUnitPengirim ? (
+                                      <div>
+                                        <div
+                                          onClick={this.handleCustomPengirim}
+                                          className="mr-2 ml-2 w-auto p-1 border-2 rounded-md  bg-primary justify-center items-center 		"
+                                        >
+                                          <p
+                                            className={
+                                              this.state.customInputTujuan
+                                                ? 'transform rotate-45 font-bold text-putih text-sm'
+                                                : 'font-bold text-putih text-sm'
+                                            }
+                                          >
+                                            +
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    {this.state.errUnitPengirim &&
+                                    this.state.customInputPengirim == false ? (
                                       <div className="text-danger text-xs mb-3">
                                         Unit Pengirim harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {this.state.errCustomPengirimNamaUnit &&
+                                    this.state.customInputPengirim ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Nama unit pengirim harus diisi
+                                      </div>
+                                    ) : (
+                                      <></>
+                                    )}
+                                    {this.state.customInputPengirim ? (
+                                      <input
+                                        type="text"
+                                        name="kodeUnitPengirim"
+                                        placeholder="Silahkan isi kode unit pengirim"
+                                        required
+                                        id="kodeUnitPengirim"
+                                        className={
+                                          'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none  w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                        }
+                                        onChange={this.handleCustomKodePengirim}
+                                      />
+                                    ) : null}
+                                    {this.state.errCustomPengirimKodeUnit &&
+                                    this.state.customInputPengirim ? (
+                                      <div className="text-danger text-xs mb-3">
+                                        Kode unit pengirim harus diisi
                                       </div>
                                     ) : (
                                       <></>
