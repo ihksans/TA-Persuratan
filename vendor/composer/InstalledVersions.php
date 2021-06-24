@@ -25,12 +25,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
+    'pretty_version' => '1.0.0+no-version-set',
+    'version' => '1.0.0.0',
     'aliases' => 
     array (
     ),
-    'reference' => '220b390c4693cf0b004a83cf1d7e749603565965',
+    'reference' => NULL,
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -166,15 +166,6 @@ private static $installed = array (
       ),
       'reference' => 'c073b2bd04d1c90e04dc1b787662b558dd65ade0',
     ),
-    'fig/http-message-util' => 
-    array (
-      'pretty_version' => '1.1.5',
-      'version' => '1.1.5.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '9d94dc0154230ac39e5bf89398b324a86f63f765',
-    ),
     'filp/whoops' => 
     array (
       'pretty_version' => '2.10.0',
@@ -183,15 +174,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '6ecda5217bf048088b891f7403b262906be5a957',
-    ),
-    'firebase/php-jwt' => 
-    array (
-      'pretty_version' => 'v5.3.0',
-      'version' => '5.3.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '3c2d70f2e64e2922345e89f2ceae47d2463faae1',
     ),
     'fruitcake/laravel-cors' => 
     array (
@@ -202,87 +184,6 @@ private static $installed = array (
       ),
       'reference' => '01de0fe5f71c70d1930ee9a80385f9cc28e0f63a',
     ),
-    'google/auth' => 
-    array (
-      'pretty_version' => 'v1.15.1',
-      'version' => '1.15.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '4e0c9367719df9703e96f5ad613041b87742471c',
-    ),
-    'google/cloud-core' => 
-    array (
-      'pretty_version' => 'v1.42.1',
-      'version' => '1.42.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '26a471ec72ee98ae146316054b25a88de8693b11',
-    ),
-    'google/cloud-firestore' => 
-    array (
-      'pretty_version' => 'v1.19.3',
-      'version' => '1.19.3.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '5dfc0be0607f2c97566bf3ef7730f5a6b1958ea7',
-    ),
-    'google/cloud-storage' => 
-    array (
-      'pretty_version' => 'v1.23.2',
-      'version' => '1.23.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '4a9f1262c2929af8c33a58466616820dba91dddc',
-    ),
-    'google/common-protos' => 
-    array (
-      'pretty_version' => '1.3',
-      'version' => '1.3.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '535f489ff1c3433c0ea64cd5aa0560f926949ac5',
-    ),
-    'google/crc32' => 
-    array (
-      'pretty_version' => 'v0.1.0',
-      'version' => '0.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'a8525f0dea6fca1893e1bae2f6e804c5f7d007fb',
-    ),
-    'google/gax' => 
-    array (
-      'pretty_version' => 'v1.7.1',
-      'version' => '1.7.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '48cd41dbea7b8fece8c41100022786d149de64ca',
-    ),
-    'google/grpc-gcp' => 
-    array (
-      'pretty_version' => '0.1.5',
-      'version' => '0.1.5.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'bb9bdbf62f6ae4e73d5209d85b1d0a0b9855ff36',
-    ),
-    'google/protobuf' => 
-    array (
-      'pretty_version' => 'v3.17.3',
-      'version' => '3.17.3.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'ae9282cf11dd2933b7e71a611f9590f07d53d3f3',
-    ),
     'graham-campbell/result-type' => 
     array (
       'pretty_version' => 'v1.0.1',
@@ -291,15 +192,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '7e279d2cd5d7fbb156ce46daada972355cea27bb',
-    ),
-    'grpc/grpc' => 
-    array (
-      'pretty_version' => '1.38.0',
-      'version' => '1.38.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'e1687963fb0b087d0c70e75d3bfff9062eaeb215',
     ),
     'guzzlehttp/guzzle' => 
     array (
@@ -561,42 +453,6 @@ private static $installed = array (
         0 => '*',
       ),
     ),
-    'kreait/clock' => 
-    array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '8f1fbc252e4e81298ae7c520597c25e9a6a0f454',
-    ),
-    'kreait/firebase-php' => 
-    array (
-      'pretty_version' => '5.20.1',
-      'version' => '5.20.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '5c5c8f3e5d2ae07ed4e5e521392609b4f812b67c',
-    ),
-    'kreait/firebase-tokens' => 
-    array (
-      'pretty_version' => '1.15.0',
-      'version' => '1.15.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'b39d7c3a78d0912c9a617cd42d4bd356209b1b91',
-    ),
-    'kreait/laravel-firebase' => 
-    array (
-      'pretty_version' => '3.1.0',
-      'version' => '3.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'c00ec1e3ce30e07ccdd6ea08712d8c75d0998ff5',
-    ),
     'laravel/framework' => 
     array (
       'pretty_version' => 'v8.33.1',
@@ -608,12 +464,12 @@ private static $installed = array (
     ),
     'laravel/laravel' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => '1.0.0+no-version-set',
+      'version' => '1.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '220b390c4693cf0b004a83cf1d7e749603565965',
+      'reference' => NULL,
     ),
     'laravel/sail' => 
     array (
@@ -650,24 +506,6 @@ private static $installed = array (
       array (
       ),
       'reference' => 'a1f82c6283c8373ea1958b8a27c3d5c98cade351',
-    ),
-    'lcobucci/clock' => 
-    array (
-      'pretty_version' => '2.0.0',
-      'version' => '2.0.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '353d83fe2e6ae95745b16b3d911813df6a05bfb3',
-    ),
-    'lcobucci/jwt' => 
-    array (
-      'pretty_version' => '4.0.3',
-      'version' => '4.0.3.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'ae4165a76848e070fdac691e773243d10cd06ce1',
     ),
     'league/commonmark' => 
     array (
@@ -720,15 +558,6 @@ private static $installed = array (
       array (
         0 => '^1.0',
       ),
-    ),
-    'mtdowling/jmespath.php' => 
-    array (
-      'pretty_version' => '2.6.0',
-      'version' => '2.6.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '42dae2cbd13154083ca6d70099692fef8ca84bfb',
     ),
     'myclabs/deep-copy' => 
     array (
@@ -896,15 +725,6 @@ private static $installed = array (
       ),
       'reference' => 'f661659747f2f87f9e72095bb207bceb0f151cb4',
     ),
-    'psr/cache' => 
-    array (
-      'pretty_version' => '1.0.1',
-      'version' => '1.0.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'd11b50ad223250cf17b86e38383413f5a6764bf8',
-    ),
     'psr/container' => 
     array (
       'pretty_version' => '1.1.1',
@@ -1037,24 +857,6 @@ private static $installed = array (
       array (
         0 => '4.1.1',
       ),
-    ),
-    'riverline/multipart-parser' => 
-    array (
-      'pretty_version' => '2.0.8',
-      'version' => '2.0.8.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '2fe9026789754c1ff07c06047f0acc113e90933a',
-    ),
-    'rize/uri-template' => 
-    array (
-      'pretty_version' => '0.3.3',
-      'version' => '0.3.3.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '6e0b97e00e0f36c652dd3c37b194ef07de669b82',
     ),
     'sebastian/cli-parser' => 
     array (
