@@ -91,11 +91,12 @@ import {
   removeTokenByID,
   setPath,
 } from '../../actions'
-
+import ModalLoading from '../ModalLoading'
 class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      modalLoading: false,
       username: null,
       password: null,
       errorMsg: false,
@@ -104,6 +105,7 @@ class Login extends Component {
       isUsername: false,
       isPassword: false,
     }
+    this.handleLoading = this.handleLoading.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleUsername = this.handleUsername.bind(this)
     this.handlePassword = this.handlePassword.bind(this)
@@ -113,6 +115,11 @@ class Login extends Component {
     this.handleNullPassword = this.handleNullPassword.bind(this)
     this.handleNullUsername = this.handleNullUsername.bind(this)
     this.test = this.test.bind(this)
+  }
+  handleLoading() {
+    this.setState({
+      modalLoading: !this.state.modalLoading,
+    })
   }
   setToken(token) {
     // console.log("setToken:"+ token);
@@ -135,6 +142,7 @@ class Login extends Component {
     if (this.state.password == null || this.state.password == '') {
       this.handleNullPassword()
     }
+    this.handleLoading()
     let formInput = new FormData()
     formInput.append('username', this.state.username)
     formInput.append('password', this.state.password)
@@ -152,6 +160,7 @@ class Login extends Component {
                 .post('api/userInfo')
                 .then((response) => {
                   if (response.data.error) {
+                    this.handleLoading()
                     console.log(response.data.error)
                     console.log('error login')
                   } else {
@@ -165,6 +174,8 @@ class Login extends Component {
                         } else {
                           this.setUserData(response.data)
                           console.log('current user :' + response.data)
+                          this.handleLoading()
+
                           window.location.assign('/')
 
                           // return <Redirect to="/" />
@@ -174,16 +185,22 @@ class Login extends Component {
                 })
             } else if (response.data.status == 'error') {
               if (response.data.errors == 'username') {
+                this.handleLoading()
+
                 this.handleErrorUsername()
                 console.log(response.data)
                 console.log('error username')
               } else if (response.data.errors == 'password') {
+                this.handleLoading()
+
                 console.log('error password')
                 this.handleErrorPassword()
               }
             }
           })
           .catch((error) => {
+            this.handleLoading()
+
             notLoggedIn
             console.log('error:' + error.data)
             this.handleErrorMsg()
@@ -313,12 +330,18 @@ class Login extends Component {
                   className="w-full border-2 rounded-md bg-primary"
                   onClick={this.handleSubmit}
                 >
-                  <div className="text-sm mb-2 text-putih h-4 font-semibold">Login</div>
+                  <div className="text-sm mb-2 text-putih h-4 font-semibold">
+                    Login
+                  </div>
                 </button>
               </div>
             </div>
           </div>
         </form>
+        <ModalLoading
+          loading={this.state.modalLoading}
+          title={'Sinkronisasi Data'}
+        />
       </>
     )
   }

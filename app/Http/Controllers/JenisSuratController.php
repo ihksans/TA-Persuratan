@@ -21,7 +21,6 @@ class JenisSuratController extends Controller
             'JENIS_SURAT' => $request->jenisSurat,
             'KETERANGAN' => $request->keterangan,
         ];
-<<<<<<< HEAD
         if($request->jenisSurat==null||$request->keterangan == null){
             $respon = [
                 'Msg' => 'error null content',
@@ -30,8 +29,6 @@ class JenisSuratController extends Controller
                 return response()->json($respon,200);
 
         }
-=======
->>>>>>> origin/push
         $jenisSurat = JenisSurat::create($data);
         if($jenisSurat)
         {
@@ -49,7 +46,6 @@ class JenisSuratController extends Controller
             return response()->json($respon);
         }
     }
-<<<<<<< HEAD
     public function getJenisSurat($id)
     {
 
@@ -58,16 +54,6 @@ class JenisSuratController extends Controller
             $respon =[
             'Msg' => 'error',
             'content' =>  $id,
-=======
-    public function getJenisSurat(Request $request)
-    {
-
-        $jenisSurat = JenisSurat::where('ID_JENIS_SURAT', $request->id)->first();
-        if($jenisSurat == null){
-            $respon =[
-            'Msg' => 'error',
-            'content' =>  $request,
->>>>>>> origin/push
             ];
         return response()->json($respon);
         }

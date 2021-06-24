@@ -15,17 +15,14 @@ class PenggunaController extends Controller
         if($user == null){
             $respon = [
                 'msg' => 'failed',
-                'error' => 'Pengguna'
+                'error' => 'Pengguna',
+                'content'=> $request->id
             ];
             return response()->json($respon);
         }
         return response()->json($user,200);
     }
-<<<<<<< HEAD
     public function allUser(){
-=======
-    public function allUser(Request $request){
->>>>>>> origin/push
         $user = Pengguna::all();
         if($user==null){
             $respon=[
@@ -37,13 +34,6 @@ class PenggunaController extends Controller
         return response()->json($user,200);
     }
     public function createUser(Request $request){
-<<<<<<< HEAD
-=======
-        // $data=[
-        //     'data'=>$request
-        // ];
-        // return response()->json($data);
->>>>>>> origin/push
         $user = Pengguna::where('USERNAME', $request->USERNAME)->first();
         if($user !== null){
             $respon = [
@@ -57,21 +47,15 @@ class PenggunaController extends Controller
             'NAMA' => 'required',
             'PASSWORD' => 'required',
             'ROLE' => 'required',
-<<<<<<< HEAD
             
-=======
->>>>>>> origin/push
         ]);
         $data=[
             'USERNAME' => $request->USERNAME,
             'PASSWORD' => Hash::make($request->PASSWORD),
             'NAMA' => $request->NAMA,
             'ROLE' => $request->ROLE,
-<<<<<<< HEAD
             'JABATAN' => $request->JABATAN,
             'NIP' => $request->NIP
-=======
->>>>>>> origin/push
         ];
         
         $user = Pengguna::create($data);
@@ -125,11 +109,8 @@ class PenggunaController extends Controller
             'PASSWORD' => Hash::make($request->PASSWORD),
             'NAMA' => $request->NAMA,
             'ROLE' => $request->ROLE,
-<<<<<<< HEAD
             'JABATAN' => $request->JABATAN,
             'NIP' => $request->NIP
-=======
->>>>>>> origin/push
         ]);
         if($user){
             $pengguna = User::where('id',$request->id)
@@ -156,6 +137,17 @@ class PenggunaController extends Controller
     }
 
     public function deleteUser($id){
+        $userAuth = User::where('id',$id);
+        $username = $userAuth->get();
+        if($username == 'admin')
+        {
+            $respon = [
+                'msg' => 'delete failed admin cant to be delete',
+                'error' => 'deletePengguna'
+            ];
+            return response()->json($userAuth,400);
+        }
+        $userAuth->delete();
         $user = Pengguna::where('ID_PENGGUNA', $id);
         $user->delete();
         if(!$user){
@@ -172,36 +164,7 @@ class PenggunaController extends Controller
                 'error' => 'deletePengguna'
             ];
             return response()->json($respon);
-<<<<<<< HEAD
         }      
         return response()->json($user);
     }
-=======
-        }
-        
-        return response()->json($user);
-
-    }
-    
-    // public function deleteUser($id){
-    //     // $user = Pengguna::where('ID_PENGGUNA', $request->id)->first();
-    //     if($id == null){
-    //         $respon = [
-    //             'msg' => 'failed',
-    //             'error' => 'Pengguna',
-    //             'request' => $id
-    //         ];
-    //         return response()->json($respon);
-    //     }else{
-            
-    //             $respon = [
-    //                 'msg' => 'succes',
-    //                 'error' => 'null',
-    //                 'request' => $id
-    //             ];
-    //             return response()->json($respon);
-    //     }
-    // }
-
->>>>>>> origin/push
 }

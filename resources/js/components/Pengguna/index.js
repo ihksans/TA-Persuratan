@@ -44,34 +44,7 @@ class CreateUser extends Component {
         });
         console.log('pengguna:'+ response.data)
       });
-  }
-  // deletePengguna(id){
-  //   let formData = new FormData()
-  //   formData.append('id',id)
-  //   api()
-  //     // .delete('api/deleteUser/${formData}',formData)
-  //     .delete('api/deleteUser/${formData}')
-  //     .then(response=>{
-  //       console.log('pengguna tidak terhapus'+response.data)
-  //     }).catch((error)=>{
-  //       console.log(error)
-  //     })
-  //     console.log('id:' +id)
-  // }
-
-//   edit(id){
-//       let item=this.state.dir.filter(item = item.id === id)[0]
-//       if(item){
-//           this.setState({
-//               isEditing:true,
-//               item:item,
-//               temp_id:item.id
-//           })
-//       }
-//   }
-
-
-  
+  }  
 
   render() {
     const {pengguna} = this.state
