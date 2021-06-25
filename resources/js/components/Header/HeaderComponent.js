@@ -5,7 +5,7 @@ import * as FaIcons from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import DataUser from './DataUser'
 import UserButton from './UserButton'
-import ReminderIcon from './ReminderIcon'
+import ReminderButton from './ReminderButton'
 // class HeaderComponent extends Component {
 //   constructor(props) {
 //     super()
@@ -54,9 +54,9 @@ const HeaderComponent = ({ show, role }) => {
             </div>
             <UserButton />
 
-            <ReminderIcon />
+            <ReminderButton />
             <button type="submit" className="justify-items-center h-9 my-2.5 mx-2">
-              <img className=" h-full w-full " src="assets/img/icon/Bell.png" />
+              <img className=" h-full" src="assets/img/icon/Bell.png" />
             </button>
           </div>
         </div>

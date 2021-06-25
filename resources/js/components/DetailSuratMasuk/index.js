@@ -6,6 +6,8 @@ import PdfReader from '../PdfReader'
 import ModalKonfirmDeleteSM from '../ModalKonfirmDeleteSM.js'
 import EditFormSurat from '../EditFormSurat'
 import ModalLoading from '../ModalLoading'
+import UpdateReminder from '../FormUpdateReminder'
+
 // import createuser from "./index";
 class DetailSuratMasuk extends Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class DetailSuratMasuk extends Component {
       url: '',
       urlLampiran: '',
       showModal: false,
+      showPengingatModal: false,
       pengguna: this.props.AllUser.allUserInfo,
       tglSurat: this.props.SuratDetail.TGL_SURAT,
       tglDiterima: this.props.SuratDetail.TGL_DITERIMA,
@@ -25,6 +28,7 @@ class DetailSuratMasuk extends Component {
 
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
+    this.handlePengingatModal = this.handlePengingatModal.bind(this)
     this.getFileSuratMasuk = this.getFileSuratMasuk.bind(this)
     this.reserveTgl = this.reserveTgl.bind(this)
   }
@@ -38,6 +42,11 @@ class DetailSuratMasuk extends Component {
       this.getFileSuratMasuk()
       this.reserveTgl()
     }
+  }
+  async handlePengingatModal(){
+    await this.setState({
+      showPengingatModal: !this.state.showPengingatModal,
+    })
   }
   reserveTgl() {
     let a = this.state.tglSurat.split('-')
@@ -312,15 +321,49 @@ class DetailSuratMasuk extends Component {
                       <div className="font-bold">Status Pengingat</div>
                       <div className=" col-span-2">
                         <div className=" flex flex-row">
-                          <button
-                            type="submit"
-                            className="bg-biru   self-center ml-2 mt-1  rounded-full p-1 shadow-sm w-40%"
-                          >
-                            Aktif
-                          </button>
+                          {this.props.Pengingat.allPengingatInfo.map(
+                            (item, index) => {
+                              const temp = this.props.SuratDetail.ID_PENCATATAN
+                              const temp2 = item.ID_PENCATATAN
+                              return (
+                                <div key={index}>
+                                  {temp == temp2 ? (
+                                    <>{item.STATUS == 1 ?(
+                                      <>
+                                      <button
+                                        type="submit"
+                                        className="bg-biru self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
+                                      >
+                                        Aktif
+                                      </button>
+                                      </>
+                                    ) : (
+                                      <>
+                                      <button
+                                        type="submit"
+                                        className="bg-abu self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
+                                      >
+                                        Tidak Aktif
+                                      </button></>
+                                    )} 
+                                    {/* <UpdateReminder
+                                      idPengingat = {item.ID_PENGINGAT}
+                                      waktuPengingat = {item.WAKTU_PENGINGAT}
+                                      deskripsiPengingat = {item.DESKRIPSI}
+                                    />                             */}
+                                    </>                                    
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
+                              )
+                            },
+                          )}{' '}
+                          
                           <button
                             type="submit"
                             className="bg-primary font-bold  self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
+                            onClick={this.handlePengingatModal}
                           >
                             <img
                               className="h-auto align-middle"
@@ -328,9 +371,9 @@ class DetailSuratMasuk extends Component {
                             />
                           </button>
                         </div>
-                        <div className="text-sm">
+                        {/* <div className="text-sm">
                           Harus ditindaklanjuti dalam waktu 5 hari
-                        </div>
+                        </div> */}
                       </div>
                       <div className="font-bold">Status Tindak Lanjut</div>
 
@@ -369,6 +412,36 @@ class DetailSuratMasuk extends Component {
                 </div>
               </div>
             </div>
+          </>
+        ) : null}
+        {this.state.showPengingatModal ? (
+          <>
+          {this.props.Pengingat.allPengingatInfo.map(
+            (item,index) => {
+              const temp = this.props.SuratDetail.ID_PENCATATAN
+              const temp2 = item.ID_PENCATATAN
+            return(
+              <div key={index}>
+                {temp == temp2 ? (
+                  <>
+                    <UpdateReminder
+                    idPengingat = {item.ID_PENGINGAT}
+                    idPengguna = {item.ID_PENGGUNA}
+                    idPencatatan = {item.ID_PENCATATAN}
+                    waktuPengingat = {item.WAKTU_PENGINGAT}
+                    deskripsiPengingat = {item.DESKRIPSI}
+                    status = {item.STATUS}
+                    noAgenda = {this.props.SuratDetail.NOMOR_AGENDA}
+                    idDerajatSurat = {this.props.SuratDetail.ID_DERAJAT_SURAT}
+                  />
+                  </>
+                ) : (
+                  <></>
+                )}
+              </div>
+            )
+          })}
+          
           </>
         ) : null}
       </>

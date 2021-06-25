@@ -38,6 +38,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::delete('deleteUser/{id}', 'PenggunaController@deleteUser');
     // Route::delete('deleteUser', 'PenggunaController@deleteUser');
 
+    //nadia
+    Route::post('createPengingat', 'PengingatController@createPengingat');
+    Route::get('allPengingatInfo', 'PengingatController@getAllPengingat');
+    Route::get('getPengingat/{id}', 'PengingatController@getPengingat');
+    Route::post('updatePengingat', 'PengingatController@updatePengingat');
+
     //ihksan
     Route::post('setPencatatan', 'PencatatanController@setPencatatan');
     Route::get('getPencatatanInfo/{id}', 'PencatatanController@getPencatatanInfo');

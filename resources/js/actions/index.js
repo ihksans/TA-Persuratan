@@ -18,6 +18,8 @@ export const SET_ALL_DERAJAT_SURAT = 'SET_ALL_DERAJAT_SURAT'
 export const UNSET_ALL_DERAJAT_SURAT = 'UNSET_ALL_DERAJAT_SURAT'
 export const SET_ALL_SIFAT_SURAT = 'SET_ALL_SIFAT_SURAT'
 export const UNSET_ALL_SIFAT_SURAT = 'UNSET_ALL_SIFAT_SURAT'
+export const SET_ALL_PENGINGAT = 'SET_ALL_PENGINGAT'
+export const UNSET_ALL_PENGINGAT = 'UNSET_ALL_PENGINGAT'
 
 //list of method actions
 //to save current token by user
@@ -150,6 +152,19 @@ export function setSifatSurat(payload) {
   const action = {
     type: SET_ALL_SIFAT_SURAT,
     payload,
+  }
+  return action
+}
+export function setAllPengingat(payload) {
+  const action = {
+    type: SET_ALL_PENGINGAT,
+    payload,
+  }
+  return action
+}
+export function unsetAllPengingat() {
+  const action = {
+    type: UNSET_ALL_PENGINGAT,
   }
   return action
 }

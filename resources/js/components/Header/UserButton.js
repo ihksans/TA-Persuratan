@@ -11,7 +11,7 @@ const UserButton = () => {
       <div className="flex flex-col">
         <button type="submit" className="h-10 my-2 mx-1" onClick={Click}>
           <img
-            className=" h-full w-full "
+            className=" h-full"
             src="assets/img/icon/User-Rounded-2.png"
           />
         </button>

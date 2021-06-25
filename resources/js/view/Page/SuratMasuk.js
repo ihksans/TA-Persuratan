@@ -8,6 +8,7 @@ import {
   setUnitKerja,
   setDerajatSurat,
   setSifatSurat,
+  setAllPengingat,
 } from '../../actions'
 
 //Ini buat dependecies/library nya
@@ -60,6 +61,11 @@ class SuratMasuk extends Component {
       .get('api/getAllSifatNaskah')
       .then((response) => {
         this.props.setSifatSurat(response.data)
+      })
+    await api()
+      .get('api/allPengingatInfo')
+      .then((response) => {
+        this.props.setAllPengingat(response.data)
       })
   }
   componentDidMount() {
@@ -114,4 +120,5 @@ export default connect(mapStateToProps, {
   setUnitKerja,
   setDerajatSurat,
   setSifatSurat,
+  setAllPengingat,
 })(SuratMasuk)

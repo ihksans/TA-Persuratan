@@ -9,6 +9,7 @@ import SuratMasuk from './surat_masuk_reducers'
 import RUnitKerja from './unit_kerja_reducers'
 import RDerajatSurat from './derajat_surat_reducers'
 import RSifatSurat from './sifat_surat_reducers'
+import Pengingat from './pengingat_reducers'
 const rootReducer = combineReducers({
   authToken,
   User,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   RUnitKerja,
   RDerajatSurat,
   RSifatSurat,
+  Pengingat,
 })
 
 export default rootReducer
