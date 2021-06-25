@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Disposisi;
 use App\Models\SuratMasuk;
@@ -18,16 +18,12 @@ class DisposisiController extends Controller
     {
         //
     }
-    public function allInfoDisposisi(Request $request){
-        $disposisi = Disposisi::all();
-        if($disposisi==null){
-            $respon=[
-                'msg' => 'Tidak ada penguna',
-                'error' => 'Pengguna'
-            ];
-            return response()->json($respon);
-        }
-        return response()->json($disposisi,200);
+    public function allInfoDisposisi(){
+        $disposisi = DB::table('disposisi')
+        ->join('surat_masuk','disposisi.ID_PENCATATAN','=','surat_masuk.ID_PENCATATAN')
+        ->select('disposisi.*','surat_masuk.*')
+        ->get();
+        return response()->json($disposisi);
     }
     /**
      * Show the form for creating a new resource.
@@ -90,22 +86,13 @@ class DisposisiController extends Controller
     }
         
     public function getDisposisi($id){
-        // $suratMasuk = Pencatatan::where('ID_PENCATATAN', $id)->first();
-        // $disposisi = Disposisi::where('ID_DISPOSISI',$suratMasuk)->first();
-        //seharusnya id pencatatan
-        $disposisi = Disposisi::where('ID_DISPOSISI',$id)->first();
-        if($disposisi == null){
-            $respon =[
-                'Msg' => 'Kosong',
-                'content' =>  $id,
-                ];
-            return response()->json($respon);
-        }
-        $respon =[
-            'Msg' => 'success',
-            'content' =>  $disposisi,
-            ];
-        return response()->json($respon);
+        $disposisi = DB::table('disposisi')
+        ->join('surat_masuk','disposisi.ID_PENCATATAN','=','surat_masuk.ID_PENCATATAN')
+        ->where('ID_DISPOSISI',$id)
+        ->select('disposisi.*','surat_masuk.*')
+        
+        ->get();
+        return response()->json($disposisi);
     }
 
     /**

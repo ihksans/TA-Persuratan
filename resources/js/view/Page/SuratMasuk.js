@@ -83,6 +83,7 @@ class SuratMasuk extends Component {
             <div>
               {this.props.SuratMasuk.allSuratMasukInfo == null ? (
                 <TabelSuratMasuk
+                  Disposisi={this.state.Disposisi}
                   SuratMasuk={this.state.suratMasuk}
                   IdJenisSurat={this.state.jenisSurat}
                   IdUnitKerja={this.state.unitKerja}
@@ -90,6 +91,7 @@ class SuratMasuk extends Component {
               ) : (
                 <TabelSuratMasuk
                   SuratMasuk={this.props.SuratMasuk.allSuratMasukInfo}
+                  Disposisi={this.props.AllDisposisi.allDisposisiInfo}
                   IdJenisSurat={this.state.jenisSurat}
                   IdUnitKerja={this.state.unitKerja}
                 />

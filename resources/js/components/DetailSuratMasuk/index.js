@@ -151,7 +151,11 @@ class DetailSuratMasuk extends Component {
                           </div>
                         </button> */}
                         <AddFormDisposisi 
-                        // ID_Pencatatan ={item.ID_PENCATATAN}
+                        namaFile={this.props.NamaFileSurat}
+                        SuratDetail={this.props.SuratDetail}
+                        namaLampiran={this.props.NamaFileLampiran}
+                        jenisSurat={this.props.jenisSurat}
+                        IdUnitKerja={this.props.IdUnitKerja}
                         />
                         <ModalLoading loading={this.state.modalLodaing} />
                         {/* <button
@@ -233,7 +237,7 @@ class DetailSuratMasuk extends Component {
                         {/* {this.props.SuratDetail.TGL_DITERIMA} */}
                         {this.state.tglDiterima}
                       </div>
-                      <div className="font-bold">Perihal / Ringkasa</div>
+                      <div className="font-bold">Perihal / Ringkasan Surat</div>
                       <div className=" col-span-2">
                         <p className="text-left overflow-ellipsis overflow-hidden">
                           {this.props.SuratDetail.PERIHAL}

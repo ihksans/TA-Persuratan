@@ -20,10 +20,14 @@ const TabelDisposisi = ({Disposisi,SuratMasuk, IdJenisSurat, IdUnitKerja }) => {
                                 Informasi = {item.INFORMASI}
                                 Tujuan = {item.TUJUAN}
                                 Keterangan = {item.KETERANGAN}
+                                NomorSurat={item.NOMOR_SURAT}
+                                TujuanSurat={item.TUJUAN_SURAT}
+                                ProsesSelanjutnya={item.PROSES_SELANJUTNYA}
                                 Disposisi={item}
                                 IdSuratMasuk={SuratMasuk}
                                 IdJenisSurat={IdJenisSurat}
                                 IdUnitKerja={IdUnitKerja}
+                                UnitKerja={item.ID_KODE_UNIT_KERJA}
                             />
                         </li>
                     )

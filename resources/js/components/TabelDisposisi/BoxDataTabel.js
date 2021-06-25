@@ -12,6 +12,7 @@ class BoxDataTabel extends Component{
         super()
         this.state={
             suratMasuk:'',
+            jenisSurat:'',
 
         }
     }
@@ -25,21 +26,25 @@ class BoxDataTabel extends Component{
         <div className="flex flex-row mt-1">
             <div className="">{this.props.NomorAgenda}</div>
         </div> */}
-        <div className="flex flex-row  col-span-2 ml-2 mt-1">
+        {/* <div className="flex flex-row  col-span-2 ml-2 mt-1">
             <div className="grid grid-cols-2 p-2">
-                <div className="flex flex-row ml-2 ">
+                
+                
+            </div>
+        </div> */}
+        <div className="flex flex-row ml-2 ">
                     <div className="">{this.props.No}.</div>
                 </div>
                 <div className="flex flex-row ml-2 ">
                     <div className="">{this.props.NomorAgenda}</div>
                 </div>
-            </div>
-        </div>
+
+
         <div className="flex flex-row ml-8 mt-1">
             <div className="">{this.props.Tanggal}</div>
         </div>
         <div className="flex flex-row ml-12 mt-1">
-            <ul>
+            {/* <ul>
                 {this.props.IdSuratMasuk.map((item, index)=>{
                     return(
                         <li key={index}>
@@ -57,8 +62,8 @@ class BoxDataTabel extends Component{
                         </li>
                     )
                 })}
-            </ul>
-            {/* <div className="">{this.props.NomorSurat}</div> */}
+            </ul> */}
+            <div className="">{this.props.NomorSurat}</div>
             {/* <div className="">12893712</div> */}
         </div>
         <div className="flex flex-row ml-16  mt-1">
@@ -66,11 +71,11 @@ class BoxDataTabel extends Component{
         </div>
         <div className="flex flex-row ml-8 mt-1">
             {/* <div className="">{this.props.Tujuan}</div> */}
-            <div className="">pd3</div>
+            <div className="">{this.props.TujuanSurat}</div>
         </div>
         <div className="flex flex-row ml-8 mt-1">
             {/* <div className="">{this.props.Keterangan}</div> */}
-            <div className="">tebusan</div>
+            <div className="">{this.props.ProsesSelanjutnya}</div>
         </div>
 
         {/* <div className="flex flex-row mt-1">
@@ -97,7 +102,11 @@ class BoxDataTabel extends Component{
 
             <DetailDisposisi 
             DisposisiDetail={this.props.Disposisi}
+            TujuanSurat={this.props.TujuanSurat}
             IdPencatatan={this.props.IdPencatatan}
+            jenisSurat={this.props.jenisSurat}
+            IdUnitKerja={this.props.IdUnitKerja}
+            NomorSurat={this.props.NomorSurat}
             // console.log('pengguna:' + this.state.pengguna)
             />
 

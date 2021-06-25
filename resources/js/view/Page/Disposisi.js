@@ -11,7 +11,7 @@ import {
   setUnitKerja,
   setDerajatSurat,
   setSifatSurat,  
-  setAllPencatatan,
+  // setAllPencatatan,
 } from '../../actions/index'
 // import Index from '../../components/Disposisi/index'
 import api from '../../service/api'
@@ -79,7 +79,7 @@ class Disposisi extends Component {
         this.state({
           pencatatan:response.data,
         })
-        this.props.setAllPencatatan(response.data)
+        // this.props.setAllPencatatan(response.data)
       })
   }
 
@@ -140,5 +140,5 @@ export default connect(mapStateToProps,{
   setUnitKerja,
   setDerajatSurat,
   setSifatSurat,  
-  setAllPencatatan,
+  // setAllPencatatan,
 })(Disposisi)

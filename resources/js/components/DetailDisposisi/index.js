@@ -152,9 +152,7 @@ class DetailDisposisi extends Component{
                                             </div>
                                             <div className="font-bold">Tujuan </div>
                                             <div className="col-span-2"> 
-                                                {/* {this.state.pengguna.map((item,index)=>{
-                                                    con
-                                                })} */}
+                                                {this.props.DisposisiDetail.TUJUAN_SURAT}
                                             </div>
                                             
                                             <div className="font-bold">Informasi / Isi Disposisi</div>
@@ -163,61 +161,65 @@ class DetailDisposisi extends Component{
                                             </div>
                                             <div className="font-bold">Keterangan</div>
                                             <div className="col-span-2">
-                                                {/* {this.props.DisposisiDetail.KETERANGAN} */}
+                                                {this.props.DisposisiDetail.PROSES_SELANJUTNYA}
                                             </div>
                                             <div></div>
 
                                             <div className="font-bold col-span-3">Informasi Surat yang Didisposisikan</div>
                                             
                                             <div className="font-bold">Nomor Agenda Surat</div>
-                                            <div className="col-span-2"> Surat masuk - 5
-                                                {/* {this.props.IdPencatatan.map((item,index)=>{
-                                                    return(
-                                                        <li key={index}>
-                                                            {this.props.DisposisiDetail.ID_PENCATATAN == 
-                                                            item.ID_PENCATATAN?(
-                                                                <div className="">
-                                                                    <p>{item.NOMOR_AGENDA}</p>
-                                                                </div>
-                                                            ):(<></>)}
-                                                        </li>
-                                                    )
-                                                })} */}
+                                            <div className="col-span-2"> 
+                                                {this.props.DisposisiDetail.NOMOR_AGENDA}
+                                                
                                             </div>
 
                                             <div className="font-bold">Dari</div>
                                             <div className="font-bold">Nama</div>
-                                            <div className="">: KO
-                                                {/* : {this.props} */}
+                                            <div className="">
+                                                : {this.props.DisposisiDetail.NAMA_PENGIRIM}
                                             </div>
                                             <div></div>
                                             <div className="font-bold">Unit</div>
-                                            <div className="">JTK
-                                                {/* : {this.props} */}
+                                            <div className="">
+                                                <ul>
+                                                    {this.props.IdUnitKerja.map((item, index) => {
+                                                        return (
+                                                        <li key={index}>
+                                                            {this.props.DisposisiDetail.ID_KODE_UNIT_KERJA ==
+                                                            item.ID_KODE_UNIT_KERJA ? (
+                                                            <div className="">
+                                                                <p>
+                                                                : {item.KODE_UNIT_KERJA} -{' '}
+                                                                {item.NAMA_UNIT_KERJA}
+                                                                </p>
+                                                            </div>
+                                                            ) : (
+                                                            <></>
+                                                            )}
+                                                        </li>
+                                                        )
+                                                    })}
+                                                </ul>
                                             </div>
                                             <div></div>
                                             <div className="font-bold">Penandatangan</div>
-                                            <div className="">: KO
-                                                {/* : {this.props} */}
+                                            <div className="">
+                                                : {this.props.DisposisiDetail.PENANDATANGAN}
                                             </div>
                                             
                                             <div className="font-bold">Tujuan</div>
-                                            <div className="col-span-2"> PD3
-                                                {/* {this.props} */}
+                                            <div className="col-span-2">
+                                                {this.props.DisposisiDetail.TUJUAN_SURAT}
                                             </div>
 
                                             <div className="font-bold">Nomor Surat</div>
-                                            <div className="col-span-2"> B/ 12312
-                                                {/* {this.props} */}
+                                            <div className="col-span-2"> 
+                                                {this.props.DisposisiDetail.NOMOR_SURAT}
                                             </div>
 
-                                            <div className="font-bold">Perihal / Ringkasan </div>
-                                            <div className="col-span-2"> Laporan pertanggung jawaban
-                                                {/* {this.props} */}
-                                            </div>
-                                            <div className="font-bold">Surat </div>
-                                            <div className="col-span-2"> Beasiswa kuartal 3
-                                                {/* {this.props} */}
+                                            <div className="font-bold">Perihal / Ringkasan Surat</div>
+                                            <div className="col-span-2">
+                                                {this.props.DisposisiDetail.PERIHAL}
                                             </div>
                                         </div>
                                         <div>

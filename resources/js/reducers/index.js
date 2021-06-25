@@ -10,7 +10,7 @@ import AllDisposisi from './all_disposisi_reducers'
 import RUnitKerja from './unit_kerja_reducers'
 import RDerajatSurat from './derajat_surat_reducers'
 import RSifatSurat from './sifat_surat_reducers'
-import AllPencatatan from './all_pencatatan_reducers'
+// import AllPencatatan from './all_pencatatan_reducers'
 
 const rootReducer = combineReducers({
   authToken,
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   RUnitKerja,
   RDerajatSurat,
   RSifatSurat,
-  AllPencatatan,
+  // AllPencatatan,
 })
 
 export default rootReducer

@@ -4,11 +4,14 @@ import React, {Component, component, useState} from 'react'
 import {connect} from 'react-redux'
 import Kalender from '../AddFormSurat/Kalender'
 
+
 class AddFormDisposisi extends Component{
     constructor(props){
         super(props)
         this.state={
-
+            dir: [],
+            tglSurat: this.props.SuratDetail.TGL_SURAT,
+            tglDiterima: this.props.SuratDetail.TGL_DITERIMA,
         }
         this.handleModal = this.handleModal.bind(this)
     }
@@ -130,54 +133,86 @@ class AddFormDisposisi extends Component{
                                             
                                             <div className="font-bold">Nomor Agenda</div>
                                             <div className="col-span-2">
-                                                {/* {this.state.pengguna.map((item,index)=>{
-                                                    con
-                                                })} */}
+                                                {this.props.SuratDetail.NOMOR_AGENDA}
                                             </div>
 
                                             <div className="font-bold">Dari</div>
                                             <div className="font-bold">Nama</div>
                                             <div className="">: KO
-                                                {/* : {this.props} */}
+                                                : {this.props.SuratDetail.NAMA_PENGIRIM}
                                             </div>
                                             <div></div>
                                             <div className="font-bold">Unit</div>
-                                            <div className="">JTK
-                                                {/* : {this.props} */}
+                                            <div className="">
+                                            <ul>
+                                                {this.props.IdUnitKerja.map((item, index) => {
+                                                    return (
+                                                    <li key={index}>
+                                                        {this.props.SuratDetail.ID_KODE_UNIT_KERJA ==
+                                                        item.ID_KODE_UNIT_KERJA ? (
+                                                        <div className="">
+                                                            <p>
+                                                            : {item.KODE_UNIT_KERJA} -{' '}
+                                                            {item.NAMA_UNIT_KERJA}
+                                                            </p>
+                                                        </div>
+                                                        ) : (
+                                                        <></>
+                                                        )}
+                                                    </li>
+                                                    )
+                                                })}
+                                            </ul>
                                             </div>
                                             <div></div>
                                             <div className="font-bold">Penandatangan</div>
-                                            <div className="">: KO
-                                                {/* : {this.props} */}
+                                            <div className="">
+                                                : {this.props.SuratDetail.PENANDATANGAN}
                                             </div>
                                             
                                             <div className="font-bold">Tujuan</div>
                                             <div className="col-span-2">
-                                                {/* {this.props} */}
+                                                {this.props.SuratDetail.TUJUAN_SURAT}
                                             </div>
 
                                             <div className="font-bold">Nomor Surat</div>
                                             <div className="col-span-2">
-                                                {/* {this.props} */}
+                                                {this.props.SuratDetail.NOMOR_SURAT}
                                             </div>
 
                                             <div className="font-bold">Tanggal Surat</div>
                                             <div className="col-span-2">
-                                                {/* {this.props} */}
+                                                {this.state.tglSurat}
                                             </div>
                                             <div className="font-bold">Tanggal Terima</div>
                                             <div className="col-span-2">
-                                                {/* {this.props} */}
+                                                {this.state.tglDiterima}
                                             </div>
 
                                             <div className="font-bold">Perihal / Ringkasan</div>
                                             <div className="col-span-2">
-                                                {/* {this.props} */}
+                                                {this.props.SuratDetail.PERIHAL}
                                             </div>
 
-                                            <div className="font-bold">Surat</div>
+                                            <div className="font-bold">Jenis Surat</div>
                                             <div className="col-span-2">
-                                                {/* {this.props} */}
+                                            {/* {this.props.AllJenisSurat.allJenisSurat.map(
+                                                (item, index) => {
+                                                    const temp = this.props.SuratDetail.ID_JENIS_SURAT
+                                                    const temp2 = item.ID_JENIS_SURAT
+                                                    return (
+                                                    <div key={index}>
+                                                        {temp == temp2 ? (
+                                                        <>
+                                                            {item.JENIS_SURAT}, {item.KETERANGAN}
+                                                        </>
+                                                        ) : (
+                                                        <></>
+                                                        )}
+                                                    </div>
+                                                    )
+                                                },
+                                            )} */}
                                             </div>
 
                                             <div className="font-bold">Kode Hal</div>
@@ -187,33 +222,61 @@ class AddFormDisposisi extends Component{
 
                                             <div className="font-bold">Jenis Surat</div>
                                             <div className="col-span-2">
-                                                {/* {this.props} */}
+                                            
                                             </div>
 
                                             <div className="font-bold">Sifat Surat</div>
                                             <div className="col-span-2">
-                                                {/* {this.props} */}
+                                            {/* {this.props.RSifatSurat.allSifatSuratInfo.map(
+                                                (item, index) => {
+                                                    const temp = this.props.SuratDetail.ID_SIFAT_NASKAH
+                                                    const temp2 = item.ID_SIFAT_NASKAH
+                                                    return (
+                                                    <div key={index}>
+                                                        {temp == temp2 ? (
+                                                        <>{item.SIFAT_NASKAH}</>
+                                                        ) : (
+                                                        <></>
+                                                        )}
+                                                    </div>
+                                                    )
+                                                },
+                                            )} */}
                                             </div>
 
                                             <div className="font-bold">Derajar Surat</div>
                                             <div className="col-span-2">
-                                                {/* {this.props} */}
+                                            {/* {this.props.RDerajatSurat.allDerajatSuratInfo.map(
+                                                    (item, index) => {
+                                                        const temp = this.props.SuratDetail.ID_DERAJAT_SURAT
+                                                        const temp2 = item.ID_DERAJAT_SURAT
+                                                        return (
+                                                        <div key={index}>
+                                                            {temp == temp2 ? (
+                                                            <>{item.DERAJAT_SURAT}</>
+                                                            ) : (
+                                                            <></>
+                                                            )}
+                                                        </div>
+                                                        )
+                                                    },
+                                                    )}{' '} */}
                                             </div>
                                             
                                             <div className="font-bold">Kode Arsip</div>
                                             <div className="font-bold">Kom</div>
-                                            <div className="">: KO
-                                                {/* : {this.props} */}
+                                            <div className="">
+                                                : {this.props.SuratDetail.KODE_ARSIP_KOM}
                                             </div>
                                             <div></div>
                                             <div className="font-bold">Hlm</div>
-                                            <div className="">: KO
-                                                {/* : {this.props} */}
+                                            <div className="">
+                                                : {this.props.SuratDetail.KODE_ARSIP_HLM}
                                             </div>
                                             <div></div>
                                             <div className="font-bold">Manual</div>
-                                            <div className="">: KO
-                                                {/* : {this.props} */}
+                                            <div className="">
+                                                : {this.props.SuratDetail.KODE_ARSIP_MANUAL}
                                             </div>
                                             
                                             <div className="font-bold">Keterangan</div>
@@ -271,10 +334,7 @@ class AddFormDisposisi extends Component{
                                             {/* <div className="font-bold col-span-3">Detail Surat</div> */}
                                             <div className="flex flex-row grid grid-cols-3 bg-white p-4">
                                                 <div className="font-bold col-span-3">Data Disposisi</div>
-                                                <div className="font-bold">Nomor Disposisi</div>
-                                                    <div className="col-span-2"> B/23/blablabla
-                                                        {/* : {this.props} */}
-                                                    </div>
+                                                
                                                 <form
                                                 className="mt-8"
                                                 action="#"
@@ -287,21 +347,47 @@ class AddFormDisposisi extends Component{
                                                                 htmlFor="nama"
                                                                 className="text-sm mb-2 font-bold flex flex-row "
                                                             >
+                                                                <div>Nomor Disposisi </div>
+                                                                <div className="text-danger ml-2"> </div>
+                                                            </div>
+                                                            <div className="justify-end ">
+                                                                <div 
+                                                                type=""
+                                                                name="nomorDisposisi"
+                                                                // required
+                                                                id="nomorDisposisi"
+                                                                className=""
+                                                                >
+                                                                {this.props.SuratDetail.NOMOR_SURAT}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                                
+                                                        <div className="flex flex-row grid grid-cols-2">
+                                                            <div
+                                                                htmlFor="nama"
+                                                                className="text-sm mb-2 font-bold flex flex-row "
+                                                            >
                                                                 <div>Tanggal Disposisi </div>
                                                                 <div className="text-danger ml-2"> </div>
                                                             </div>
                                                             <div className="justify-end ">
-                                                                <input
+                                                                <div
                                                                 type="text"
                                                                 name="tanggalDisposisi"
                                                                 required
                                                                 id="tanggalDisposisi"
                                                                 className={
-                                                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                                                 }
                                                                 >
-                                                                {/* {this.state.lastAgenda} */}
-                                                                </input>
+                                                                <Kalender
+                                                                    onChange={(exDate, value) =>
+                                                                    this.handleTglSurat(exDate, value)
+                                                                    }
+                                                                    data={null}
+                                                                />
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -314,9 +400,13 @@ class AddFormDisposisi extends Component{
                                                             </div>
                                                             <div className="justify-end ">
                                                                 <div
+                                                                type=""
+                                                                name="tujuanDisposisi"
+                                                                // required
+                                                                id="tujuanDisposisi"
                                                                 className=""
-                                                                >Jurusan teknik informatika
-                                                                {/* {this.state.lastAgenda} */}
+                                                                >
+                                                                    {this.props.SuratDetail.TUJUAN_SURAT}
                                                                 </div>
                                                             </div>
                                                         </div>
