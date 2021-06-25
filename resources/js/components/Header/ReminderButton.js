@@ -47,7 +47,8 @@ class ReminderButton extends Component {
           {this.state.show ? (
               <>
                 <div className="relative spacing-0">
-                  <div className="absolute right-0 bg-primary shadow-lg overflow-hidden">
+                  <div className="absolute right-0 bg-white shadow-lg overflow-hidden">
+                    <p className="p-3">Pengingat Tindak Lanjut Surat</p>
                     {this.props.Pengingat.allPengingatInfo == null ? (
                       <DataReminder Pengingat={this.state.Pengingat} />
                     ) : (

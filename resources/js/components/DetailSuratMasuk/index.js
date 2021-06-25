@@ -7,6 +7,9 @@ import ModalKonfirmDeleteSM from '../ModalKonfirmDeleteSM.js'
 import EditFormSurat from '../EditFormSurat'
 import ModalLoading from '../ModalLoading'
 import UpdateReminder from '../FormUpdateReminder'
+import UpdateTindakLanjut from '../FormUpdateReminder/updateTL'
+import AddReminder from '../FormAddReminder'
+import { isEmpty } from 'lodash-es'
 
 // import createuser from "./index";
 class DetailSuratMasuk extends Component {
@@ -14,12 +17,15 @@ class DetailSuratMasuk extends Component {
     super(props)
     this.state = {
       dir: [],
+      pengingat: null,
       numPages: '',
       pageNumber: '',
       url: '',
       urlLampiran: '',
+      getP: false,
       showModal: false,
       showPengingatModal: false,
+      hiddenTLModal: false,
       pengguna: this.props.AllUser.allUserInfo,
       tglSurat: this.props.SuratDetail.TGL_SURAT,
       tglDiterima: this.props.SuratDetail.TGL_DITERIMA,
@@ -29,7 +35,9 @@ class DetailSuratMasuk extends Component {
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
     this.handlePengingatModal = this.handlePengingatModal.bind(this)
+    this.handleTindakLanjutModal = this.handleTindakLanjutModal.bind(this)
     this.getFileSuratMasuk = this.getFileSuratMasuk.bind(this)
+    this.getPengingatSurat = this.getPengingatSurat.bind(this)
     this.reserveTgl = this.reserveTgl.bind(this)
   }
   //handle input changes and update item state
@@ -37,15 +45,22 @@ class DetailSuratMasuk extends Component {
   async handleModal() {
     await this.setState({
       showModal: !this.state.showModal,
+      getP: !this.state.getP,
     })
     if (this.state.showModal == true) {
       this.getFileSuratMasuk()
       this.reserveTgl()
+      this.getPengingatSurat()
     }
   }
   async handlePengingatModal(){
     await this.setState({
       showPengingatModal: !this.state.showPengingatModal,
+    })
+  }
+  async handleTindakLanjutModal(){
+    await this.setState({
+      hiddenTLModal: !this.state.hiddenTLModal,
     })
   }
   reserveTgl() {
@@ -56,6 +71,33 @@ class DetailSuratMasuk extends Component {
       tglSurat: a[2] + '-' + a[1] + '-' + a[0],
       tglDiterima: b[2] + '-' + b[1] + '-' + b[0],
     })
+  }
+  async getPengingatSurat(){
+    this.setState({
+      pengingat: null
+    })
+    if (this.state.getP == true) {
+      // await api()
+      //   .get('/api/getPengingat/{this.props.SuratDetail.ID_PENCATATAN}')
+      //   .then((response) =>{
+      //     this.setState({
+      //       pengingat: response.data,
+      //       getP: !this.state.getP,
+      //     })
+      //     console.log('pengingat:' + this.state.pengingat)
+      //   })
+      this.props.Pengingat.allPengingatInfo.map(
+        (item) => {
+          const temp = this.props.SuratDetail.ID_PENCATATAN
+          const temp2 = item.ID_PENCATATAN
+          if (temp == temp2){
+            this.setState({
+              pengingat: item
+            })
+          }          
+      })
+    }
+    //console.log(this.state.pengingat)
   }
   async onSubmit(e) {
     e.preventDefault()
@@ -321,44 +363,37 @@ class DetailSuratMasuk extends Component {
                       <div className="font-bold">Status Pengingat</div>
                       <div className=" col-span-2">
                         <div className=" flex flex-row">
-                          {this.props.Pengingat.allPengingatInfo.map(
-                            (item, index) => {
-                              const temp = this.props.SuratDetail.ID_PENCATATAN
-                              const temp2 = item.ID_PENCATATAN
-                              return (
-                                <div key={index}>
-                                  {temp == temp2 ? (
-                                    <>{item.STATUS == 1 ?(
-                                      <>
-                                      <button
-                                        type="submit"
-                                        className="bg-biru self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
-                                      >
-                                        Aktif
-                                      </button>
-                                      </>
-                                    ) : (
-                                      <>
-                                      <button
-                                        type="submit"
-                                        className="bg-abu self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
-                                      >
-                                        Tidak Aktif
-                                      </button></>
-                                    )} 
-                                    {/* <UpdateReminder
-                                      idPengingat = {item.ID_PENGINGAT}
-                                      waktuPengingat = {item.WAKTU_PENGINGAT}
-                                      deskripsiPengingat = {item.DESKRIPSI}
-                                    />                             */}
-                                    </>                                    
-                                  ) : (
-                                    <></>
-                                  )}
-                                </div>
-                              )
-                            },
-                          )}{' '}
+                          {this.state.pengingat == null ? (
+                            <>
+                            <button
+                              type="submit"
+                              className="bg-abu self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
+                            >
+                            Tidak Aktif
+                            </button>
+                            </>
+                          ):(
+                            <>{this.state.pengingat.STATUS == 1 ? (
+                            <>
+                            <button
+                              type="submit"
+                              className="bg-biru self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
+                            >
+                            Aktif
+                            </button>
+                            </>
+                            ):(
+                              <>
+                              <button
+                                type="submit"
+                                className="bg-abu self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
+                              >
+                              Tidak Aktif
+                              </button>
+                              </>
+                            )}
+                            </>
+                          )}
                           
                           <button
                             type="submit"
@@ -376,10 +411,36 @@ class DetailSuratMasuk extends Component {
                         </div> */}
                       </div>
                       <div className="font-bold">Status Tindak Lanjut</div>
-
-                      <div className="font-bold rounded p-2 col-span-2 bg-danger w-75% text-putih">
-                        Belum ditindak lanjuti
-                      </div>
+                          
+                      {this.state.pengingat == null ? (
+                        <><div
+                            className="font-bold rounded p-2 col-span-2 bg-danger w-75% text-putih"
+                          >
+                            Belum ditindaklanjuti
+                          </div>
+                        </>
+                      ):(
+                        <>{this.state.pengingat.STATUS == 0 ? (
+                          <>
+                          <div
+                            className="font-bold rounded p-2 col-span-2 bg-green-500 w-75% text-putih"
+                          >
+                            Sudah ditindaklanjuti
+                          </div>
+                          </>
+                        ):(
+                          <>
+                          <button
+                            type="button"
+                            className="font-bold rounded p-2 col-span-2 bg-danger w-75% text-putih"
+                            onClick={this.handleTindakLanjutModal}
+                          >
+                            Belum ditindaklanjuti
+                          </button>
+                          </>
+                        )}
+                        </>
+                      )}
                     </div>
                     <div>
                       <div className=" flex justify-end   ">
@@ -416,34 +477,41 @@ class DetailSuratMasuk extends Component {
         ) : null}
         {this.state.showPengingatModal ? (
           <>
-          {this.props.Pengingat.allPengingatInfo.map(
-            (item,index) => {
-              const temp = this.props.SuratDetail.ID_PENCATATAN
-              const temp2 = item.ID_PENCATATAN
-            return(
-              <div key={index}>
-                {temp == temp2 ? (
-                  <>
-                    <UpdateReminder
-                    idPengingat = {item.ID_PENGINGAT}
-                    idPengguna = {item.ID_PENGGUNA}
-                    idPencatatan = {item.ID_PENCATATAN}
-                    waktuPengingat = {item.WAKTU_PENGINGAT}
-                    deskripsiPengingat = {item.DESKRIPSI}
-                    status = {item.STATUS}
-                    noAgenda = {this.props.SuratDetail.NOMOR_AGENDA}
-                    idDerajatSurat = {this.props.SuratDetail.ID_DERAJAT_SURAT}
-                  />
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
-            )
-          })}
-          
+         {this.state.pengingat == null ? (
+           <>
+           <AddReminder
+              SuratDetail = {this.props.SuratDetail}
+              idPencatatan = {this.props.SuratDetail.ID_PENCATATAN}
+              noAgenda = {this.props.SuratDetail.NOMOR_AGENDA}
+              idDerajatSurat = {this.props.SuratDetail.ID_DERAJAT_SURAT}/>
+           </>
+         ) : (
+           <>
+           <UpdateReminder
+              idPengingat = {this.state.pengingat.ID_PENGINGAT}
+              idPengguna = {this.state.pengingat.ID_PENGGUNA}
+              idPencatatan = {this.state.pengingat.ID_PENCATATAN}
+              waktuPengingat = {this.state.pengingat.WAKTU_PENGINGAT}
+              deskripsiPengingat = {this.state.pengingat.DESKRIPSI}
+              status = {this.state.pengingat.STATUS}
+              noAgenda = {this.props.SuratDetail.NOMOR_AGENDA}
+              idDerajatSurat = {this.props.SuratDetail.ID_DERAJAT_SURAT}/>
+           </>
+         )}
           </>
         ) : null}
+        {this.state.hiddenTLModal ? (
+          <>
+          <UpdateTindakLanjut
+            idPengingat = {this.state.pengingat.ID_PENGINGAT}
+            idPengguna = {this.state.pengingat.ID_PENGGUNA}
+            idPencatatan = {this.state.pengingat.ID_PENCATATAN}
+            waktuPengingat = {this.state.pengingat.WAKTU_PENGINGAT}
+            deskripsiPengingat = {this.state.pengingat.DESKRIPSI}
+            status = {this.state.pengingat.STATUS}
+          />
+          </>
+        ): null}
       </>
     )
   }

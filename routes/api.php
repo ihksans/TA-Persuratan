@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('allPengingatInfo', 'PengingatController@getAllPengingat');
     Route::get('getPengingat/{id}', 'PengingatController@getPengingat');
     Route::post('updatePengingat', 'PengingatController@updatePengingat');
+    Route::delete('deletePengingat/{id}', 'PengingatController@deletePengingat');
 
     //ihksan
     Route::post('setPencatatan', 'PencatatanController@setPencatatan');

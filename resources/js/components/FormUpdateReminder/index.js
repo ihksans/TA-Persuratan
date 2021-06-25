@@ -30,6 +30,7 @@ class FormUpdateReminder extends Component {
         this.handleErrorDeskripsi = this.handleErrorDeskripsi.bind(this)
         this.handleModal = this.handleModal.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+        this.onDelete = this.onDelete.bind(this)
         this.validateInputWaktuPengingat = this.validateInputWaktuPengingat.bind(this)
         this.validateInputDeskripsi = this.validateInputDeskripsi.bind(this)
         this.handleLoading = this.handleLoading.bind(this)
@@ -115,16 +116,34 @@ class FormUpdateReminder extends Component {
                     this.handleLoading()
                     this.handleModal()
                     window.location.reload('/#/SuratMasuk')
+                    // this.setState({
+                    //   showModal: !this.state.showModal,
+                    // })
                 })
                 .catch((err) => {
                     console.log(err)
                     this.handleLoading()
                 })
                 console.log('valid form')
+                
             } else {
                 console.log('error form')
             }
         }
+    }
+    async onDelete(){
+      await api()
+        .delete('/api/deletePengingat/' + this.state.ID_PENGINGAT)
+        .then((response) =>{
+            console.log('respon:' + response)
+            console.log('pengingat telah terhapus')
+            this.handleLoading()
+            window.location.reload('/#/SuratMasuk')
+          })
+          .catch((error) => {
+            console.log(error)
+            this.handleLoading()
+          })
     }
 
     validateInputWaktuPengingat(input){
@@ -180,7 +199,7 @@ class FormUpdateReminder extends Component {
                         <img className="w-8" src="assets/img/icon/Surat.png" />
                       </div>
                       <div className="flex ">
-                        <h3 className="text-xl font-semibold  ">Tambah Pengingat Surat</h3>
+                        <h3 className="text-xl font-semibold  ">Edit Pengingat Surat</h3>
                       </div>
                     </div>
 
@@ -313,13 +332,22 @@ class FormUpdateReminder extends Component {
                                     </div>
                                   </div>
                                   <div className="flex flex-row grid grid-cols-2">
-                                    <div></div>
+                                    {/* <div></div> */}
+                                    <button
+                                      type="submit"
+                                      className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center align-center"
+                                      onClick={this.onDelete}
+                                      value="Nonactived Reminder"
+                                    >
+                                      <div className="text-sm mb-2 text-white	h-6 font-bold justify-center ">
+                                        Hapus Pengingat
+                                      </div>
+                                    </button>
                                     <button
                                       type="submit"
                                       className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center align-center"
                                       onClick={this.onSubmit}
-                                      value="Add Pengguna"
-                                    //   value="Update Reminder"
+                                      value="Update Reminder"
                                     >
                                       <div className="text-sm mb-2 text-white	h-6 font-bold justify-center ">
                                         Simpan Pengingat

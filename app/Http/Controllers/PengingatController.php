@@ -14,15 +14,15 @@ class PengingatController extends Controller
     {
 
     }
-    public function setPengingat(Request $request)
+    public function createPengingat(Request $request)
     {
         $data = [
-            'ID_PENGINGAT' => $request->id_pengingat,
-            'ID_PENGGUNA' => $request->id_pengguna,
-            'ID_PENCATATAN' => $request->id_pencatatan,
-            'WAKTU_PENGINGAT' => $request->waktu_pengingat,
-            'DESKRIPSI' => $request->deskripsi,
-            'STATUS' => $request->status,
+            'ID_PENGINGAT' => $request->ID_PENGINGAT,
+            'ID_PENGGUNA' => $request->ID_PENGGUNA,
+            'ID_PENCATATAN' => $request->ID_PENCATATAN,
+            'WAKTU_PENGINGAT' => $request->WAKTU_PENGINGAT,
+            'DESKRIPSI' => $request->DESKRIPSI,
+            'STATUS' => $request->STATUS,
         ];
         $pengingat = Pengingat::create($data);
         if(!$pengingat){
@@ -40,19 +40,24 @@ class PengingatController extends Controller
     }
     public function getPengingat($id)
     {
-        $pengingat = Pengingat::where('ID_PENCATATAN', $id)->first();
-        if($pengingat == null){
-            $respon =[
-                'Msg' => 'error',
-                'content' =>  $id,
-            ];
-            return response()->json($respon);
-        }
+        $pengingat = Pengingat::where('ID_PENCATATAN', $id);
+        // if($pengingat == null){
+        //     $respon =[
+        //         'Msg' => 'error',
+        //         'content' =>  [],
+        //     ];
+        //     return response()->json($respon);
+        // }
+        // $respon=[
+        //     'Msg' => 'success',
+        //     'content' => $pengingat,
+        // ];
         return response()->json($pengingat,200);
     }
     public function getAllPengingat()
     {
-        $pengingat = Pengingat::all();
+        //$pengingat = Pengingat::all();
+        $pengingat = Pengingat::orderBy('WAKTU_PENGINGAT','ASC')->get();
         if(!$pengingat){
             $respon =[
                 'Msg' => 'Tidak ada pengingat',
@@ -84,6 +89,26 @@ class PengingatController extends Controller
             'Msg' => 'success',
             'content' => $pengingat,
             ];
+        return response()->json($pengingat);
+    }
+    public function deletePengingat($id)
+    {
+        $pengingat = Pengingat::where('ID_PENGINGAT',$id);
+        $pengingat->delete();
+        if(!$pengingat){
+            $respon = [
+                'msg' => 'delete failed',
+                'error' => 'delete pengingat'
+            ];
+            return response()->json($respon);
+        }
+        if($id==null){
+            $respon = [
+                'msg' => 'delete failed',
+                'error' => 'delete pengingat'
+            ];
+            return response()->json($respon);
+        }      
         return response()->json($pengingat);
     }
 }

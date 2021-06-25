@@ -4,6 +4,7 @@ import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import Kalender from './Kalender'
 import ModalLoading from '../ModalLoading'
+import AddReminder from '../FormAddReminder'
 // import createuser from "./index";
 class AddFormSurat extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class AddFormSurat extends Component {
     this.state = {
       dir: [],
       modalLoading: false,
+      SuratDetail: null,
       jenisSurat: [],
       firstDate: new Date(),
       surat: null,
@@ -61,12 +63,14 @@ class AddFormSurat extends Component {
       errCustomTujuanKodeUnit: false,
       errCustomPengirimNamaUnit: false,
       errCustomPengirimKodeUnit: false,
+      showPengingatModal: false,
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
     this.handleLoading = this.handleLoading.bind(this)
     this.onFileChange = this.onFileChange.bind(this)
     this.onFileChange2 = this.onFileChange2.bind(this)
+    // this.handleSetReminder = this.handleSetReminder.bind(this)
 
     this.handleIdPencatatan = this.handleIdPencatatan.bind(this)
     this.handleIdPengguna = this.handleIdPengguna.bind(this)
@@ -884,11 +888,33 @@ class AddFormSurat extends Component {
             this.handleLoading()
             this.handleModal()
             window.location.reload('/#/SuratMasuk')
+            // this.handleSetReminder()
+            // this.setState({
+            //   showPengingatModal: !this.state.showPengingatModal,
+            // })
           })
       }
       console.log('error form add surat' + this.state.errTujuanSurat)
     }
   }
+  
+  /*UNTUK HANDLE MODAL ADD REMINDER SAMA PARAMETERNYA*/
+  // async handleSetReminder(){
+  //   this.setState({
+  //     SuratDetail: null
+  //   })
+  //   window.location.reload('/#/SuratMasuk')
+  //   this.props.SuratMasuk.allSuratMasukInfo.map(
+  //     (item)=>{
+  //       if (item.NOMOR_AGENDA == (lastAgenda-1)){
+  //         this.setState({
+  //           SuratDetail: item,
+  //           showPengingatModal: !this.state.showPengingatModal
+  //         })
+  //       }
+  //   })    
+  // }
+  
   componentDidMount() {
     api()
       .get('api/getLast')
@@ -1696,6 +1722,18 @@ class AddFormSurat extends Component {
           loading={this.state.modalLoading}
           title={'Sinkronisasi Data'}
         />
+        
+        {/*Add Reminder*/}
+        {this.state.showPengingatModal ? (
+          <>
+          <AddReminder
+            SuratDetail = {this.state.SuratDetail}
+            idPencatatan = {this.state.SuratDetail.ID_PENCATATAN}
+            noAgenda = {this.state.SuratDetail.NOMOR_AGENDA}
+            derajatSurat = {this.state.SuratDetail.ID_DERAJAT_SURAT}
+          />
+          </>
+        ):null}
       </>
     )
   }
