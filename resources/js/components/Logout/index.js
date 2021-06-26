@@ -1,15 +1,31 @@
 //component logout
 import React, { Component, useState } from 'react'
-import { removeTokenByID, unsetUser, unsetPath } from '../../actions'
+import {
+  removeTokenByID,
+  unsetUser,
+  unsetPath,
+  unsetAllSuratMasuk,
+  unsetJenisSurat,
+  unsetAllUser,
+  unsetUnitKerja,
+} from '../../actions'
 import { logoutAuth } from '../../service/auth'
 import { connect } from 'react-redux'
-
+import ModalLoading from '../ModalLoading'
 class Logout extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      modalLoading: false,
+    }
     this.removeToken = this.removeToken.bind(this)
     this.unsetCurrentUser = this.unsetCurrentUser.bind(this)
+    this.handleLoading = this.handleLoading.bind(this)
+  }
+  handleLoading() {
+    this.setState({
+      modalLoading: !this.state.modalLoading,
+    })
   }
   signOut() {
     logoutAuth()
@@ -17,9 +33,15 @@ class Logout extends Component {
     this.unsetCurrentUser()
   }
   removeToken() {
+    this.handleLoading()
     this.props.removeTokenByID()
     this.props.unsetUser()
     this.props.unsetPath()
+    this.props.unsetAllSuratMasuk()
+    this.props.unsetJenisSurat()
+    this.props.unsetAllUser()
+    this.props.unsetUnitKerja()
+    this.handleLoading()
     logoutAuth()
   }
   unsetCurrentUser() {
@@ -69,6 +91,10 @@ class Logout extends Component {
             Logout
           </div>
         </div>
+        <ModalLoading
+          loading={this.state.modalLoading}
+          title={'Membersihkan Data'}
+        />
       </>
     )
   }
@@ -81,4 +107,8 @@ export default connect(mapStateToProps, {
   removeTokenByID,
   unsetUser,
   unsetPath,
+  unsetAllSuratMasuk,
+  unsetJenisSurat,
+  unsetAllUser,
+  unsetUnitKerja,
 })(Logout)

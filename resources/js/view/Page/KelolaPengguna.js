@@ -51,7 +51,7 @@ class KelolaPengguna extends Component {
           <div className="bg-white shadow-md rounded p-6">
             <div className="flex flex-row">
               <div>
-                <img className="w-8" src="assets/img/icon/user_icon.png"/>
+                <img className="w-8" src="assets/img/icon/user_icon.png" />
               </div>
               <div className="font-bold ml-2 text-2xl	">Kelola Pengguna</div>
             </div>
