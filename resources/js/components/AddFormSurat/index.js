@@ -35,7 +35,6 @@ class AddFormSurat extends Component {
       tglDiterima: null,
       tglSurat: null,
       sifatNaskah: '',
-<<<<<<< HEAD
       lastAgenda: 1,
       customInputTujuan: false,
       customNamaTujuan: '',
@@ -43,10 +42,6 @@ class AddFormSurat extends Component {
       customInputPengirim: false,
       customNamaPengirim: '',
       customKodePengirim: '',
-=======
-      lastAgenda: null,
-
->>>>>>> dev-satria2
       errSurat: '',
       errJenisSurat: false,
       errLampiran: '',
@@ -64,17 +59,13 @@ class AddFormSurat extends Component {
       errNamaPengirim: false,
       errSifatNaskah: false,
       errMsgFileLampiran: '',
-<<<<<<< HEAD
       errCustomTujuanNamaUnit: false,
       errCustomTujuanKodeUnit: false,
       errCustomPengirimNamaUnit: false,
       errCustomPengirimKodeUnit: false,
-<<<<<<< HEAD
+
       showPengingatModal: false,
-=======
-=======
->>>>>>> dev-satria2
->>>>>>> dev-integrasi
+
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
@@ -101,15 +92,12 @@ class AddFormSurat extends Component {
     this.handleTglDiterima = this.handleTglDiterima.bind(this)
     this.handleTglSurat = this.handleTglSurat.bind(this)
     this.handleSifatSurat = this.handleSifatSurat.bind(this)
-<<<<<<< HEAD
     this.handleCustomTujuan = this.handleCustomTujuan.bind(this)
     this.handleCustomNamaUnit = this.handleCustomNamaUnit.bind(this)
     this.handleCustomKodeUnit = this.handleCustomKodeUnit.bind(this)
     this.handleCustomPengirim = this.handleCustomPengirim.bind(this)
     this.handleCustomNamaPengirim = this.handleCustomNamaPengirim.bind(this)
     this.handleCustomKodePengirim = this.handleCustomKodePengirim.bind(this)
-=======
->>>>>>> dev-satria2
 
     this.handleErrSurat = this.handleErrSurat.bind(this)
     this.handleErrJenisSurat = this.handleErrJenisSurat.bind(this)
@@ -127,7 +115,6 @@ class AddFormSurat extends Component {
     this.handleErrTglSurat = this.handleErrTglSurat.bind(this)
     this.handleErrorPenandatangan = this.handleErrorPenandatangan.bind(this)
     this.handleErrSifatSurat = this.handleErrSifatSurat.bind(this)
-<<<<<<< HEAD
     this.handleErrCustomKodeUnit = this.handleErrCustomKodeUnit.bind(this)
     this.handleErrCustomNamaUnit = this.handleErrCustomNamaUnit.bind(this)
     this.handleErrCustomNamaPengirim = this.handleErrCustomNamaPengirim.bind(
@@ -136,8 +123,6 @@ class AddFormSurat extends Component {
     this.handleErrCustomKodePengirim = this.handleErrCustomKodePengirim.bind(
       this,
     )
-=======
->>>>>>> dev-satria2
 
     this.validateNomorSurat = this.validateNomorSurat.bind(this)
     this.validateTanggalSurat = this.validateTanggalSurat.bind(this)
@@ -155,13 +140,10 @@ class AddFormSurat extends Component {
     this.validateSurat = this.validateSurat.bind(this)
     this.validateLampiran = this.validateLampiran.bind(this)
     this.validateSifatSurat = this.validateSifatSurat.bind(this)
-<<<<<<< HEAD
     this.validateCustomNamaUnit = this.validateCustomNamaUnit.bind(this)
     this.validateCustomKodeUnit = this.validateCustomKodeUnit.bind(this)
     this.validateCustomNamaPengirim = this.validateCustomNamaPengirim.bind(this)
     this.validateCustomKodePengirim = this.validateCustomKodePengirim.bind(this)
-=======
->>>>>>> dev-satria2
   }
 
   validateLampiran(input) {
@@ -195,7 +177,6 @@ class AddFormSurat extends Component {
           namaFileSurat: namasurat,
         })
       }
-<<<<<<< HEAD
     } else {
       this.handleErrSurat('Surat file harus pdf')
     }
@@ -204,16 +185,6 @@ class AddFormSurat extends Component {
     if (input == null || input == '' || input == ' ') {
       this.handleErrKodeArsipManual(true)
     } else {
-=======
-    } else {
-      this.handleErrSurat('Surat file harus pdf')
-    }
-  }
-  validateKodeArsipManual(input) {
-    if (input == null || input == '' || input == ' ') {
-      this.handleErrKodeArsipManual(true)
-    } else {
->>>>>>> dev-satria2
       this.handleErrKodeArsipManual(false)
     }
   }
@@ -323,7 +294,6 @@ class AddFormSurat extends Component {
     } else {
       this.handleErrNomorSurat(false)
     }
-<<<<<<< HEAD
   }
   validateCustomNamaUnit(input) {
     const re = /^[a-zA-Z0-9 ]*$/
@@ -380,8 +350,6 @@ class AddFormSurat extends Component {
         this.handleErrCustomKodePengirim(true)
       }
     }
-=======
->>>>>>> dev-satria2
   }
 
   handleErrSurat(props) {
@@ -464,7 +432,6 @@ class AddFormSurat extends Component {
       errNamaPengirim: props,
     })
   }
-<<<<<<< HEAD
 
   handleErrCustomKodeUnit(props) {
     this.setState({
@@ -488,8 +455,6 @@ class AddFormSurat extends Component {
       errCustomPengirimNamaUnit: props,
     })
   }
-=======
->>>>>>> dev-satria2
   handleSifatSurat(e) {
     let value = e.target.value
     this.setState({
@@ -631,14 +596,6 @@ class AddFormSurat extends Component {
     this.setState({
       firstDate: value,
     })
-<<<<<<< HEAD
-=======
-  }
-  handleLoading() {
-    this.setState({
-      modalLoading: !this.state.modalLoading,
-    })
->>>>>>> dev-satria2
   }
   handleLoading() {
     this.setState({
@@ -704,10 +661,6 @@ class AddFormSurat extends Component {
     this.setState({
       showModal: !this.state.showModal,
       modalLoading: false,
-<<<<<<< HEAD
-=======
-
->>>>>>> dev-satria2
       idJenisSurat: '',
       kodeArsipKom: '',
       kodeArsipHlm: '',
@@ -739,7 +692,6 @@ class AddFormSurat extends Component {
       errPenandatangan: false,
       errNamaPengirim: false,
       errMsgFileLampiran: '',
-<<<<<<< HEAD
       errSifatNaskah: false,
       surat: null,
       lampiran: null,
@@ -754,11 +706,6 @@ class AddFormSurat extends Component {
       errCustomTujuanKodeUnit: false,
       errCustomPengirimNamaUnit: false,
       errCustomPengirimKodeUnit: false,
-=======
-      surat: null,
-      lampiran: null,
-      sifatNaskah: '',
->>>>>>> dev-satria2
     })
   }
 
@@ -774,7 +721,6 @@ class AddFormSurat extends Component {
   async onSubmit(e) {
     e.preventDefault()
     await this.validateNomorSurat(this.state.nomorSurat)
-<<<<<<< HEAD
     await this.validateTanggalSurat(this.state.tglSurat)
     await this.validateTanggalDiterima(this.state.tglDiterima)
     await this.validatePerihal(this.state.perihal)
@@ -953,81 +899,6 @@ class AddFormSurat extends Component {
       }
       console.log('error form add surat' + this.state.errTujuanSurat)
     }
-=======
-    await this.validateSurat(this.state.tglSurat)
-    let formData = new FormData()
-    formData.append('id_pengguna', 51)
-    formData.append('id_jenis_surat', this.state.idJenisSurat)
-    formData.append('kode_arsip_kom', this.state.kodeArsipKom)
-    formData.append('kode_arsip_hlm', this.state.kodeArsipHlm)
-    formData.append('kode_arsip_manual', this.state.kodeArsipManual)
-    formData.append('nama_file_surat', this.state.nomorSurat)
-    formData.append('nama_file_lampiran', this.state.nomorSurat + '_lampiran')
-    formData.append('derajat_surat', this.state.derajatSurat)
-    
-    let fd = new FormData()
-    fd.append('id_pengguna', 51)
-    fd.append('id_jenis_surat', this.state.idJenisSurat)
-    fd.append('kode_arsip_kom', this.state.kodeArsipKom)
-    fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
-    fd.append('kode_arsip_manual', this.state.kodeArsipManual)
-    fd.append('nama_file_surat', this.state.nomorSurat)
-    fd.append('nama_file_lampiran', this.state.nomorSurat + '_lampiran')
-    fd.append('derajat_surat', this.state.derajatSurat)
-    fd.append('nomor_surat', this.state.nomorSurat)
-    fd.append('unit_pengirim', this.state.unitPengirim)
-    fd.append('penandatangan', this.state.penandatangan)
-    fd.append('nama_pengirim', this.state.namaPengirim)
-    fd.append('tujuan_surat', this.state.tujuanSurat)
-    fd.append('perihal', this.state.perihal)
-    fd.append('tgl_diterima', this.state.tglDiterima)
-    fd.append('tgl_surat', this.state.tglSurat)
-    await api()
-      .post('api/setPencatatan', formData)
-      .then((response) => {
-        this.setState({
-          idPencatatan: response.data.content.id,
-        })
-        console.log('pencatatan form' + response.data.content.id)
-        console.log('pencatatan form 2' + response.data)
-
-        fd.append('id_pencatatan', response.data.content.id)
-
-        api()
-          .post('api/setSuratMasuk', fd)
-          .then((response) => {
-            console.log('surat Masuk form' + response)
-          })
-          .catch((err) => console.log(err))
-      })
-      .catch((err) => console.log(err))
-
-    let fd2 = new FormData()
-
-    fd2.append('myFile', this.state.surat)
-    fd2.append('namefile', this.state.nomorSurat)
-
-    api()
-      .post('api/addSurat', fd2)
-      .then((response) => {
-        console.log('valid form' + response)
-        // this.handleModal()
-      })
-      .catch((err) => console.log(err))
-
-    let fd3 = new FormData()
-
-    fd3.append('myFile', this.state.lampiran)
-    fd3.append('namefile', this.state.nomorSurat + '_lampiran')
-
-    api()
-      .post('api/addSurat', fd3)
-      .then((response) => {
-        console.log('valid form' + response)
-        this.handleModal()
-      })
-      .catch((err) => console.log(err))
->>>>>>> dev-satria2
   }
   
   /*UNTUK HANDLE MODAL ADD REMINDER SAMA PARAMETERNYA*/
@@ -1051,7 +922,6 @@ class AddFormSurat extends Component {
     api()
       .get('api/getLast')
       .then((response) => {
-<<<<<<< HEAD
         if (response.data.content == null) {
           this.setState({
             lastAgenda: 1,
@@ -1061,11 +931,6 @@ class AddFormSurat extends Component {
             lastAgenda: response.data.content + 1,
           })
         }
-=======
-        this.setState({
-          lastAgenda: response.data.content + 1,
-        })
->>>>>>> dev-satria2
       })
     console.log('no agenda:' + this.state.lastAgenda)
   }
@@ -1243,7 +1108,6 @@ class AddFormSurat extends Component {
                                       <></>
                                     )}
                                   </div>
-<<<<<<< HEAD
                                 </div>
                                 <div className="flex flex-row grid grid-cols-2">
                                   <div
@@ -1382,83 +1246,6 @@ class AddFormSurat extends Component {
                                   </div>
                                 </div>
 
-=======
-                                </div>
-                                <div className="flex flex-row grid grid-cols-2">
-                                  <div
-                                    htmlFor="nama"
-                                    className="text-sm mb-2 font-bold flex flex-row "
-                                  >
-                                    <div>Perihal </div>
-                                    <div className="text-danger ml-2"> *</div>
-                                  </div>
-                                  <div className="justify-end ">
-                                    <textarea
-                                      type="text"
-                                      name="perihal"
-                                      required
-                                      id="perihal"
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none  w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      onChange={this.handlePerihal}
-                                    />
-                                    {this.state.errPerihal ? (
-                                      <div className="text-danger text-xs mb-3">
-                                        Perihal harus diisi
-                                      </div>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                </div>
-                                <div className="flex flex-row grid grid-cols-2">
-                                  <div
-                                    htmlFor="nama"
-                                    className="text-sm mb-2 font-bold flex flex-row "
-                                  >
-                                    <div>Tujuan Surat </div>
-                                    <div className="text-danger ml-2"> *</div>
-                                  </div>
-                                  <div className="justify-end ">
-                                    <select
-                                      type="text"
-                                      name="tujuanSurat"
-                                      required
-                                      id="tujuanSurat"
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      value={this.state.tujuanSurat}
-                                      onChange={this.handleTujuanSurat}
-                                    >
-                                      <option value="0">
-                                        Pilih tujuan ...
-                                      </option>
-                                      {this.props.RUnitKerja.allUnitKerjaInfo.map(
-                                        (item) => {
-                                          return (
-                                            <option
-                                              key={item.ID_KODE_UNIT_KERJA}
-                                              value={item.KODE_UNIT_KERJA}
-                                            >
-                                              {item.KODE_UNIT_KERJA}
-                                            </option>
-                                          )
-                                        },
-                                      )}
-                                    </select>
-                                    {this.state.errTujuanSurat ? (
-                                      <div className="text-danger text-xs mb-3">
-                                        Tujuan surat harus diisi
-                                      </div>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                </div>
-
->>>>>>> dev-satria2
                                 <div className="flex flex-row grid grid-cols-2">
                                   <div
                                     htmlFor="nama"
@@ -1468,7 +1255,6 @@ class AddFormSurat extends Component {
                                     <div className="text-danger ml-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
-<<<<<<< HEAD
                                     <div className="flex flex-row">
                                       {this.state.customInputPengirim ? (
                                         <input
@@ -1661,236 +1447,6 @@ class AddFormSurat extends Component {
                                               value={item.ID_JENIS_SURAT}
                                             >
                                               {item.JENIS_SURAT}
-=======
-                                    <select
-                                      type="text"
-                                      name="unitPengirim"
-                                      required
-                                      id="unitPengirim"
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      value={this.state.unitPengirim}
-                                      onChange={this.handleUnitPengirim}
-                                    >
-                                      <option value="0">
-                                        Pilit unit pengirim
-                                      </option>
-                                      {this.props.RUnitKerja.allUnitKerjaInfo.map(
-                                        (item) => {
-                                          return (
-                                            <option
-                                              key={item.ID_KODE_UNIT_KERJA}
-                                              value={item.ID_KODE_UNIT_KERJA}
-                                            >
-                                              {item.KODE_UNIT_KERJA}
->>>>>>> dev-satria2
-                                            </option>
-                                          )
-                                        },
-                                      )}
-                                    </select>
-<<<<<<< HEAD
-                                    {this.state.errJenisSurat ? (
-                                      <div className="text-danger text-xs mb-3">
-                                        Jenis surat harus diisi
-=======
-                                    {this.state.errUnitPengirim ? (
-                                      <div className="text-danger text-xs mb-3">
-                                        Unit Pengirim harus diisi
->>>>>>> dev-satria2
-                                      </div>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                </div>
-                                <div className="flex flex-row grid grid-cols-2">
-                                  <div
-                                    htmlFor="nama"
-                                    className="text-sm mb-2 font-bold flex flex-row "
-                                  >
-<<<<<<< HEAD
-                                    <div>Sifat Surat </div>
-                                    <div className="text-danger ml-2"> *</div>
-                                  </div>
-                                  <div className="justify-end ">
-                                    <select
-                                      type="text"
-                                      name="jenisSurat"
-                                      required
-                                      id="jenisSurat"
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	 w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      value={this.state.sifatNaskah}
-                                      onChange={this.handleSifatSurat}
-                                    >
-                                      <option value="0">
-                                        Pilih Sifat Surat ...
-                                      </option>
-                                      {this.props.RSifatSurat.allSifatSuratInfo.map(
-                                        (item, index) => {
-                                          return (
-                                            <option
-                                              key={item.ID_SIFAT_NASKAH}
-                                              value={item.ID_SIFAT_NASKAH}
-                                            >
-                                              {item.SIFAT_NASKAH}
-                                            </option>
-                                          )
-                                        },
-                                      )}
-                                    </select>
-                                    {this.state.errSifatNaskah ? (
-                                      <div className="text-danger text-xs mb-3">
-                                        Sifat surat harus diisi
-=======
-                                    <div>Nama Pengirim </div>
-                                    <div className="text-danger ml-2"> *</div>
-                                  </div>
-                                  <div className="justify-end ">
-                                    <input
-                                      type="text"
-                                      name="namaPengirim"
-                                      required
-                                      id="namaPengirim"
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      onChange={this.handleNamaPengirim}
-                                    />
-                                    {this.state.errNamaPengirim ? (
-                                      <div className="text-danger text-xs mb-3">
-                                        Nama Pengirim harus diisi
->>>>>>> dev-satria2
-                                      </div>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                </div>
-                                <div className="flex flex-row grid grid-cols-2">
-                                  <div
-                                    htmlFor="nama"
-                                    className="text-sm mb-2 font-bold flex flex-row "
-                                  >
-<<<<<<< HEAD
-                                    <div>Derajat Surat </div>
-                                    <div className="text-danger ml-2"> *</div>
-                                  </div>
-                                  <div className="justify-end ">
-                                    <select
-                                      type="text"
-                                      name="derajatSurat"
-                                      required
-                                      id="derajatSurat"
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      value={this.state.derajatSurat}
-                                      onChange={this.handleDerajatSurat}
-                                    >
-                                      <option value="0">
-                                        Pilih Derajat Surat ...
-                                      </option>
-                                      {this.props.RDerajatSurat.allDerajatSuratInfo.map(
-                                        (item) => {
-                                          return (
-                                            <option
-                                              key={item.ID_DERAJAT_SURAT}
-                                              value={item.ID_DERAJAT_SURAT}
-                                            >
-                                              {item.DERAJAT_SURAT}
-                                            </option>
-                                          )
-                                        },
-                                      )}
-                                    </select>
-                                    {this.state.errDerajatSurat ? (
-                                      <div className="text-danger text-xs mb-3">
-                                        Derajat surat harus diisi
-=======
-                                    <div>Penandatangan </div>
-                                    <div className="text-danger ml-2"> *</div>
-                                  </div>
-                                  <div className="justify-end ">
-                                    <input
-                                      type="text"
-                                      name="penandatangan"
-                                      required
-                                      id="penandatangan"
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      onChange={this.handlePenandatangan}
-                                    />
-
-                                    {this.state.errPenandatangan ? (
-                                      <div className="text-danger text-xs mb-3">
-                                        Penandatangan harus diisi
->>>>>>> dev-satria2
-                                      </div>
-                                    ) : (
-                                      <></>
-                                    )}
-                                  </div>
-                                </div>
-<<<<<<< HEAD
-=======
-                              </div>
-                              <div>
->>>>>>> dev-satria2
-                                <div className="flex flex-row grid grid-cols-2">
-                                  <div
-                                    htmlFor="nama"
-                                    className="text-sm mb-2 font-bold flex flex-row "
-                                  >
-<<<<<<< HEAD
-                                    <div>Kode Arsip Kom </div>
-                                    <div className="text-danger ml-2"> *</div>
-                                  </div>
-                                  <div className="justify-end ">
-                                    <input
-                                      type="text"
-                                      name="kodeArsipKom"
-                                      required
-                                      id="kodeArsipKom"
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      onChange={this.handleKodeArsipKom}
-                                    />
-                                    {this.state.errKodeArsipKom ? (
-                                      <div className="text-danger text-xs mb-3">
-                                        Kode arsip harus diisi
-=======
-                                    <div>Jenis Surat </div>
-                                    <div className="text-danger ml-2"> *</div>
-                                  </div>
-                                  <div className="justify-end ">
-                                    <select
-                                      type="text"
-                                      name="jenisSurat"
-                                      required
-                                      id="jenisSurat"
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	 w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      value={this.state.idJenisSurat}
-                                      onChange={this.handleIdJenisSurat}
-                                    >
-                                      <option value="0">
-                                        Pilih Jenis Surat ...
-                                      </option>
-                                      {this.props.AllJenisSurat.allJenisSurat.map(
-                                        (item, index) => {
-                                          return (
-                                            <option
-                                              key={item.ID_JENIS_SURAT}
-                                              value={item.ID_JENIS_SURAT}
-                                            >
-                                              {item.JENIS_SURAT}
                                             </option>
                                           )
                                         },
@@ -1899,7 +1455,6 @@ class AddFormSurat extends Component {
                                     {this.state.errJenisSurat ? (
                                       <div className="text-danger text-xs mb-3">
                                         Jenis surat harus diisi
->>>>>>> dev-satria2
                                       </div>
                                     ) : (
                                       <></>
@@ -1911,8 +1466,6 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-<<<<<<< HEAD
-=======
                                     <div>Sifat Surat </div>
                                     <div className="text-danger ml-2"> *</div>
                                   </div>
@@ -2031,7 +1584,6 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
->>>>>>> dev-satria2
                                     <div>Kode Arsip Hlm </div>
                                     <div className="text-danger ml-2"> *</div>
                                   </div>

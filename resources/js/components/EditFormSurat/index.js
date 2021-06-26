@@ -37,7 +37,6 @@ class EditFormSurat extends Component {
       tglSurat: this.props.SuratDetail.TGL_SURAT,
       sifatNaskah: this.props.SuratDetail.ID_SIFAT_NASKAH,
       lastAgenda: this.props.SuratDetail.NOMOR_AGENDA,
-<<<<<<< HEAD
       customInputTujuan: false,
       customNamaTujuan: '',
       customKodeTujuan: '',
@@ -45,8 +44,6 @@ class EditFormSurat extends Component {
       customNamaPengirim: '',
       customKodePengirim: '',
 
-=======
->>>>>>> dev-satria2
       errSurat: '',
       errJenisSurat: false,
       errLampiran: '',
@@ -64,13 +61,10 @@ class EditFormSurat extends Component {
       errNamaPengirim: false,
       errSifatNaskah: false,
       errMsgFileLampiran: '',
-<<<<<<< HEAD
       errCustomTujuanNamaUnit: false,
       errCustomTujuanKodeUnit: false,
       errCustomPengirimNamaUnit: false,
       errCustomPengirimKodeUnit: false,
-=======
->>>>>>> dev-satria2
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
@@ -98,15 +92,12 @@ class EditFormSurat extends Component {
     this.handleTglDiterima = this.handleTglDiterima.bind(this)
     this.handleTglSurat = this.handleTglSurat.bind(this)
     this.handleSifatSurat = this.handleSifatSurat.bind(this)
-<<<<<<< HEAD
     this.handleCustomTujuan = this.handleCustomTujuan.bind(this)
     this.handleCustomNamaUnit = this.handleCustomNamaUnit.bind(this)
     this.handleCustomKodeUnit = this.handleCustomKodeUnit.bind(this)
     this.handleCustomPengirim = this.handleCustomPengirim.bind(this)
     this.handleCustomNamaPengirim = this.handleCustomNamaPengirim.bind(this)
     this.handleCustomKodePengirim = this.handleCustomKodePengirim.bind(this)
-=======
->>>>>>> dev-satria2
 
     this.handleErrSurat = this.handleErrSurat.bind(this)
     this.handleErrJenisSurat = this.handleErrJenisSurat.bind(this)
@@ -124,7 +115,6 @@ class EditFormSurat extends Component {
     this.handleErrTglSurat = this.handleErrTglSurat.bind(this)
     this.handleErrorPenandatangan = this.handleErrorPenandatangan.bind(this)
     this.handleErrSifatSurat = this.handleErrSifatSurat.bind(this)
-<<<<<<< HEAD
     this.handleErrCustomKodeUnit = this.handleErrCustomKodeUnit.bind(this)
     this.handleErrCustomNamaUnit = this.handleErrCustomNamaUnit.bind(this)
     this.handleErrCustomNamaPengirim = this.handleErrCustomNamaPengirim.bind(
@@ -133,8 +123,6 @@ class EditFormSurat extends Component {
     this.handleErrCustomKodePengirim = this.handleErrCustomKodePengirim.bind(
       this,
     )
-=======
->>>>>>> dev-satria2
 
     this.validateNomorSurat = this.validateNomorSurat.bind(this)
     this.validateTanggalSurat = this.validateTanggalSurat.bind(this)
@@ -152,13 +140,10 @@ class EditFormSurat extends Component {
     this.validateSurat = this.validateSurat.bind(this)
     this.validateLampiran = this.validateLampiran.bind(this)
     this.validateSifatSurat = this.validateSifatSurat.bind(this)
-<<<<<<< HEAD
     this.validateCustomNamaUnit = this.validateCustomNamaUnit.bind(this)
     this.validateCustomKodeUnit = this.validateCustomKodeUnit.bind(this)
     this.validateCustomNamaPengirim = this.validateCustomNamaPengirim.bind(this)
     this.validateCustomKodePengirim = this.validateCustomKodePengirim.bind(this)
-=======
->>>>>>> dev-satria2
   }
   validateLampiran(input) {
     const extension = '.pdf'
@@ -307,7 +292,6 @@ class EditFormSurat extends Component {
       this.handleErrNomorSurat(false)
     }
   }
-<<<<<<< HEAD
 
   validateCustomNamaUnit(input) {
     const re = /^[a-zA-Z0-9 ]*$/
@@ -365,8 +349,6 @@ class EditFormSurat extends Component {
       }
     }
   }
-=======
->>>>>>> dev-satria2
   handleErrSurat(props) {
     this.setState({
       errSurat: props,
@@ -447,7 +429,6 @@ class EditFormSurat extends Component {
       errNamaPengirim: props,
     })
   }
-<<<<<<< HEAD
 
   handleErrCustomKodeUnit(props) {
     this.setState({
@@ -472,8 +453,6 @@ class EditFormSurat extends Component {
     })
   }
 
-=======
->>>>>>> dev-satria2
   handleSifatSurat(e) {
     let value = e.target.value
     this.setState({
@@ -621,7 +600,6 @@ class EditFormSurat extends Component {
       modalLoading: !this.state.modalLoading,
     })
   }
-<<<<<<< HEAD
   handleCustomTujuan() {
     this.setState({
       customInputTujuan: !this.state.customInputTujuan,
@@ -677,8 +655,6 @@ class EditFormSurat extends Component {
     })
   }
 
-=======
->>>>>>> dev-satria2
   handleModal() {
     this.setState({
       showModal: !this.state.showModal,
@@ -722,7 +698,6 @@ class EditFormSurat extends Component {
       errMsgFileLampiran: '',
       surat: null,
       lampiran: null,
-<<<<<<< HEAD
 
       customInputTujuan: false,
       customNamaTujuan: '',
@@ -734,8 +709,6 @@ class EditFormSurat extends Component {
       errCustomTujuanKodeUnit: false,
       errCustomPengirimNamaUnit: false,
       errCustomPengirimKodeUnit: false,
-=======
->>>>>>> dev-satria2
     })
     console.log('id pencatatan :' + this.state.idPencatatan)
   }
@@ -771,13 +744,9 @@ class EditFormSurat extends Component {
       this.state.sifatNaskah != this.props.SuratDetail.ID_SIFAT_NASKAH ||
       this.state.lastAgenda != this.props.SuratDetail.NOMOR_AGENDA ||
       this.state.surat != null ||
-<<<<<<< HEAD
       this.state.lampiran != null ||
       this.state.customInputPengirim == true ||
       this.state.customInputTujuan == true
-=======
-      this.state.lampiran != null
->>>>>>> dev-satria2
     ) {
       await this.validateNomorSurat(this.state.nomorSurat)
       await this.validateTanggalSurat(this.state.tglSurat)
@@ -793,7 +762,6 @@ class EditFormSurat extends Component {
       await this.validateKodeArsipHlm(this.state.kodeArsipHlm)
       await this.validateKodeArsipKom(this.state.kodeArsipKom)
       await this.validateKodeArsipManual(this.state.kodeArsipManual)
-<<<<<<< HEAD
       if (this.state.customInputTujuan) {
         await this.validateCustomKodeUnit(this.state.customKodeTujuan)
         await this.validateCustomNamaUnit(this.state.customNamaTujuan)
@@ -807,8 +775,6 @@ class EditFormSurat extends Component {
         await this.validateUnitPengirim(this.state.unitPengirim)
       }
 
-=======
->>>>>>> dev-satria2
       if (this.state.surat != null) {
         await this.validateSurat(this.state.surat)
       }
@@ -829,7 +795,6 @@ class EditFormSurat extends Component {
         this.state.errKodeArsipHlm == false &&
         this.state.errKodeArsipKom == false &&
         this.state.errKodeArsipManual == false &&
-<<<<<<< HEAD
         this.state.errSifatNaskah == false &&
         this.state.errCustomTujuanKodeUnit == false &&
         this.state.errCustomTujuanNamaUnit == false &&
@@ -861,11 +826,6 @@ class EditFormSurat extends Component {
             }
           })
 
-=======
-        this.state.errSifatNaskah == false
-      ) {
-        this.handleLoading()
->>>>>>> dev-satria2
         let formData = new FormData()
         formData.append('id', this.state.idPencatatan)
         formData.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
@@ -883,10 +843,6 @@ class EditFormSurat extends Component {
             this.state.namaFileLampiran + '_lampiran',
           )
         }
-<<<<<<< HEAD
-=======
-        let fd = new FormData()
->>>>>>> dev-satria2
         fd.append('id_pencatatan', this.state.idPencatatan)
         fd.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
         fd.append('id_jenis_surat', this.state.idJenisSurat)
@@ -905,7 +861,6 @@ class EditFormSurat extends Component {
 
         fd.append('id_derajat_surat', this.state.derajatSurat)
         fd.append('nomor_surat', this.state.nomorSurat)
-<<<<<<< HEAD
         fd.append('id_sifat_naskah', this.state.sifatNaskah)
         fd.append('penandatangan', this.state.penandatangan)
         fd.append('nama_pengirim', this.state.namaPengirim)
@@ -915,13 +870,6 @@ class EditFormSurat extends Component {
           fd.append('tujuan_surat', this.state.tujuanSurat)
         }
 
-=======
-        fd.append('id_kode_unit', this.state.unitPengirim)
-        fd.append('id_sifat_naskah', this.state.sifatNaskah)
-        fd.append('penandatangan', this.state.penandatangan)
-        fd.append('nama_pengirim', this.state.namaPengirim)
-        fd.append('tujuan_surat', this.state.tujuanSurat)
->>>>>>> dev-satria2
         fd.append('perihal', this.state.perihal)
         fd.append('tgl_diterima', this.state.tglDiterima)
         fd.append('tgl_surat', this.state.tglSurat)
@@ -1192,7 +1140,6 @@ class EditFormSurat extends Component {
                                     <div className="text-danger ml-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
-<<<<<<< HEAD
                                     <div className="flex flex-row">
                                       {this.state.customInputTujuan ? (
                                         <input
@@ -1255,44 +1202,12 @@ class EditFormSurat extends Component {
                                     </div>
                                     {this.state.errTujuanSurat &&
                                     this.state.customInputTujuan == false ? (
-=======
-                                    <select
-                                      type="text"
-                                      name="tujuanSurat"
-                                      required
-                                      id="tujuanSurat"
-                                      value={this.state.tujuanSurat}
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      value={this.state.tujuanSurat}
-                                      onChange={this.handleTujuanSurat}
-                                    >
-                                      <option value="0">
-                                        Pilih tujuan ...
-                                      </option>
-                                      {this.props.RUnitKerja.allUnitKerjaInfo.map(
-                                        (item) => {
-                                          return (
-                                            <option
-                                              key={item.ID_KODE_UNIT_KERJA}
-                                              value={item.KODE_UNIT_KERJA}
-                                            >
-                                              {item.KODE_UNIT_KERJA}
-                                            </option>
-                                          )
-                                        },
-                                      )}
-                                    </select>
-                                    {this.state.errTujuanSurat ? (
->>>>>>> dev-satria2
                                       <div className="text-danger text-xs mb-3">
                                         Tujuan surat harus diisi
                                       </div>
                                     ) : (
                                       <></>
                                     )}
-<<<<<<< HEAD
                                     {this.state.errCustomTujuanNamaUnit &&
                                     this.state.customInputTujuan ? (
                                       <div className="text-danger text-xs mb-3">
@@ -1322,8 +1237,6 @@ class EditFormSurat extends Component {
                                     ) : (
                                       <></>
                                     )}
-=======
->>>>>>> dev-satria2
                                   </div>
                                 </div>
 
@@ -1336,7 +1249,6 @@ class EditFormSurat extends Component {
                                     <div className="text-danger ml-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
-<<<<<<< HEAD
                                     <div className="flex flex-row">
                                       {this.state.customInputPengirim ? (
                                         <input
@@ -1402,43 +1314,12 @@ class EditFormSurat extends Component {
                                     </div>
                                     {this.state.errUnitPengirim &&
                                     this.state.customInputPengirim == false ? (
-=======
-                                    <select
-                                      type="text"
-                                      name="unitPengirim"
-                                      required
-                                      id="unitPengirim"
-                                      className={
-                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                      }
-                                      value={this.state.unitPengirim}
-                                      onChange={this.handleUnitPengirim}
-                                    >
-                                      <option value="0">
-                                        Pilit unit pengirim
-                                      </option>
-                                      {this.props.RUnitKerja.allUnitKerjaInfo.map(
-                                        (item) => {
-                                          return (
-                                            <option
-                                              key={item.ID_KODE_UNIT_KERJA}
-                                              value={item.ID_KODE_UNIT_KERJA}
-                                            >
-                                              {item.KODE_UNIT_KERJA}
-                                            </option>
-                                          )
-                                        },
-                                      )}
-                                    </select>
-                                    {this.state.errUnitPengirim ? (
->>>>>>> dev-satria2
                                       <div className="text-danger text-xs mb-3">
                                         Unit Pengirim harus diisi
                                       </div>
                                     ) : (
                                       <></>
                                     )}
-<<<<<<< HEAD
                                     {this.state.errCustomPengirimNamaUnit &&
                                     this.state.customInputPengirim ? (
                                       <div className="text-danger text-xs mb-3">
@@ -1468,8 +1349,6 @@ class EditFormSurat extends Component {
                                     ) : (
                                       <></>
                                     )}
-=======
->>>>>>> dev-satria2
                                   </div>
                                 </div>
                                 <div className="flex flex-row grid grid-cols-2">

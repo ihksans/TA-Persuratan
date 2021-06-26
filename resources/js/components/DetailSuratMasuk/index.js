@@ -6,18 +6,14 @@ import PdfReader from '../PdfReader'
 import ModalKonfirmDeleteSM from '../ModalKonfirmDeleteSM.js'
 import EditFormSurat from '../EditFormSurat'
 import ModalLoading from '../ModalLoading'
-<<<<<<< HEAD
+
 import UpdateReminder from '../FormUpdateReminder'
 import UpdateTindakLanjut from '../FormUpdateReminder/updateTL'
 import AddReminder from '../FormAddReminder'
 import { isEmpty } from 'lodash-es'
 
-=======
-<<<<<<< HEAD
-=======
+
 import AddFormDisposisi from '../AddFormDisposisi'
->>>>>>> dev-satria2
->>>>>>> dev-integrasi
 // import createuser from "./index";
 class DetailSuratMasuk extends Component {
   constructor(props) {
@@ -193,11 +189,7 @@ class DetailSuratMasuk extends Component {
                           <div className="font-bold ml-1 mr-2">Edit</div>
                         </button> */}
                         <EditFormSurat SuratDetail={this.props.SuratDetail} />
-<<<<<<< HEAD
-                        <button
-=======
                         {/* <button
->>>>>>> dev-satria2
                           className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
                           type="button"
                         >
@@ -210,9 +202,6 @@ class DetailSuratMasuk extends Component {
                           <div className="font-bold text-putih ml-1 mr-2">
                             Lihat Disposisi
                           </div>
-<<<<<<< HEAD
-                        </button>
-=======
                         </button> */}
                         <AddFormDisposisi 
                         namaFile={this.props.NamaFileSurat}
@@ -221,7 +210,6 @@ class DetailSuratMasuk extends Component {
                         jenisSurat={this.props.jenisSurat}
                         IdUnitKerja={this.props.IdUnitKerja}
                         />
->>>>>>> dev-satria2
                         <ModalLoading loading={this.state.modalLodaing} />
                         {/* <button
                           type="submit"
@@ -302,11 +290,7 @@ class DetailSuratMasuk extends Component {
                         {/* {this.props.SuratDetail.TGL_DITERIMA} */}
                         {this.state.tglDiterima}
                       </div>
-<<<<<<< HEAD
-                      <div className="font-bold">Perihal / Ringkasa</div>
-=======
                       <div className="font-bold">Perihal / Ringkasan Surat</div>
->>>>>>> dev-satria2
                       <div className=" col-span-2">
                         <p className="text-left overflow-ellipsis overflow-hidden">
                           {this.props.SuratDetail.PERIHAL}
