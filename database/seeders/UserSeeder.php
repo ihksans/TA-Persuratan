@@ -20,11 +20,17 @@ class UserSeeder extends Seeder
         //     'name' => 'nadia',
         //     'password' => \Hash::make('nadia123'),
         // ]);
-       User::create([
+        User::create([
             'id' => '1',
             'username' => 'admin',
             'name' => 'admin',
             'password' => \Hash::make('admin123'),
+        ]);
+        User::create([
+            'id' => '2',
+            'username' => 'satria',
+            'name' => 'satria',
+            'password' => \Hash::make('satria123'),
         ]);
     }
 }

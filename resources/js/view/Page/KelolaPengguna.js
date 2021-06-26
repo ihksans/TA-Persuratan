@@ -15,7 +15,7 @@ class KelolaPengguna extends Component {
       Pengguna: [],
     }
     this.getPengguna = this.getPengguna.bind(this)
-    // this.deletePengguna = this.deletePengguna.bind(this);
+
   }
   async getPengguna() {
     await api()
@@ -29,19 +29,7 @@ class KelolaPengguna extends Component {
   componentDidMount() {
     this.getPengguna()
   }
-  // deletePengguna(id){
-  //   let formData = new FormData()
-  //   formData.append('id',id)
-  //   api()
-  //     // .delete('api/deleteUser,formData)
-  //     .delete('api/deleteUser/${formData}')
-  //     .then(response=>{
-  //       console.log('pengguna tidak terhapus'+response.data)
-  //     }).catch((error)=>{
-  //       console.log(error)
-  //     })
-  //     console.log('id:' +id)
-  // }
+
   render() {
     return (
       //html
