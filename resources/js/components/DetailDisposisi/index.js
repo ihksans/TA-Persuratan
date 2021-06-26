@@ -3,6 +3,8 @@ import api from '../../service/api'
 import React, {Component, useState} from 'react'
 import {connect} from 'react-redux'
 import Kalender from '../AddFormSurat/Kalender'
+import ModalKonfirmDeleteDispo from '../ModalKonfirmDeleteDispo'
+import EditFormDisposisi from '../EditFormDisposisi'
 
 class DetailDisposisi extends Component{
     constructor(props){
@@ -74,7 +76,7 @@ class DetailDisposisi extends Component{
                             </button>
                             </>
                         ): */}
-                        (
+                        
                         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
                             <div className="relative w-auto my-6 mx-auto max-w-6xl">
                                 {/* content */}
@@ -96,7 +98,7 @@ class DetailDisposisi extends Component{
                                                 </div>
                                             </div>
                                                 <div className="flex flex-row  col-span-3 mb-4 border-b-2">
-                                                    <button
+                                                    {/* <button
                                                         type="submit"
                                                         className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
                                                         >
@@ -107,16 +109,18 @@ class DetailDisposisi extends Component{
                                                             />
                                                         </div>
                                                         <div className="font-bold ml-1 mr-2">Edit</div>
-                                                        </button>
+                                                    </button> */}
+                                                    <EditFormDisposisi />
                                                         
-                                                        <button
+                                                    <button
                                                         type="submit"
                                                         className="bg-primary font-bold 	self-center ml-2 mt-1  rounded p-1 shadow-sm w-full"
                                                         >
                                                         Ekspor ke PDF
-                                                        </button>
-                                                        <button
-                                                        className="flex flex-row bg-danger font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
+                                                    </button>
+                                                        <ModalKonfirmDeleteDispo />
+                                                        {/* <button
+                                                        className="bg-danger font-bold 	self-center ml-2 mt-1  rounded p-1 shadow-sm w-full"
                                                         type="button"
                                                         >
                                                         <div className="ml-1">
@@ -128,7 +132,7 @@ class DetailDisposisi extends Component{
                                                         <div className="font-bold text-putih ml-1 mr-2">
                                                             Hapus disposisi
                                                         </div>
-                                                        </button>
+                                                        </button> */}
                                                 </div>
                                             
                                             

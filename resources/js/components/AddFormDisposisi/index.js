@@ -3,6 +3,7 @@ import api from '../../service/api'
 import React, {Component, component, useState} from 'react'
 import {connect} from 'react-redux'
 import Kalender from '../AddFormSurat/Kalender'
+import ModalLoading from '../ModalLoading'
 
 
 class AddFormDisposisi extends Component{
@@ -12,13 +13,157 @@ class AddFormDisposisi extends Component{
             dir: [],
             tglSurat: this.props.SuratDetail.TGL_SURAT,
             tglDiterima: this.props.SuratDetail.TGL_DITERIMA,
+            
+            nomorDisposisi:'',
+            tglDisposisi:null,
+            tujuanDisposisi:'',
+            informasiDisposisi:null,
+            keteranganDisposisi:null,
+            namaFileDisposisi:null,
+            firstDate: new Date(),
+
+            errNomorDisposisi:false,
+            errTglDisposisi:false,
+            errTujuanDisposisi:false,
+            errInformasiDisposisi:false,
+            errKeteranganDisposisi:false,
+            errNamaFileDisposisi:false,
+            
         }
+        
         this.handleModal = this.handleModal.bind(this)
+        this.handleTglDisposisi = this.handleTglDisposisi.bind(this)
+        this.handleInformasiDisposisi = this.handleInformasiDisposisi.bind(this)
+        this.handleKeteranganDisposisi = this.handleKeteranganDisposisi.bind(this)
+        
+        this.onSubmit = this.onSubmit.bind(this)
+
+        this.handleErrTglDisposisi = this.handleErrTglDisposisi.bind(this) 
+        this.handleErrInformasiDisposisi = this.handleErrInformasiDisposisi.bind(this)
+        this.handleErrKeteranganDisposisi = this.handleErrKeteranganDisposisi.bind(this)
+        
+
+        this.ValidateInformasiDisposisi = this.ValidateInformasiDisposisi.bind(this)
+        this.ValidateKeteranganDisposisi = this.ValidateKeteranganDisposisi.bind(this)
+        this.ValidateTglDisposisi = this.ValidateTglDisposisi.bind(this)
+    }
+    
+    ValidateTglDisposisi(input){
+        if (input == null || input == '') {
+            this.handleErrTglDisposisi(true)
+        } else {
+            this.handleErrTglDisposisi(false)
+        }
+    }
+    ValidateInformasiDisposisi(input){
+        if (input == null || input == '') {
+            this.handleErrInformasiDisposisi(true)
+        } else {
+            this.handleErrInformasiDisposisi(false)
+        }
+    }
+    ValidateKeteranganDisposisi(input){
+        if (input == null || input == '') {
+            this.handleErrKeteranganDisposisi(true)
+        } else {
+            this.handleErrKeteranganDisposisi(false)
+        }
+    }
+
+    handleErrTglDisposisi(props){
+        this.setState({
+            errTglDisposisi: props,
+        })
+    }
+    handleErrInformasiDisposisi(e){
+        this.setState({
+            errInformasiDisposisi: props,
+        })
+    }
+    handleErrKeteranganDisposisi(e){
+        this.setState({
+            errKeteranganDisposisi: props,
+        })
+    }
+
+    handleInformasiDisposisi(e){
+        let value = e.target.value
+        let str = ''
+        str = value.replace(/\s\s+/g, '')
+
+        this.setState({
+            informasiDisposisi: str,
+        })
+    }
+    handleKeteranganDisposisi(e){
+        let value = e.target.value
+        let str = ''
+        str = value.replace(/\s\s+/g, '')
+
+        this.setState({
+            keteranganDisposisi: str,
+        })
+    }
+
+    
+    handleTglDisposisi(exDate, value){
+        this.setState({
+            tglDisposisi: exDate,
+        })
+        this.setState({
+            firstDate: value,
+        })
     }
     handleModal(){
         this.setState({
             showModal: !this.state.showModal,
+            nomorDisposisi:'',
+            tglDisposisi:null,
+            tujuanDisposisi:'',
+            informasiDisposisi:null,
+            keteranganDisposisi:null,
+            namaFileDisposisi:null,
+
+            errNomorDisposisi:false,
+            errTglDisposisi:false,
+            errTujuanDisposisi:false,
+            errInformasiDisposisi:false,
+            errKeteranganDisposisi:false,
+            errNamaFileDisposisi:false,
         })
+    }
+
+    async onSubmit(e){
+        e.preventDefault()
+        let formData = new FormData()
+        console.log('id surat detail : '+ this.props.SuratDetail)
+        console.log('id_pengguan : ' + this.props.User.currentUser.ID_PENGGUNA)
+        console.log('id pencatatan : '+ this.props.SuratDetail.ID_PENCATATAN)
+        console.log('nomor_agenda'+ this.props.SuratDetail.NOMOR_AGENDA)
+        console.log('tanggal_disposisi'+this.state.tglDisposisi)
+        console.log('tujuan_surat'+ this.props.SuratDetail.TUJUAN_SURAT)
+        console.log('informasi' + this.state.informasiDisposisi)
+        console.log('keterangan'+ this.state.keteranganDisposisi)
+        
+        // formData.append('id_disposisi',)
+        // formData.append('nomor_disposisi')
+        // formData.append('tanggal_disposisi')
+        // formData.append('tujuan_disposisi')
+        
+        formData.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
+        formData.append('id_pencatatan', this.props.SuratDetail.ID_PENCATATAN)
+        formData.append('nomor_agenda', this.props.SuratDetail.NOMOR_AGENDA)
+        formData.append('tanggal_disposisi',this.state.tglDisposisi)
+        formData.append('tujuan_surat', this.props.SuratDetail.TUJUAN_SURAT)
+        formData.append('informasi',this.state.informasiDisposisi)
+        formData.append('proses_selanjutnya',this.state.keteranganDisposisi)
+        await api()
+            .post('api/createDisposisi',formData)
+            .then((respon)=>{
+                console.log('disposisi' + respon)
+                this.handleModal()
+            })
+            .catch((err) => console.log(err))
     }
     render(){
         return(
@@ -196,7 +341,7 @@ class AddFormDisposisi extends Component{
 
                                             <div className="font-bold">Jenis Surat</div>
                                             <div className="col-span-2">
-                                            {/* {this.props.AllJenisSurat.allJenisSurat.map(
+                                            {this.props.AllJenisSurat.allJenisSurat.map(
                                                 (item, index) => {
                                                     const temp = this.props.SuratDetail.ID_JENIS_SURAT
                                                     const temp2 = item.ID_JENIS_SURAT
@@ -212,13 +357,13 @@ class AddFormDisposisi extends Component{
                                                     </div>
                                                     )
                                                 },
-                                            )} */}
+                                            )}
                                             </div>
 
-                                            <div className="font-bold">Kode Hal</div>
+                                            {/* <div className="font-bold">Kode Hal</div>
                                             <div className="col-span-2">
-                                                {/* {this.props} */}
-                                            </div>
+                                                
+                                            </div> */}
 
                                             <div className="font-bold">Jenis Surat</div>
                                             <div className="col-span-2">
@@ -227,7 +372,7 @@ class AddFormDisposisi extends Component{
 
                                             <div className="font-bold">Sifat Surat</div>
                                             <div className="col-span-2">
-                                            {/* {this.props.RSifatSurat.allSifatSuratInfo.map(
+                                            {this.props.RSifatSurat.allSifatSuratInfo.map(
                                                 (item, index) => {
                                                     const temp = this.props.SuratDetail.ID_SIFAT_NASKAH
                                                     const temp2 = item.ID_SIFAT_NASKAH
@@ -241,12 +386,12 @@ class AddFormDisposisi extends Component{
                                                     </div>
                                                     )
                                                 },
-                                            )} */}
+                                            )}
                                             </div>
 
                                             <div className="font-bold">Derajar Surat</div>
                                             <div className="col-span-2">
-                                            {/* {this.props.RDerajatSurat.allDerajatSuratInfo.map(
+                                            {this.props.RDerajatSurat.allDerajatSuratInfo.map(
                                                     (item, index) => {
                                                         const temp = this.props.SuratDetail.ID_DERAJAT_SURAT
                                                         const temp2 = item.ID_DERAJAT_SURAT
@@ -260,7 +405,7 @@ class AddFormDisposisi extends Component{
                                                         </div>
                                                         )
                                                     },
-                                                    )}{' '} */}
+                                                    )}{' '}
                                             </div>
                                             
                                             <div className="font-bold">Kode Arsip</div>
@@ -339,7 +484,7 @@ class AddFormDisposisi extends Component{
                                                 className="mt-8"
                                                 action="#"
                                                 method="POST"
-                                                // onSubmit={this.onSubmit}
+                                                onSubmit={this.onSubmit}
                                                 >
                                                     {/* <div className="flex flex-row grid grid-cols-2"> */}
                                                         <div className="flex flex-row grid grid-cols-2">
@@ -351,14 +496,10 @@ class AddFormDisposisi extends Component{
                                                                 <div className="text-danger ml-2"> </div>
                                                             </div>
                                                             <div className="justify-end ">
-                                                                <div 
-                                                                type=""
-                                                                name="nomorDisposisi"
-                                                                // required
-                                                                id="nomorDisposisi"
+                                                                <div
                                                                 className=""
                                                                 >
-                                                                {this.props.SuratDetail.NOMOR_SURAT}
+                                                                {this.props.SuratDetail.NOMOR_AGENDA}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -373,21 +514,28 @@ class AddFormDisposisi extends Component{
                                                             </div>
                                                             <div className="justify-end ">
                                                                 <div
-                                                                type="text"
-                                                                name="tanggalDisposisi"
-                                                                required
-                                                                id="tanggalDisposisi"
-                                                                className={
-                                                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                                                }
-                                                                >
-                                                                <Kalender
-                                                                    onChange={(exDate, value) =>
-                                                                    this.handleTglSurat(exDate, value)
+                                                                    type="text"
+                                                                    name="tanggalDisposisi"
+                                                                    required
+                                                                    id="tanggalDisposisi"
+                                                                    className={
+                                                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	mr-4  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                                                     }
-                                                                    data={null}
-                                                                />
+                                                                >
+                                                                    <Kalender
+                                                                        onChange={(exDate, value) =>
+                                                                        this.handleTglDisposisi(exDate, value)
+                                                                        }
+                                                                        data={null}
+                                                                    />
                                                                 </div>
+                                                                {this.state.errTglDisposisi ? (
+                                                                    <div className="text-danger text-xs mb-3">
+                                                                        Tanggal diterima harus diisi
+                                                                    </div>
+                                                                ) : (
+                                                                    <></>
+                                                                )}
                                                             </div>
                                                         </div>
 
@@ -400,10 +548,6 @@ class AddFormDisposisi extends Component{
                                                             </div>
                                                             <div className="justify-end ">
                                                                 <div
-                                                                type=""
-                                                                name="tujuanDisposisi"
-                                                                // required
-                                                                id="tujuanDisposisi"
                                                                 className=""
                                                                 >
                                                                     {this.props.SuratDetail.TUJUAN_SURAT}
@@ -420,17 +564,23 @@ class AddFormDisposisi extends Component{
                                                                 <div className="text-danger ml-2"> </div>
                                                             </div>
                                                             <div className="justify-end ">
-                                                                <input
-                                                                type="text"
-                                                                name="informasiDisposisi"
-                                                                required
-                                                                id="informasiDisposisi"
-                                                                className={
-                                                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                                                }
-                                                                >
-                                                                {/* {this.state.lastAgenda} */}
-                                                                </input>
+                                                                <textarea
+                                                                    type="text"
+                                                                    name="informasiDisposisi"
+                                                                    required
+                                                                    id="informasiDisposisi"
+                                                                    className={
+                                                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none  w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                                                    }
+                                                                    onChange={this.handleInformasiDisposisi}
+                                                                />
+                                                                {this.state.errInformasiDisposisi?(
+                                                                    <div className="text-danger text-xs mb-3">
+                                                                        Informasi terkait disposisi harus diisi
+                                                                    </div>
+                                                                ):(
+                                                                    <></>
+                                                                )}
                                                             </div>
                                                         </div>
                                                         <div className="flex flex-row grid grid-cols-2">
@@ -442,17 +592,24 @@ class AddFormDisposisi extends Component{
                                                                 <div className="text-danger ml-2"> </div>
                                                             </div>
                                                             <div className="justify-end ">
-                                                                <input
-                                                                type="text"
-                                                                name="keteranganDisposisi"
-                                                                required
-                                                                id="keteranganDisposisi"
-                                                                className={
-                                                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                                                }
-                                                                >
-                                                                {/* {this.state.lastAgenda} */}
-                                                                </input>
+                                                                <textarea
+                                                                    type="text"
+                                                                    name="keteranganDisposisi"
+                                                                    required
+                                                                    id="keteranganDisposisi"
+                                                                    className={
+                                                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                                                    }
+                                                                    onChange={this.handleKeteranganDisposisi}
+                                                                />
+                                                                {this.state.errKeteranganDisposisi?(
+                                                                    <div className="text-danger text-xs mb-3">
+                                                                        Keterangan terkait disposisi harus diisi
+                                                                    </div>
+                                                                ):(
+                                                                    <></>
+                                                                )}
+                                                                
                                                             </div>
                                                         </div>
                                                         <div className="flex flex-row grid grid-cols-2">
@@ -465,13 +622,13 @@ class AddFormDisposisi extends Component{
                                                             </div>
                                                             <div className="justify-end ">
                                                                 <input
-                                                                type="file"
-                                                                name="lampiranDisposisi"
-                                                                required
-                                                                id="lampiranDisposisi"
-                                                                className={
-                                                                    'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                                                                }
+                                                                    type="file"
+                                                                    name="lampiranDisposisi"
+                                                                    required
+                                                                    id="lampiranDisposisi"
+                                                                    className={
+                                                                        'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                                                    }
                                                                 >
                                                                 {/* {this.state.lastAgenda} */}
                                                                 </input>
@@ -485,33 +642,25 @@ class AddFormDisposisi extends Component{
                                                             </div>
                                                             <div className="flex flex-row grid grid-cols-2 items-center">
                                                             <div></div>
-                                                            <button
-                                                                type="submit"
-                                                                className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center items-center"
-                                                                onClick={this.onSubmit}
-                                                                value="Add Pengguna"
-                                                            >
-                                                                Simpan
-                                                            </button>
-                                                        </div>
-                                                    {/* </div> */}
+                                                                <button
+                                                                    type="submit"
+                                                                    className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center items-center"
+                                                                    onClick={this.onSubmit}
+                                                                    
+                                                                    value="Add Disposisi"
+                                                                >
+                                                                    Simpan
+                                                                </button>
+                                                            </div>
+                                                    {/* </div>
                                                     
-                                                    {/* <div 
-                                                    className="font-bold text-sm mb-2 flex flex-row"
-                                                    htmlFor="nama"
-                                                    // className="text-sm mb-2 font-bold flex flex-row "
-                                                    >Tanggal Disposisi</div>
-                                                    <div className="col-span-2">
-                                                        <input 
-                                                        type="text"
-                                                        name="tanggalDisposisi"
-                                                        // required
-                                                        id="tanggalDisposisi"
-                                                        // className={'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	mr-4  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'}
-                                                        >
-                                                        
-                                                        </input>
-                                                    </div> */}
+                                                    // {/* <div 
+                                                    // className="font-bold text-sm mb-2 flex flex-row"
+                                                    // htmlFor="nama"
+                                                    // // className="text-sm mb-2 font-bold flex flex-row "
+                                                    // >Tanggal Disposisi</div>
+                                                    // <div className="col-span-2">
+                                                    // </div> */}
                                                 </form>
                                             </div>
                                         </div>
@@ -523,14 +672,18 @@ class AddFormDisposisi extends Component{
                         {/* )} */}
                     </>
                 ):null}
+                <ModalLoading
+                loading={this.state.modalLoading}
+                title={'Sinkronisasi Data'}
+                />
             </>
         )
     }
 }
 
-// function mapStateToProps(state){
-//     return state
-// }
+function mapStateToProps(state) {
+    return state
+}
 
-// export default connect(mapStateToProps.apply,{})(AddFormDisposisi)
-export default AddFormDisposisi
+export default connect(mapStateToProps,{})(AddFormDisposisi)
+{/* // export default AddFormDisposisi */}

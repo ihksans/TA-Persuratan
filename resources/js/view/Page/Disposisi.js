@@ -101,7 +101,7 @@ class Disposisi extends Component {
             </div>
             {/* <AddFormSurat /> */}
             <div>
-            <AddFormDisposisi />
+            {/* <AddFormDisposisi /> */}
             </div>
             <div>
               
