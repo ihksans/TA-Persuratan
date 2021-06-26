@@ -12,6 +12,10 @@ export const UNSET_ALL_SURAT_MASUK = 'UNSET_ALL_SURAT_MASUK'
 export const SET_JENIS_SURAT = 'SET_JENIS_SURAT'
 export const UNSET_JENIS_SURAT = 'UNSET_JENIS_SURAT'
 export const SET_ALL_USER2 = 'SET_ALL_USER2'
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev-satria2
 export const SET_ALL_UNIT_KERJA = 'SET_ALL_UNIT_KERJA'
 export const UNSET_ALL_UNIT_KERJA = 'UNSET_ALL_UNIT_KERJA'
 export const SET_ALL_DERAJAT_SURAT = 'SET_ALL_DERAJAT_SURAT'
@@ -21,6 +25,12 @@ export const UNSET_ALL_SIFAT_SURAT = 'UNSET_ALL_SIFAT_SURAT'
 export const SET_ALL_PENGINGAT = 'SET_ALL_PENGINGAT'
 export const UNSET_ALL_PENGINGAT = 'UNSET_ALL_PENGINGAT'
 
+<<<<<<< HEAD
+=======
+export const SET_ALL_DISPOSISI = 'SET_ALL_DISPOSISI'
+export const UNSET_ALL_DISPOSISI = 'UNSET_ALL_DISPOSISI'
+
+>>>>>>> dev-satria2
 //list of method actions
 //to save current token by user
 export function addTokenByID(payload) {
@@ -129,6 +139,10 @@ export function setUnitKerja(payload) {
   }
   return action
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev-satria2
 export function unsetDerajatSurat() {
   const action = {
     type: UNSET_ALL_DERAJAT_SURAT,
@@ -155,16 +169,35 @@ export function setSifatSurat(payload) {
   }
   return action
 }
+<<<<<<< HEAD
 export function setAllPengingat(payload) {
   const action = {
     type: SET_ALL_PENGINGAT,
+=======
+<<<<<<< HEAD
+=======
+export function setAllDisposisi(payload){
+  const action = {
+    type: SET_ALL_DISPOSISI,
+>>>>>>> dev-integrasi
     payload,
   }
   return action
 }
+<<<<<<< HEAD
 export function unsetAllPengingat() {
   const action = {
     type: UNSET_ALL_PENGINGAT,
   }
   return action
 }
+=======
+export function unsetAllDisposisi(payload){
+  const action = {
+    type: UNSET_ALL_DISPOSISI,
+    payload,
+  }
+  return action
+}
+>>>>>>> dev-satria2
+>>>>>>> dev-integrasi

@@ -30,12 +30,21 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::put('updateUser', 'PenggunaController@updateUser');
 
     //satria
+        //pengguna
     Route::get('getPenggunaInfo', 'PenggunaController@index');
     Route::post('createUser', 'PenggunaController@createUser');
     Route::get('allPenggunaInfo','PenggunaController@allUser');
-    Route::post('editUser','PenggunaController@editUser');
+    Route::post('editUser/{request}','PenggunaController@editUser');
     Route::post('updateUser', 'PenggunaController@updateUser');
     Route::delete('deleteUser/{id}', 'PenggunaController@deleteUser');
+        //disposisi
+    Route::get('allInfoDisposisi','DisposisiController@allInfoDisposisi');
+    Route::get('createDisposisi','DisposisiController@createDisposisis');
+    Route::get('getDisposisi/{id}','DisposisiController@getDisposisi');
+    Route::post('createDisposisi','DisposisiController@createDisposisis');
+    Route::post('editDisposisi','DisposisiController@editDisposisi');
+    Route::post('updateDisposisi','DisposisiController@updateDisposisi');
+    Route::delete('deleteDisposisi/{id}','DisposisiController@deleteDisposisi');
     // Route::delete('deleteUser', 'PenggunaController@deleteUser');
 
     //nadia
