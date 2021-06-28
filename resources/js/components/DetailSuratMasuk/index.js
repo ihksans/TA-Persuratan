@@ -9,6 +9,7 @@ import ModalLoading from '../ModalLoading'
 import UpdateReminder from '../FormUpdateReminder'
 import UpdateTindakLanjut from '../FormUpdateReminder/updateTL'
 import AddReminder from '../FormAddReminder'
+import moment from 'moment'
 import { isEmpty } from 'lodash-es'
 
 // import createuser from "./index";
@@ -18,6 +19,7 @@ class DetailSuratMasuk extends Component {
     this.state = {
       dir: [],
       pengingat: null,
+      count: null,
       numPages: '',
       pageNumber: '',
       url: '',
@@ -94,7 +96,13 @@ class DetailSuratMasuk extends Component {
             this.setState({
               pengingat: item
             })
-          }          
+            const rn = moment(new Date())
+            this.setState({
+              count: Math.abs(rn.diff(this.state.pengingat.WAKTU_PENGINGAT, 'days'))+1
+            })
+            console.log(this.state.count)       
+          }
+             
       })
     }
     //console.log(this.state.pengingat)
@@ -406,9 +414,17 @@ class DetailSuratMasuk extends Component {
                             />
                           </button>
                         </div>
-                        {/* <div className="text-sm">
-                          Harus ditindaklanjuti dalam waktu 5 hari
-                        </div> */}
+                        {this.state.pengingat != null ? (
+                          <>
+                        {this.state.pengingat.STATUS == 1 ? (
+                          <>
+                          <div className="text-sm">
+                            Harus ditindaklanjuti dalam waktu {this.state.count} hari
+                          </div>
+                          </>
+                        ):(<></>)}
+                        </>
+                        ):(<></>)}
                       </div>
                       <div className="font-bold">Status Tindak Lanjut</div>
                           
