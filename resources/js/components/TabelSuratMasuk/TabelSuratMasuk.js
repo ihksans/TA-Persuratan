@@ -23,9 +23,27 @@ class TabelSuratMasuk extends Component {
   render(){
     let filteredSM = this.state.SuratMasuk.filter(
       (surat) => {
-        return surat.PERIHAL.toLowerCase().includes(
-          this.state.search.toLowerCase() 
-        )
+        if (surat.TGL_DITERIMA.toLowerCase().includes(this.state.search.toLowerCase())){
+          return surat.TGL_DITERIMA.toLowerCase().includes(this.state.search.toLowerCase())
+        }
+        if (surat.TGL_SURAT.toLowerCase().includes(this.state.search.toLowerCase())){
+          return surat.TGL_SURAT.toLowerCase().includes(this.state.search.toLowerCase())
+        }
+        if (surat.NOMOR_SURAT.toLowerCase().includes(this.state.search.toLowerCase())){
+          return surat.NOMOR_SURAT.toLowerCase().includes(this.state.search.toLowerCase())
+        }
+        if (surat.PERIHAL.toLowerCase().includes(this.state.search.toLowerCase())){
+          return surat.PERIHAL.toLowerCase().includes(this.state.search.toLowerCase())
+        }
+        if (surat.TUJUAN_SURAT.toLowerCase().includes(this.state.search.toLowerCase())){
+          return surat.TUJUAN_SURAT.toLowerCase().includes(this.state.search.toLowerCase())
+        }
+        if (surat.NAMA_PENGIRIM.toLowerCase().includes(this.state.search.toLowerCase())){
+          return surat.NAMA_PENGIRIM.toLowerCase().includes(this.state.search.toLowerCase())
+        }        
+        // return surat.PERIHAL.toLowerCase().includes(
+        //   this.state.search.toLowerCase() 
+        // )
       }
     )
     return (
