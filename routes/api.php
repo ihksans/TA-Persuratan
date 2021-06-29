@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('updateDisposisi','DisposisiController@updateDisposisi');
     Route::delete('deleteDisposisi/{id}','DisposisiController@deleteDisposisi');
     // Route::delete('deleteUser', 'PenggunaController@deleteUser');
+    Route::get('getDisposisiByID/{id}','DisposisiController@getDisposisiByID');
 
     //nadia
     Route::post('createPengingat', 'PengingatController@createPengingat');
@@ -105,4 +106,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('donwloadFile','FirebaseController@donwloadFile');
     Route::delete('delSurat/{id}','FirebaseController@delSurat');
     Route::delete('cancelDownload/{id}','FirebaseController@cancelDownload');
+
+    Route::get('detailSuratMasuk', 'SuratMasukController@getSuratDetail');
+
 });

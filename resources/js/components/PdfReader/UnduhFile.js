@@ -1,25 +1,33 @@
 import React from 'react'
 import api from '../../service/api'
-
+import ModalLoading from '../ModalLoading'
 export default function UnduhFile({ link, namaFile, title }) {
   const [showModal, setShowModal] = React.useState(false)
+  const [showLoading, setLoading] = React.useState(false)
+
   const downloadFile = async () => {
+    setLoading(true)
     let formData = new FormData()
     formData.append('namafile', namaFile)
     console.log('nama file:' + namaFile)
     await api()
       .post('/api/donwloadFile', formData)
       .then((response) => {
+        setLoading(false)
         setShowModal(true)
       })
     setShowModal(true)
   }
   const cancelDownload = async () => {
+    setLoading(true)
+
     await api()
       .delete('/api/cancelDownload/' + namaFile)
       .then((response) => {
+        setLoading(false)
         setShowModal(false)
       })
+    setShowModal(false)
   }
   return (
     <>
@@ -100,6 +108,9 @@ export default function UnduhFile({ link, namaFile, title }) {
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
+      ) : null}
+      {showLoading ? (
+        <ModalLoading loading={showLoading} title={'Singkronisasi data'} />
       ) : null}
     </>
   )

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SuratMasuk;
@@ -158,5 +159,28 @@ class SuratMasukController extends Controller
             'content' => $suratMasuk,
             ];
             return response()->json($respon,200);
+    }
+    public function getSuratDetail(){
+        $suratMasuk = DB::table('surat_masuk')
+        ->join('kode_unit_kerja','surat_masuk.ID_KODE_UNIT_KERJA','=','kode_unit_kerja.ID_KODE_UNIT_KERJA')
+        ->join('jenis_surat','surat_masuk.ID_JENIS_SURAT','=','jenis_surat.ID_JENIS_SURAT')
+        ->join('derajat_surat','surat_masuk.ID_DERAJAT_SURAT', '=','derajat_surat.ID_DERAJAT_SURAT')
+        ->join('kode_sifat_naskah','kode_sifat_naskah.ID_SIFAT_NASKAH', '=','surat_masuk.ID_SIFAT_NASKAH')
+        ->join('pengguna','pengguna.ID_PENGGUNA','=','surat_masuk.ID_PENGGUNA')
+        ->select('surat_masuk.*','kode_unit_kerja.KODE_UNIT_KERJA','kode_unit_kerja.NAMA_UNIT_KERJA','jenis_surat.JENIS_SURAT','derajat_surat.DERAJAT_SURAT','kode_sifat_naskah.KODE_SIFAT_NASKAH','kode_sifat_naskah.SIFAT_NASKAH','pengguna.NAMA')        
+        ->orderBy('ID_PENCATATAN','desc')
+        ->get();
+        if(!$suratMasuk){
+            $respon = [
+                'Msg' => 'error',
+                'content' => $suratMasuk,
+                ];
+                return response()->json($respon);
+        }
+        $respon = [
+            'Msg' => 'success',
+            'content' => $suratMasuk,
+            ];
+        return response()->json($respon);
     }
 }

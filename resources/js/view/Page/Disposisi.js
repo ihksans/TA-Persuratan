@@ -4,13 +4,13 @@ import React, { Component } from 'react'
 import TabelDisposisi from '../../components/TabelDisposisi/TabelDisposisi'
 import PdfReader from '../../components/PdfReader'
 import { connect } from 'react-redux'
-import { 
+import {
   setAllDisposisi,
   setAllSuratMasuk,
   setJenisSurat,
   setUnitKerja,
   setDerajatSurat,
-  setSifatSurat,  
+  setSifatSurat,
   // setAllPencatatan,
 } from '../../actions/index'
 // import Index from '../../components/Disposisi/index'
@@ -21,19 +21,19 @@ class Disposisi extends Component {
   constructor(props) {
     super()
     this.state = {
-      Disposisi:[],
+      Disposisi: [],
       suratMasuk: [],
       jenisSurat: [],
       unitKerja: [],
-      pencatatan:[],
+      pencatatan: [],
     }
     this.getDisposisi = this.getDisposisi.bind(this)
   }
 
-  async getDisposisi(){
+  async getDisposisi() {
     await api()
       .get('api/allInfoDisposisi')
-      .then((response)=>{
+      .then((response) => {
         this.setState({
           Disposisi: response.data.content,
         })
@@ -45,24 +45,24 @@ class Disposisi extends Component {
         this.setState({
           suratMasuk: response.data.content,
         })
-      this.props.setAllSuratMasuk(response.data.content)
-    })
+        this.props.setAllSuratMasuk(response.data.content)
+      })
     await api()
       .get('api/getAllJenisSurat')
       .then((response) => {
-      this.setState({
-        jenisSurat: response.data,
+        this.setState({
+          jenisSurat: response.data,
+        })
+        this.props.setJenisSurat(response.data)
       })
-      this.props.setJenisSurat(response.data)
-    })
     await api()
       .get('api/getAllKodeUnit')
       .then((response) => {
-      this.setState({
-        unitKerja: response.data,
+        this.setState({
+          unitKerja: response.data,
+        })
+        this.props.setUnitKerja(response.data)
       })
-      this.props.setUnitKerja(response.data)
-    })
     await api()
       .get('api/getAllDerajatSurat')
       .then((response) => {
@@ -75,15 +75,15 @@ class Disposisi extends Component {
       })
     await api()
       .get('api/getAllPencatatanInfo')
-      .then((response)=>{
+      .then((response) => {
         this.state({
-          pencatatan:response.data,
+          pencatatan: response.data,
         })
         // this.props.setAllPencatatan(response.data)
       })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getDisposisi()
   }
   render() {
@@ -100,27 +100,23 @@ class Disposisi extends Component {
               <div className="font-bold ml-2 text-2xl	">Agenda Disposisi</div>
             </div>
             {/* <AddFormSurat /> */}
+            <div>{/* <AddFormDisposisi /> */}</div>
             <div>
-            {/* <AddFormDisposisi /> */}
-            </div>
-            <div>
-              
               {/* <TabelDisposisi Disposisi={this.state.Disposisi}/> */}
 
-              {this.props.AllDisposisi.allDisposisiInfo == null ?(
-                <TabelDisposisi 
-                Disposisi={this.state.Disposisi}
-                SuratMasuk={this.state.suratMasuk}
-                IdJenisSurat={this.state.jenisSurat}
-                IdUnitKerja={this.state.unitKerja}
+              {this.props.AllDisposisi.allDisposisiInfo == null ? (
+                <TabelDisposisi
+                  SuratMasuk={this.state.suratMasuk}
+                  Disposisi={this.state.Disposisi}
+                  IdJenisSurat={this.state.jenisSurat}
+                  IdUnitKerja={this.state.unitKerja}
                 />
-                
-              ):(
-                <TabelDisposisi 
-                Disposisi={this.props.AllDisposisi.allDisposisiInfo}
-                SuratMasuk={this.props.SuratMasuk.allSuratMasukInfo}
-                IdJenisSurat={this.state.jenisSurat}
-                IdUnitKerja={this.state.unitKerja}
+              ) : (
+                <TabelDisposisi
+                  Disposisi={this.props.AllDisposisi.allDisposisiInfo}
+                  SuratMasuk={this.props.SuratMasuk.allSuratMasukInfo}
+                  IdJenisSurat={this.state.jenisSurat}
+                  IdUnitKerja={this.state.unitKerja}
                 />
               )}
             </div>
@@ -133,12 +129,12 @@ class Disposisi extends Component {
 function mapStateToProps(state) {
   return state
 }
-export default connect(mapStateToProps,{
+export default connect(mapStateToProps, {
   setAllDisposisi,
   setAllSuratMasuk,
   setJenisSurat,
   setUnitKerja,
   setDerajatSurat,
-  setSifatSurat,  
+  setSifatSurat,
   // setAllPencatatan,
 })(Disposisi)

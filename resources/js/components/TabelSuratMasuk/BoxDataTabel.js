@@ -22,9 +22,11 @@ class BoxDataTabel extends Component {
 
               <div className="   col-span-2 ">
                 <div className="flex flex-row">
-                  <div className="flex flex-row ">{this.props.TglSurat}</div>
+                  <div className="flex flex-row ">
+                    {this.props.Surat.TGL_SURAT}
+                  </div>
                   <div className="flex flex-row ml-4">
-                    {this.props.TglDiterima}
+                    {this.props.Surat.TGL_DITERIMA}
                   </div>
                 </div>
               </div>
@@ -32,87 +34,26 @@ class BoxDataTabel extends Component {
           </div>
 
           <div className="flex flex-row  items-center mt-1">
-            <p className="truncate text-sm">{this.props.NoSurat}</p>
+            <p className="truncate text-sm">{this.props.Surat.NOMOR_SURAT}</p>
           </div>
           <div className="flex flex-row  col-span-2  items-center mt-1">
-            <p className="truncate text-sm">{this.props.Perihal}</p>
+            <p className="truncate text-sm">{this.props.Surat.PERIHAL}</p>
           </div>
-          <div className="flex flex-row  items-center  mt-1 ">
-            <ul>
-              {this.props.IdJenisSurat.map((item, index) => {
-                return (
-                  <li key={index}>
-                    {this.props.JenisSurat == item.ID_JENIS_SURAT ? (
-                      <div className="ml-2">
-                        {item.JENIS_SURAT.length > 15 ? (
-                          <>{item.JENIS_SURAT.slice(0, 15)}...</>
-                        ) : (
-                          <>{item.JENIS_SURAT}</>
-                        )}
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                  </li>
-                )
-              })}
-            </ul>
+          <div className=" flex  flex-row  items-center  mt-1 ">
+            <p className="truncate text-sm"> {this.props.Surat.JENIS_SURAT}</p>
           </div>
           <div className="flex flex-row items-center ml-2 mt-1">
-            {/* <ul>
-              {this.props.IdUnitKerja.map((item, index) => {
-                return (
-                  <li key={index}>
-                    {this.props.UnitKerja == item.ID_KODE_UNIT_KERJA ? (
-                      <div className="">
-                        {item.NAMA_UNIT_KERJA.length > 15 ? (
-                          <>{item.NAMA_UNIT_KERJA.slice(0, 15)}...</>
-                        ) : (
-                          <>{item.NAMA_UNIT_KERJA}</>
-                        )}
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                  </li>
-                )
-              })}
-            </ul> */}
-            {this.props.TujuanSurat}
+            {this.props.Surat.TUJUAN_SURAT}
           </div>
           <div className="   items-center ml-2 mt-1">
-            <div className="font-bold">
-              {this.props.NamaPengirim.length > 12 ? (
-                <>{this.props.NamaPengirim.slice(0, 12)}...</>
-              ) : (
-                <>{this.props.NamaPengirim}</>
-              )}
-            </div>
-            <ul>
-              {this.props.IdUnitKerja.map((item, index) => {
-                return (
-                  <li key={index}>
-                    {this.props.UnitKerja == item.ID_KODE_UNIT_KERJA ? (
-                      <div className="">
-                        {item.KODE_UNIT_KERJA.length > 15 ? (
-                          <>{item.KODE_UNIT_KERJA.slice(0, 15)}...</>
-                        ) : (
-                          <>{item.KODE_UNIT_KERJA}</>
-                        )}
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                  </li>
-                )
-              })}
-            </ul>
+            <div className="font-bold">{this.props.Surat.NAMA_PENGIRIM}</div>
+            {this.props.Surat.KODE_UNIT_KERJA}
           </div>
 
           <DetailSuratMasuk
-            namaFile={this.props.NamaFileSurat}
+            namaFile={this.props.Surat.NAMA_FILE_SURAT}
             SuratDetail={this.props.Surat}
-            namaLampiran={this.props.NamaFileLampiran}
+            namaLampiran={this.props.Surat.NAMA_FILE_LAMPIRAN}
             jenisSurat={this.props.jenisSurat}
             IdUnitKerja={this.props.IdUnitKerja}
           />

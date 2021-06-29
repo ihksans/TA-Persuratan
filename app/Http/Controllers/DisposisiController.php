@@ -32,35 +32,7 @@ class DisposisiController extends Controller
      */
     public function createDisposisis(Request $request)
     {
-        // $suratMasuk = Pencatatan::where('ID_PENCATATAN', $id)->first();
-        
-        // $suratMasuk = Disposisi::where('ID_PENCATATAN', $request->id_pencatatan)->first();
-        
-        // if(!$suratMasuk){
-        //     $respon = [
-        //         'msg' => $request->id_pencatatan,
-        //         'error' => 'create disposisi'
-        //     ];
-        //     return response()->json($suratMasuk);
-        // }
-        // $suratMasuk->validate([
-        //     'ID_PENGGUNA'=>'required',
-        //     'ID_PENCATATAN'=>'required',
-        //     'TANGGAL_DISPOSISI'=>'required',
-        //     'NOMOR_DISPOSISI'=>'required',
-        //     'PROSES_SELANJUTNYA'=>'required',
-        //     'INFORMASI'=>'required',
-        //     'NOMOR_AGENDA'=>'required',
-        // ]);
-        // $data = [
-        //     'ID_PENGGUNA'=>$suratMasuk->id_pengguna,
-        //     'ID_PENCATATAN'=>$suratMasuk->id_pencatatan,
-        //     'TANGGAL_DISPOSISI'=>$suratMasuk->tanggal_disposisi,
-        //     'NOMOR_DISPOSISI'=>$suratMasuk->nomor_disposisi,
-        //     'PROSES_SELANJUTNYA'=>$suratMasuk->proses_selanjutnya,
-        //     'INFORMASI'=>$suratMasuk->informasi,
-        //     'NOMOR_AGENDA'=>$suratMasuk->nomor_agenda,
-        // ];
+       
         $data = [
             'ID_PENGGUNA'=>$request->id_pengguna,
             'ID_PENCATATAN'=>$request->id_pencatatan,
@@ -95,6 +67,18 @@ class DisposisiController extends Controller
         return response()->json($disposisi);
     }
 
+    public function getDisposisiByID($id){
+        $disposisi = Disposisi::where('ID_PENCATATAN', $id)->first();     if($disposisi==null){
+            $respon = [
+                'content' => null
+            ];
+            return response()->json($respon);
+        }   
+        $respon = [
+            'content' => $disposisi
+        ];
+        return response()->json($respon);
+    }
     /**
      * Store a newly created resource in storage.
      *

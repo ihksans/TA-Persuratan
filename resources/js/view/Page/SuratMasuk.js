@@ -29,7 +29,7 @@ class SuratMasuk extends Component {
   }
   async getSuratMasuk() {
     await api()
-      .get('api/getAllSuratMasuk')
+      .get('api/detailSuratMasuk')
       .then((response) => {
         this.setState({
           suratMasuk: response.data.content,

@@ -12,8 +12,7 @@ import UpdateTindakLanjut from '../FormUpdateReminder/updateTL'
 import AddReminder from '../FormAddReminder'
 import { isEmpty } from 'lodash-es'
 
-
-import AddFormDisposisi from '../AddFormDisposisi'
+import Modal from '../AddFormDisposisi/Modal'
 // import createuser from "./index";
 class DetailSuratMasuk extends Component {
   constructor(props) {
@@ -23,8 +22,8 @@ class DetailSuratMasuk extends Component {
       pengingat: null,
       numPages: '',
       pageNumber: '',
-      url: '',
-      urlLampiran: '',
+      url: null,
+      urlLampiran: null,
       getP: false,
       showModal: false,
       showPengingatModal: false,
@@ -33,7 +32,9 @@ class DetailSuratMasuk extends Component {
       tglSurat: this.props.SuratDetail.TGL_SURAT,
       tglDiterima: this.props.SuratDetail.TGL_DITERIMA,
       modalLodaing: false,
+      loading: false,
     }
+    this.handleLoading = this.handleLoading.bind(this)
 
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
@@ -44,24 +45,32 @@ class DetailSuratMasuk extends Component {
     this.reserveTgl = this.reserveTgl.bind(this)
   }
   //handle input changes and update item state
-
+  handleLoading() {
+    this.setState({
+      loading: !this.state.loading,
+    })
+  }
   async handleModal() {
+    if (this.state.url == null || this.state.urlLampiran == null) {
+      this.handleLoading()
+      await this.getFileSuratMasuk()
+      this.handleLoading()
+    }
     await this.setState({
       showModal: !this.state.showModal,
       getP: !this.state.getP,
     })
     if (this.state.showModal == true) {
-      this.getFileSuratMasuk()
       this.reserveTgl()
       this.getPengingatSurat()
     }
   }
-  async handlePengingatModal(){
+  async handlePengingatModal() {
     await this.setState({
       showPengingatModal: !this.state.showPengingatModal,
     })
   }
-  async handleTindakLanjutModal(){
+  async handleTindakLanjutModal() {
     await this.setState({
       hiddenTLModal: !this.state.hiddenTLModal,
     })
@@ -75,29 +84,19 @@ class DetailSuratMasuk extends Component {
       tglDiterima: b[2] + '-' + b[1] + '-' + b[0],
     })
   }
-  async getPengingatSurat(){
+  async getPengingatSurat() {
     this.setState({
-      pengingat: null
+      pengingat: null,
     })
     if (this.state.getP == true) {
-      // await api()
-      //   .get('/api/getPengingat/{this.props.SuratDetail.ID_PENCATATAN}')
-      //   .then((response) =>{
-      //     this.setState({
-      //       pengingat: response.data,
-      //       getP: !this.state.getP,
-      //     })
-      //     console.log('pengingat:' + this.state.pengingat)
-      //   })
-      this.props.Pengingat.allPengingatInfo.map(
-        (item) => {
-          const temp = this.props.SuratDetail.ID_PENCATATAN
-          const temp2 = item.ID_PENCATATAN
-          if (temp == temp2){
-            this.setState({
-              pengingat: item
-            })
-          }          
+      this.props.Pengingat.allPengingatInfo.map((item) => {
+        const temp = this.props.SuratDetail.ID_PENCATATAN
+        const temp2 = item.ID_PENCATATAN
+        if (temp == temp2) {
+          this.setState({
+            pengingat: item,
+          })
+        }
       })
     }
     //console.log(this.state.pengingat)
@@ -130,16 +129,7 @@ class DetailSuratMasuk extends Component {
           }),
         )
     }
-    // console.log('url file:' + this.state.url)
-    // console.log('item:' + this.props.SuratDetail.NOMOR_SURAT)
-    // console.log('item2:' + this.props.SuratDetail.PERIHAL)
-    console.log('pengguna:' + this.state.pengguna)
-    console.log('all user:' + this.props.AllUser.allUserInfo)
   }
-  // handlePage(){
-  //   if
-  // }
-  pencatat() {}
 
   render() {
     return (
@@ -176,47 +166,16 @@ class DetailSuratMasuk extends Component {
                         </div>
                       </div>
                       <div className="flex flex-row  col-span-3 mb-4 border-b-2">
-                        {/* <button
-                          type="submit"
-                          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
-                        >
-                          <div className="ml-1">
-                            <img
-                              className="h-auto align-middle"
-                              src="assets/img/icon/Pencil.png"
-                            />
-                          </div>
-                          <div className="font-bold ml-1 mr-2">Edit</div>
-                        </button> */}
                         <EditFormSurat SuratDetail={this.props.SuratDetail} />
-                        {/* <button
-                          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
-                          type="button"
-                        >
-                          <div className="ml-1">
-                            <img
-                              className="h-4 align-middle"
-                              src="assets/img/icon/Surat.png"
-                            />
-                          </div>
-                          <div className="font-bold text-putih ml-1 mr-2">
-                            Lihat Disposisi
-                          </div>
-                        </button> */}
-                        <AddFormDisposisi 
-                        namaFile={this.props.NamaFileSurat}
-                        SuratDetail={this.props.SuratDetail}
-                        namaLampiran={this.props.NamaFileLampiran}
-                        jenisSurat={this.props.jenisSurat}
-                        IdUnitKerja={this.props.IdUnitKerja}
+                        <Modal
+                          namaFile={this.props.NamaFileSurat}
+                          SuratDetail={this.props.SuratDetail}
+                          namaLampiran={this.props.NamaFileLampiran}
+                          jenisSurat={this.props.jenisSurat}
+                          IdUnitKerja={this.props.IdUnitKerja}
                         />
                         <ModalLoading loading={this.state.modalLodaing} />
-                        {/* <button
-                          type="submit"
-                          className="bg-primary font-bold 	self-center ml-2 mt-1  rounded p-1 shadow-sm w-full"
-                        >
-                          Ekspor ke PDF
-                        </button> */}
+
                         <ModalKonfirmDeleteSM
                           NomorSurat={this.props.SuratDetail.NOMOR_SURAT}
                           IdSurat={this.props.SuratDetail.ID_PENCATATAN}
@@ -225,15 +184,7 @@ class DetailSuratMasuk extends Component {
                       <div className="font-bold">Dicatat oleh </div>
 
                       <div className="col-span-2">
-                        {this.state.pengguna.map((item, index) => {
-                          const temp = item.ID_PENGGUNA
-                          const temp2 = this.props.SuratDetail.ID_PENGGUNA
-                          return (
-                            <div key={index}>
-                              {temp == temp2 ? <div>{item.NAMA}</div> : null}
-                            </div>
-                          )
-                        })}
+                        {this.props.SuratDetail.NAMA}
                       </div>
                       <div className="font-bold">No Agenda </div>
                       <div className=" col-span-2">
@@ -247,25 +198,12 @@ class DetailSuratMasuk extends Component {
                       <div></div>
                       <div className="font-bold">Unit</div>
                       <div className="">
-                        <ul>
-                          {this.props.IdUnitKerja.map((item, index) => {
-                            return (
-                              <li key={index}>
-                                {this.props.SuratDetail.ID_KODE_UNIT_KERJA ==
-                                item.ID_KODE_UNIT_KERJA ? (
-                                  <div className="">
-                                    <p>
-                                      : {item.KODE_UNIT_KERJA} -{' '}
-                                      {item.NAMA_UNIT_KERJA}
-                                    </p>
-                                  </div>
-                                ) : (
-                                  <></>
-                                )}
-                              </li>
-                            )
-                          })}
-                        </ul>
+                        <div className="">
+                          <p>
+                            : {this.props.SuratDetail.KODE_UNIT_KERJA} -{' '}
+                            {this.props.SuratDetail.NAMA_UNIT_KERJA}
+                          </p>
+                        </div>
                       </div>
                       <div> </div>
                       <div className="font-bold">Penandatangan</div>
@@ -298,59 +236,15 @@ class DetailSuratMasuk extends Component {
                       </div>
                       <div className="font-bold">Jenis Surat</div>
                       <div className=" col-span-2">
-                        {this.props.AllJenisSurat.allJenisSurat.map(
-                          (item, index) => {
-                            const temp = this.props.SuratDetail.ID_JENIS_SURAT
-                            const temp2 = item.ID_JENIS_SURAT
-                            return (
-                              <div key={index}>
-                                {temp == temp2 ? (
-                                  <>
-                                    {item.JENIS_SURAT}, {item.KETERANGAN}
-                                  </>
-                                ) : (
-                                  <></>
-                                )}
-                              </div>
-                            )
-                          },
-                        )}
+                        {this.props.SuratDetail.JENIS_SURAT}
                       </div>
                       <div className="font-bold">Sifat Surat</div>
                       <div className=" col-span-2">
-                        {this.props.RSifatSurat.allSifatSuratInfo.map(
-                          (item, index) => {
-                            const temp = this.props.SuratDetail.ID_SIFAT_NASKAH
-                            const temp2 = item.ID_SIFAT_NASKAH
-                            return (
-                              <div key={index}>
-                                {temp == temp2 ? (
-                                  <>{item.SIFAT_NASKAH}</>
-                                ) : (
-                                  <></>
-                                )}
-                              </div>
-                            )
-                          },
-                        )}
+                        <>{this.props.SuratDetail.SIFAT_NASKAH}</>
                       </div>
                       <div className="font-bold">Derajat Surat</div>
                       <div className="col-span-2">
-                        {this.props.RDerajatSurat.allDerajatSuratInfo.map(
-                          (item, index) => {
-                            const temp = this.props.SuratDetail.ID_DERAJAT_SURAT
-                            const temp2 = item.ID_DERAJAT_SURAT
-                            return (
-                              <div key={index}>
-                                {temp == temp2 ? (
-                                  <>{item.DERAJAT_SURAT}</>
-                                ) : (
-                                  <></>
-                                )}
-                              </div>
-                            )
-                          },
-                        )}{' '}
+                        <>{this.props.SuratDetail.DERAJAT_SURAT}</>
                       </div>
                       <div className="font-bold">Kode Arsip</div>
                       <div className="font-bold">Kom</div>
@@ -367,44 +261,43 @@ class DetailSuratMasuk extends Component {
                       <div className="">
                         : {this.props.SuratDetail.KODE_ARSIP_MANUAL}
                       </div>
-                      <div className="font-bold">Keterangan</div>
-                      <div className="col-span-2">-</div>
 
                       <div className="font-bold">Status Pengingat</div>
                       <div className=" col-span-2">
                         <div className=" flex flex-row">
                           {this.state.pengingat == null ? (
                             <>
-                            <button
-                              type="submit"
-                              className="bg-abu self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
-                            >
-                            Tidak Aktif
-                            </button>
-                            </>
-                          ):(
-                            <>{this.state.pengingat.STATUS == 1 ? (
-                            <>
-                            <button
-                              type="submit"
-                              className="bg-biru self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
-                            >
-                            Aktif
-                            </button>
-                            </>
-                            ):(
-                              <>
                               <button
                                 type="submit"
                                 className="bg-abu self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
                               >
-                              Tidak Aktif
+                                Tidak Aktif
                               </button>
-                              </>
-                            )}
+                            </>
+                          ) : (
+                            <>
+                              {this.state.pengingat.STATUS == 1 ? (
+                                <>
+                                  <button
+                                    type="submit"
+                                    className="bg-biru self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
+                                  >
+                                    Aktif
+                                  </button>
+                                </>
+                              ) : (
+                                <>
+                                  <button
+                                    type="submit"
+                                    className="bg-abu self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
+                                  >
+                                    Tidak Aktif
+                                  </button>
+                                </>
+                              )}
                             </>
                           )}
-                          
+
                           <button
                             type="submit"
                             className="bg-primary font-bold  self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
@@ -416,39 +309,34 @@ class DetailSuratMasuk extends Component {
                             />
                           </button>
                         </div>
-                        {/* <div className="text-sm">
-                          Harus ditindaklanjuti dalam waktu 5 hari
-                        </div> */}
                       </div>
                       <div className="font-bold">Status Tindak Lanjut</div>
-                          
+
                       {this.state.pengingat == null ? (
-                        <><div
-                            className="font-bold rounded p-2 col-span-2 bg-danger w-75% text-putih"
-                          >
+                        <>
+                          <div className="font-bold rounded p-2 col-span-2 bg-danger w-75% text-putih">
                             Belum ditindaklanjuti
                           </div>
                         </>
-                      ):(
-                        <>{this.state.pengingat.STATUS == 0 ? (
-                          <>
-                          <div
-                            className="font-bold rounded p-2 col-span-2 bg-green-500 w-75% text-putih"
-                          >
-                            Sudah ditindaklanjuti
-                          </div>
-                          </>
-                        ):(
-                          <>
-                          <button
-                            type="button"
-                            className="font-bold rounded p-2 col-span-2 bg-danger w-75% text-putih"
-                            onClick={this.handleTindakLanjutModal}
-                          >
-                            Belum ditindaklanjuti
-                          </button>
-                          </>
-                        )}
+                      ) : (
+                        <>
+                          {this.state.pengingat.STATUS == 0 ? (
+                            <>
+                              <div className="font-bold rounded p-2 col-span-2 bg-green-500 w-75% text-putih">
+                                Sudah ditindaklanjuti
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <button
+                                type="button"
+                                className="font-bold rounded p-2 col-span-2 bg-danger w-75% text-putih"
+                                onClick={this.handleTindakLanjutModal}
+                              >
+                                Belum ditindaklanjuti
+                              </button>
+                            </>
+                          )}
                         </>
                       )}
                     </div>
@@ -487,41 +375,46 @@ class DetailSuratMasuk extends Component {
         ) : null}
         {this.state.showPengingatModal ? (
           <>
-         {this.state.pengingat == null ? (
-           <>
-           <AddReminder
-              SuratDetail = {this.props.SuratDetail}
-              idPencatatan = {this.props.SuratDetail.ID_PENCATATAN}
-              noAgenda = {this.props.SuratDetail.NOMOR_AGENDA}
-              idDerajatSurat = {this.props.SuratDetail.ID_DERAJAT_SURAT}/>
-           </>
-         ) : (
-           <>
-           <UpdateReminder
-              idPengingat = {this.state.pengingat.ID_PENGINGAT}
-              idPengguna = {this.state.pengingat.ID_PENGGUNA}
-              idPencatatan = {this.state.pengingat.ID_PENCATATAN}
-              waktuPengingat = {this.state.pengingat.WAKTU_PENGINGAT}
-              deskripsiPengingat = {this.state.pengingat.DESKRIPSI}
-              status = {this.state.pengingat.STATUS}
-              noAgenda = {this.props.SuratDetail.NOMOR_AGENDA}
-              idDerajatSurat = {this.props.SuratDetail.ID_DERAJAT_SURAT}/>
-           </>
-         )}
+            {this.state.pengingat == null ? (
+              <>
+                <AddReminder
+                  SuratDetail={this.props.SuratDetail}
+                  idPencatatan={this.props.SuratDetail.ID_PENCATATAN}
+                  noAgenda={this.props.SuratDetail.NOMOR_AGENDA}
+                  idDerajatSurat={this.props.SuratDetail.ID_DERAJAT_SURAT}
+                />
+              </>
+            ) : (
+              <>
+                <UpdateReminder
+                  idPengingat={this.state.pengingat.ID_PENGINGAT}
+                  idPengguna={this.state.pengingat.ID_PENGGUNA}
+                  idPencatatan={this.state.pengingat.ID_PENCATATAN}
+                  waktuPengingat={this.state.pengingat.WAKTU_PENGINGAT}
+                  deskripsiPengingat={this.state.pengingat.DESKRIPSI}
+                  status={this.state.pengingat.STATUS}
+                  noAgenda={this.props.SuratDetail.NOMOR_AGENDA}
+                  idDerajatSurat={this.props.SuratDetail.ID_DERAJAT_SURAT}
+                />
+              </>
+            )}
           </>
         ) : null}
         {this.state.hiddenTLModal ? (
           <>
-          <UpdateTindakLanjut
-            idPengingat = {this.state.pengingat.ID_PENGINGAT}
-            idPengguna = {this.state.pengingat.ID_PENGGUNA}
-            idPencatatan = {this.state.pengingat.ID_PENCATATAN}
-            waktuPengingat = {this.state.pengingat.WAKTU_PENGINGAT}
-            deskripsiPengingat = {this.state.pengingat.DESKRIPSI}
-            status = {this.state.pengingat.STATUS}
-          />
+            <UpdateTindakLanjut
+              idPengingat={this.state.pengingat.ID_PENGINGAT}
+              idPengguna={this.state.pengingat.ID_PENGGUNA}
+              idPencatatan={this.state.pengingat.ID_PENCATATAN}
+              waktuPengingat={this.state.pengingat.WAKTU_PENGINGAT}
+              deskripsiPengingat={this.state.pengingat.DESKRIPSI}
+              status={this.state.pengingat.STATUS}
+            />
           </>
-        ): null}
+        ) : null}
+        {this.state.loading ? (
+          <ModalLoading loading={this.state.loading} title={'Memeriksa data'} />
+        ) : null}
       </>
     )
   }
