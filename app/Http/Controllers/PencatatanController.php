@@ -61,7 +61,7 @@ class PencatatanController extends Controller
     public function delPencatatan($id)
     {
         $pencatatan = Pencatatan::where('ID_PENCATATAN', $id);
-       $result =  $pencatatan->delete();
+        $result =  $pencatatan->delete();
         if($result != null){
             $respon =[
             'Msg' => 'error',

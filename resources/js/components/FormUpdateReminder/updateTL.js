@@ -17,7 +17,8 @@ class UpdateTL extends Component {
             waktuPengingat: this.props.waktuPengingat,
             deskripsiPengingat: this.props.deskripsiPengingat,
             showModal: true,
-            modalLoading: false,     
+            modalLoading: false,
+            idPengingat: this.props.idPengingat,
         }
         this.onSave = this.onSave.bind(this)
         this.handleLoading = this.handleLoading.bind(this)
@@ -27,22 +28,7 @@ class UpdateTL extends Component {
           modalLoading: !this.state.modalLoading,
         })
     }
-    onSave(e){
-        this.setState({
-                  showModal: !this.state.showModal,
-                  modalLoading: false,
-                  idPengingat: this.props.idPengingat,
-                  idPengguna: this.props.idPengguna,
-                  idPencatatan: this.props.idPencatatan,
-                  status: "0",
-                  waktuPengingat: this.props.waktuPengingat,
-                  deskripsiPengingat: this.props.deskripsiPengingat,
-                  noAgenda: this.props.noAgenda,
-                  derajatSurat: this.props.idDerajatSurat,
-                  errorWaktuPengingat: false,
-                  errorDeskripsi: false, 
-                })
-        e.preventDefault()
+    async onSave(){
         if (this.state.showModal == true){
             this.handleLoading()
             api()
@@ -55,17 +41,7 @@ class UpdateTL extends Component {
                     STATUS: this.state.status,
                 })
                 .then((response) => {
-                    this.setState({
-                    item: {
-                        idPengguna: '',
-                        idPencatatan: '',
-                        waktuPengingat: '',
-                        deskripsiPengingat: '',
-                        status: '',
-                        },
-                    })
                     this.handleLoading()
-                    this.handleModal()
                     window.location.reload('/#/SuratMasuk')
                 })
                 .catch((err) => {
@@ -77,15 +53,12 @@ class UpdateTL extends Component {
     render(){
         return(
             <>
-            {this.state.showModal ? (
-            <>
-            </>
-          ) : null}
-          <ModalLoading
-            loading={this.state.modalLoading}
-            title={'Sedang diproses sistem'}
-          />
-            </>
+            {this.onSave()}
+            <ModalLoading
+                loading={this.state.modalLoading}
+                title={'Sedang diproses sistem'}
+            />
+                </>
         )
     }
 }

@@ -139,7 +139,7 @@ export default function ModalKonfirmDeleteSM({
                   <div className="flex items-center justify-center content-center">
                     <button
                       type="submit"
-                      className="rounded bg-danger text-red-500 background-transparent font-bold w-36 px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
+                      className="rounded bg-danger text-putih background-transparent font-bold w-36 px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
                       onClick={() => deletePengguna(IdSurat)}
                     >
                       Ya

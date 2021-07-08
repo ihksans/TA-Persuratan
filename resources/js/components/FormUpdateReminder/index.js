@@ -165,27 +165,16 @@ class FormUpdateReminder extends Component {
     render(){
         return(
             <>
-            {/* <button
-                type="submit"
-                className="bg-primary font-bold  self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
-                onClick={this.handleModal}
-            >
-                <img
-                    className="h-auto align-middle"
-                    src="assets/img/icon/Pencil.png"
-                />
-            </button> */}
-            
             {this.state.showModal ? (
             <>
               <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                <div className="relative w-auto my-6 mx-auto max-w-6xl">
+                <div className="relative w-full my-6 h-90% mx-auto max-w-6xl">
                   {/*content*/}
-                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full h-full bg-white outline-none focus:outline-none">
                     {/*header*/}
                     <div className="flex items-start justify-center ">
                       <button
-                        className="p-1 ml-auto  border-2 float-right  leading-none  outline-none focus:outline-none"
+                        className="p-1 ml-auto  float-right  leading-none  outline-none hover:shadow-md focus:outline-none"
                         onClick={this.handleModal}
                       >
                         <img
@@ -268,7 +257,6 @@ class FormUpdateReminder extends Component {
                                       <div className="text-danger ml-2"> *</div>
                                     </div>
                                     <div className="justify-end ">
-                                      {/* {this.props.pengingat.WAKTU_PENGINGAT} */}
                                       <div
                                         type="text"
                                         name="waktuPengingat"
@@ -325,9 +313,9 @@ class FormUpdateReminder extends Component {
                                     </div>
                                   </div>
                                   
-                                  <div className="flex flex-row grid grid-cols-2 mb-4 mt-4  p-2">
+                                  <div className="flex flex-row grid grid-cols-2 mb-4 mt-4 p-2">
                                     <div></div>
-                                    <div className=" text-xs text-abu ">
+                                    <div className="text-xs text-abu">
                                       Keterangan (*): data wajib diisi.
                                     </div>
                                   </div>
@@ -335,23 +323,19 @@ class FormUpdateReminder extends Component {
                                     {/* <div></div> */}
                                     <button
                                       type="submit"
-                                      className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center align-center"
+                                      className=" w-2/3 p-1 border-2 rounded-md text-sm text-white font-bold bg-biru justify-center align-center"
                                       onClick={this.onDelete}
                                       value="Nonactived Reminder"
                                     >
-                                      <div className="text-sm mb-2 text-white	h-6 font-bold justify-center ">
-                                        Hapus Pengingat
-                                      </div>
+                                      Hapus Pengingat
                                     </button>
                                     <button
                                       type="submit"
-                                      className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center align-center"
+                                      className=" w-2/3 p-1 border-2 rounded-md text-sm text-white font-bold bg-biru justify-center align-center"
                                       onClick={this.onSubmit}
                                       value="Update Reminder"
                                     >
-                                      <div className="text-sm mb-2 text-white	h-6 font-bold justify-center ">
-                                        Simpan Pengingat
-                                      </div>
+                                      Simpan Pengingat
                                     </button>
                                   </div>
                                 </div>

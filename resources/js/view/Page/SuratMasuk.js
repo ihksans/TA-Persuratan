@@ -29,7 +29,7 @@ class SuratMasuk extends Component {
   }
   async getSuratMasuk() {
     await api()
-      .get('api/getAllSuratMasuk')
+      .get('api/detailSuratMasuk')
       .then((response) => {
         this.setState({
           suratMasuk: response.data.content,
@@ -84,11 +84,16 @@ class SuratMasuk extends Component {
               </div>
               <div className="font-bold ml-2 text-2xl	">Agenda Surat Masuk</div>
             </div>
-            <AddFormSurat />
-
+            
             <div>
+              <AddFormSurat />
+            </div>
+
+            <div className="">
+            {/* <div className="transform -translate-y-12"> */}
               {this.props.SuratMasuk.allSuratMasukInfo == null ? (
                 <TabelSuratMasuk
+                  Disposisi={this.state.Disposisi}
                   SuratMasuk={this.state.suratMasuk}
                   IdJenisSurat={this.state.jenisSurat}
                   IdUnitKerja={this.state.unitKerja}
@@ -96,6 +101,7 @@ class SuratMasuk extends Component {
               ) : (
                 <TabelSuratMasuk
                   SuratMasuk={this.props.SuratMasuk.allSuratMasukInfo}
+                  Disposisi={this.props.AllDisposisi.allDisposisiInfo}
                   IdJenisSurat={this.state.jenisSurat}
                   IdUnitKerja={this.state.unitKerja}
                 />

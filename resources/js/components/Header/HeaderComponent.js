@@ -34,19 +34,19 @@ const HeaderComponent = ({ show, role }) => {
   return (
     <>
       <>
-        <div className="grid grid-cols-3 gap-4  h-17 border shadow-3xl">
-          <div className="col-span-2 flex items-center p-1 ml-1.5 mt-1.5">
+        <div className="grid grid-cols-2 gap-4 h-17 border shadow-3xl">
+          <div className="flex items-center p-1 ml-1.5 mt-1.5">
             <Link to="#">
-              <button type="submit" className="w-full" onClick={handleSubmit}>
+              <button type="submit" className="w-full hover:shadow-md focus:outline-none" onClick={handleSubmit}>
                 <img
                   className="object-fill h-10"
                   src="assets/img/icon/Menu.png"
                 />
               </button>
             </Link>
-            {/* <div className="border-1 border-gray-400  font-semibold ">
-              Aplikasi Pengelolaan Surat Kemahasiswaan
-            </div> */}
+            <div className="flex items-center p-1 mb-1.5 ml-2 text-2xl font-bold pointer-events-none">
+              PETANAS
+            </div>
           </div>
           <div className="flex justify-end border-1 border-gray-400">
             <div className="flex justify-items-center p-1.5">
@@ -55,7 +55,7 @@ const HeaderComponent = ({ show, role }) => {
             <UserButton />
 
             <ReminderButton />
-            <button type="submit" className="justify-items-center h-9 my-2.5 mx-2">
+            <button type="submit" className="justify-items-center h-9 my-2.5 mx-2 focus:outline-none">
               <img className=" h-full" src="assets/img/icon/Bell.png" />
             </button>
           </div>
