@@ -318,7 +318,7 @@ class FormAddReminder extends Component {
                                     <div></div>
                                     <button
                                       type="submit"
-                                      className="w-2/3 p-1 border-2 rounded-md text-sm text-white font-bold bg-biru justify-center align-center"
+                                      className="w-2/3 p-1 border-2 rounded-md text-sm text-white font-bold bg-biru justify-center align-center hover:bg-biruduaHover focus:outline-none"
                                       onClick={this.onSubmit}
                                       value="Add Pengguna"
                                     //   value="Update Reminder"

@@ -4,6 +4,7 @@ import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import Kalender from './Kalender'
 import ModalLoading from '../ModalLoading'
+import DeleteP from '../ModalKonfirmDeletePengingat'
 
 class FormUpdateReminder extends Component {
     constructor(props) {
@@ -30,7 +31,6 @@ class FormUpdateReminder extends Component {
         this.handleErrorDeskripsi = this.handleErrorDeskripsi.bind(this)
         this.handleModal = this.handleModal.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
-        this.onDelete = this.onDelete.bind(this)
         this.validateInputWaktuPengingat = this.validateInputWaktuPengingat.bind(this)
         this.validateInputDeskripsi = this.validateInputDeskripsi.bind(this)
         this.handleLoading = this.handleLoading.bind(this)
@@ -130,20 +130,6 @@ class FormUpdateReminder extends Component {
                 console.log('error form')
             }
         }
-    }
-    async onDelete(){
-      await api()
-        .delete('/api/deletePengingat/' + this.state.ID_PENGINGAT)
-        .then((response) =>{
-            console.log('respon:' + response)
-            console.log('pengingat telah terhapus')
-            this.handleLoading()
-            window.location.reload('/#/SuratMasuk')
-          })
-          .catch((error) => {
-            console.log(error)
-            this.handleLoading()
-          })
     }
 
     validateInputWaktuPengingat(input){
@@ -320,18 +306,10 @@ class FormUpdateReminder extends Component {
                                     </div>
                                   </div>
                                   <div className="flex flex-row grid grid-cols-2">
-                                    {/* <div></div> */}
+                                    <DeleteP idPengingat={this.state.idPengingat}/>
                                     <button
                                       type="submit"
-                                      className=" w-2/3 p-1 border-2 rounded-md text-sm text-white font-bold bg-biru justify-center align-center"
-                                      onClick={this.onDelete}
-                                      value="Nonactived Reminder"
-                                    >
-                                      Hapus Pengingat
-                                    </button>
-                                    <button
-                                      type="submit"
-                                      className=" w-2/3 p-1 border-2 rounded-md text-sm text-white font-bold bg-biru justify-center align-center"
+                                      className=" w-2/3 p-1 border-2 rounded-md text-sm text-white font-bold bg-biru justify-center align-center hover:bg-biruduaHover focus:outline-none"
                                       onClick={this.onSubmit}
                                       value="Update Reminder"
                                     >

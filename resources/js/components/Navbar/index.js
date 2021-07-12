@@ -66,8 +66,8 @@ class Navbar extends Component {
         <div
           className={
             this.props.bar
-              ? 'flex flex-col w-17%  h-screen bg-gradient-to-b from-black to-blue-500 '
-              : 'flex flex-col w-0  h-screen'
+              ? 'flex flex-col w-17% h-screen bg-gradient-to-b from-black to-blue-500 '
+              : 'flex flex-col w-0 h-screen'
           }
         >
           <IconContext.Provider value={{ color: '#fff' }}>

@@ -74,7 +74,7 @@ class ClassReducers extends Component {
     return (
       <>
         <button
-          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
+          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1 rounded p-2 shadow-sm w-75% hover:bg-orenHover focus:outline-none"
           type="button"
           onClick={this.handleModal}
         >
@@ -95,6 +95,8 @@ class ClassReducers extends Component {
               IdUnitKerja={this.props.IdUnitKerja}
               disposisi={this.state.disposisi}
               url={this.state.url}
+              pengingatS={this.props.pengingatS}
+              countDays={this.props.countDays}
             />
           </>
         ) : null}

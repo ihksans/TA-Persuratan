@@ -76,7 +76,7 @@ class SuratMasuk extends Component {
       //html
       //js
       <>
-        <div className="w-full h-90% bg-gray-200 bg-gray-200 p-4	">
+        <div className="w-full h-95% bg-gray-200 bg-gray-200 p-4">
           <div className="bg-white shadow-md rounded p-6">
             <div className="flex flex-row">
               <div>

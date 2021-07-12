@@ -919,6 +919,7 @@ class EditFormSurat extends Component {
       }
     } else {
       this.handleModal()
+
     }
   }
 
@@ -926,7 +927,7 @@ class EditFormSurat extends Component {
     return (
       <>
         <button
-          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
+          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75% hover:bg-orenHover focus:outline-none"
           type="button"
           onClick={this.handleModal}
         >
@@ -1468,9 +1469,9 @@ class EditFormSurat extends Component {
                                   <div className="justify-end ">
                                     <select
                                       type="text"
-                                      name="jenisSurat"
+                                      name="sifatSurat"
                                       required
-                                      id="jenisSurat"
+                                      id="sifatSurat"
                                       className={
                                         'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	 w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                       }

@@ -88,7 +88,7 @@ const PdfReader = ({ urlFile, namaFile, namaLampiran }) => {
 
   return (
     <div>
-      <div className="">
+      <div className="flex flex-row justify-center">
         <Document
           file={urlFile}
           // file={'/data_files.pdf'}
@@ -97,35 +97,36 @@ const PdfReader = ({ urlFile, namaFile, namaLampiran }) => {
           // width="350"
           className="pdf-container"
         >
-          <div className="shadow-lg mb-2">
-            <Page height={600} pageNumber={pageNumber} />
+          <div className="flex flex-row justify-center mt-3">
+            <Page className="shadow-lg" height={600} pageNumber={pageNumber} />
           </div>
 
-          <div className="ml-1 rounded p-1 shadow-sm w-auto text-sm ">
-            Halaman : {pageNumber || (numPages ? 1 : '--')} / {numPages || '--'}
+          <div className="flex flex-row grid grid-cols-5 justify-center transform -translate-y-12 w-auto">
+            <div className="flex justify-center col-start-2 col-span-3 bg-bb rounded p-1 shadow-sm text-sm text-putih">
+              Halaman {pageNumber || (numPages ? 1 : '--')} / {numPages || '--'}
+              <button
+                type="button"
+                disabled={pageNumber <= 1}
+                onClick={previousPage}
+                className="text-sm font-bold text-putih self-center ml-7 rounded p-1 shadow-sm w-auto hover:opacity-80 focus:outline-none"
+              >
+                <div>
+                  <img className="w-4" src="assets/img/icon/Previous.png" />
+                </div>
+              </button>
+              <button
+                type="button"
+                disabled={pageNumber >= numPages}
+                onClick={nextPage}
+                className="text-sm font-bold text-putih self-center rounded p-1 shadow-sm w-auto hover:opacity-80 focus:outline-none"
+              >
+                <div>
+                  <img className="w-4" src="assets/img/icon/Next.png" />
+                </div>
+              </button>
+            </div>
           </div>
-          <div className="flex flex-row border-b-2 border-t-2 border-black	border-opacity-5	">
-            <button
-              type="button"
-              disabled={pageNumber <= 1}
-              onClick={previousPage}
-              className="bg-danger  text-sm font-bold text-putih self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
-            >
-              <div>
-                <img className="w-6" src="assets/img/icon/Previous.png" />
-              </div>
-            </button>
-            <button
-              type="button"
-              disabled={pageNumber >= numPages}
-              onClick={nextPage}
-              className="bg-danger  text-sm font-bold text-putih self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
-            >
-              <div>
-                <img className="w-6" src="assets/img/icon/Next.png" />
-              </div>
-            </button>
-
+          <div className="flex flex-row justify-center transform -translate-y-5">
             <UnduhFile link={namaFile} namaFile={namaFile} title={'Surat'} />
             {namaLampiran != null ? (
               <UnduhFile
@@ -139,10 +140,11 @@ const PdfReader = ({ urlFile, namaFile, namaLampiran }) => {
               href={urlFile}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary flex flex-row text-sm font-bold text-putih self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
+              className="bg-primary flex flex-row text-sm font-bold text-putih self-center ml-2 mt-1 rounded p-1 shadow-sm w-auto"
             >
-              <img className="w-4 ml-1 mr-1" src="assets/img/icon/search.png" />
-              <p>Lihat Lebih Detail</p>
+              {/* <img className="w-4 ml-1 mr-1" src="assets/img/icon/search.png" /> */}
+              <img src="https://img.icons8.com/material-outlined/24/ffffff/file-preview.png" className="w-4"/>
+              <p className="px-0.5">Lihat Lebih Detail</p>
             </a>
           </div>
         </Document>

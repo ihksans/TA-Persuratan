@@ -175,6 +175,7 @@ class AddFormDisposisi extends Component {
         if (this.state.fileDisposisi == null) {
           this.handleLoading()
           this.handleModal()
+          window.location.reload('/#/SuratMasuk')
         }
       })
       .catch((err) => console.log(err))
@@ -187,6 +188,7 @@ class AddFormDisposisi extends Component {
         .then((response) => {
           this.handleLoading()
           this.handleModal()
+          window.location.reload('/#/SuratMasuk')
         })
     }
   }
@@ -219,7 +221,7 @@ class AddFormDisposisi extends Component {
                           </div>
                           <div>Belum ada data disposisi</div>
                           <button
-                            className="justify-self-center flex flex-row bg-primary p-2 mt-4"
+                            className="justify-self-center flex flex-row bg-primary p-2 mt-4 hover:bg-orenHover focus:outline-none"
                             type="button"
                             onClick={this.handleShowForm}
                           >
@@ -236,7 +238,7 @@ class AddFormDisposisi extends Component {
                         </div>
                       ) : (
                         <>
-                          <div className="flex flex-row items-start p-2 border-b ml-6 border-solid border-blueGray-200 rounded-t col-span-3">
+                          <div className="flex flex-row items-start p-2 ml-6 rounded-t col-span-3">
                             <div>
                               <img
                                 className="w-8"
@@ -340,32 +342,80 @@ class AddFormDisposisi extends Component {
                               <div className="font-bold">Status Pengingat</div>
                               <div className=" col-span-2">
                                 <div className=" flex flex-row">
-                                  <button
-                                    type="submit"
-                                    className="bg-biru   self-center ml-2 mt-1  rounded-full p-1 shadow-sm w-40%"
-                                  >
-                                    Aktif
-                                  </button>
-                                  <button
-                                    type="submit"
-                                    className="bg-primary font-bold  self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
-                                  >
-                                    <img
-                                      className="h-auto align-middle"
-                                      src="assets/img/icon/Pencil.png"
-                                    />
-                                  </button>
+                                  {this.props.pengingatS == null ? (
+                                    <>
+                                      <button
+                                        type="submit"
+                                        className="bg-abu self-center mt-1 rounded-full p-1 shadow-sm w-40% cursor-default focus:outline-none"
+                                      >
+                                        Tidak Aktif
+                                      </button>
+                                    </>
+                                  ) : (
+                                    <>
+                                      {this.props.pengingatS.STATUS == 1 ? (
+                                        <>
+                                          <button
+                                            type="submit"
+                                            className="bg-biru self-center mt-1 rounded-full p-1 shadow-sm w-40% cursor-default focus:outline-none"
+                                          >
+                                            Aktif
+                                          </button>
+                                        </>
+                                      ) : (
+                                        <>
+                                          <button
+                                            type="submit"
+                                            className="bg-abu self-center mt-1 rounded-full p-1 shadow-sm w-40% cursor-default focus:outline-none"
+                                          >
+                                            Tidak Aktif
+                                          </button>
+                                        </>
+                                      )}
+                                    </>
+                                  )}
                                 </div>
-                                <div className="text-sm">
-                                  {/* Harus ditindaklanjuti dalam waktu 5 hari */}
-                                </div>
+                                {this.props.pengingatS != null ? (
+                                  <>
+                                {this.props.pengingatS.STATUS == 1 ? (
+                                  <>
+                                  <div className="text-sm">
+                                    Harus ditindaklanjuti dalam waktu {this.props.countDays} hari
+                                  </div>
+                                  </>
+                                ):(<><div className="text-sm">
+                              </div></>)}
+                                </>
+                                ):(<><div className="text-sm">
+                                </div></>)}
                               </div>
-                              <div className="font-bold">
-                                Status Tindak Lanjut
-                              </div>
-                              <div className="font-bold rounded p-2 col-span-2 bg-danger w-75% text-putih">
-                                Belum ditindak lanjuti
-                              </div>
+                              <div className="font-bold">Status Tindak Lanjut</div>
+
+                              {this.props.pengingatS == null ? (
+                                <>
+                                  <p className="font-semibold self-center rounded-md p-1 col-span-2 text-danger w-75%">
+                                    Belum ditindaklanjuti
+                                  </p>
+                                </>
+                              ) : (
+                                <>
+                                  {this.props.pengingatS.STATUS == 0 ? (
+                                    <>
+                                      <p className="font-semibold self-center rounded-md p-1 col-span-2 w-75% text-green pointer-events-none">
+                                        Sudah ditindaklanjuti
+                                      </p>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <p
+                                        className="font-semibold self-center rounded-md p-1 col-span-2 text-danger w-75%"
+                                      >
+                                        Belum ditindaklanjuti
+                                      </p>
+                                    </>
+                                  )}
+                                </>
+                              )}
                             </div>
                             <div>
                               <div className=" flex justify-end   ">
@@ -559,7 +609,7 @@ class AddFormDisposisi extends Component {
                                     <div></div>
                                     <button
                                       type="submit"
-                                      className="  p-1 border-2 rounded-md  bg-biru justify-center items-center"
+                                      className="  p-1 border-2 rounded-md  bg-biru justify-center items-center hover:bg-biruduaHover focus:outline-none"
                                       onClick={this.onSubmit}
                                       value="Add Disposisi"
                                     >
@@ -582,7 +632,7 @@ class AddFormDisposisi extends Component {
                             {/* Header */}
                             <div className="flex flex-row grid grid-cols-2 mr-8">
                               <div className="flex flex-row grid grid-cols-3 bg-white pb-10 pt-4 pl-4 pr-4">
-                                <div className="flex flex-row items-start p-2  border-b ml-6 border-solid border-blueGray-200 rounded-t col-span-3">
+                                <div className="flex flex-row items-start p-2  rounded-t col-span-3">
                                   <div>
                                     <img
                                       className="w-8"
@@ -595,7 +645,7 @@ class AddFormDisposisi extends Component {
                                     </h3>
                                   </div>
                                 </div>
-                                <div className="flex flex-row  col-span-3 mb-4 border-b-2 mb-10">
+                                <div className="flex flex-row  col-span-3 mb-4 mb-10">
                                   <EditFormDisposisi />
 
                                   <ModalKonfirmDeleteDispo

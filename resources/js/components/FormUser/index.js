@@ -321,7 +321,7 @@ class FormUser extends Component {
     return (
       <>
         <button
-          className="flex flex-row bg-primary rounded p-2 mt-4"
+          className="flex flex-row bg-primary rounded p-2 mt-4 hover:bg-orenHover focus:outline-none"
           type="button"
           onClick={this.handleModal}
         >
@@ -377,7 +377,7 @@ class FormUser extends Component {
                         onSubmit={this.onSubmit}
                       >
                         <div>
-                          <div className="w-full rounded-md shadow-sm ml-8">
+                          <div className="w-full rounded-md shadow-sm">
                             <div className="flex flex-row grid grid-cols-3">
                               <div
                                 htmlFor="username"
@@ -740,7 +740,7 @@ class FormUser extends Component {
                               <div></div>
                               <button
                                 type="submit"
-                                className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center align-center"
+                                className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center align-center hover:bg-biruduaHover focus:outline-none"
                                 onClick={this.onSubmit}
                                 value="Add Pengguna"
                               >

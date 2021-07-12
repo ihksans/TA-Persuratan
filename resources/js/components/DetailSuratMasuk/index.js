@@ -159,7 +159,7 @@ class DetailSuratMasuk extends Component {
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-abu outline-none focus:outline-none">
                   {/* header*/}
 
-                  <div className="flex flex-row grid grid-cols-2 mr-8">
+                  <div className="flex flex-row grid grid-cols-2">
                     <div className="flex flex-row grid grid-cols-3 bg-white p-4 rounded-l-lg">
                       <div className="flex flex-row items-start p-2 col-span-3">
                         <div>
@@ -174,7 +174,7 @@ class DetailSuratMasuk extends Component {
                           </h3>
                         </div>
                       </div>
-                      <div className="flex flex-row  col-span-3 mb-4">
+                      <div className="flex flex-row col-span-3 mb-4">
                         <EditFormSurat SuratDetail={this.props.SuratDetail} />
                         <Modal
                           namaFile={this.props.NamaFileSurat}
@@ -182,6 +182,8 @@ class DetailSuratMasuk extends Component {
                           namaLampiran={this.props.NamaFileLampiran}
                           jenisSurat={this.props.jenisSurat}
                           IdUnitKerja={this.props.IdUnitKerja}
+                          pengingatS={this.state.pengingat}
+                          countDays={this.state.count}
                         />
                         <ModalLoading loading={this.state.modalLodaing} />
 
@@ -278,7 +280,7 @@ class DetailSuratMasuk extends Component {
                             <>
                               <button
                                 type="submit"
-                                className="bg-abu self-center mt-1 rounded-full p-1 shadow-sm w-40% cursor-default"
+                                className="bg-abu self-center mt-1 rounded-full p-1 shadow-sm w-40% cursor-default focus:outline-none"
                               >
                                 Tidak Aktif
                               </button>
@@ -289,7 +291,7 @@ class DetailSuratMasuk extends Component {
                                 <>
                                   <button
                                     type="submit"
-                                    className="bg-biru self-center mt-1 rounded-full p-1 shadow-sm w-40% cursor-default"
+                                    className="bg-biru self-center mt-1 rounded-full p-1 shadow-sm w-40% cursor-default focus:outline-none"
                                   >
                                     Aktif
                                   </button>
@@ -298,7 +300,7 @@ class DetailSuratMasuk extends Component {
                                 <>
                                   <button
                                     type="submit"
-                                    className="bg-abu self-center mt-1 rounded-full p-1 shadow-sm w-40% cursor-default"
+                                    className="bg-abu self-center mt-1 rounded-full p-1 shadow-sm w-40% cursor-default focus:outline-none"
                                   >
                                     Tidak Aktif
                                   </button>
@@ -309,7 +311,7 @@ class DetailSuratMasuk extends Component {
 
                           <button
                             type="submit"
-                            className="bg-primary font-bold  self-center ml-2 mt-1 rounded p-1 shadow-sm w-auto hover:orenHover hover:shadow focus:outline-none"
+                            className="bg-primary font-bold  self-center ml-2 mt-1 rounded p-1 shadow-sm w-auto hover:bg-orenHover hover:shadow focus:outline-none"
                             onClick={this.handlePengingatModal}
                           >
                             <img
@@ -362,14 +364,14 @@ class DetailSuratMasuk extends Component {
                         </>
                       )}
                     </div>
-                    <div>
-                      <div className="flex justify-end">
+                    <div className="flex flex-row grid p-4 rounded-r-lg">
+                      <div className="flex flex-row justify-end">
                         <button className="hover:shadow-md focus:outline-none"
                         onClick={this.handleModal}>
                           <img src="assets/img/icon/x.png" />
                         </button>
                       </div>
-                      <div className="flex justify-center p-2 ">
+                      <div className="flex flex-row justify-center">
                         <div className="w-auto">
                           {this.props.namaFile == null ? (
                             <> File kosong</>

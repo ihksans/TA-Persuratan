@@ -63,7 +63,7 @@ class DetailDisposisi extends Component {
     return (
       <>
         <button
-          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
+          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75% hover:bg-orenHover focus:outline-none"
           type="button"
           onClick={this.handleModal}
         >
@@ -78,7 +78,7 @@ class DetailDisposisi extends Component {
                   {/* Header */}
                   <div className="flex flex-row grid grid-cols-2 mr-8">
                     <div className="flex flex-row grid grid-cols-3 bg-white pb-10 pt-4 pl-4 pr-4">
-                      <div className="flex flex-row items-start p-2  border-b ml-6 border-solid border-blueGray-200 rounded-t col-span-3">
+                      <div className="flex flex-row items-start p-2 ml-6 rounded-t col-span-3">
                         <div>
                           <img
                             className="w-8"
@@ -91,7 +91,7 @@ class DetailDisposisi extends Component {
                           </h3>
                         </div>
                       </div>
-                      <div className="flex flex-row  col-span-3 mb-4 border-b-2 mb-10">
+                      <div className="flex flex-row col-span-3 mb-4 mb-10">
                         <EditFormDisposisi />
 
                         <ModalKonfirmDeleteDispo

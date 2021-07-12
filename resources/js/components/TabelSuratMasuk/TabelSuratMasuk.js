@@ -45,8 +45,20 @@ class TabelSuratMasuk extends Component {
     )
     return (
       <>
-      <div className="flex right-10 justify-end mt-2">
+      {/* <div className="flex right-10 justify-end mt-2">
           <div className="flex w-1/5 border border-brokenblack shadow rounded-sm p-2 hover:shadow-md focus:outline-none">
+            <input
+            className="w-full focus:outline-none"
+            type="text"
+            placeholder="Cari Surat..."
+            onChange={this.getSuratMasuk}/>
+            <svg className="justify-end h-7 w-7"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+      </div> */}
+      <div className="flex absolute right-10 top-32 justify-end mt-5 w-1/2">
+          <div className="flex w-1/2 border border-brokenblack shadow rounded-sm p-2 hover:shadow-md focus:outline-none">
             <input
             className="w-full focus:outline-none"
             type="text"

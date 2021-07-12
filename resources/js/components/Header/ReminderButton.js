@@ -46,7 +46,7 @@ class ReminderButton extends Component {
           </button>
           {this.state.show ? (
               <>
-                <div className="justify-center items-center">
+                <div className="justify-center items-center z-50">
                   <div className="grid grid-cols-2 absolute right-3 bg-white shadow-lg overflow-hidden border-t-2 border-abu">
                     <div className="col-span-2 flex flex-row items-start p-2 border-b ml-2 mr-4 border-solid border-blueGray-200 rounded-t">
                       <div>

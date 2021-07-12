@@ -56,7 +56,7 @@ const HeaderComponent = ({ show, role }) => {
 
             <ReminderButton />
             <button type="submit" className="justify-items-center h-9 my-2.5 mx-2 focus:outline-none">
-              <img className=" h-full" src="assets/img/icon/Bell.png" />
+              <img className="h-full" src="assets/img/icon/Bell.png" />
             </button>
           </div>
         </div>
