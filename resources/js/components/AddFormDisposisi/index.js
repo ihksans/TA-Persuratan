@@ -53,9 +53,29 @@ class AddFormDisposisi extends Component {
     this.ValidateKeteranganDisposisi = this.ValidateKeteranganDisposisi.bind(
       this,
     )
+    this.validateSurat = this.validateSurat.bind(this)
+
     this.ValidateTglDisposisi = this.ValidateTglDisposisi.bind(this)
     this.handleShowForm = this.handleShowForm.bind(this)
     this.onFileChange = this.onFileChange.bind(this)
+  }
+  validateSurat(input) {
+    const extension = '.pdf'
+    let result2 = this.state.fileDisposisi.name.match(extension)
+    if (result2) {
+      if (this.state.fileDisposisi.size > '10485760') {
+        //this.handleErrSurat('Ukuran file surat melebihi 10 Mb')
+      } else {
+        // this.handleErrSurat('')
+        let namasurat = this.props.SuratDetail.NOMOR_SURAT.split('/').join('_')
+        console.log('nama surat:' + namasurat)
+        this.setState({
+          namaFileDisposisi: namasurat,
+        })
+      }
+    } else {
+      this.handleErrSurat('Surat file harus pdf')
+    }
   }
   handleLoading() {
     this.setState({
@@ -158,6 +178,7 @@ class AddFormDisposisi extends Component {
   async onSubmit(e) {
     e.preventDefault()
     this.handleLoading()
+    await this.validateSurat()
     let formData = new FormData()
 
     formData.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
@@ -175,20 +196,23 @@ class AddFormDisposisi extends Component {
         if (this.state.fileDisposisi == null) {
           this.handleLoading()
           this.handleModal()
-          window.location.reload('/#/SuratMasuk')
+          console.log('nomorsurat tanpa file:' + this.state.namaFileDisposisi)
+
+          // window.location.reload('/#/SuratMasuk')
         }
       })
       .catch((err) => console.log(err))
     if (this.state.fileDisposisi != null) {
       let fd2 = new FormData()
+      console.log('nomorsurat dengan file:' + this.state.namaFileDisposisi)
       fd2.append('myFile', this.state.fileDisposisi)
-      fd2.append('namefile', this.props.SuratDetail.NOMOR_SURAT + '_disposisi')
+      fd2.append('namefile', this.state.namaFileDisposisi + '_disposisi')
       await api()
         .post('api/addSurat', fd2)
         .then((response) => {
           this.handleLoading()
           this.handleModal()
-          window.location.reload('/#/SuratMasuk')
+          // window.location.reload('/#/SuratMasuk')
         })
     }
   }
@@ -377,19 +401,28 @@ class AddFormDisposisi extends Component {
                                 </div>
                                 {this.props.pengingatS != null ? (
                                   <>
-                                {this.props.pengingatS.STATUS == 1 ? (
-                                  <>
-                                  <div className="text-sm">
-                                    Harus ditindaklanjuti dalam waktu {this.props.countDays} hari
-                                  </div>
+                                    {this.props.pengingatS.STATUS == 1 ? (
+                                      <>
+                                        <div className="text-sm">
+                                          Harus ditindaklanjuti dalam waktu{' '}
+                                          {this.props.countDays} hari
+                                        </div>
+                                      </>
+                                    ) : (
+                                      <>
+                                        <div className="text-sm"></div>
+                                      </>
+                                    )}
                                   </>
-                                ):(<><div className="text-sm">
-                              </div></>)}
-                                </>
-                                ):(<><div className="text-sm">
-                                </div></>)}
+                                ) : (
+                                  <>
+                                    <div className="text-sm"></div>
+                                  </>
+                                )}
                               </div>
-                              <div className="font-bold">Status Tindak Lanjut</div>
+                              <div className="font-bold">
+                                Status Tindak Lanjut
+                              </div>
 
                               {this.props.pengingatS == null ? (
                                 <>
@@ -407,9 +440,7 @@ class AddFormDisposisi extends Component {
                                     </>
                                   ) : (
                                     <>
-                                      <p
-                                        className="font-semibold self-center rounded-md p-1 col-span-2 text-danger w-75%"
-                                      >
+                                      <p className="font-semibold self-center rounded-md p-1 col-span-2 text-danger w-75%">
                                         Belum ditindaklanjuti
                                       </p>
                                     </>
@@ -767,8 +798,9 @@ class AddFormDisposisi extends Component {
                                         <PdfReader
                                           urlFile={this.props.url}
                                           namaFile={
-                                            this.props.SuratDetail.NOMOR_SURAT +
-                                            '_disposisi'
+                                            this.props.SuratDetail.NOMOR_SURAT.split(
+                                              '/',
+                                            ).join('_') + '_disposisi'
                                           }
                                         />
                                       </>

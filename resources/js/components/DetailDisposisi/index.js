@@ -34,7 +34,8 @@ class DetailDisposisi extends Component {
     let formData = new FormData()
     formData.append(
       'namafile',
-      this.props.DisposisiDetail.NOMOR_SURAT + '_disposisi',
+      this.props.DisposisiDetail.NOMOR_SURAT.split('/').join('_') +
+        '_disposisi',
     )
     await api()
       .post('/api/getSurat', formData)
@@ -198,8 +199,9 @@ class DetailDisposisi extends Component {
                               <PdfReader
                                 urlFile={this.state.url}
                                 namaFile={
-                                  this.props.DisposisiDetail.NOMOR_SURAT +
-                                  '_disposisi'
+                                  this.props.DisposisiDetail.NOMOR_SURAT.split(
+                                    '/',
+                                  ).join('_') + '_disposisi'
                                 }
                               />
                             </>
