@@ -35,15 +35,15 @@ class BoxDataTabel extends Component{
         <div className="flex flex-row ml-2 ">
                     <div className="">{this.props.No}.</div>
                 </div>
-                <div className="flex flex-row ml-2 ">
+                <div className="flex flex-row">
                     <div className="">{this.props.NomorAgenda}</div>
                 </div>
 
 
-        <div className="flex flex-row ml-8 mt-1">
+        <div className="flex flex-row mt-1">
             <div className="">{this.props.Tanggal}</div>
         </div>
-        <div className="flex flex-row ml-12 mt-1">
+        <div className="flex flex-row mt-1">
             {/* <ul>
                 {this.props.IdSuratMasuk.map((item, index)=>{
                     return(
@@ -63,19 +63,19 @@ class BoxDataTabel extends Component{
                     )
                 })}
             </ul> */}
-            <div className="">{this.props.NomorSurat}</div>
+            <div className="truncate">{this.props.NomorSurat}</div>
             {/* <div className="">12893712</div> */}
         </div>
-        <div className="flex flex-row ml-16  mt-1">
-            <div className="">{this.props.Informasi}</div>
+        <div className="flex flex-row mt-1">
+            <div className="truncate">{this.props.Informasi}</div>
         </div>
-        <div className="flex flex-row ml-8 mt-1">
+        <div className="flex flex-row ml-4 mt-1">
             {/* <div className="">{this.props.Tujuan}</div> */}
             <div className="">{this.props.TujuanSurat}</div>
         </div>
-        <div className="flex flex-row ml-8 mt-1">
+        <div className="flex flex-row mt-1">
             {/* <div className="">{this.props.Keterangan}</div> */}
-            <div className="">{this.props.ProsesSelanjutnya}</div>
+            <div className="truncate">{this.props.ProsesSelanjutnya}</div>
         </div>
 
         {/* <div className="flex flex-row mt-1">

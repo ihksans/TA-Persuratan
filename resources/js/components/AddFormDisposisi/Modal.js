@@ -57,7 +57,7 @@ class ClassReducers extends Component {
       let formData = new FormData()
       formData.append(
         'namafile',
-        this.props.SuratDetail.NOMOR_SURAT + '_disposisi',
+        this.props.SuratDetail.NOMOR_SURAT.split('/').join('_') + '_disposisi',
       )
       await api()
         .post('/api/getSurat', formData)

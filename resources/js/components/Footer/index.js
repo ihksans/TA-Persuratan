@@ -9,7 +9,7 @@ const Footer = () => {
           Copyright @2021 NamaAplikasi. All rights reserved
         </div>
       </div> */}
-      {/* <div className="w-full h-4 bg-gray-200"></div> */}
+      <div className="w-full h-4 bg-gray-200"></div>
       <div className="grid grid-cols-3 gap-4  h-5% flex items-center list-none">
         <div className="col-span-2 flex justify-start">
           <div className="flex items-center list-none">
