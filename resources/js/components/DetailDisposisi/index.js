@@ -92,7 +92,10 @@ class DetailDisposisi extends Component {
                         </div>
                       </div>
                       <div className="flex flex-row col-span-3 mb-4 mb-10">
-                        <EditFormDisposisi />
+                        <EditFormDisposisi 
+                        SuratDetail={this.props.SuratDetail}
+                        DisposisiDetail={this.props.DisposisiDetail}
+                        />
 
                         <ModalKonfirmDeleteDispo
                           IdDispo={this.props.DisposisiDetail.ID_DISPOSISI}
