@@ -52,6 +52,16 @@ class DetailDisposisi extends Component {
     await this.setState({
       showModal: !this.state.showModal,
     })
+    // console.log('detail disposisi: ' + this.props.DisposisiDetail)
+    // console.log('surate detail: '+ this.props.SuratDetail)
+    console.log('detail disposisi: '+ this.props.DisposisiDetail) 
+    console.log('tujuan surat: '+ this.props.TujuanSurat)
+    console.log('ID pencatatan: '+ this.props.IdPencatatan)
+    console.log('Jenis surat: '+ this.props.IdJenisSurat)
+    console.log('id kode unit kerja: '+ this.props.IdUnitKerja)
+    console.log('kode unit kerja: '+ this.props.UnitKerja)
+    console.log('nomor surat masuk: '+ this.props.NomorSurat)
+    console.log('id surat masuk: '+ this.props.IdSuratMasuk)
   }
   handleDelete() {
     window.location.reload('/#/Disposisi')
@@ -95,6 +105,14 @@ class DetailDisposisi extends Component {
                         <EditFormDisposisi 
                         SuratDetail={this.props.SuratDetail}
                         DisposisiDetail={this.props.DisposisiDetail}
+                        // DisposisiDetail={this.props.Disposisi}
+                        TujuanSurat={this.props.TujuanSurat}
+                        IdPencatatan={this.props.IdPencatatan}
+                        IdJenisSurat={this.props.IdJenisSurat}
+                        IdSuratMasuk={this.props.IdSuratMasuk}
+                        IdUnitKerja={this.props.IdUnitKerja}
+                        UnitKerja={this.props.UnitKerja}
+                        NomorSurat={this.props.NomorSurat}
                         />
 
                         <ModalKonfirmDeleteDispo

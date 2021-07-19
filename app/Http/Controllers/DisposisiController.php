@@ -18,11 +18,14 @@ class DisposisiController extends Controller
     {
         //
     }
-    public function allInfoDisposisi(){
+    // public function allInfoDisposisi(){
+        public function allInfoDisposisi($id){
         $disposisi = DB::table('disposisi')
         ->join('surat_masuk','disposisi.ID_PENCATATAN','=','surat_masuk.ID_PENCATATAN')
+        ->where('JENIS_DISPOSISI',$id)
         ->select('disposisi.*','surat_masuk.*')
         ->get();
+        
         return response()->json($disposisi);
     }
     /**
@@ -41,6 +44,7 @@ class DisposisiController extends Controller
             'PROSES_SELANJUTNYA'=>$request->proses_selanjutnya,
             'INFORMASI'=>$request->informasi,
             'NOMOR_AGENDA'=>$request->nomor_agenda,
+            'JENIS_DOSPOSISI'=>$request->jenis_disposisi,
         ];
         $disposisi = Disposisi::create($data);
         if($disposisi ==null){

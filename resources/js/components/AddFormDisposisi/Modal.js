@@ -30,8 +30,7 @@ class ClassReducers extends Component {
         modal: !this.state.modal,
       })
     }
-
-    console.log('modal:' + this.state.modal)
+    console.log('modal: ' + this.state.modal)
   }
   handleLoading() {
     this.setState({
@@ -41,11 +40,12 @@ class ClassReducers extends Component {
   async getDisposisi() {
     this.handleLoading()
     await api()
-      .get('api/getDisposisiByID/' + this.props.SuratDetail.ID_PENCATATAN)
+      .get('api/getDisposisiByID/' + this.props.SuratDetail.ID_PENCATATAN + this.props.SuratDetail)
       .then((response) => {
         if (response.data.content != null) {
           this.setState({
             disposisi: response.data.content,
+            SuratDetail: this.props.SuratDetail,
           })
         } else {
           this.setState({
@@ -62,8 +62,11 @@ class ClassReducers extends Component {
       await api()
         .post('/api/getSurat', formData)
         .then((response) =>
+        
           this.setState({
+            
             url: response.data.url,
+            
           }),
         )
     }

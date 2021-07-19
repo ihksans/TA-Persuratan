@@ -104,8 +104,10 @@ class BoxDataTabel extends Component{
             DisposisiDetail={this.props.Disposisi}
             TujuanSurat={this.props.TujuanSurat}
             IdPencatatan={this.props.IdPencatatan}
-            jenisSurat={this.props.jenisSurat}
+            IdJenisSurat={this.props.IdJenisSurat}
+            IdSuratMasuk={this.props.IdSuratMasuk}
             IdUnitKerja={this.props.IdUnitKerja}
+            UnitKerja={this.props.UnitKerja}
             NomorSurat={this.props.NomorSurat}
             // console.log('pengguna:' + this.state.pengguna)
             />

@@ -188,6 +188,7 @@ class AddFormDisposisi extends Component {
     formData.append('tujuan_surat', this.props.SuratDetail.TUJUAN_SURAT)
     formData.append('informasi', this.state.informasiDisposisi)
     formData.append('proses_selanjutnya', this.state.keteranganDisposisi)
+    // formData.append('jenis_disposisi', 1)
     //formData.append('nomor_disposisi', this.props.SuratDetail.NOMOR_SURAT)
     await api()
       .post('api/createDisposisi', formData)

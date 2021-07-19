@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('updateUser', 'PenggunaController@updateUser');
     Route::delete('deleteUser/{id}', 'PenggunaController@deleteUser');
         //disposisi
-    Route::get('allInfoDisposisi','DisposisiController@allInfoDisposisi');
+    Route::get('allInfoDisposisi/{id}','DisposisiController@allInfoDisposisi');
     Route::get('createDisposisi','DisposisiController@createDisposisis');
     Route::get('getDisposisi/{id}','DisposisiController@getDisposisi');
     Route::post('createDisposisi','DisposisiController@createDisposisis');

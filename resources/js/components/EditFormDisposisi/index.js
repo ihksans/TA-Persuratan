@@ -13,15 +13,39 @@ class EditFormDisposisi extends Component {
     this.state = {
       dir:[],
       showModal: this.props.showModal,
-      // nomorAgenda: this.props.SuratDetail.NOMOR_AGENDA,
-      nomorAgenda: this.props.DisposisiDetail.NOMOR_AGENDA,
+      // pengguna: this.props.Disposisi.ID_PENGGUNA,
+      // nomorAgenda: this.props.Disposisi.NOMOR_AGENDA,
+      // tanggalDisposisi: this.props.TANGGAL_DISPOSISI,
+      // tujuanSurat: this.props.TUJUAN_SURAT,
+      // informasi: this.props.Disposisi.INFORMASI,
+      // prosesSelanjutnya: this.props.Disposisi.PROSES_SELANJUTNYA,
+
+      
+
     }
     this.handleModal = this.handleModal.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
   }
   async handleModal(){
     this.setState({
       showModal: !this.state.showModal
     })
+    console.log('detail surat: '+ this.props.SuratDetail)
+    console.log('detail disposisi: '+ this.props.Disposisi)
+
+    console.log('detail disposisi: '+ this.props.DisposisiDetail) 
+    console.log('tujuan surat: '+ this.props.TujuanSurat)
+    console.log('ID pencatatan: '+ this.props.IdPencatatan)
+    console.log('Jenis surat: '+ this.props.IdJenisSurat)
+    console.log('id kode unit kerja: '+ this.props.IdUnitKerja)
+    console.log('kode unit kerja: '+ this.props.UnitKerja)
+    console.log('nomor surat masuk: '+ this.props.NomorSurat)
+    console.log('id surat masuk: '+ this.props.IdSuratMasuk)
+
+    // console.log('detail disposisi jenis surat: '+ this.props.Disposisi.JENIS_SURAT)
+  }
+  async onSubmit(e){
+    e.preventDefault()
   }
   render(){
     return(
@@ -38,7 +62,7 @@ class EditFormDisposisi extends Component {
             />
           </div>
           <div className="font-bold text-putih ml-1 mr-2">
-            Edit Data Disposisi{' '}
+            Edit Data {' '}
           </div>
         </button>
         {this.state.showModal?(
@@ -91,17 +115,22 @@ class EditFormDisposisi extends Component {
                     </div>
                     <div className="font-bold">No Agenda </div>
                     <div className=" col-span-2">
-                      {this.state.nomorAgenda}
+                    {this.props.SuratDetail.NOMOR_AGENDA}
                     </div>
                     <div className="font-bold">Dari</div>
                     <div className="font-bold">Nama</div>
                     <div className="">: 
-                      {/* {this.props.SuratDetail.NAMA_PENGIRIM}{''} */}
+                      : {this.props.SuratDetail.NAMA_PENGIRIM}{' '}
                     </div>
                     <div></div>
                     <div className="font-bold">Unit</div>
-                    <div className="">: 
-                      {/* {} */}
+                    <div className="">
+                      <div className="">
+                        <p>
+                          : {this.props.UnitKerja} -{' '}
+                          {this.props.UnitKerja}
+                        </p>
+                      </div>
                     </div>
                     <div></div>
                     <div className="font-bold">Penandatangan</div>
@@ -227,7 +256,7 @@ class EditFormDisposisi extends Component {
                           </div>
                           <div className="justify-end ">
                             <div className="">
-                              {/* {this.props.SuratDetail.NOMOR_AGENDA} */}
+                              {this.props.DisposisiDetail.NOMOR_AGENDA}
                             </div>
                           </div>
                         </div>

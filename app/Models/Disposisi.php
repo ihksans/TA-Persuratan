@@ -20,5 +20,6 @@ class Disposisi extends Model
         'PROSES_SELANJUTNYA',
         'INFORMASI',
         'NOMOR_AGENDA',
+        // 'JENIS_DISPOSISI'
     ];
 }

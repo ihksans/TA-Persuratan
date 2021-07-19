@@ -92,8 +92,8 @@ class Disposisi extends Component {
       //js
       <>
         <div className="w-full h-90% bg-gray-200 p-4	">
-          <div className="bg-white shadow-md rounded p-6">
-            <div className="flex flex-row">
+          <div className="bg-white shadow-md rounded p-6 nav nav-tabs">
+            <div className="flex flex-row nav-item">
               <div>
                 <img className="w-8" src="assets/img/icon/Surat.png" />
               </div>
