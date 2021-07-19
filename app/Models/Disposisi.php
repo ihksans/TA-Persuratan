@@ -16,9 +16,10 @@ class Disposisi extends Model
         'ID_PENGGUNA',
         'ID_PENCATATAN',
         'TANGGAL_DISPOSISI',
-        'NOMOR_DISPOSISI',
+        'NAMA_FILE_DISPOSISI',
         'PROSES_SELANJUTNYA',
         'INFORMASI',
         'NOMOR_AGENDA',
+        'JENIS_DISPOSISI',
     ];
 }

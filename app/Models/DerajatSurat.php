@@ -12,7 +12,6 @@ class DerajatSurat extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'NOMOR_SURAT',
         'DERAJAT_SURAT',
         'DESKRIPSI'
     ];

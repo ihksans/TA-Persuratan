@@ -19,5 +19,8 @@ class Pencatatan extends Model
         'KODE_ARSIP_MANUAL',
         'NAMA_FILE_SURAT',
         'NAMA_FILE_LAMPIRAN',
+        'PERIHAL',
+        'TGL_SURAT',
+        'PENANDATANGAN'
     ];
 }

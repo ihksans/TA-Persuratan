@@ -37,11 +37,11 @@ class AddFormSurat extends Component {
       sifatNaskah: '',
       lastAgenda: 1,
       customInputTujuan: false,
-      customNamaTujuan: '',
-      customKodeTujuan: '',
+      customNamaTujuan: null,
+      customKodeTujuan: null,
       customInputPengirim: false,
-      customNamaPengirim: '',
-      customKodePengirim: '',
+      customNamaPengirim: null,
+      customKodePengirim: null,
       errSurat: '',
       errJenisSurat: false,
       errLampiran: '',
@@ -65,7 +65,6 @@ class AddFormSurat extends Component {
       errCustomPengirimKodeUnit: false,
 
       showPengingatModal: false,
-
     }
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
@@ -781,30 +780,39 @@ class AddFormSurat extends Component {
       // console.log('errKode:' + this.state.errCustomTujuanKodeUnit)
       // console.log('errNama:' + this.state.errCustomTujuanNamaUnit)
       this.handleLoading()
+
       let fd = new FormData()
-
-      let forDataCustom = new FormData()
-      forDataCustom.append('kodeUnit', this.state.customKodeTujuan)
-      forDataCustom.append('namaUnit', this.state.customNamaTujuan)
-      await api()
-        .post('api/setKodeUnit', forDataCustom)
-        .then((response) => {
-          console.log('setKodeUnit:' + response.data.content)
-        })
-
-      let forDataCustom2 = new FormData()
-      forDataCustom2.append('kodeUnit', this.state.customKodePengirim)
-      forDataCustom2.append('namaUnit', this.state.customNamaPengirim)
-      await api()
-        .post('api/setKodeUnit', forDataCustom2)
-        .then((response) => {
-          console.log('setKodeUnit2:' + response.data.content.id)
-          if (this.state.customInputPengirim == false) {
-            fd.append('id_kode_unit', this.state.unitPengirim)
-          } else {
-            fd.append('id_kode_unit', response.data.content.id)
-          }
-        })
+      if (
+        this.state.customKodeTujuan != null &&
+        this.state.customNamaTujuan != null
+      ) {
+        let forDataCustom = new FormData()
+        forDataCustom.append('kodeUnit', this.state.customKodeTujuan)
+        forDataCustom.append('namaUnit', this.state.customNamaTujuan)
+        await api()
+          .post('api/setKodeUnit', forDataCustom)
+          .then((response) => {
+            console.log('setKodeUnit:' + response.data.content)
+          })
+      }
+      if (
+        this.state.customKodePengirim != null &&
+        this.state.customNamaPengirim != null
+      ) {
+        let forDataCustom2 = new FormData()
+        forDataCustom2.append('kodeUnit', this.state.customKodePengirim)
+        forDataCustom2.append('namaUnit', this.state.customNamaPengirim)
+        await api()
+          .post('api/setKodeUnit', forDataCustom2)
+          .then((response) => {
+            console.log('setKodeUnit2:' + response.data.content.id)
+            if (this.state.customInputPengirim == false) {
+              fd.append('id_kode_unit', this.state.unitPengirim)
+            } else {
+              fd.append('id_kode_unit', response.data.content.id)
+            }
+          })
+      }
 
       let formData = new FormData()
       formData.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
@@ -822,33 +830,37 @@ class AddFormSurat extends Component {
           this.state.namaFileLampiran + '_lampiran',
         )
       }
+      formData.append('perihal', this.state.perihal)
+      formData.append('tgl_surat', this.state.tglSurat)
+      formData.append('penandatangan', this.state.penandatangan)
+
       fd.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
-      fd.append('id_jenis_surat', this.state.idJenisSurat)
-      fd.append('id_derajat_surat', this.state.derajatSurat)
-      fd.append('kode_arsip_kom', this.state.kodeArsipKom)
-      fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
-      fd.append('kode_arsip_manual', this.state.kodeArsipManual)
-      if (this.state.surat != null) {
-        fd.append('nama_file_surat', this.state.namaFileSurat)
-      }
-      if (this.state.lampiran != null) {
-        fd.append(
-          'nama_file_lampiran',
-          this.state.namaFileLampiran + '_lampiran',
-        )
-      }
+      // fd.append('id_jenis_surat', this.state.idJenisSurat)
+      //   fd.append('id_derajat_surat', this.state.derajatSurat)
+      // fd.append('kode_arsip_kom', this.state.kodeArsipKom)
+      // fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
+      // fd.append('kode_arsip_manual', this.state.kodeArsipManual)
+      // if (this.state.surat != null) {
+      //   fd.append('nama_file_surat', this.state.namaFileSurat)
+      // }
+      // if (this.state.lampiran != null) {
+      //   fd.append(
+      //     'nama_file_lampiran',
+      //     this.state.namaFileLampiran + '_lampiran',
+      //   )
+      // }
       fd.append('id_sifat_naskah', this.state.sifatNaskah)
       fd.append('nomor_surat', this.state.nomorSurat)
       fd.append('nama_pengirim', this.state.namaPengirim)
-      if (this.state.customInputTujuan) {
-        fd.append('tujuan_surat', this.state.customNamaTujuan)
-      } else {
-        fd.append('tujuan_surat', this.state.tujuanSurat)
-      }
-      fd.append('perihal', this.state.perihal)
+      // if (this.state.customInputTujuan) {
+      //   fd.append('tujuan_surat', this.state.customNamaTujuan)
+      // } else {
+      //   fd.append('tujuan_surat', this.state.tujuanSurat)
+      // }
+      // fd.append('perihal', this.state.perihal)
       fd.append('tgl_diterima', this.state.tglDiterima)
-      fd.append('tgl_surat', this.state.tglSurat)
-      fd.append('penandatangan', this.state.penandatangan)
+      //fd.append('tgl_surat', this.state.tglSurat)
+      // fd.append('penandatangan', this.state.penandatangan)
       fd.append('no_agenda', this.state.lastAgenda)
       await api()
         .post('api/setPencatatan', formData)
@@ -861,6 +873,8 @@ class AddFormSurat extends Component {
             .post('api/setSuratMasuk', fd)
             .then((response) => {
               if (this.state.surat == null && this.state.lampiran == null) {
+                console.log('tanpa surat:')
+
                 this.handleLoading()
                 this.handleModal()
                 window.location.reload('/#/SuratMasuk')
@@ -900,7 +914,7 @@ class AddFormSurat extends Component {
       console.log('error form add surat' + this.state.errTujuanSurat)
     }
   }
-  
+
   /*UNTUK HANDLE MODAL ADD REMINDER SAMA PARAMETERNYA*/
   // async handleSetReminder(){
   //   this.setState({
@@ -915,9 +929,9 @@ class AddFormSurat extends Component {
   //           showPengingatModal: !this.state.showPengingatModal
   //         })
   //       }
-  //   })    
+  //   })
   // }
-  
+
   componentDidMount() {
     api()
       .get('api/getLast')
@@ -974,7 +988,9 @@ class AddFormSurat extends Component {
                       <img className="w-8" src="assets/img/icon/Surat.png" />
                     </div>
                     <div className="flex ">
-                      <h3 className="text-xl font-bold">Tambah Data Surat Masuk</h3>
+                      <h3 className="text-xl font-bold">
+                        Tambah Data Surat Masuk
+                      </h3>
                     </div>
                   </div>
 
@@ -1015,7 +1031,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Nomor Surat </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1045,7 +1064,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Tanggal Surat </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <div
@@ -1080,8 +1102,13 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div className="mt-2">Tanggal Diterima </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="mt-2">
+                                      Tanggal Diterima{' '}
+                                    </div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <div
@@ -1117,7 +1144,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Perihal </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <textarea
@@ -1146,7 +1176,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Tujuan Surat </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <div className="flex flex-row">
@@ -1255,7 +1288,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Unit Pengirim </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <div className="flex flex-row">
@@ -1366,7 +1402,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Nama Pengirim </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1395,7 +1434,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Penandatangan </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1427,7 +1469,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Jenis Surat </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <select
@@ -1472,7 +1517,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Sifat Surat </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <select
@@ -1517,7 +1565,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Derajat Surat </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <select
@@ -1562,7 +1613,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Kode Arsip Kom </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1591,7 +1645,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Kode Arsip Hlm </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1619,8 +1676,13 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div className="mt-2">Kode Arsip Manual </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="mt-2">
+                                      Kode Arsip Manual{' '}
+                                    </div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1649,7 +1711,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Surat </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1677,7 +1742,10 @@ class AddFormSurat extends Component {
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
                                     <div className="mt-2">Lampiran </div>
-                                    <div className="text-danger ml-2 mt-2"> *</div>
+                                    <div className="text-danger ml-2 mt-2">
+                                      {' '}
+                                      *
+                                    </div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1725,23 +1793,21 @@ class AddFormSurat extends Component {
                               </div>
                             </div>
                             <div className="flex justify-end content-center items-center">
-                                <div className="text-xs text-abu">
-                                  Keterangan (
-                                </div>
-                                <div className="text-xs text-danger">
-                                  *
-                                </div>
-                                <div className="text-xs text-abu mr-6">
-                                  ): data wajib diisi.
-                                </div>
-                                <button
-                                  type="submit"
-                                  className=" w-20 p-1 mr-8 border-2 rounded-md font-bold bg-biru justify-center items-center hover:bg-biruduaHover focus:outline-none"
-                                  onClick={this.onSubmit}
-                                  value="Add Pengguna"
-                                >
-                                  Simpan
-                                </button>
+                              <div className="text-xs text-abu">
+                                Keterangan (
+                              </div>
+                              <div className="text-xs text-danger">*</div>
+                              <div className="text-xs text-abu mr-6">
+                                ): data wajib diisi.
+                              </div>
+                              <button
+                                type="submit"
+                                className=" w-20 p-1 mr-8 border-2 rounded-md font-bold bg-biru justify-center items-center hover:bg-biruduaHover focus:outline-none"
+                                onClick={this.onSubmit}
+                                value="Add Pengguna"
+                              >
+                                Simpan
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -1758,18 +1824,18 @@ class AddFormSurat extends Component {
           loading={this.state.modalLoading}
           title={'Sinkronisasi Data'}
         />
-        
+
         {/*Add Reminder*/}
         {this.state.showPengingatModal ? (
           <>
-          <AddReminder
-            SuratDetail = {this.state.SuratDetail}
-            idPencatatan = {this.state.SuratDetail.ID_PENCATATAN}
-            noAgenda = {this.state.SuratDetail.NOMOR_AGENDA}
-            derajatSurat = {this.state.SuratDetail.ID_DERAJAT_SURAT}
-          />
+            <AddReminder
+              SuratDetail={this.state.SuratDetail}
+              idPencatatan={this.state.SuratDetail.ID_PENCATATAN}
+              noAgenda={this.state.SuratDetail.NOMOR_AGENDA}
+              derajatSurat={this.state.SuratDetail.ID_DERAJAT_SURAT}
+            />
           </>
-        ):null}
+        ) : null}
       </>
     )
   }

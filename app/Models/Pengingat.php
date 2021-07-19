@@ -18,6 +18,7 @@ class Pengingat extends Model
         'ID_PENCATATAN',
         'WAKTU_PENGINGAT',
         'DESKRIPSI',
-        'STATUS'
+        'STATUS',
+        'JENIS_PENGINGAT'
         ];
 }

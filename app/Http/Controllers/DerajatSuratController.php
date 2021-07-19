@@ -20,7 +20,6 @@ class DerajatSuratController extends Controller
         $data = [
             'DERAJAT_SURAT' => $request->derajatSurat,
             'DESKRIPSI' => $request->keterangan,
-            'NOMOR_SURAT'=> $request->nomorSurat,
         ];
         $DerajatSurat = DerajatSurat::create($data);
         if($DerajatSurat)
@@ -104,7 +103,6 @@ class DerajatSuratController extends Controller
         ->update([
             'DERAJAT_SURAT' => $request->derajatSurat,
             'DESKRIPSI' => $request->deskripsi,
-            'NOMOR_SURAT' => $request->nomorSurat,
         ]);
         if(!$DerajatSurat){
             $respon =[
