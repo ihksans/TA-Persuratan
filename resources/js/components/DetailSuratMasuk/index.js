@@ -14,12 +14,12 @@ import moment from 'moment'
 import { isEmpty } from 'lodash-es'
 
 import Modal from '../AddFormDisposisi/Modal'
-// import createuser from "./index";
 class DetailSuratMasuk extends Component {
   constructor(props) {
     super(props)
     this.state = {
       dir: [],
+      tujuanPencatatan: [],
       pengingat: null,
       count: null,
       numPages: '',
@@ -41,18 +41,33 @@ class DetailSuratMasuk extends Component {
     this.onSubmit = this.onSubmit.bind(this)
     this.handleModal = this.handleModal.bind(this)
     this.handlePengingatModal = this.handlePengingatModal.bind(this)
+    this.handleTujuanPencatatan = this.handleTujuanPencatatan.bind(this)
     this.handleTindakLanjutModal = this.handleTindakLanjutModal.bind(this)
     this.getFileSuratMasuk = this.getFileSuratMasuk.bind(this)
     this.getPengingatSurat = this.getPengingatSurat.bind(this)
     this.reserveTgl = this.reserveTgl.bind(this)
   }
   //handle input changes and update item state
+  async handleTujuanPencatatan() {
+    await api()
+      .get(
+        'api/getDetailTujuanPencatatan/' + this.props.SuratDetail.ID_PENCATATAN,
+      )
+      .then((response) => {
+        this.setState({
+          tujuanPencatatan: response.data.content,
+        })
+        console.log('tujuan pencatatan:' + this.state.tujuanPencatatan)
+        console.log('tujuan pencatatan2:' + response.data.content)
+      })
+  }
   handleLoading() {
     this.setState({
       loading: !this.state.loading,
     })
   }
   async handleModal() {
+    this.handleTujuanPencatatan()
     if (this.state.url == null || this.state.urlLampiran == null) {
       this.handleLoading()
       await this.getFileSuratMasuk()
@@ -91,24 +106,23 @@ class DetailSuratMasuk extends Component {
       pengingat: null,
     })
     if (this.state.getP == true) {
-      this.props.Pengingat.allPengingatInfo.map(
-        (item) => {
-          const temp = this.props.SuratDetail.ID_PENCATATAN
-          const temp2 = item.ID_PENCATATAN
-          if (temp == temp2){
-            this.setState({
-              pengingat: item
-            })
-            const rn = moment(new Date())
-            this.setState({
-              count: Math.abs(rn.diff(this.state.pengingat.WAKTU_PENGINGAT, 'days'))+1
-            })
-            console.log(this.state.count)       
-          }
-             
+      this.props.Pengingat.allPengingatInfo.map((item) => {
+        const temp = this.props.SuratDetail.ID_PENCATATAN
+        const temp2 = item.ID_PENCATATAN
+        if (temp == temp2) {
+          this.setState({
+            pengingat: item,
+          })
+          const rn = moment(new Date())
+          this.setState({
+            count:
+              Math.abs(rn.diff(this.state.pengingat.WAKTU_PENGINGAT, 'days')) +
+              1,
+          })
+          console.log(this.state.count)
+        }
       })
     }
-    //console.log(this.state.pengingat)
   }
   async onSubmit(e) {
     e.preventDefault()
@@ -175,7 +189,10 @@ class DetailSuratMasuk extends Component {
                         </div>
                       </div>
                       <div className="flex flex-row col-span-3 mb-4">
-                        <EditFormSurat SuratDetail={this.props.SuratDetail} />
+                        <EditFormSurat
+                          SuratDetail={this.props.SuratDetail}
+                          tujuanPencatatan={this.state.tujuanPencatatan}
+                        />
                         <Modal
                           namaFile={this.props.NamaFileSurat}
                           SuratDetail={this.props.SuratDetail}
@@ -204,7 +221,7 @@ class DetailSuratMasuk extends Component {
                       <div className="font-bold">Dari </div>
                       <div className="font-bold">Nama</div>
                       <div className="">
-                        : {this.props.SuratDetail.NAMA_PENGIRIM}{' '}
+                        : {this.props.SuratDetail.NAMA_PENGIRIM}
                       </div>
                       <div></div>
                       <div className="font-bold">Unit</div>
@@ -222,9 +239,26 @@ class DetailSuratMasuk extends Component {
                         : {this.props.SuratDetail.PENANDATANGAN}
                       </div>
                       <div className="font-bold">Tujuan</div>
-                      <div className=" col-span-2">
-                        {this.props.SuratDetail.TUJUAN_SURAT}
-                      </div>
+                      {this.state.tujuanPencatatan.map((item, i) => {
+                        return (
+                          <div
+                            key={i}
+                            className={i == 0 ? ' col-span-2' : ' col-span-3'}
+                          >
+                            <div
+                              className={
+                                i == 0 ? '' : 'flex flex-row grid grid-cols-3'
+                              }
+                            >
+                              <div></div>
+                              <div className={i == 0 ? '' : ' col-span-2'}>
+                                - {item.KODE_UNIT_KERJA} :{' '}
+                                {item.NAMA_UNIT_KERJA}
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })}
                       <div className="font-bold">Nomor Surat</div>
                       <div className=" col-span-2">
                         {this.props.SuratDetail.NOMOR_SURAT}
@@ -322,17 +356,24 @@ class DetailSuratMasuk extends Component {
                         </div>
                         {this.state.pengingat != null ? (
                           <>
-                        {this.state.pengingat.STATUS == 1 ? (
-                          <>
-                          <div className="text-sm">
-                            Harus ditindaklanjuti dalam waktu {this.state.count} hari
-                          </div>
+                            {this.state.pengingat.STATUS == 1 ? (
+                              <>
+                                <div className="text-sm">
+                                  Harus ditindaklanjuti dalam waktu{' '}
+                                  {this.state.count} hari
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <div className="text-sm"></div>
+                              </>
+                            )}
                           </>
-                        ):(<><div className="text-sm">
-                      </div></>)}
-                        </>
-                        ):(<><div className="text-sm">
-                        </div></>)}
+                        ) : (
+                          <>
+                            <div className="text-sm"></div>
+                          </>
+                        )}
                       </div>
                       <div className="font-bold">Status Tindak Lanjut</div>
 
@@ -366,8 +407,10 @@ class DetailSuratMasuk extends Component {
                     </div>
                     <div className="flex flex-row grid p-4 rounded-r-lg">
                       <div className="flex flex-row justify-end">
-                        <button className="hover:shadow-md focus:outline-none"
-                        onClick={this.handleModal}>
+                        <button
+                          className="hover:shadow-md focus:outline-none"
+                          onClick={this.handleModal}
+                        >
                           <img src="assets/img/icon/x.png" />
                         </button>
                       </div>
