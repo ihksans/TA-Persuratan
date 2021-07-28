@@ -13,7 +13,7 @@ import RSifatSurat from './sifat_surat_reducers'
 import Pengingat from './pengingat_reducers'
 
 import AllDisposisi from './all_disposisi_reducers'
-// import AllPencatatan from './all_pencatatan_reducers'
+import AllPencatatan from './all_pencatatan_reducers'
 
 const rootReducer = combineReducers({
   authToken,
@@ -29,7 +29,7 @@ const rootReducer = combineReducers({
 
   AllDisposisi,
   Pengingat,
-  // AllPencatatan,
+  AllPencatatan,
 
 })
 

@@ -54,14 +54,32 @@ class DetailDisposisi extends Component {
     })
     // console.log('detail disposisi: ' + this.props.DisposisiDetail)
     // console.log('surate detail: '+ this.props.SuratDetail)
-    console.log('detail disposisi: '+ this.props.DisposisiDetail) 
-    console.log('tujuan surat: '+ this.props.TujuanSurat)
-    console.log('ID pencatatan: '+ this.props.IdPencatatan)
-    console.log('Jenis surat: '+ this.props.IdJenisSurat)
-    console.log('id kode unit kerja: '+ this.props.IdUnitKerja)
-    console.log('kode unit kerja: '+ this.props.UnitKerja)
-    console.log('nomor surat masuk: '+ this.props.NomorSurat)
-    console.log('id surat masuk: '+ this.props.IdSuratMasuk)
+    // console.log('detail disposisi: '+ this.props.DisposisiDetail) 
+    // console.log('tujuan surat: '+ this.props.TujuanSurat)
+    // console.log('ID pencatatan: '+ this.props.IdPencatatan)
+    // console.log('Jenis surat: '+ this.props.IdJenisSurat)
+    // console.log('id kode unit kerja: '+ this.props.IdUnitKerja)
+    // console.log('kode unit kerja: '+ this.props.UnitKerja)
+    // console.log('nomor surat masuk: '+ this.props.NomorSurat)
+    // console.log('id surat masuk: '+ this.props.SuratMasuk)
+    // console.log('pencatatan: '+ this.props.Pencatatan)
+    console.log('surat detail '+this.props.SuratDetail)
+    console.log('detail disposisi '+this.props.DisposisiDetail)
+    console.log('tujuan surat '+this.props.TujuanSurat)
+    console.log('IdPencatatan '+this.props.IdPencatatan)
+    console.log('IdJenisSurat '+this.props.IdJenisSurat)
+    console.log('SuratMasuk '+this.props.SuratMasuk)
+    console.log('IdUnitKerja '+this.props.IdUnitKerja)
+    console.log('UnitKerja '+this.props.UnitKerja)
+    console.log('NomorSurat '+this.props.NomorSurat)
+    console.log('Pencatatan '+this.props.Pencatatan)
+
+    console.log('namaFile '+this.props.namaFile)
+    console.log('namaLampiran '+this.props.namaLampiran)
+    console.log('jenisSurat '+this.props.jenisSurat)
+    console.log('disposisi '+this.props.disposisi)
+    console.log('pengingatS '+this.props.pengingatS)
+    console.log('countDays '+this.props.countDays)
   }
   handleDelete() {
     window.location.reload('/#/Disposisi')
@@ -109,10 +127,22 @@ class DetailDisposisi extends Component {
                         TujuanSurat={this.props.TujuanSurat}
                         IdPencatatan={this.props.IdPencatatan}
                         IdJenisSurat={this.props.IdJenisSurat}
-                        IdSuratMasuk={this.props.IdSuratMasuk}
+                        SuratMasuk={this.props.SuratMasuk}
                         IdUnitKerja={this.props.IdUnitKerja}
                         UnitKerja={this.props.UnitKerja}
                         NomorSurat={this.props.NomorSurat}
+                        Pencatatan={this.props.Pencatatan}
+
+                        
+                        namaFile={this.props.NamaFileSurat}
+                        // SuratDetail={this.props.SuratDetail}
+                        namaLampiran={this.props.NamaFileLampiran}
+                        jenisSurat={this.props.jenisSurat}
+                        // IdUnitKerja={this.props.IdUnitKerja}
+                        disposisi={this.state.disposisi}
+                        pengingatS={this.props.pengingatS}
+                        countDays={this.props.countDays}
+                        // DisposisiDetail={this.props.DisposisiDetail}
                         />
 
                         <ModalKonfirmDeleteDispo

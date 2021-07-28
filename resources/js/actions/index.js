@@ -25,6 +25,8 @@ export const UNSET_ALL_PENGINGAT = 'UNSET_ALL_PENGINGAT'
 export const SET_ALL_DISPOSISI = 'SET_ALL_DISPOSISI'
 export const UNSET_ALL_DISPOSISI = 'UNSET_ALL_DISPOSISI'
 
+export const SET_ALL_PENCATATAN = 'SET_ALL_PENCATATAN'
+export const UNSET_ALL_PENCATATAN = 'UNSET_ALL_PENCATATAN'
 //list of method actions
 //to save current token by user
 export function addTokenByID(payload) {
@@ -185,6 +187,20 @@ export function unsetAllDisposisi(payload){
   const action = {
     type: UNSET_ALL_DISPOSISI,
     payload,
+  }
+  return action
+}
+export function setAllPencatatan(){
+  const action = {
+    type: SET_ALL_PENCATATAN,
+    payload,
+  }
+  return action
+}
+export function unsetAllPencatatan(){
+  const action = {
+    type: UNSET_ALL_PENCATATAN,
+    payload, 
   }
   return action
 }

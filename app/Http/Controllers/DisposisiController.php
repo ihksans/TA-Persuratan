@@ -18,11 +18,22 @@ class DisposisiController extends Controller
     {
         //
     }
-    // public function allInfoDisposisi(){
-        public function allInfoDisposisi($id){
+    public function allInfoDisposisiSuratMasuk(){
+        // public function allInfoDisposisi($id){
         $disposisi = DB::table('disposisi')
         ->join('surat_masuk','disposisi.ID_PENCATATAN','=','surat_masuk.ID_PENCATATAN')
-        ->where('JENIS_DISPOSISI',$id)
+        ->join('pencatatan','disposisi.ID_PENCATATAN','=','pencatatan.ID_PENCATATAN')
+        ->where('JENIS_DISPOSISI',1)
+        ->select('disposisi.*','surat_masuk.*','pencatatan.*')
+        ->get();
+        
+        return response()->json($disposisi);
+    }
+    public function allInfoDisposisiSuratKeluar(){
+        // public function allInfoDisposisi($id){
+        $disposisi = DB::table('disposisi')
+        ->join('surat_masuk','disposisi.ID_PENCATATAN','=','surat_masuk.ID_PENCATATAN')
+        ->where('JENIS_DISPOSISI',2)
         ->select('disposisi.*','surat_masuk.*')
         ->get();
         
@@ -44,7 +55,7 @@ class DisposisiController extends Controller
             'PROSES_SELANJUTNYA'=>$request->proses_selanjutnya,
             'INFORMASI'=>$request->informasi,
             'NOMOR_AGENDA'=>$request->nomor_agenda,
-            'JENIS_DOSPOSISI'=>$request->jenis_disposisi,
+            'JENIS_DISPOSISI'=>$request->jenis_disposisi,
         ];
         $disposisi = Disposisi::create($data);
         if($disposisi ==null){
@@ -113,13 +124,17 @@ class DisposisiController extends Controller
      */
     public function editDisposisi(Request $request)
     {
-        $disposisi = Disposisi::where('ID_DISPOSISI', $request->id)->update([
+        $disposisi = Disposisi::where('ID_DISPOSISI', $request->id)
+        ->update([
             // 'ID_PENGGUNA'=>$request->id_pengguna,
             // 'ID_PENCATATAN'=>$request->id_pencatatan,
+            // 'ID_DISPOSISI'=>$request->id,
             // 'TANGGAL_DISPOSISI'=>$request->tanggal_disposisi,
             // 'NOMOR_DISPOSISI'=>$request->nomor_disposisi,
             'PROSES_SELANJUTNYA'=>$request->proses_selanjutnya,
             'INFORMASI'=>$request->informasi,
+            // 'PROSES_SELANJUTNYA'=>$request->keteranganDisposisi,
+            // 'INFORMASI'=>$request->informasiDisposisi,
             'NOMOR_AGENDA'=>$request->nomor_agenda,
         ]);
         if(!$disposisi){
@@ -135,7 +150,15 @@ class DisposisiController extends Controller
             ];
         return response()->json($respon);
     }
-
+    public function showData()
+    {
+        $count = DB::table('surat_masuk')->count();
+        $respon =[
+            'Msg' => 'success',
+            'content' => $count,
+            ];
+        return response()->json($respon);
+    }
     /**
      * Update the specified resource in storage.
      *

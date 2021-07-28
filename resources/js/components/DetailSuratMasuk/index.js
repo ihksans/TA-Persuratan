@@ -184,6 +184,7 @@ class DetailSuratMasuk extends Component {
                           IdUnitKerja={this.props.IdUnitKerja}
                           pengingatS={this.state.pengingat}
                           countDays={this.state.count}
+                          disposisi={this.props.Disposisi}
                         />
                         <ModalLoading loading={this.state.modalLodaing} />
 
@@ -196,6 +197,8 @@ class DetailSuratMasuk extends Component {
 
                       <div className="col-span-2">
                         {this.props.SuratDetail.NAMA}
+                        {console.log('disposisi: '+ this.props.SuratDetail.PROSES_SELANJUTNYA)}
+                        {console.log('disposisi '+this.props.Disposisi)}
                       </div>
                       <div className="font-bold">No Agenda </div>
                       <div className=" col-span-2">

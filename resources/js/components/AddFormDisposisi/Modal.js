@@ -25,7 +25,7 @@ class ClassReducers extends Component {
     await this.setState({
       modal: !this.state.modal,
     })
-    if (this.state.modal == false) {
+    if (this .state.modal == false) {
       await this.setState({
         modal: !this.state.modal,
       })
@@ -100,6 +100,7 @@ class ClassReducers extends Component {
               url={this.state.url}
               pengingatS={this.props.pengingatS}
               countDays={this.props.countDays}
+              DisposisiDetail={this.props.DisposisiDetail}
             />
           </>
         ) : null}

@@ -31,6 +31,7 @@ class AddFormDisposisi extends Component {
       errKeteranganDisposisi: false,
       errNamaFileDisposisi: false,
       loading: false,
+      jenisDisposisi:"1",
     }
     this.handleLoading = this.handleLoading.bind(this)
 
@@ -165,6 +166,7 @@ class AddFormDisposisi extends Component {
       informasiDisposisi: null,
       keteranganDisposisi: null,
       namaFileDisposisi: null,
+      jenisDisposisi:"1",
 
       errNomorDisposisi: false,
       errTglDisposisi: false,
@@ -188,7 +190,7 @@ class AddFormDisposisi extends Component {
     formData.append('tujuan_surat', this.props.SuratDetail.TUJUAN_SURAT)
     formData.append('informasi', this.state.informasiDisposisi)
     formData.append('proses_selanjutnya', this.state.keteranganDisposisi)
-    // formData.append('jenis_disposisi', 1)
+    formData.append('jenis_disposisi', this.state.jenisDisposisi)
     //formData.append('nomor_disposisi', this.props.SuratDetail.NOMOR_SURAT)
     await api()
       .post('api/createDisposisi', formData)
@@ -477,8 +479,11 @@ class AddFormDisposisi extends Component {
                                       htmlFor="nama"
                                       className="text-sm mb-2 font-bold flex flex-row "
                                     >
-                                      <div>Nomor Disposisi </div>
-                                      <div className="text-danger ml-2"> </div>
+                                      <div className="mt-2">Nomor Disposisi </div>
+                                      <div className="text-danger ml-2 mt-2">
+                                        {/* {' '}
+                                        *  */}
+                                        </div>
                                     </div>
                                     <div className="justify-end ">
                                       <div className="">
@@ -671,7 +676,18 @@ class AddFormDisposisi extends Component {
                                   </div>
                                 </div>
                                 <div className="flex flex-row  col-span-3 mb-4 mb-10">
-                                  <EditFormDisposisi />
+                                  <EditFormDisposisi
+                                  namaFile={this.props.NamaFileSurat}
+                                  SuratDetail={this.props.SuratDetail}
+                                  namaLampiran={this.props.NamaFileLampiran}
+                                  jenisSurat={this.props.jenisSurat}
+                                  IdUnitKerja={this.props.IdUnitKerja}
+                                  disposisi={this.state.disposisi}
+                                  url={this.state.url}
+                                  pengingatS={this.props.pengingatS}
+                                  countDays={this.props.countDays}
+                                  DisposisiDetail={this.props.DisposisiDetail}
+                                  />
 
                                   <ModalKonfirmDeleteDispo
                                     IdDispo={this.props.disposisi.ID_DISPOSISI}
@@ -705,7 +721,7 @@ class AddFormDisposisi extends Component {
                                 </div>
                                 <div className="font-bold ">Keterangan</div>
                                 <div className="col-span-2 ml-4">
-                                  {this.props.disposisi.PROSES_SELANJUTNYA}
+                                  {this.props.disposisi.PROsSES_SELANJUTNYA}
                                 </div>
                                 <div></div>
 

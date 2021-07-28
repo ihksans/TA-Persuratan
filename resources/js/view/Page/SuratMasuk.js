@@ -24,6 +24,7 @@ class SuratMasuk extends Component {
       suratMasuk: [],
       jenisSurat: [],
       unitKerja: [],
+      disposisi: [],
     }
     this.getSuratMasuk = this.getSuratMasuk.bind(this)
   }
@@ -66,6 +67,14 @@ class SuratMasuk extends Component {
       .get('api/allPengingatInfo')
       .then((response) => {
         this.props.setAllPengingat(response.data)
+      })
+    await api()
+      .get('api/allInfoDisposisi')
+      .then((response)=>{
+        this.setState({
+          disposisi: response.data,
+        })
+        this.props.setAllDisposisi(response.data)
       })
   }
   componentDidMount() {

@@ -803,29 +803,37 @@ class EditFormSurat extends Component {
       ) {
         this.handleLoading()
         let fd = new FormData()
-        let forDataCustom = new FormData()
-        forDataCustom.append('kodeUnit', this.state.customKodeTujuan)
-        forDataCustom.append('namaUnit', this.state.customNamaTujuan)
-        await api()
-          .post('api/setKodeUnit', forDataCustom)
-          .then((response) => {
-            console.log('setKodeUnit:' + response.data.content)
-          })
-
-        let forDataCustom2 = new FormData()
-        forDataCustom2.append('kodeUnit', this.state.customKodePengirim)
-        forDataCustom2.append('namaUnit', this.state.customNamaPengirim)
-        await api()
-          .post('api/setKodeUnit', forDataCustom2)
-          .then((response) => {
-            console.log('setKodeUnit2:' + response.data.content.id)
-            if (this.state.customInputPengirim == false) {
-              fd.append('id_kode_unit', this.state.unitPengirim)
-            } else {
-              fd.append('id_kode_unit', response.data.content.id)
-            }
-          })
-
+        if (
+          this.state.customKodeTujuan != null &&
+          this.state.customKodePengirim != null
+        ) {
+          let forDataCustom = new FormData()
+          forDataCustom.append('kodeUnit', this.state.customKodeTujuan)
+          forDataCustom.append('namaUnit', this.state.customNamaTujuan)
+          await api()
+            .post('api/setKodeUnit', forDataCustom)
+            .then((response) => {
+              console.log('setKodeUnit:' + response.data.content)
+            })
+        }
+        if (
+          this.state.customKodePengirim != null &&
+          this.state.customNamaPengirim != null
+        ) {
+          let forDataCustom2 = new FormData()
+          forDataCustom2.append('kodeUnit', this.state.customKodePengirim)
+          forDataCustom2.append('namaUnit', this.state.customNamaPengirim)
+          await api()
+            .post('api/setKodeUnit', forDataCustom2)
+            .then((response) => {
+              console.log('setKodeUnit2:' + response.data.content.id)
+              if (this.state.customInputPengirim == false) {
+                fd.append('id_kode_unit', this.state.unitPengirim)
+              } else {
+                fd.append('id_kode_unit', response.data.content.id)
+              }
+            })
+        }
         let formData = new FormData()
         formData.append('id', this.state.idPencatatan)
         formData.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
@@ -843,36 +851,40 @@ class EditFormSurat extends Component {
             this.state.namaFileLampiran + '_lampiran',
           )
         }
+        formData.append('perihal', this.state.perihal)
+        formData.append('tgl_surat', this.state.tglSurat)
+        formData.append('penandatangan', this.state.penandatangan)
+
         fd.append('id_pencatatan', this.state.idPencatatan)
         fd.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
-        fd.append('id_jenis_surat', this.state.idJenisSurat)
-        fd.append('kode_arsip_kom', this.state.kodeArsipKom)
-        fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
-        fd.append('kode_arsip_manual', this.state.kodeArsipManual)
-        if (this.state.namaFileSurat != null) {
-          fd.append('nama_file_surat', this.state.namaFileSurat)
-        }
-        if (this.state.namaFileLampiran != null) {
-          fd.append(
-            'nama_file_lampiran',
-            this.state.namaFileLampiran + '_lampiran',
-          )
-        }
+        // fd.append('id_jenis_surat', this.state.idJenisSurat)
+        //fd.append('kode_arsip_kom', this.state.kodeArsipKom)
+        //fd.append('kode_arsip_hlm', this.state.kodeArsipHlm)
+        // fd.append('kode_arsip_manual', this.state.kodeArsipManual)
+        // if (this.state.namaFileSurat != null) {
+        //   fd.append('nama_file_surat', this.state.namaFileSurat)
+        // }
+        // if (this.state.namaFileLampiran != null) {
+        //   fd.append(
+        //     'nama_file_lampiran',
+        //     this.state.namaFileLampiran + '_lampiran',
+        //   )
+        // }
 
-        fd.append('id_derajat_surat', this.state.derajatSurat)
+        //  fd.append('id_derajat_surat', this.state.derajatSurat)
         fd.append('nomor_surat', this.state.nomorSurat)
         fd.append('id_sifat_naskah', this.state.sifatNaskah)
-        fd.append('penandatangan', this.state.penandatangan)
+        //fd.append('penandatangan', this.state.penandatangan)
         fd.append('nama_pengirim', this.state.namaPengirim)
-        if (this.state.customInputTujuan) {
-          fd.append('tujuan_surat', this.state.customNamaTujuan)
-        } else {
-          fd.append('tujuan_surat', this.state.tujuanSurat)
-        }
+        // if (this.state.customInputTujuan) {
+        //   fd.append('tujuan_surat', this.state.customNamaTujuan)
+        // } else {
+        //   fd.append('tujuan_surat', this.state.tujuanSurat)
+        // }
 
-        fd.append('perihal', this.state.perihal)
+        // fd.append('perihal', this.state.perihal)
         fd.append('tgl_diterima', this.state.tglDiterima)
-        fd.append('tgl_surat', this.state.tglSurat)
+        //fd.append('tgl_surat', this.state.tglSurat)
         fd.append('no_agenda', this.state.lastAgenda)
 
         await api()
@@ -919,7 +931,6 @@ class EditFormSurat extends Component {
       }
     } else {
       this.handleModal()
-
     }
   }
 
@@ -1713,23 +1724,21 @@ class EditFormSurat extends Component {
                               </div>
                             </div>
                             <div className="flex justify-end content-center items-center">
-                                <div className="text-xs text-abu">
-                                  Keterangan (
-                                </div>
-                                <div className="text-xs text-danger">
-                                  *
-                                </div>
-                                <div className="text-xs text-abu mr-6">
-                                  ): data wajib diisi.
-                                </div>
-                                <button
-                                  type="submit"
-                                  className=" w-auto p-1 mr-8 border-2 rounded-md bg-biru justify-center items-center font-bold hover:bg-biruduaHover focus:outline-none"
-                                  onClick={this.onSubmit}
-                                  value="Add Pengguna"
-                                >
-                                  Simpan Perubahan
-                                </button>
+                              <div className="text-xs text-abu">
+                                Keterangan (
+                              </div>
+                              <div className="text-xs text-danger">*</div>
+                              <div className="text-xs text-abu mr-6">
+                                ): data wajib diisi.
+                              </div>
+                              <button
+                                type="submit"
+                                className=" w-auto p-1 mr-8 border-2 rounded-md bg-biru justify-center items-center font-bold hover:bg-biruduaHover focus:outline-none"
+                                onClick={this.onSubmit}
+                                value="Add Pengguna"
+                              >
+                                Simpan Perubahan
+                              </button>
                             </div>
                           </div>
                         </div>
