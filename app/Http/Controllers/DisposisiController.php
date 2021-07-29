@@ -46,14 +46,15 @@ class DisposisiController extends Controller
      */
     public function createDisposisis(Request $request)
     {
-       
         $data = [
             'ID_PENGGUNA'=>$request->id_pengguna,
             'ID_PENCATATAN'=>$request->id_pencatatan,
             'TANGGAL_DISPOSISI'=>$request->tanggal_disposisi,
             'NOMOR_DISPOSISI'=>$request->nomor_disposisi,
-            'PROSES_SELANJUTNYA'=>$request->proses_selanjutnya,
+            // tujuan
+            'ID_KODE_UNIT_KERJA'=>$request->id_kode_unit,
             'INFORMASI'=>$request->informasi,
+            'PROSES_SELANJUTNYA'=>$request->proses_selanjutnya,
             'NOMOR_AGENDA'=>$request->nomor_agenda,
             'JENIS_DISPOSISI'=>$request->jenis_disposisi,
         ];

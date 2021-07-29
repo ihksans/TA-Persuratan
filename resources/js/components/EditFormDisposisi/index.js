@@ -15,15 +15,15 @@ class EditFormDisposisi extends Component {
       showModal: this.props.showModal,
       modalLoading: false,
 
-      // idDiposisi:this.props.DisposisiDetail.ID_DISPOSISI,
-      // informasiDisposisi:this.props.SuratDetail.INFORMASI,
-      // keteranganDisposisi:this.props.SuratDetail.PROSES_SELANJUTNYA,
-      // pengguna: this.props.Disposisi.ID_PENGGUNA,
-      // nomorAgenda: this.props.Disposisi.NOMOR_AGENDA,
-      // tanggalDisposisi: this.props.TANGGAL_DISPOSISI,
+      idDiposisi:this.props.disposisi.ID_DISPOSISI,
+      informasiDisposisi:this.props.disposisi.INFORMASI,
+      keteranganDisposisi:this.props.disposisi.PROSES_SELANJUTNYA,
+      pengguna: this.props.disposisi.ID_PENGGUNA,
+      // nomorAgenda: this.props.disposisi.NOMOR_AGENDA,
+      tanggalDisposisi: this.props.disposisi.TANGGAL_DISPOSISI,
       // tujuanSurat: this.props.TUJUAN_SURAT,
-      // informasi: this.props.Disposisi.INFORMASI,
-      // prosesSelanjutnya: this.props.Disposisi.PROSES_SELANJUTNYA,
+      informasi: this.props.disposisi.INFORMASI,
+      prosesSelanjutnya: this.props.disposisi.PROSES_SELANJUTNYA,
 
       errInformasiDisposisi:false,
       errKeteranganDisposisi:false,
@@ -35,6 +35,7 @@ class EditFormDisposisi extends Component {
 
     this.handleInformasiDisposisi=this.handleInformasiDisposisi.bind(this)
     this.handleKeteranganDisposisi=this.handleKeteranganDisposisi.bind(this)
+    this.handleInputChangeCustom = this.handleInputChangeCustom.bind(this)
 
     this.handleErrInformasiDisposisi=this.handleErrInformasiDisposisi.bind(this)
     this.handleErrKeteranganDisposisi=this.handleErrKeteranganDisposisi.bind(this)
@@ -95,14 +96,22 @@ class EditFormDisposisi extends Component {
       modalLoading: !this.state.modalLoading,
     })
   }
+  handleInputChangeCustom(e, index) {
+    const { name, value } = e.target
+    let str = ''
+    str = name.replace(/\s\s+/g, '')
+    const list = [...this.state.inputListSelect]
+    list[index][str] = value
+    this.handleInputListSelect(list)
+  }
   async handleModal(){
     this.setState({
       showModal: !this.state.showModal,
       modalLoading: false,
 
-      // idDiposisi:this.props.DisposisiDetail.ID_DISPOSISI,
-      // informasiDisposisi:this.props.DisposisiDetail.INFORMASI,
-      // keteranganDisposisi:this.props.DisposisiDetail.PROSES_SELANJUTNYA,
+      // idDiposisi:this.props.disposisi.ID_DISPOSISI,
+      // informasiDisposisi:this.props.disposisi.INFORMASI,
+      // keteranganDisposisi:this.props.disposisi.PROSES_SELANJUTNYA,
 
       errInformasiDisposisi: false,
       errKeteranganDisposisi: false,
@@ -114,7 +123,7 @@ class EditFormDisposisi extends Component {
     // console.log('detail surat: '+ this.props.SuratDetail)
     // console.log('detail disposisi: '+ this.props.disposisi)
 
-    // console.log('detail disposisi: '+ this.props.DisposisiDetail) 
+    // console.log('detail disposisi: '+ this.props.disposisi) 
     // console.log('tujuan surat: '+ this.props.TujuanSurat)
     // console.log('ID pencatatan: '+ this.props.IdPencatatan)
     // console.log('Jenis surat: '+ this.props.IdJenisSurat)
@@ -126,12 +135,11 @@ class EditFormDisposisi extends Component {
     // console.log('id surat masuk: '+ this.props.SuratMasuk.INFORMASI)
     // console.log('id surat masuk: '+ this.props.SuratMasuk.PROSES_SELANJUTNYA)
     // console.log('pencatatan: '+ this.props.Pencatatan)
-    // console.log('id disposisi: '+ this.props.DisposisiDetail.ID_DISPOSISI)
+    // console.log('id disposisi: '+ this.props.disposisi.ID_DISPOSISI)
 
     console.log('surat detail......')
-    console.log('surat detail '+this.props.SuratDetail.NAMA_PENGIRIM)
-    console.log('surat detail '+this.props.SuratDetail.NOMOR_AGENDA)
-    console.log('detail disposisi '+this.props.DisposisiDetail)
+    console.log('tanggal detail '+this.props.disposisi.TANGGAL_DISPOSISI)
+    console.log('detail disposisi '+this.props.disposisi)
     console.log('tujuan surat '+this.props.TujuanSurat)
     console.log('IdPencatatan '+this.props.IdPencatatan)
     console.log('IdJenisSurat '+this.props.IdJenisSurat)
@@ -181,8 +189,8 @@ class EditFormDisposisi extends Component {
       //     this.handleLoading()
       //   })
     // if(
-    //   // this.state.informasiDisposisi != this.props.DisposisiDetail.INFORMASI ||
-    //   // this.state.keteranganDisposisi != this.props.DisposisiDetail.PROSES_SELANJUTNYA
+    //   // this.state.informasiDisposisi != this.props.disposisi.INFORMASI ||
+    //   // this.state.keteranganDisposisi != this.props.disposisi.PROSES_SELANJUTNYA
     // ) {
     //   await this.validateInformasiDisposisi(this.state.informasiDisposisi)
     //   await this.validateKeteranganDIsposisi(this.state.keteranganDisposisi)
@@ -195,7 +203,7 @@ class EditFormDisposisi extends Component {
     //     this.handleLoading()
     //     // let fd = new FormData()
     //     let formData = new FormData()
-    //     // formData.append('id',this.props.DisposisiDetail.ID_DISPOSISI)
+    //     // formData.append('id',this.props.disposisi.ID_DISPOSISI)
     //     // formData.append('informasi', this.state.informasiDisposisi)
     //     // formData.append('proses_selanjutnya', this.state.keteranganDisposisi)
 
@@ -320,58 +328,77 @@ class EditFormDisposisi extends Component {
                     </div>
                     <div className="font-bold">Tujuan</div>
                     <div className=" col-span-2">
-                      {this.props.SuratDetail.TUJUAN_SURAT}
+                    {this.props.tujuanDisposisi.map((item, i) => {
+                      return (
+                        <div
+                        key={i}
+                        className={i == 0 ? ' col-span-2' : ' col-span-3'}
+                      >
+                        <div
+                          className={
+                            i == 0 ? '' : 'flex flex-row grid grid-cols-3'
+                          }
+                        >
+                          <div></div>
+                          <div className={i == 0 ? '' : ' col-span-2'}>
+                            - {item.KODE_UNIT_KERJA} :{' '}
+                            {item.NAMA_UNIT_KERJA}
+                          </div>
+                        </div>
+                      </div>
+                      )
+                    })}
                     </div>
                     <div className="font-bold">Nomor Surat </div>
                     <div className=" col-span-2">
-                      {this.props.NOMOR_SURAT}
+                      {this.props.SuratDetail.NOMOR_SURAT}
                     </div>
                     <div className="font-bold">Tanggal Surat </div>
                     <div className=" col-span-2">
-                      
+                      {this.props.tglSurat}
                     </div>
                     <div className="font-bold">Tanggal Terima </div>
                     <div className=" col-span-2">
-                      
+                      {this.props.tglDiterima}
                     </div>
                     <div className="font-bold">Perihal / Ringkasan Surat </div>
                     <div className=" col-span-2">
-                      {/* {this.props.SuratDetail.PERIHAL} */}
+                      {this.props.SuratDetail.PERIHAL}
                     </div>
                     <div className="font-bold">Kode Hal </div>
                     <div className=" col-span-2">
-                      
+                    {this.props.SuratDetail.JENIS_SURAT}
                     </div>
                     <div className="font-bold">Jenis Surat </div>
                     <div className=" col-span-2">
-                      
+                      {this.props.SuratDetail.JENIS_SURAT}
                     </div>
                     <div className="font-bold">Sifat Surat </div>
                     <div className=" col-span-2">
-                      
+                    {this.props.SuratDetail.SIFAT_NASKAH}
                     </div>
                     <div className="font-bold">Derajat Surat</div>
                     <div className=" col-span-2">
-                      
+                    {this.props.SuratDetail.DERAJAT_SURAT}
                     </div>
                     <div className="font-bold">Kode Arsip</div>
                     <div className="font-bold">Kom</div>
                     <div className="">: 
-                      {/* {this.props.SuratDetail.KODE_ARSIP_KOM} */}
+                      {this.props.SuratDetail.KODE_ARSIP_KOM}
                     </div>
                     <div></div>
                     <div className="font-bold">Hlm</div>
                     <div className="">: 
-                      {/* {this.props.SuratDetail.KODE_ARSIP_HLM} */}
+                      {this.props.SuratDetail.KODE_ARSIP_HLM}
                     </div>
                     <div></div>
                     <div className="font-bold">Manual</div>
                     <div className="">: 
-                      {/* {this.props.SuratDetail.KODE_ARSIP_MANUAL} */}
+                      {this.props.SuratDetail.KODE_ARSIP_MANUAL}
                     </div>
                     <div className="font-bold">Keterangan</div>
                     <div className=" col-span-2">
-                      
+                      {this.props.disposisi.PROSES_SELANJUTNYA}
                     </div>
                     <div className="font-bold">Status Pengingat</div>
                     <div className=" col-span-2">
@@ -437,7 +464,7 @@ class EditFormDisposisi extends Component {
                           </div>
                           <div className="justify-end ">
                             <div className="">
-                              {/* {this.props.DisposisiDetail.NOMOR_AGENDA} */}
+                              {this.props.disposisi.NOMOR_AGENDA}
                             </div>
                           </div>
                         </div>
@@ -455,12 +482,12 @@ class EditFormDisposisi extends Component {
                               name="tanggalDisposisi"
                               required
                               id="tanggalDisposisi"
-                              // value={this.props.DisposisiDetail.TANGGAL_DISPOSISI}
+                              value={this.state.tanggalDisposisi}
                               className={
                                 'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	mr-4  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                               }
                             >
-                              {/* {this.props.DisposisiDetail.TANGGAL_DISPOSISI} */}
+                              {/* {this.props.disposisi.TANGGAL_DISPOSISI} */}
                               <Kalender
                                 onChange={(exDate, value) =>
                                 this.handleTglDisposisi(
@@ -488,6 +515,115 @@ class EditFormDisposisi extends Component {
                             <div className="font-bold">Tujuan </div>
                           </div>
                           <div className="justify-end ">
+                            <div className="">
+                              {/* {this.props.SuratDetail.TUJUAN_SURAT} */}
+                              {this.props.inputListSelect.map(
+                                (x, i)=>{
+                                  return(
+                                    <div>
+                                      {x.idUnit != null ||
+                                      x.idUnit != undefined?(
+                                        <>
+                                          <select
+                                          name="idUnit"
+                                          placeholder="Masukan nama unit"
+                                          value={x.idUnit}
+                                          onChange={(e)=>
+                                            this.handleInputChangeCustom(
+                                              e,
+                                              i,
+                                            )
+                                          }
+                                          required
+                                          id="tujuanSurat"
+                                          className={
+                                            'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none  w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                          }
+                                        >
+                                          <option value="0">
+                                            Pilih Tujuan ...
+                                          </option>
+                                          {this.props.RUnitKerja.allUnitKerjaInfo.map(
+                                            (item)=>{
+                                              return(
+                                                <option
+                                                  key={
+                                                    item.ID_KODE_UNIT_KERJA
+                                                  }
+                                                  value={
+                                                    item.ID_KODE_UNIT_KERJA
+                                                  }
+                                                >
+                                                  {
+                                                    item.KODE_UNIT_KERJA
+                                                  }
+                                                  -
+                                                  {
+                                                    item.NAMA_UNIT_KERJA
+                                                  }
+                                                </option>
+                                              )
+                                            },
+                                          )}
+                                        </select>
+                                        {x.err == true?(
+                                          <div className="text-danger text-xs mb-3">
+                                            Tujuan surat harus diisi
+                                          </div>
+                                        ):null}
+                                    </>
+                                    ):
+                                    (
+                                      <>
+                                        <input
+                                        name="namaUnit"
+                                        placeholder="Masukan nama unit"
+                                        value={x.namaUnit}
+                                        onChange={(e) =>
+                                          this.handleInputChangeCustom(
+                                            e,
+                                            i,
+                                          )
+                                        }
+                                        required
+                                        id="tujuanSurat"
+                                        className={
+                                          'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none  w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                        }
+                                        />
+                                        <input
+                                          className="ml10"
+                                          name="kodeUnit"
+                                          placeholder="Masukan kode unit"
+                                          value={x.kodeUnit}
+                                          required
+                                          id="tujuanSurat"
+                                          className={
+                                            'focus:form-control  mb-1 focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none  w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 '
+                                          }
+                                          onChange={(e) =>
+                                            this.handleInputChangeCustom(
+                                              e,
+                                              i,
+                                            )
+                                          }
+                                        />
+                                        {x.err == true ? (
+                                          <div className="text-danger text-xs mb-3">
+                                            Kode unit, Nama unit harus
+                                            diisi dan hanya huruf
+                                            angka
+                                          </div>
+                                        ) : null}
+                                      </>
+                                    )
+                                    }
+                                </div>
+                                )}
+                              )}
+                            </div>
+                          </div>
+                          {/* <div className="justify-end ">
                             <div className="flex flex-row">
                               <select
                               type="text"
@@ -503,21 +639,10 @@ class EditFormDisposisi extends Component {
                                 <option value="0">
                                   Pilih tujuan ...
                                 </option>
-                                {/* {this.props.RUnitKerja.allUnitKerjaInfo.map(
-                                  (item) => {
-                                    return (
-                                      <option
-                                        key={item.ID_KODE_UNIT_KERJA}
-                                        value={item.KODE_UNIT_KERJA}
-                                      >
-                                        {item.KODE_UNIT_KERJA}
-                                      </option>
-                                    )
-                                  },
-                                )} */}
+                                
                               </select>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
 
                         <div className="flex flex-row grid grid-cols-2">

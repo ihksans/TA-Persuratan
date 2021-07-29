@@ -14,6 +14,9 @@ import Pengingat from './pengingat_reducers'
 
 import AllDisposisi from './all_disposisi_reducers'
 import AllPencatatan from './all_pencatatan_reducers'
+import SuratKeluar from './surat_keluar_reducers'
+import RKodeHal from './kode_hal_reducers'
+// import AllPencatatan from './all_pencatatan_reducers'
 
 const rootReducer = combineReducers({
   authToken,
@@ -31,6 +34,9 @@ const rootReducer = combineReducers({
   Pengingat,
   AllPencatatan,
 
+  SuratKeluar,
+  RKodeHal,
+  // AllPencatatan,
 })
 
 export default rootReducer

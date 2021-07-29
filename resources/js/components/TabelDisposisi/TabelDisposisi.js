@@ -40,23 +40,25 @@ const TabelDisposisi = ({
 //   constructor(props){
 //     super(props)
 //     this.state = {
-//       suratMasuk : this.props.SuratMasuk,
-//       pencatatan : this.props.Pencatatan,
-//       Disposisi : this.props.Disposisi
+//       // suratMasuk : this.props.SuratMasuk,
+//       // pencatatan : this.props.Pencatatan,
+//       Disposisi : this.props.Disposisi,
+//       search: '',
 //     }
-//     // this.getDisposisi = this.getDisposisi.bind(this)
+//     this.getDisposisi = this.getDisposisi.bind(this)
 //   }
-//   // getDisposisi(e){
-//   //   this.setState({
-
-//   //   })
-//   // }
+//   getDisposisi(e){
+//     this.setState({
+//       search: e.target.value.substr(0,20)
+//     })
+//   }
 //   render(){
-//     let DisposisiSM = this.props.Disposisi.filter(
-//       (disposisi)=>{
-//         return disposisi
-//       }
-//     )
+//     let DisposisiSM = this.props.Disposisi;
+//     // .filter(
+//     //   (disposisi)=>{
+//     //     return disposisi
+//     //   }
+//     // )
 //     return(
 //       <>
 //       <ul>
@@ -68,24 +70,9 @@ const TabelDisposisi = ({
 //                 <li key={index}>
 //                   <BoxDataTabel
 //                     No={index + 1}
-//                     // NomorAgenda={item.NOMOR_AGENDA}
-//                     // Tanggal={item.TANGGAL_DISPOSISI}
-//                     // NomorSurat = {item.NOMOR_SURAT}
-//                     // Informasi={item.INFORMASI}
-//                     // Tujuan={item.TUJUAN}
-//                     // Keterangan={item.KETERANGAN}
-//                     // NomorSurat={item.NOMOR_SURAT}
-//                     // TujuanSurat={item.TUJUAN_SURAT}
-//                     // ProsesSelanjutnya={item.PROSES_SELANJUTNYA}
 //                     Disposisi={item}
-//                     // IdJenisSurat={IdJenisSurat}
-//                     // IdUnitKerja={IdUnitKerja}
-//                     // JenisDisposisi={JenisDisposisi}
-//                     // UnitKerja={item.ID_KODE_UNIT_KERJA}
-//                     // Pencatatan={Pencatatan}
-//                     // SuratMasuk={SuratMasuk}
-//                     Pencatatan={this.props.Pencatatan}
-//                     SuratMasuk={this.props.SuratMasuk}
+//                     IdJenisSurat={IdJenisSurat}
+//                     IdUnitKerja={IdUnitKerja}
 //                   />
 //                 </li>
 //               )

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Kalender from '../AddFormSurat/Kalender'
 import ModalLoading from '../ModalLoading'
 import { divIcon } from 'leaflet'
+import { eachRight } from 'lodash-es'
 // import DetailDisposisi from '../DetailDisposisi'
 
 class EditFormDisposisiD extends Component {
@@ -20,8 +21,8 @@ class EditFormDisposisiD extends Component {
       keteranganDisposisi:this.props.DisposisiDetail.PROSES_SELANJUTNYA,
       pengguna: this.props.DisposisiDetail.ID_PENGGUNA,
       nomorAgenda: this.props.DisposisiDetail.NOMOR_AGENDA,
-      tanggalDisposisi: this.props.TANGGAL_DISPOSISI,
-      tujuanSurat: this.props.TUJUAN_SURAT,
+      tanggalDisposisi: this.props.DisposisiDetail.TANGGAL_DISPOSISI,
+      tujuanSurat: this.props.DisposisiDetail.TUJUAN_SURAT,
       informasi: this.props.DisposisiDetail.INFORMASI,
       prosesSelanjutnya: this.props.DisposisiDetail.PROSES_SELANJUTNYA,
 
@@ -71,7 +72,6 @@ class EditFormDisposisiD extends Component {
       errKeteranganDisposisi:props,
     })
   }
-
 
   handleInformasiDisposisi(e){
     let value = e.target.value
@@ -415,7 +415,7 @@ class EditFormDisposisiD extends Component {
                           </div>
                           <div className="justify-end ">
                             <div className="">
-                              {/* {this.props.DisposisiDetail.NOMOR_AGENDA} */}
+                              {this.props.DisposisiDetail.NOMOR_AGENDA}
                             </div>
                           </div>
                         </div>

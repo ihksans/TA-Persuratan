@@ -37,6 +37,7 @@ class ClassReducers extends Component {
       loading: !this.state.loading,
     })
   }
+  
   async getDisposisi() {
     this.handleLoading()
     await api()
@@ -101,6 +102,8 @@ class ClassReducers extends Component {
               pengingatS={this.props.pengingatS}
               countDays={this.props.countDays}
               DisposisiDetail={this.props.DisposisiDetail}
+              tujuanPencatatan={this.props.tujuanPencatatan}
+              tujuanDisposisi={this.props.tujuanDisposisi}
             />
           </>
         ) : null}

@@ -87,7 +87,7 @@ class DetailDisposisiD extends Component {
                         </div>
                         <div className="flex">
                           <h3 className="text-xl font-semibold">
-                            Detail Disposisi
+                            Detail Disposisi 123
                           </h3>
                         </div>
                       </div>

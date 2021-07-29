@@ -7,8 +7,12 @@ export const SET_PATH = 'SET_PATH'
 export const UNSET_PATH = 'UNSET_PATH'
 export const SET_ALL_USER = 'SET_ALL_USER'
 export const UNSET_ALL_USER = 'UNSET_ALL_USER'
+
 export const SET_ALL_SURAT_MASUK = 'SET_ALL_SURAT_MASUK'
 export const UNSET_ALL_SURAT_MASUK = 'UNSET_ALL_SURAT_MASUK'
+export const SET_ALL_SURAT_KELUAR = 'SET_ALL_SURAT_KELUAR'
+export const UNSET_ALL_SURAT_KELUAR = 'UNSET_ALL_SURAT_KELUAR'
+
 export const SET_JENIS_SURAT = 'SET_JENIS_SURAT'
 export const UNSET_JENIS_SURAT = 'UNSET_JENIS_SURAT'
 export const SET_ALL_USER2 = 'SET_ALL_USER2'
@@ -27,6 +31,9 @@ export const UNSET_ALL_DISPOSISI = 'UNSET_ALL_DISPOSISI'
 
 export const SET_ALL_PENCATATAN = 'SET_ALL_PENCATATAN'
 export const UNSET_ALL_PENCATATAN = 'UNSET_ALL_PENCATATAN'
+export const SET_KODE_HAL = 'SET_KODE_HAL'
+export const UNSET_KODE_HAL = 'UNSET_KODE_HAL'
+
 //list of method actions
 //to save current token by user
 export function addTokenByID(payload) {
@@ -170,7 +177,7 @@ export function setAllPengingat(payload) {
   return action
 }
 
-export function setAllDisposisi(payload){
+export function setAllDisposisi(payload) {
   const action = {
     type: SET_ALL_DISPOSISI,
     payload,
@@ -183,7 +190,7 @@ export function unsetAllPengingat() {
   }
   return action
 }
-export function unsetAllDisposisi(payload){
+export function unsetAllDisposisi(payload) {
   const action = {
     type: UNSET_ALL_DISPOSISI,
     payload,
@@ -195,12 +202,39 @@ export function setAllPencatatan(){
     type: SET_ALL_PENCATATAN,
     payload,
   }
-  return action
 }
 export function unsetAllPencatatan(){
   const action = {
     type: UNSET_ALL_PENCATATAN,
     payload, 
+  }
+}
+export function setAllSuratKeluar(payload) {
+  const action = {
+    type: SET_ALL_SURAT_KELUAR,
+    payload,
+  }
+  return action
+}
+
+
+export function unsetAllSuratKeluar() {
+  const action = {
+    type: UNSET_ALL_SURAT_KELUAR,
+  }
+  return action
+}
+
+export function setAllKodeHal(payload) {
+  const action = {
+    type: SET_KODE_HAL,
+    payload,
+  }
+  return action
+}
+export function unsetAllKodeHal(payload) {
+  const action = {
+    type: UNSET_KODE_HAL,
   }
   return action
 }

@@ -115,7 +115,7 @@ class DetailDisposisi extends Component {
                         </div>
                         <div className="flex">
                           <h3 className="text-xl font-semibold">
-                            Detail Disposisi
+                            Detail Disposisi 123das
                           </h3>
                         </div>
                       </div>
@@ -132,8 +132,7 @@ class DetailDisposisi extends Component {
                         UnitKerja={this.props.UnitKerja}
                         NomorSurat={this.props.NomorSurat}
                         Pencatatan={this.props.Pencatatan}
-
-                        
+                                                
                         namaFile={this.props.NamaFileSurat}
                         // SuratDetail={this.props.SuratDetail}
                         namaLampiran={this.props.NamaFileLampiran}

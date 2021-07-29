@@ -9,6 +9,7 @@ import {
   setDerajatSurat,
   setSifatSurat,
   setAllPengingat,
+  setAllDisposisi
 } from '../../actions'
 
 //Ini buat dependecies/library nya
@@ -93,16 +94,16 @@ class SuratMasuk extends Component {
               </div>
               <div className="font-bold ml-2 text-2xl	">Agenda Surat Masuk</div>
             </div>
-            
+
             <div>
               <AddFormSurat />
             </div>
 
             <div className="">
-            {/* <div className="transform -translate-y-12"> */}
+              {/* <div className="transform -translate-y-12"> */}
               {this.props.SuratMasuk.allSuratMasukInfo == null ? (
                 <TabelSuratMasuk
-                  Disposisi={this.state.Disposisi}
+                  Disposisi={this.state.disposisi}
                   SuratMasuk={this.state.suratMasuk}
                   IdJenisSurat={this.state.jenisSurat}
                   IdUnitKerja={this.state.unitKerja}
@@ -136,4 +137,5 @@ export default connect(mapStateToProps, {
   setDerajatSurat,
   setSifatSurat,
   setAllPengingat,
+  setAllDisposisi
 })(SuratMasuk)
