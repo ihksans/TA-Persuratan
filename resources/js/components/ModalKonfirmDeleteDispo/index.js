@@ -11,11 +11,16 @@ export default function ModalKonfirmDeleteDispo({ IdDispo, handleDisposisi }) {
     handleLoading()
     let formData = new FormData()
     formData.append('id', id)
+    console.log('id'+id)
     api()
       .delete('api/deleteDisposisi/' + id)
       .then((response) => {
+        console.log('respon: '+ response)
         setShowModal(false)
+        handleLoading()
         handleDisposisi()
+        
+        // window.location.reload('/#/SuratMasuk')
       })
       .catch((error) => {
         console.log(error)

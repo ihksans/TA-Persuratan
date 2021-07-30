@@ -57,6 +57,7 @@ class DisposisiController extends Controller
             'PROSES_SELANJUTNYA'=>$request->proses_selanjutnya,
             'NOMOR_AGENDA'=>$request->nomor_agenda,
             'JENIS_DISPOSISI'=>$request->jenis_disposisi,
+            'NAMA_FILE_DISPOSISI'=>$request->nama_file_disposisi,
         ];
         $disposisi = Disposisi::create($data);
         if($disposisi ==null){
@@ -130,13 +131,14 @@ class DisposisiController extends Controller
             // 'ID_PENGGUNA'=>$request->id_pengguna,
             // 'ID_PENCATATAN'=>$request->id_pencatatan,
             // 'ID_DISPOSISI'=>$request->id,
-            // 'TANGGAL_DISPOSISI'=>$request->tanggal_disposisi,
+            'TANGGAL_DISPOSISI'=>$request->tanggal_disposisi,
             // 'NOMOR_DISPOSISI'=>$request->nomor_disposisi,
             'PROSES_SELANJUTNYA'=>$request->proses_selanjutnya,
             'INFORMASI'=>$request->informasi,
             // 'PROSES_SELANJUTNYA'=>$request->keteranganDisposisi,
             // 'INFORMASI'=>$request->informasiDisposisi,
             'NOMOR_AGENDA'=>$request->nomor_agenda,
+            'NAMA_FILE_DISPOSISI'=>$request->nama_file_disposisi,
         ]);
         if(!$disposisi){
             $respon =[

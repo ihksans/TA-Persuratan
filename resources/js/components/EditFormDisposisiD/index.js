@@ -15,7 +15,7 @@ class EditFormDisposisiD extends Component {
       dir:[],
       showModal: this.props.showModal,
       modalLoading: false,
-
+      firstDate: new Date(),
       idDiposisi:this.props.DisposisiDetail.ID_DISPOSISI,
       informasiDisposisi:this.props.DisposisiDetail.INFORMASI,
       keteranganDisposisi:this.props.DisposisiDetail.PROSES_SELANJUTNYA,
@@ -36,7 +36,8 @@ class EditFormDisposisiD extends Component {
 
     this.handleInformasiDisposisi=this.handleInformasiDisposisi.bind(this)
     this.handleKeteranganDisposisi=this.handleKeteranganDisposisi.bind(this)
-
+    this.handleTglDisposisi = this.handleTglDisposisi.bind(this)
+    
     this.handleErrInformasiDisposisi=this.handleErrInformasiDisposisi.bind(this)
     this.handleErrKeteranganDisposisi=this.handleErrKeteranganDisposisi.bind(this)
 
@@ -73,6 +74,14 @@ class EditFormDisposisiD extends Component {
     })
   }
 
+  handleTglDisposisi(exDate, value){
+    this.setState({
+      tanggalDisposisi: exDate,
+    })
+    this.setState({
+      firstDate:value,
+    })
+  }
   handleInformasiDisposisi(e){
     let value = e.target.value
     let str = ''
@@ -101,6 +110,7 @@ class EditFormDisposisiD extends Component {
       modalLoading: false,
 
       idDiposisi:this.props.DisposisiDetail.ID_DISPOSISI,
+      tanggalDisposisi:this.props.DisposisiDetail.TANGGAL_DISPOSISI,
       informasiDisposisi:this.props.DisposisiDetail.INFORMASI,
       keteranganDisposisi:this.props.DisposisiDetail.PROSES_SELANJUTNYA,
 
@@ -160,9 +170,14 @@ class EditFormDisposisiD extends Component {
     //     console.log('valid form')
     // }
     if(
+      this.state.nomorAgenda != this.props.DisposisiDetail.NOMOR_AGENDA ||
       this.state.informasiDisposisi != this.props.DisposisiDetail.INFORMASI ||
-      this.state.keteranganDisposisi != this.props.DisposisiDetail.PROSES_SELANJUTNYA
-    ) {
+      this.state.keteranganDisposisi != this.props.DisposisiDetail.PROSES_SELANJUTNYA ||
+      this.state.tanggalDisposisi != this.props.DisposisiDetail.TANGGAL_DISPOSISI 
+      // this.state.namaFileDisposisi != this.props.DisposisiDetail.NAMA_FILE_DISPOSISI ||
+      // this.state.lampiranDisposisi != null
+      
+      ) {
       await this.validateInformasiDisposisi(this.state.informasiDisposisi)
       await this.validateKeteranganDIsposisi(this.state.keteranganDisposisi)
       
@@ -175,9 +190,13 @@ class EditFormDisposisiD extends Component {
         // let fd = new FormData()
         let formData = new FormData()
         formData.append('id',this.props.DisposisiDetail.ID_DISPOSISI)
+        formData.append('nomor_agenda',this.state.nomorAgenda)
         formData.append('informasi', this.state.informasiDisposisi)
         formData.append('proses_selanjutnya', this.state.keteranganDisposisi)
-
+        formData.append('tanggal_disposisi', this.state.tanggalDisposisi)
+        // if(this.state.namaFileDisposisi != null){
+        //   formData.append('nama_file_dipsosisi',this.state.namaFileDisposisi)
+        // }
         await api()
         .post('api/editDisposisi',formData)
         .then((response)=>{
@@ -196,6 +215,20 @@ class EditFormDisposisiD extends Component {
           this.handleLoading()
         }) 
       }
+      // if(this.state.lampiranDisposisi != null && this.state.errSurat == ''){
+      //   let fd2 = new FormData()
+      //   fd2.append('myFile', this.state.lampiranDisposisi)
+      //   fd2.append('namefile', this.state.namaFileDisposisi)
+      //   await api()
+      //     .post('api/addSurat',fd2)
+      //     .then((response)=>{
+      //       // if(this.state.lampiran == null){
+      //         this.handleLoading()
+      //         this.handleModal()
+      //         window.location.reload('/#/Disposisi')
+      //       // }
+      //     })
+      //   }
         console.log('valid form')
     }
     else{
@@ -306,15 +339,15 @@ class EditFormDisposisiD extends Component {
                     </div>
                     <div className="font-bold">Tanggal Surat </div>
                     <div className=" col-span-2">
-                      
+                      {this.props.DisposisiDetail.TGL_SURAT}
                     </div>
                     <div className="font-bold">Tanggal Terima </div>
                     <div className=" col-span-2">
-                      
+                      {this.props.DisposisiDetail.TGL_TERIMA}
                     </div>
                     <div className="font-bold">Perihal / Ringkasan Surat </div>
                     <div className=" col-span-2">
-                      {this.props.Perihal}
+                      {this.props.DisposisiDetail.PERIHAL}
                     </div>
                     <div className="font-bold">Kode Hal </div>
                     <div className=" col-span-2">
@@ -322,15 +355,15 @@ class EditFormDisposisiD extends Component {
                     </div>
                     <div className="font-bold">Jenis Surat </div>
                     <div className=" col-span-2">
-                    {this.props.JenisSurat}
+                    {this.props.SuratMasuk.JENIS_SURAT}
                     </div>
                     <div className="font-bold">Sifat Surat </div>
                     <div className=" col-span-2">
-                      
+                    {this.props.SuratMasuk.SIFAT_NASKAH}
                     </div>
                     <div className="font-bold">Derajat Surat</div>
                     <div className=" col-span-2">
-                      {this.props.DerajatSurat}
+                    {this.props.SuratMasuk.DERAJAT_SURAT}
                     </div>
                     <div className="font-bold">Kode Arsip</div>
                     <div className="font-bold">Kom</div>
@@ -433,20 +466,15 @@ class EditFormDisposisiD extends Component {
                               name="tanggalDisposisi"
                               required
                               id="tanggalDisposisi"
-                              // value={this.props.DisposisiDetail.TANGGAL_DISPOSISI}
+                              value={this.props.tanggalDisposisi}
                               className={
                                 'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	mr-4  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                               }
                             >
-                              {/* {this.props.DisposisiDetail.TANGGAL_DISPOSISI} */}
                               <Kalender
                                 onChange={(exDate, value) =>
-                                this.handleTglDisposisi(
-                                  value,
-                                  exDate,
-                                  )
+                                this.handleTglDisposisi(value,exDate)
                                 }
-                                data={null}
                               />
                             </div>
                             {/* {this.state.errTglDisposisi ? (

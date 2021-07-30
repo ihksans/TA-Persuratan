@@ -96,8 +96,8 @@ class DetailDisposisiD extends Component {
                         DisposisiDetail={this.props.DisposisiDetail}
                         IdJenisSurat={this.props.IdJenisSurat}
                         IdUnitKerja={this.props.IdUnitKerja}
+                        SuratMasuk={this.props.SuratMasuk}
                         />
-
                         <ModalKonfirmDeleteDispo
                           IdDispo={this.props.DisposisiDetail.ID_DISPOSISI}
                           handleDisposisi={() => this.handleDelete()}

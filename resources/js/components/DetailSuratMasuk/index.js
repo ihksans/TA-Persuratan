@@ -63,9 +63,23 @@ class DetailSuratMasuk extends Component {
         console.log('tujuan pencatatan2:' + response.data.content)
       })
   }
+  async handleTujuanDisposisi() {
+    await api()
+      .get(
+        'api/getDetailTujuanPencatatan/' + this.props.SuratDetail.ID_PENCATATAN,
+      )
+      .then((response) => {
+        this.setState({
+          tujuanPencatatan: response.data.content,
+        })
+        console.log('tujuan pencatatan:' + this.state.tujuanPencatatan)
+        console.log('tujuan pencatatan2:' + response.data.content)
+        console.log('id tujuan pencatatan: '+ this.props.SuratDetail.ID_DISPOSISI)
+      })
+  }
   async handleTujuanDisposisi(){
     await api()
-    .get('api/getTujuanDisposisi/'+this.props.SuratDetail.ID_DISPOSISI)
+    .get('api/getTujuanDisposisi/'+this.props.Disposisi.ID_DISPOSISI,)
     .them((response)=>{
       this.setState({
         tujuanDisposisi: response.data.content,
@@ -82,6 +96,7 @@ class DetailSuratMasuk extends Component {
   async handleModal() {
     this.handleTujuanDisposisi()
     this.handleTujuanPencatatan()
+    
     if (this.state.url == null || this.state.urlLampiran == null) {
       this.handleLoading()
       await this.getFileSuratMasuk()
@@ -95,6 +110,7 @@ class DetailSuratMasuk extends Component {
       this.reserveTgl()
       this.getPengingatSurat()
     }
+    
   }
   async handlePengingatModal() {
     await this.setState({
@@ -199,7 +215,6 @@ class DetailSuratMasuk extends Component {
                         <div className="flex ">
                           <h3 className="text-xl font-semibold ">
                             Detail Surat Masuk
-                            {console.log('id tujuan disposisi ' + this.props.Disposisi)}
                           </h3>
                         </div>
                       </div>
@@ -228,7 +243,6 @@ class DetailSuratMasuk extends Component {
                         />
                       </div>
                       <div className="font-bold">Dicatat oleh </div>
-
                       <div className="col-span-2">
                         {this.props.SuratDetail.NAMA}
                       </div>
@@ -425,7 +439,7 @@ class DetailSuratMasuk extends Component {
                         </>
                       )}
                       <div style={{ marginTop: 20 }}>
-                          {JSON.stringify(this.props.SuratDetail)}
+                          {JSON.stringify(this.props.Disposisi)}
                         
                       </div>
                     </div>

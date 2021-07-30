@@ -48,12 +48,13 @@ class BoxDataTabel extends Component{
         <div className="flex flex-row mt-1">
             {/* <div className="">{this.props.Keterangan}</div> */}
             <div className="truncate">{this.props.Disposisi.PROSES_SELANJUTNYA}</div>
-        </div>        
+        </div>
         <div className="">
             <DetailDisposisiD
             DisposisiDetail={this.props.Disposisi}
             IdUnitKerja={this.props.IdUnitKerja}
             UnitKerja={this.props.UnitKerja}
+            SuratMasuk={this.props.SuratMasuk}
             />
             {/* NomorAgenda={this.props.NOMOR_AGENDA}
             /> */}

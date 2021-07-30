@@ -48,8 +48,8 @@ class AddFormDisposisi extends Component {
     this.handleIdPencatatan = this.handleIdPencatatan.bind(this)
     this.handleIdDisposisi = this.handleIdDisposisi.bind(this)
     this.handleInputChangeCustom = this.handleInputChangeCustom.bind(this)
-    this.handleTujuanPencatatan = this.handleTujuanPencatatan.bind(this)
-    this.handleTujuanDisposisi = this.handleTujuanDisposisi.bind(this)
+    // this.handleTujuanPencatatan = this.handleTujuanPencatatan.bind(this)
+    // this.handleTujuanDisposisi = this.handleTujuanDisposisi.bind(this)
 
     this.onSubmit = this.onSubmit.bind(this)
 
@@ -91,29 +91,29 @@ class AddFormDisposisi extends Component {
     }
   }
 
-  async handleTujuanPencatatan(){
-    await api()
-    .get('api/getDetailTujuanPencatatan/'+ this.props.SuratDetail.ID_PENCATATAN)
-    .then((response)=>{
-      this.setState({
-        tujuanPencatatan: response.data.content,
-      })
-      // console.log('tujuan pencatatan:' + this.state.tujuanPencatatan)
-      // console.log('tujuan pencatatan2:' + response.data.content)
-    })
-  }
+  // async handleTujuanPencatatan(){
+  //   await api()
+  //   .get('api/getDetailTujuanPencatatan/'+ this.props.SuratDetail.ID_PENCATATAN)
+  //   .then((response)=>{
+  //     this.setState({
+  //       tujuanPencatatan: response.data.content,
+  //     })
+  //     console.log('tujuan pencatatan:' + this.state.tujuanPencatatan)
+  //     console.log('tujuan pencatatan2:' + response.data.content)
+  //   })
+  // }
 
-  async handleTujuanDisposisi(){
-    await api()
-    .get('api/getTujuanDisposisi/'+this.props.disposisi.ID_DISPOSISI)
-    .them((response)=>{
-      this.setState({
-        tujuanDisposisi: response.data.content,
-      })
-      console.log('tujuan disposisi:' + this.state.tujuanDisposisi)
-      console.log('tujuan disposisi 2:' + response.data.content)
-    })
-  }
+  // async handleTujuanDisposisi(){
+  //   await api()
+  //   .get('api/getTujuanDisposisi/'+this.props.idDisposisi)
+  //   .then((response)=>{
+  //     this.setState({
+  //       tujuanDisposisi: response.data.content,
+  //     })
+  //     console.log('tujuan disposisi:' + this.state.tujuanDisposisi)
+  //     console.log('tujuan disposisi 2:' + response.data.content)
+  //   })
+  // }
   handleTujuanSelect(e,index){
     const list=[...this.state.inputListSelect]
     list[index]['id']=e
@@ -259,6 +259,7 @@ class AddFormDisposisi extends Component {
   }
 
   async handleModal() {
+    // await this.handleTujuanDisposisi()
     await this.setState({
       showModal: !this.state.showModal,
       nomorDisposisi: '',
@@ -276,8 +277,8 @@ class AddFormDisposisi extends Component {
       errKeteranganDisposisi: false,
       errNamaFileDisposisi: false,
     })
-    await this.handleTujuanPencatatan()
-    await this.handleTujuanDisposisi()
+    // await this.handleTujuanPencatatan()
+    
   }
 
   async onSubmit(e) {
@@ -295,6 +296,9 @@ class AddFormDisposisi extends Component {
     formData.append('informasi', this.state.informasiDisposisi)
     formData.append('proses_selanjutnya', this.state.keteranganDisposisi)
     formData.append('jenis_disposisi', this.state.jenisDisposisi)
+    if(this.state.fileDisposisi !=null){
+      formData.append('nama_file_disposisi',this.state.namaFileDisposisi+'_disposisi')
+    }
     //formData.append('nomor_disposisi', this.props.SuratDetail.NOMOR_SURAT)
     await api()
       .post('api/createDisposisi', formData)
@@ -353,7 +357,6 @@ class AddFormDisposisi extends Component {
           })
       }
     })
-
     if (this.state.fileDisposisi != null) {
       let fd2 = new FormData()
       console.log('nomorsurat dengan file:' + this.state.namaFileDisposisi)

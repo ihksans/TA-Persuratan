@@ -26,6 +26,7 @@ const TabelDisposisi = ({
                     Disposisi={item}
                     IdJenisSurat={IdJenisSurat}
                     IdUnitKerja={IdUnitKerja}
+                    SuratMasuk={SuratMasuk}
                   />
                 </li>
               )

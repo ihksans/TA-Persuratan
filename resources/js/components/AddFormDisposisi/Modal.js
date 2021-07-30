@@ -10,7 +10,9 @@ class ClassReducers extends Component {
   constructor(props) {
     super()
     this.state = {
+      tujuanDisposisi:[],
       modal: false,
+      idDisposisi:null,
       disposisi: null,
       detailDisposisi: null,
       loading: false,
@@ -37,16 +39,24 @@ class ClassReducers extends Component {
       loading: !this.state.loading,
     })
   }
-  
   async getDisposisi() {
     this.handleLoading()
     await api()
-      .get('api/getDisposisiByID/' + this.props.SuratDetail.ID_PENCATATAN + this.props.SuratDetail)
+      .get('api/getDisposisiByID/' + this.props.SuratDetail.ID_PENCATATAN)
       .then((response) => {
         if (response.data.content != null) {
           this.setState({
             disposisi: response.data.content,
             SuratDetail: this.props.SuratDetail,
+          })
+          api()
+          .get('api/getTujuanDisposisi/'+ response.data.content.ID_DISPOSISI)
+          .then((response)=>{
+            this.setState({
+              tujuanDisposisi: response.data.content,
+            })
+            console.log('tujuan disposisi:' + this.state.tujuanDisposisi)
+            console.log('tujuan disposisi 2:' + response.data.content)
           })
         } else {
           this.setState({
@@ -54,6 +64,7 @@ class ClassReducers extends Component {
           })
         }
       })
+      console.log('disposisi by id: '+ this.state.idDisposisi)
     if (this.state.disposisi != null) {
       let formData = new FormData()
       formData.append(
@@ -103,7 +114,8 @@ class ClassReducers extends Component {
               countDays={this.props.countDays}
               DisposisiDetail={this.props.DisposisiDetail}
               tujuanPencatatan={this.props.tujuanPencatatan}
-              tujuanDisposisi={this.props.tujuanDisposisi}
+              tujuanDisposisi={this.state.tujuanDisposisi}
+              idDisposisi={this.state.idDisposisi}
             />
           </>
         ) : null}
