@@ -2,6 +2,7 @@ import axios from 'axios'
 import api from '../../service/api'
 import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
+import { setAllSuratMasuk } from '../../actions'
 import Kalender from './Kalender'
 import ModalLoading from '../ModalLoading'
 
@@ -12,6 +13,7 @@ class EditFormSurat extends Component {
     this.state = {
       dir: [],
       jenisSurat: [],
+      inputListSelectAwal: [{ idUnit: '', err: false }],
       modalLoading: false,
       errForm: false,
       inputListSelect: [{ idUnit: '', err: false }],
@@ -160,7 +162,6 @@ class EditFormSurat extends Component {
       if (this.state.inputListSelect[i].err == true) {
         this.setState({ errForm: true })
         i = this.state.inputListSelect.length
-        console.log('tujuan surat error')
       } else {
         this.setState({ errForm: false })
       }
@@ -233,6 +234,7 @@ class EditFormSurat extends Component {
         }
       }
     })
+    console.log('validate')
   }
   validateLampiran(input) {
     const extension = '.pdf'
@@ -260,7 +262,6 @@ class EditFormSurat extends Component {
       } else {
         this.handleErrSurat('')
         let namasurat = this.state.nomorSurat.split('/').join('_')
-        console.log('nama surat:' + namasurat)
         this.setState({
           namaFileSurat: namasurat,
         })
@@ -346,13 +347,7 @@ class EditFormSurat extends Component {
       this.handleErrUnitPengirim(false)
     }
   }
-  validateTujuanSurat(input) {
-    if (input == 0 || input == null || input == '') {
-      this.handleErrTujuanSurat(true)
-    } else {
-      this.handleErrTujuanSurat(false)
-    }
-  }
+
   validatePerihal(input) {
     if (input == null || input == '') {
       this.handleErrPerihal(true)
@@ -799,7 +794,6 @@ class EditFormSurat extends Component {
       errCustomPengirimNamaUnit: false,
       errCustomPengirimKodeUnit: false,
     })
-    console.log('id pencatatan :' + this.state.idPencatatan)
     if (this.state.inputListSelect[0].idUnit == '') {
       let arr = []
       this.props.tujuanPencatatan.map((x, i) => {
@@ -809,9 +803,8 @@ class EditFormSurat extends Component {
         })
         this.setState({
           inputListSelect: arr,
+          inputListSelectAwal: arr,
         })
-        console.log('tujuan ku:' + this.state.inputListSelect[i].idUnit)
-        console.log('tujuan mu:' + x.ID_KODE_UNIT_KERJA)
       })
     }
   }
@@ -840,7 +833,7 @@ class EditFormSurat extends Component {
       this.state.unitPengirim != this.props.SuratDetail.ID_KODE_UNIT_KERJA ||
       this.state.penandatangan != this.props.SuratDetail.PENANDATANGAN ||
       this.state.namaPengirim != this.props.SuratDetail.NAMA_PENGIRIM ||
-      this.state.inputListSelect != this.state.tujuanPencatatan ||
+      this.state.inputListSelectAwal != this.state.inputListSelect ||
       this.state.perihal != this.props.SuratDetail.PERIHAL ||
       this.state.tglDiterima != this.props.SuratDetail.TGL_DITERIMA ||
       this.state.tglSurat != this.props.SuratDetail.TGL_SURAT ||
@@ -879,6 +872,12 @@ class EditFormSurat extends Component {
       if (this.state.lampiran != null) {
         await this.validateLampiran(this.state.lampiran)
       }
+      if (this.state.customInputTujuan) {
+        this.handleErrTujuanSurat(false)
+      }
+      if (this.state.customInputPengirim) {
+        this.handleErrUnitPengirim(false)
+      }
       if (
         this.state.errNomorSurat == false &&
         this.state.errTglDiterima == false &&
@@ -897,7 +896,6 @@ class EditFormSurat extends Component {
         this.state.errCustomTujuanKodeUnit == false &&
         this.state.errCustomTujuanNamaUnit == false &&
         this.state.errCustomPengirimKodeUnit == false &&
-        this.state.errCustomPengirimNamaUnit == false &&
         this.state.errCustomPengirimNamaUnit == false &&
         this.state.errForm == false
       ) {
@@ -926,7 +924,6 @@ class EditFormSurat extends Component {
           await api()
             .post('api/setKodeUnit', forDataCustom2)
             .then((response) => {
-              console.log('setKodeUnit2:' + response.data.content.id)
               if (this.state.customInputPengirim == false) {
                 fd.append('id_kode_unit', this.state.unitPengirim)
               } else {
@@ -968,7 +965,13 @@ class EditFormSurat extends Component {
           .then((response) => {
             api()
               .post('api/updateSuratMasuk', fd)
-              .then((response) => {})
+              .then((response) => {
+                api()
+                  .get('api/detailSuratMasuk')
+                  .then((response) => {
+                    this.props.setAllSuratMasuk(response.data.content)
+                  })
+              })
           })
         await api()
           .delete('api/delAllTujuanPencatatan/' + this.state.idPencatatan)
@@ -987,11 +990,7 @@ class EditFormSurat extends Component {
                 form2.append('idUnit', response.data.content.id)
                 api()
                   .post('api/setTujuanPencatatan', form2)
-                  .then((response) => {
-                    console.log(
-                      'tujuan:' + x.id + '|' + this.state.idPencatatan,
-                    )
-                  })
+                  .then((response) => {})
               })
           } else {
             let form3 = new FormData()
@@ -1000,16 +999,10 @@ class EditFormSurat extends Component {
             api()
               .post('api/setTujuanPencatatan', form3)
               .then((response) => {
-                console.log(
-                  'tujuan2:' + x.idUnit + '|' + this.state.idPencatatan,
-                )
-
                 if (this.state.surat == null && this.state.lampiran == null) {
-                  console.log('tanpa surat:')
-
                   this.handleLoading()
-                  this.handleModal()
-                  window.location.reload('/#/SuratMasuk')
+                  // this.handleModal()
+                  //   window.location.reload('/#/SuratMasuk')
                 }
               })
           }
@@ -1022,9 +1015,9 @@ class EditFormSurat extends Component {
             .post('api/addSurat', fd2)
             .then((response) => {
               if (this.state.lampiran == null) {
-                this.handleLoading()
-                this.handleModal()
-                window.location.reload('/#/SuratMasuk')
+                //this.handleLoading()
+                // this.handleModal()
+                //window.location.reload('/#/SuratMasuk')
               }
             })
         }
@@ -1039,7 +1032,7 @@ class EditFormSurat extends Component {
               //jika dari BE error
               this.handleLoading()
               this.handleModal()
-              window.location.reload('/#/SuratMasuk')
+              //  window.location.reload('/#/SuratMasuk')
             })
         }
       }
@@ -1179,7 +1172,7 @@ class EditFormSurat extends Component {
                                         onChange={(exDate, value) =>
                                           this.handleTglSurat(exDate, value)
                                         }
-                                        data={this.state.tglDiterima}
+                                        data={this.state.tglSurat}
                                       />
                                     </div>
 
@@ -1272,7 +1265,7 @@ class EditFormSurat extends Component {
                                       {this.state.inputListSelect.map(
                                         (x, i) => {
                                           return (
-                                            <div>
+                                            <div key={i}>
                                               {x.idUnit != null ||
                                               x.idUnit != undefined ? (
                                                 <>
@@ -1947,4 +1940,4 @@ class EditFormSurat extends Component {
 function mapStateToProps(state) {
   return state
 }
-export default connect(mapStateToProps, {})(EditFormSurat)
+export default connect(mapStateToProps, { setAllSuratMasuk })(EditFormSurat)

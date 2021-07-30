@@ -16,8 +16,7 @@ class SuratKeluar extends Model
         'ID_PENCATATAN',
         'ID_NOMOR_SURAT',
         'ID_PEMOHON',
-        'TGL_KIRIM',
-        'NOMOR_AGENDA',
-        'TAHUN_AGENDA'
+        'TGL_KIRIM', 
+        'NOMOR_SURAT'
     ];
 }

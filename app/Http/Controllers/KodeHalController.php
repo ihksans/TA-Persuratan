@@ -19,4 +19,18 @@ class KodeHalController extends Controller
             return response()->json($data);          
         }
     }
+    public function getKodeHal($id)
+    {
+
+        $result = KodeHal::where('ID_KODE_HAL', $id)->first();
+        if($result == null){
+            $respon =[
+            'Msg' => 'error',
+            'content' =>  $id,
+            ];
+            return response()->json($respon);
+        }
+        return response()->json($result);
+
+    }
 }

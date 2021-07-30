@@ -58,6 +58,7 @@ class ClassReducers extends Component {
             console.log('tujuan disposisi:' + this.state.tujuanDisposisi)
             console.log('tujuan disposisi 2:' + response.data.content)
           })
+          //didie
         } else {
           this.setState({
             disposisi: null,

@@ -168,4 +168,21 @@ class TujuanController extends Controller
             return response()->json($response,200);
         }
     }
+    
+    public function delTujuanDisposisi($id,$to){
+        $delTujuanDisposisi = TujuanDisposisi::where('ID_DISPOSISI',$id)->where('ID_KODE_UNIT_KERJA',$to);
+        $delTujuanDisposisi->delete();
+        if($delTujuanDisposisi){
+            $respon=[
+                'Msg' => 'succes',
+                'content'=> $delTujuanDisposisi
+            ];
+            return response()->json($respon,200);            
+        }
+        $respon=[
+            'Msg'=> 'error',
+            'content'=> null
+        ];
+        return response()->json($respon);
+    }
 }

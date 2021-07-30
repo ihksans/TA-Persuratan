@@ -146,7 +146,7 @@ class DetailDisposisi extends Component {
 
                         <ModalKonfirmDeleteDispo
                           IdDispo={this.props.DisposisiDetail.ID_DISPOSISI}
-                          handleDisposisi={() => this.handleDelete()}
+                          // handleDisposisi={() => this.handleDelete()}
                         />
                       </div>
 

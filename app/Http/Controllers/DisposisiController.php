@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Disposisi;
+use Illuminate\Database\QueryException;
 use App\Models\SuratMasuk;
 use App\Models\Pencatatan;
+use App\Models\TujuanDisposisi;
 
 class DisposisiController extends Controller
 {
@@ -182,20 +185,46 @@ class DisposisiController extends Controller
      */
     public function deleteDisposisi($id)
     {
-        // $suratMasuk = Pencatatan::where('ID_PENCATATAN', $id)->first();
-        $disposisi = Disposisi::where('ID_DISPOSISI',$id);
-        $result =  $disposisi->delete();
-        if($result != null){
-            $respon =[
-            'Msg' => 'success',
-            'content' => $id,
-            ];
-        return response()->json($respon);
+        try{
+            $disposisi = TujuanDisposisi::where('ID_DISPOSISI',$id);
+            $disposisi->delete();
+        } catch(\Exception $ex){ 
+            $respon = [
+                'Msg' => 'error1',
+                'content' => $id,
+                ];
+                return response()->json($respon);
         }
-        $respon =[
-            'Msg' => 'Belum terhapus',
-            'content' => $id,
-            ];
-        return response()->json($respon);
+        try{
+            $disposisi = Disposisi::where('ID_DISPOSISI',$id);
+            $disposisi->delete();
+            $respon = [
+                'Msg' => 'succes',
+                'content' => $result,
+                ];            
+                return response()->json($respon);
+            }
+            catch(\Exception $ex){ 
+                $respon = [
+                    'Msg' => 'error3',
+                    'content' => $id,
+                    ];
+                    return response()->json($respon,200);
+            }
+        // $disposisi = Disposisi::where('ID_PENCATATAN',$id);
+        // $disposisi->delete();
+        // if($disposisi = null){
+        //     $respon =[
+        //     'Msg' => 'error',
+        //     'content' => $id,
+        //     ];
+        // return response()->json($respon);
+        // }
+        
+        // $respon =[
+        //     'Msg' => 'Belum terhapus',
+        //     'content' => $id,
+        //     ];
+        // return response()->json($respon);
     }
 }

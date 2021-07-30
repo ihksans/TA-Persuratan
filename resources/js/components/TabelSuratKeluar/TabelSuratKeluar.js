@@ -118,6 +118,7 @@ class TabelSuratKeluar extends Component {
                       IdJenisSurat={this.props.IdJenisSurat}
                       Surat={item}
                       IdUnitKerja={this.props.IdUnitKerja}
+                      Disposisi={this.props.Disposisi}
                     />
                   </li>
                 )

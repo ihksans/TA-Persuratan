@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import api from '../../service/api'
 import { connect } from 'react-redux'
 import {} from '../../actions'
+import AddFormSuratKeluar from '../AddFormSuratKeluar'
 //Ini buat dependecies/library nya
 //import + "nama variabel" + from + "nama librarynya";
 
@@ -11,12 +12,14 @@ class GenerateNoSurat extends Component {
   constructor(props) {
     super()
     this.state = {
+      showAddModal: false,
       jenisSurat: '',
       kodeHal: '',
       sifatSurat: '',
       idKodeHal: '',
       idSifatSurat: '',
       noUrut: null,
+      finalNoUrut: null,
       tahunSurat: null,
       kodePt: null,
       isShowModal: false,
@@ -24,6 +27,7 @@ class GenerateNoSurat extends Component {
       faseGenerate2: false,
       generate: false,
       nomorSurat: null,
+      idNomorSurat: null,
       errJenisSurat: false,
       errKodeHal: false,
       errSifatSurat: false,
@@ -41,19 +45,7 @@ class GenerateNoSurat extends Component {
   //contoh method
   async handleSubmit() {
     var resultId = this.state.jenisSurat
-    var resultTahun = new Date().getFullYear()
-    let resultNo
-    let data
-    await api()
-      .get('api/getLastNoAgenda/')
-      .then((response) => {
-        data = response.data
-      })
-    if (data.tahun != null || data.tahun != 0 || data.tahun != undefined) {
-      resultNo = data.no + 1
-    } else {
-      resultNo = 1
-    }
+
     //proses
     await this.validateForm()
     if (
@@ -62,7 +54,22 @@ class GenerateNoSurat extends Component {
       this.state.errKodeHal == false
     ) {
       if (this.state.typeNomor == 1) {
-        console.log('nomor surat: NOMOR' + resultNo + 'Tahun' + resultTahun)
+        let formData = new FormData()
+        await api()
+          .post('api/setNomorSurat', formData)
+          .then((response) => {
+            this.setState({
+              nomorSurat:
+                'Nomor ' +
+                response.data.content.NOMOR_URUT +
+                ' Tahun ' +
+                response.data.content.TAHUN,
+              showAddModal: true,
+              isShowModal: false,
+              idNomorSurat: response.data.content.id,
+              finalNoUrut: response.data.content.NOMOR_URUT,
+            })
+          })
       } else if (this.state.typeNomor == 2 || this.state.typeNomor == 3) {
         this.setState({
           faseGenerate2: true,
@@ -74,42 +81,64 @@ class GenerateNoSurat extends Component {
             this.state.kodeHal != null &&
             this.state.kodeHal != ''
           ) {
+            let formData = new FormData()
+
+            formData.append('id_kode_unit', '1')
+            formData.append('id_kode_hal', this.state.idKodeHal)
+            formData.append('id_kode_pt', '1')
+            formData.append('id_sifat_naskah', this.state.idSifatSurat)
+
+            await api()
+              .post('api/setNomorSurat', formData)
+              .then((response) => {
+                this.setState({
+                  nomorSurat:
+                    this.state.sifatSurat +
+                    '/' +
+                    response.data.content.NOMOR_URUT +
+                    '/' +
+                    'PL.1/' +
+                    this.state.kodeHal +
+                    '/' +
+                    response.data.content.TAHUN,
+                  showAddModal: true,
+                  isShowModal: false,
+                  idNomorSurat: response.data.content.id,
+                  finalNoUrut: response.data.content.NOMOR_URUT,
+                })
+              })
           }
-          console.log(
-            'Nomor Surat:' +
-              this.state.sifatSurat +
-              '/' +
-              resultNo +
-              '/' +
-              'PL.1/' +
-              this.state.kodeHal +
-              '/' +
-              resultTahun,
-          )
         } else {
-          if (
-            this.state.sifatSurat != null &&
-            this.state.sifatSurat != '' &&
-            this.state.kodeHal != null &&
-            this.state.kodeHal != ''
-          ) {
+          if (this.state.kodeHal != null && this.state.kodeHal != '') {
+            let formData = new FormData()
+
+            formData.append('id_kode_unit', '1')
+            formData.append('id_kode_hal', this.state.idKodeHal)
+            formData.append('id_kode_pt', '1')
+
+            await api()
+              .post('api/setNomorSurat', formData)
+              .then((response) => {
+                this.setState({
+                  nomorSurat:
+                    response.data.content.NOMOR_URUT +
+                    '/' +
+                    'PL1.R3/' +
+                    this.state.kodeHal +
+                    '/' +
+                    response.data.content.TAHUN,
+                  showAddModal: true,
+                  isShowModal: false,
+                  idNomorSurat: response.data.content.id,
+                  finalNoUrut: response.data.content.NOMOR_URUT,
+                })
+              })
           }
-          console.log(
-            'Nomor Surat:' +
-              resultNo +
-              '/' +
-              'PL.1/' +
-              this.state.kodeHal +
-              '/' +
-              resultTahun,
-          )
         }
       }
     }
   }
-  handleGenerate() {
-    console.log('data:' + data)
-  }
+  handleGenerate() {}
   handleJenisSurat(e) {
     let value = e.target.value
     this.props.AllJenisSurat.allJenisSurat.map((x, i) => {
@@ -127,7 +156,6 @@ class GenerateNoSurat extends Component {
     this.setState({
       jenisSurat: value,
     })
-    console.log('tipe:' + this.state.typeNomor)
   }
   handleKodeHal(e) {
     let value = e.target.value
@@ -189,7 +217,6 @@ class GenerateNoSurat extends Component {
       errKodeHal: false,
       errSifatSurat: false,
     })
-    console.log('modal:' + this.state.isShowModal)
   }
   isiVarA() {
     this.setState({
@@ -207,23 +234,35 @@ class GenerateNoSurat extends Component {
       })
     }
     if (this.state.faseGenerate2 == true) {
-      if (this.state.idKodeHal == null || this.state.idKodeHal == 0) {
-        this.setState({
-          errKodeHal: true,
-        })
+      if (this.state.typeNomor == 2) {
+        if (this.state.idKodeHal == null || this.state.idKodeHal == 0) {
+          this.setState({
+            errKodeHal: true,
+          })
+        } else {
+          this.setState({
+            errKodeHal: false,
+          })
+        }
+        if (this.state.idSifatSurat == null || this.state.idSifatSurat == 0) {
+          this.setState({
+            errSifatSurat: true,
+          })
+        } else {
+          this.setState({
+            errSifatSurat: false,
+          })
+        }
       } else {
-        this.setState({
-          errKodeHal: false,
-        })
-      }
-      if (this.state.idSifatSurat == null || this.state.idSifatSurat == 0) {
-        this.setState({
-          errSifatSurat: true,
-        })
-      } else {
-        this.setState({
-          errSifatSurat: false,
-        })
+        if (this.state.idKodeHal == null || this.state.idKodeHal == 0) {
+          this.setState({
+            errKodeHal: true,
+          })
+        } else {
+          this.setState({
+            errKodeHal: false,
+          })
+        }
       }
     }
   }
@@ -245,7 +284,14 @@ class GenerateNoSurat extends Component {
           </div>
           <div className="font-bold ml-1 mr-2">Tambah Data Surat</div>
         </button>
-
+        <AddFormSuratKeluar
+          showModal={this.state.showAddModal}
+          nomorSurat={this.state.nomorSurat}
+          idNomorSurat={this.state.idNomorSurat}
+          typeNomor={this.state.typeNomor}
+          idJenisSurat={this.state.jenisSurat}
+          noUrut={this.state.finalNoUrut}
+        />
         {this.state.isShowModal ? (
           <>
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -349,47 +395,49 @@ class GenerateNoSurat extends Component {
                             )}
                           </div>
                         </div>
-                        <div className="flex flex-row grid grid-cols-2 p-2">
-                          <div className="flex flex-row">
-                            <div className="mt-2">Sifat Surat </div>
-                            <div className="text-danger ml-2 mt-2"> *</div>
-                          </div>
-                          <div className="justify-end ">
-                            <select
-                              type="text"
-                              name="sifatSurat"
-                              required
-                              id="sifatSurat"
-                              className={
-                                'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	 w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
-                              }
-                              value={this.state.idSifatSurat}
-                              onChange={this.handleSifatSurat}
-                            >
-                              <option value="0">Pilih Sifat Surat ...</option>
-                              {this.props.RSifatSurat.allSifatSuratInfo.map(
-                                (item, index) => {
-                                  return (
-                                    <option
-                                      key={item.ID_SIFAT_NASKAH}
-                                      value={item.ID_SIFAT_NASKAH}
-                                    >
-                                      {item.KODE_SIFAT_NASKAH}-
-                                      {item.SIFAT_NASKAH}
-                                    </option>
-                                  )
-                                },
+                        {this.state.typeNomor == 2 ? (
+                          <div className="flex flex-row grid grid-cols-2 p-2">
+                            <div className="flex flex-row">
+                              <div className="mt-2">Sifat Surat </div>
+                              <div className="text-danger ml-2 mt-2"> *</div>
+                            </div>
+                            <div className="justify-end ">
+                              <select
+                                type="text"
+                                name="sifatSurat"
+                                required
+                                id="sifatSurat"
+                                className={
+                                  'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	 w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
+                                }
+                                value={this.state.idSifatSurat}
+                                onChange={this.handleSifatSurat}
+                              >
+                                <option value="0">Pilih Sifat Surat ...</option>
+                                {this.props.RSifatSurat.allSifatSuratInfo.map(
+                                  (item, index) => {
+                                    return (
+                                      <option
+                                        key={item.ID_SIFAT_NASKAH}
+                                        value={item.ID_SIFAT_NASKAH}
+                                      >
+                                        {item.KODE_SIFAT_NASKAH}-
+                                        {item.SIFAT_NASKAH}
+                                      </option>
+                                    )
+                                  },
+                                )}
+                              </select>
+                              {this.state.errSifatSurat ? (
+                                <div className="text-danger text-xs mb-3">
+                                  Sifat surat harus diisi
+                                </div>
+                              ) : (
+                                <></>
                               )}
-                            </select>
-                            {this.state.errSifatSurat ? (
-                              <div className="text-danger text-xs mb-3">
-                                Sifat surat harus diisi
-                              </div>
-                            ) : (
-                              <></>
-                            )}
+                            </div>
                           </div>
-                        </div>
+                        ) : null}
                       </>
                     )}
                   </div>

@@ -16,60 +16,42 @@ export default function ModalKonfirmDeleteSM({
     handleLoading()
     let formData = new FormData()
     formData.append('id', id)
-    console.log('id' + id)
     await api()
       .delete('api/delSuratMasuk/' + id)
-      .then((response) => {
-        console.log('respon:' + response)
-        console.log('Surat telah terhapus')
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+      .then((response) => {})
+      .catch((error) => {})
     await api()
       .delete('api/delPencatatan/' + id)
       .then((response) => {
-        console.log('respon:' + response)
-        console.log('Pencatatan telah terhapus')
         if (NamaSurat == null && NamaLampiran == null) {
           handleLoading()
           setShowModal(false)
           window.location.reload('/#/SuratMasuk')
         }
       })
-      .catch((error) => {
-        console.log(error)
-      })
+      .catch((error) => {})
     if (NamaSurat != null) {
       await api()
         .delete('api/delSurat/' + NamaSurat)
         .then((response) => {
-          console.log('respon:' + response)
-          console.log('File surat telah terhapus')
           if (NamaLampiran == null) {
             handleLoading()
             setShowModal(false)
             window.location.reload('/#/SuratMasuk')
           }
         })
-        .catch((error) => {
-          console.log(error)
-        })
+        .catch((error) => {})
     }
 
     if (NamaLampiran != null) {
       await api()
         .delete('api/delSurat/' + NamaLampiran)
         .then((response) => {
-          console.log('respon:' + response)
-          console.log('File surat telah terhapus')
           handleLoading()
           setShowModal(false)
           window.location.reload('/#/SuratMasuk')
         })
-        .catch((error) => {
-          console.log(error)
-        })
+        .catch((error) => {})
     }
   }
   return (

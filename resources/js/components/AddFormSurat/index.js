@@ -3,6 +3,7 @@ import api from '../../service/api'
 import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import Kalender from './Kalender'
+import { setAllSuratMasuk } from '../../actions'
 import ModalLoading from '../ModalLoading'
 import AddReminder from '../FormAddReminder'
 import CustomInput from './CostumInput'
@@ -346,6 +347,7 @@ class AddFormSurat extends Component {
         }
       }
     })
+    console.log('validate')
   }
   validatePerihal(input) {
     if (input == null || input == '') {
@@ -915,7 +917,13 @@ class AddFormSurat extends Component {
           fd.append('id_pencatatan', response.data.content.id)
           api()
             .post('api/setSuratMasuk', fd)
-            .then((response) => {})
+            .then((response) => {
+              api()
+                .get('api/detailSuratMasuk')
+                .then((response) => {
+                  this.props.setAllSuratMasuk(response.data.content)
+                })
+            })
         })
       await this.state.inputListSelect.map((x, i) => {
         if (x.idUnit == null) {
@@ -1221,7 +1229,7 @@ class AddFormSurat extends Component {
                                       {this.state.inputListSelect.map(
                                         (x, i) => {
                                           return (
-                                            <div>
+                                            <div key={i}>
                                               {x.idUnit != null ||
                                               x.idUnit != undefined ? (
                                                 <>
@@ -1926,4 +1934,4 @@ class AddFormSurat extends Component {
 function mapStateToProps(state) {
   return state
 }
-export default connect(mapStateToProps, {})(AddFormSurat)
+export default connect(mapStateToProps, { setAllSuratMasuk })(AddFormSurat)

@@ -12,8 +12,11 @@ class DetailDisposisiD extends Component {
     super(props)
     this.state = {
       dir: [],
+      tujuanDisposisi:[],
       url: null,
       loading: false,
+      disposisi: null,
+      showModal: false,
 
       // pengguna: this.props.AllUser.allUserInfo,
       // disposisi: this.props.AllDisposisi.allDisposisiInfo,
@@ -22,6 +25,8 @@ class DetailDisposisiD extends Component {
     this.handleModal = this.handleModal.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
     this.handleLoading = this.handleLoading.bind(this)
+
+    // this.handleTujuanDisposisi = this.handleTujuanDisposisi.bind(this)
     this.getFileDisposisi = this.getFileDisposisi.bind(this)
   }
   handleLoading() {
@@ -29,6 +34,30 @@ class DetailDisposisiD extends Component {
       loading: !this.state.loading,
     })
   }
+  // async handleTujuanDisposisi(){
+  //   await api()
+  //   .get('api/getTujuanDisposisi/' + this.props.DisposisiDetail.ID_DISPOSISI)
+  //   .then((response)=>{
+  //     this.setState({
+  //       tujuanDisposisi:response.data.content,
+  //     })
+  //     console.log('tujuan disposisi:' + this.state.tujuanDisposisi)
+  //     console.log('tujuan disposisi2:' + response.data.content)
+  //   })
+  // }
+  // async handleTujuanDisposisi() {
+  //   await api()
+  //     .get(
+  //       'api/getDetailTujuanPencatatan/' + this.props.DisposisiDetail.ID_DISPOSISI,
+  //     )
+  //     .then((response) => {
+  //       this.setState({
+  //         tujuanDisposisi: response.data.content,
+  //       })
+  //       console.log('tujuan pencatatan:' + this.state.tujuanDisposisi)
+  //       console.log('tujuan pencatatan2:' + response.data.content)
+  //     })
+  // }
   async getFileDisposisi() {
     this.handleLoading()
     let formData = new FormData()
@@ -46,6 +75,7 @@ class DetailDisposisiD extends Component {
     this.handleLoading()
   }
   async handleModal() {
+    // handleTujuanDisposisi()
     if (this.state.url == null) {
       await this.getFileDisposisi()
     }
@@ -87,7 +117,7 @@ class DetailDisposisiD extends Component {
                         </div>
                         <div className="flex">
                           <h3 className="text-xl font-semibold">
-                            Detail Disposisi 123
+                            Detail Disposisi
                           </h3>
                         </div>
                       </div>
