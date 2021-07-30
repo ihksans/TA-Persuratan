@@ -47,6 +47,7 @@ class ClassReducers extends Component {
           this.setState({
             disposisi: response.data.content,
           })
+          //didie
         } else {
           this.setState({
             disposisi: null,

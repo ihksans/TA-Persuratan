@@ -34,12 +34,39 @@ class BoxDataTabel extends Component {
           </div>
 
           <div className="flex flex-row  items-center mt-1">
-            <p className="truncate text-sm">
-              {this.props.Surat.KODE_SIFAT_NASKAH}/{this.props.Surat.NOMOR_URUT}
-              /{this.props.Surat.KODE_PERGURUAN_TINGGI}.
-              {this.props.Surat.KODE_UNIT_KERJA}/{this.props.Surat.KODE_HAL}/
-              {this.props.Surat.TAHUN}
-            </p>
+            {/* {this.props.Surat.TIPE_SURAT == 1 ? (
+              <p className="truncate text-sm">
+                Nomor {this.props.Surat.NOMOR_URUT} Tahun{' '}
+                {this.props.Surat.TAHUN}{' '}
+              </p>
+            ) : null}
+            {this.props.Surat.TIPE_SURAT == 2 ? (
+              <p className="truncate text-sm">
+                Nomor {this.props.Surat.NOMOR_URUT} Tahun{' '}
+                {this.props.Surat.TAHUN}{' '}
+              </p>
+            ) : null}
+
+            {this.props.Surat.TIPE_SURAT == 2 ? (
+              <p className="truncate text-sm">
+                {' '}
+                {this.props.Surat.KODE_SIFAT_NASKAH}/
+                {this.props.Surat.NOMOR_URUT}/
+                {this.props.Surat.KODE_PERGURUAN_TINGGI}.
+                {this.props.Surat.KODE_UNIT_KERJA}/{this.props.Surat.KODE_HAL}/
+                {this.props.Surat.TAHUN}
+              </p>
+            ) : null}
+
+            {this.props.Surat.TIPE_SURAT == 3 ? (
+              <p className="truncate text-sm">
+                {this.props.Surat.NOMOR_URUT}/
+                {this.props.Surat.KODE_PERGURUAN_TINGGI}.
+                {this.props.Surat.KODE_UNIT_KERJA}/{this.props.Surat.KODE_HAL}/{this.props.Surat.NOMOR_URUT}
+                {this.props.Surat.TAHUN}
+              </p>
+            ) : null} */}
+            <p className="truncate text-sm">{this.props.Surat.NOMOR_SURAT}</p>
           </div>
           <div className="flex flex-row  col-span-2  items-center mt-1">
             <p className="truncate text-sm">{this.props.Surat.PERIHAL}</p>

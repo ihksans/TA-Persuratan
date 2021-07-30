@@ -10,42 +10,53 @@ use App\Models\NomorSuratKeluar;
 class NomorSuratKeluarController extends Controller
 {
     public function index(){
-        $result = NomorSuratKeluar::all();
+        $year = date("Y"); 
+        
+            $result = NomorSuratKeluar::where('TAHUN',  $year)->orderBy('NOMOR_URUT','desc')->first();
+          if($result==null){
+            $result = [
+                'Msg' => 'kosong',
+                'content'=> null
+                ];
+          }
+          $result = [
+            'Msg' => 'kosong',
+            'content'=> $result
+            ];
         return response()->json($result);
+
     }
     public function setNomorSurat(Request $request){
-        try{
-            $last = DB::table('nomor_surat')->select('nomor_surat.TAHUN', 'nomor_surat.NOMOR_URUT')
-            ->orderBy('TAHUN','desc')->get()->first();
-                if( $request->tahun> $last->TAHUN )
-                {
+        $year = date("Y"); 
+        $tahun = 0;
+        $no_urut = 0;
+        if($request->tahun!=null && $request->no_urut!=null) {
+            $no_urut = $request->no_urut;
+            $tahun = $request->tahun;
+        }else{
+            try{
+                $last = NomorSuratKeluar::where('TAHUN',  $year)->orderBy('NOMOR_URUT','desc')->first();
+                $no_urut = $last->NOMOR_URUT + 1;
+                $tahun = $year;
+            } catch(\Exception $ex){ 
                     $no_urut = 1;
-                }else if($last->TAHUN == $request->tahun){
-                   $no_urut = $last->NOMOR_URUT + 1;
-                }else{
-                    $no_urut = $request->no_urut;
-                }
-        } catch(\Exception $ex){ 
-            $respon = [
-                'Msg' => 'err',
-                'content' => null,
-            ];                        
-            return response()->json($respon,200);
+                    $tahun = $year;
+            }
         }
-        
         $data = [
-            'ID_KODE_UNIT_KERJA'=>$request->id_kode_unit,
+            'ID_KODE_UNIT_KERJA'=>1,
             'ID_KODE_HAL'=>$request->id_kode_hal,
-            'ID_KODE_PERGURUAN_TINGGI'=>$request->id_kode_pt, 
+            'ID_KODE_PERGURUAN_TINGGI'=>1, 
             'ID_SIFAT_NASKAH'=>$request->id_sifat_naskah,
             'NOMOR_URUT' =>$no_urut,
-            'TAHUN'=>$request->tahun,
+            'TAHUN'=>$tahun,
+            
         ];
         try{
             $nomorSurat = NomorSuratKeluar::create($data);
             $respon = [
                 'Msg' => 'success',
-                'content' => $data,
+                'content' => $nomorSurat,
                 ];
                 return response()->json($respon,200);
         } catch(\Exception $ex){ 

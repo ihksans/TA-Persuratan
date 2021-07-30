@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\SuratKeluar;
 use Illuminate\Database\QueryException;
 use App\Models\NomorSuratKeluar;
+use App\Models\TujuanPencatatan;
+use App\Models\Pencatatan;
+
 
 class SuratKeluarController extends Controller
 {
@@ -52,27 +55,14 @@ class SuratKeluarController extends Controller
     }
     public function setSuratKeluar(Request $request)
     {
-        try { 
-            $last = SuratKeluar::all()->last();
-            if($last->TAHUN_AGENDA!=$request->tahun_agenda){
-                $no_agenda = 1;
-            }else{
-                $no_agenda = $last->NOMOR_AGENDA + 1;
-            }
-          } catch(\Exception $ex){ 
-            $no_agenda = 1;
-        }
-        $respon = [
-            'Msg' =>$no_agenda,
-        ];
+        $nomor = str_replace("\/","/",$request->nomor_surat);
         $data = [
             'ID_PENCATATAN' =>$request->id_pencatatan,
             'ID_PENGGUNA' =>$request->id_pengguna,
             'ID_NOMOR_SURAT'=>$request->id_no_surat,
             'ID_PEMOHON'=>$request->id_pemohon,
-            'TGL_KIRIM'=>$request->tgl_diterima,
-            'NOMOR_AGENDA'=>$no_agenda,
-            'TAHUN_AGENDA'=>$request->tahun_agenda,
+            'TGL_KIRIM'=>$request->tgl_kirim,
+            'NOMOR_SURAT'=>$nomor
         ];
         try{
                $suratKeluar = SuratKeluar::create($data);
@@ -84,7 +74,7 @@ class SuratKeluarController extends Controller
         }catch(\Exception $ex){ 
                 $respon = [
                     'Msg' => 'error',
-                    'content' => null,
+                    'content' => $data,
                 ];
                 return response()->json($respon);
         }
@@ -113,26 +103,46 @@ class SuratKeluarController extends Controller
             return response()->json($respon);
         }
     }
-    public function delSuratKeluar($id , $no){        
+    public function delSuratKeluar($id , $no){ 
+        try{
+            $delTujuanPencatatan = TujuanPencatatan::where('ID_PENCATATAN', $id);
+            $delTujuanPencatatan->delete();
+        } catch(\Exception $ex){ 
+            $respon = [
+                'Msg' => 'error',
+                'content' => $id,
+                ];
+                return response()->json($respon);
+        }
         try{
             $suratKeluar = SuratKeluar::where('ID_PENCATATAN', $id);
             $suratKeluar->delete();
             try{
                 $nomorSurat = NomorSuratKeluar::where('ID_NOMOR_SURAT', $no);
                 $nomorSurat->delete();
-                $respon = [
-                    'Msg' => 'success',
-                    'content' => $id,
-                    ];
-                    return response()->json($respon,200);
-            } catch(\Exception $ex){ 
+                try{
+                    $pencatatan = Pencatatan::where('ID_PENCATATAN', $id);
+                    $result =  $pencatatan->delete();
+                    $respon = [
+                        'Msg' => 'succes',
+                        'content' => $result,
+                        ];            
+                         return response()->json($respon);
+                    } 
+                    catch(\Exception $ex){ 
+                        $respon = [
+                            'Msg' => 'error',
+                            'content' => $id,
+                            ];
+                            return response()->json($respon,200);
+                        }
+              }catch(\Exception $ex){ 
                 $respon = [
                     'Msg' => 'error',
                     'content' => $id,
                     ];
                     return response()->json($respon);
             }
-            return response()->json($respon,200);
         } catch(\Exception $ex){ 
             $respon = [
                 'Msg' => 'error',
@@ -144,6 +154,14 @@ class SuratKeluarController extends Controller
     }
     public function updateSuratKeluar(Request $request)
     {
+        $data = [
+            'ID_PENGGUNA' =>$request->id_pengguna,
+            'ID_PENCATATAN' =>$request->id_pencatatan,
+            'ID_NOMOR_SURAT'=>$request->id_no_surat,
+            'ID_PEMOHON'=>$request->id_pemohon,
+            'TGL_KIRIM'=>$request->tgl_kirim,
+            'NOMOR_SURAT'=>$request->nomor_surat
+        ];
         try{
             $suratKeluar = SuratKeluar::where('ID_PENCATATAN', $request->id_pencatatan)
             ->update([
@@ -151,10 +169,10 @@ class SuratKeluarController extends Controller
                 'ID_PENCATATAN' =>$request->id_pencatatan,
                 'ID_NOMOR_SURAT'=>$request->id_no_surat,
                 'ID_PEMOHON'=>$request->id_pemohon,
-                'TGL_KIRIM'=>$request->tgl_diterima,
-                'NOMOR_AGENDA'=>$request->no_agenda,
-                'TAHUN_AGENDA'=>$request->tahun_agenda,
+                'TGL_KIRIM'=>$request->tgl_kirim,
+                'NOMOR_SURAT'=>$request->nomor_surat
             ]);
+         
             if($suratKeluar!=0 || $suratKeluar!= null){
                 $respon = [
                     'Msg' => 'success',
@@ -165,6 +183,7 @@ class SuratKeluarController extends Controller
                 $respon = [
                     'Msg' => 'error',
                     'content' => $suratKeluar,
+                    'data'=> $data
                     ];
                 
             }
@@ -172,7 +191,7 @@ class SuratKeluarController extends Controller
         } catch(\Exception $ex){ 
             $respon = [
                 'Msg' => 'error',
-                'content' => null,
+                'data'=> $data
                 ];
                 return response()->json($respon);
         }
@@ -219,10 +238,10 @@ class SuratKeluarController extends Controller
             ->join('pengguna','pengguna.ID_PENGGUNA','=','surat_keluar.ID_PENGGUNA')
             ->join('pemohon','pemohon.ID_PEMOHON','=','surat_keluar.ID_PEMOHON')
             ->join('nomor_surat','nomor_surat.ID_NOMOR_SURAT','=','surat_keluar.ID_NOMOR_SURAT')
-            ->join('kode_unit_kerja','kode_unit_kerja.ID_KODE_UNIT_KERJA','=','nomor_surat.ID_KODE_UNIT_KERJA')
-            ->join('kode_hal','kode_hal.ID_KODE_HAL','=','nomor_surat.ID_KODE_HAL')
-            ->join('kode_perguruan_tinggi','kode_perguruan_tinggi.ID_KODE_PERGURUAN_TINGGI','=','nomor_surat.ID_KODE_PERGURUAN_TINGGI')
-            ->join('kode_sifat_naskah','kode_sifat_naskah.ID_SIFAT_NASKAH','=','nomor_surat.ID_SIFAT_NASKAH')
+            // ->join('kode_unit_kerja','kode_unit_kerja.ID_KODE_UNIT_KERJA','=','nomor_surat.ID_KODE_UNIT_KERJA')
+            // ->join('kode_hal','kode_hal.ID_KODE_HAL','=','nomor_surat.ID_KODE_HAL')
+            // ->join('kode_perguruan_tinggi','kode_perguruan_tinggi.ID_KODE_PERGURUAN_TINGGI','=','nomor_surat.ID_KODE_PERGURUAN_TINGGI')
+            // ->join('kode_sifat_naskah','kode_sifat_naskah.ID_SIFAT_NASKAH','=','nomor_surat.ID_SIFAT_NASKAH')
             ->join('derajat_surat','derajat_surat.ID_DERAJAT_SURAT','=','pencatatan.ID_DERAJAT_SURAT')
             ->join('jenis_surat','jenis_surat.ID_JENIS_SURAT','=','pencatatan.ID_JENIS_SURAT')
             ->select('pencatatan.PERIHAL','pencatatan.KODE_ARSIP_KOM',
@@ -233,10 +252,10 @@ class SuratKeluarController extends Controller
             'pengguna.NAMA',
             'pemohon.*',
             'nomor_surat.*',
-            'kode_unit_kerja.*',
-            'kode_hal.*',
-            'kode_perguruan_tinggi.*',
-            'kode_sifat_naskah.*',
+            // 'kode_unit_kerja.*',
+            // 'kode_hal.*',
+            // 'kode_perguruan_tinggi.*',
+            // 'kode_sifat_naskah.*',
             'derajat_surat.*',
             'jenis_surat.*')
             ->orderBy('ID_PENCATATAN','desc')

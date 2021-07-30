@@ -42,7 +42,7 @@ class PemohonController extends Controller
         return response()->json($respon);
     }
     public function getAllPemohon(){
-        $pemohon=Pemohon::orderBy('ID_PEMOHON','desc')->get();
+        $pemohon=Pemohon::all();
         if($pemohon == null){
             $respon =[
             'Msg' => 'error',

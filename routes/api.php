@@ -146,7 +146,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::delete('delPemohon/{id}', 'PemohonController@delPemohon');
     Route::post('updatePemohon', 'PemohonController@updatePemohon');
     Route::get('getLastPemohon', 'PemohonController@index');
+    Route::get('getAllPemohon','PemohonController@getAllPemohon');
     
     //KODE HAL
     Route::get('getAllKodeHal','KodeHalController@getAllKodeHal');
+    Route::get('getKodeHal/{id}','KodeHalController@getKodeHal');
+
+    
 });

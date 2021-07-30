@@ -10,6 +10,7 @@ import {
   setSifatSurat,
   setAllPengingat,
   setAllKodeHal,
+  setAllPemohon,
 } from '../../actions'
 import api from '../../service/api'
 import TabelSuratKeluar from '../../components/TabelSuratKeluar/TabelSuratKeluar'
@@ -72,11 +73,22 @@ class SuratKeluar extends Component {
       .then((response) => {
         this.props.setAllKodeHal(response.data)
       })
+    await api()
+      .get('api/getAllPemohon')
+      .then((response) => {
+        this.props.setAllPemohon(response.data.content)
+      })
+    return (
+      <TabelSuratKeluar
+        SuratKeluar={this.props.SuratKeluar.allSuratKeluarInfo}
+        Disposisi={this.props.AllDisposisi.allDisposisiInfo}
+        IdJenisSurat={this.state.jenisSurat}
+        IdUnitKerja={this.state.unitKerja}
+      />
+    )
   }
   componentDidMount() {
     this.getSuratKeluar()
-    console.log('surat keluar1:' + this.state.suratKeluar)
-    console.log('surat keluar2:' + this.props.SuratKeluar.allSuratKeluarInfo)
   }
   render() {
     return (
@@ -98,7 +110,7 @@ class SuratKeluar extends Component {
 
             <div className="">
               {/* <div className="transform -translate-y-12"> */}
-              {/* {this.props.SuratKeluar.allSuratKeluarInfo == null ? (
+              {this.props.SuratKeluar.allSuratKeluarInfo == null ? (
                 <TabelSuratKeluar
                   Disposisi={this.state.Disposisi}
                   SuratKeluar={this.state.suratKeluar}
@@ -112,13 +124,14 @@ class SuratKeluar extends Component {
                   IdJenisSurat={this.state.jenisSurat}
                   IdUnitKerja={this.state.unitKerja}
                 />
-              )} */}
-              <TabelSuratKeluar
+              )}
+
+              {/* <TabelSuratKeluar
                 SuratKeluar={this.props.SuratKeluar.allSuratKeluarInfo}
                 Disposisi={this.props.AllDisposisi.allDisposisiInfo}
                 IdJenisSurat={this.state.jenisSurat}
                 IdUnitKerja={this.state.unitKerja}
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -137,4 +150,5 @@ export default connect(mapStateToProps, {
   setSifatSurat,
   setAllPengingat,
   setAllKodeHal,
+  setAllPemohon,
 })(SuratKeluar)

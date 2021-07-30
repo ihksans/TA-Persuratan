@@ -3,8 +3,8 @@ import api from '../../service/api'
 import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import PdfReader from '../PdfReader'
-import ModalKonfirmDeleteSM from '../ModalKonfirmDeleteSM.js'
-import EditFormSurat from '../EditFormSurat'
+import ModalKonfirmDeleteSK from '../ModalKonfirmDeleteSK.js'
+import EditFormSuratKeluar from '../EditFormSuratKeluar'
 import ModalLoading from '../ModalLoading'
 
 import UpdateReminder from '../FormUpdateReminder'
@@ -35,6 +35,10 @@ class DetailSuratKeluar extends Component {
       tglKirim: this.props.SuratDetail.TGL_KIRIM,
       modalLodaing: false,
       loading: false,
+      sifatNaskah: null,
+      kodeHal: null,
+      kodePt: null,
+      kodeUnit: null,
     }
     this.handleLoading = this.handleLoading.bind(this)
 
@@ -45,6 +49,7 @@ class DetailSuratKeluar extends Component {
     this.handleTindakLanjutModal = this.handleTindakLanjutModal.bind(this)
     this.getFileSuratMasuk = this.getFileSuratMasuk.bind(this)
     this.getPengingatSurat = this.getPengingatSurat.bind(this)
+
     this.reserveTgl = this.reserveTgl.bind(this)
   }
   //handle input changes and update item state
@@ -57,8 +62,23 @@ class DetailSuratKeluar extends Component {
         this.setState({
           tujuanPencatatan: response.data.content,
         })
-        console.log('tujuan pencatatan:' + this.state.tujuanPencatatan)
-        console.log('tujuan pencatatan2:' + response.data.content)
+      })
+    await api()
+      .get('api/getSifatNaskah/' + this.props.SuratDetail.ID_SIFAT_NASKAH)
+      .then((response) => {
+        this.setState({
+          sifatNaskah:
+            response.data.KODE_SIFAT_NASKAH +
+            ' - ' +
+            response.data.SIFAT_NASKAH,
+        })
+      })
+    await api()
+      .get('api/getKodeHal/' + this.props.SuratDetail.ID_KODE_HAL)
+      .then((response) => {
+        this.setState({
+          kodeHal: response.data.KODE_HAL + ' - ' + response.data.HAL,
+        })
       })
   }
   handleLoading() {
@@ -67,7 +87,9 @@ class DetailSuratKeluar extends Component {
     })
   }
   async handleModal() {
-    this.handleTujuanPencatatan()
+    if (this.state.tujuanPencatatan.length == 0) {
+      this.handleTujuanPencatatan()
+    }
     if (this.state.url == null || this.state.urlLampiran == null) {
       this.handleLoading()
       await this.getFileSuratMasuk()
@@ -119,7 +141,6 @@ class DetailSuratKeluar extends Component {
               Math.abs(rn.diff(this.state.pengingat.WAKTU_PENGINGAT, 'days')) +
               1,
           })
-          console.log(this.state.count)
         }
       })
     }
@@ -189,7 +210,7 @@ class DetailSuratKeluar extends Component {
                         </div>
                       </div>
                       <div className="flex flex-row col-span-3 mb-4">
-                        <EditFormSurat
+                        <EditFormSuratKeluar
                           SuratDetail={this.props.SuratDetail}
                           tujuanPencatatan={this.state.tujuanPencatatan}
                         />
@@ -204,9 +225,10 @@ class DetailSuratKeluar extends Component {
                         />
                         <ModalLoading loading={this.state.modalLodaing} />
 
-                        <ModalKonfirmDeleteSM
+                        <ModalKonfirmDeleteSK
                           NomorSurat={this.props.SuratDetail.NOMOR_SURAT}
                           IdSurat={this.props.SuratDetail.ID_PENCATATAN}
+                          IdNomor={this.props.SuratDetail.ID_NOMOR_SURAT}
                         />
                       </div>
                       <div className="font-bold">Dicatat oleh </div>
@@ -216,7 +238,7 @@ class DetailSuratKeluar extends Component {
                       </div>
                       <div className="font-bold">No Agenda </div>
                       <div className=" col-span-2">
-                        {this.props.SuratDetail.NOMOR_AGENDA}
+                        {this.props.SuratDetail.NOMOR_URUT}
                       </div>
                       <div className="font-bold">Pemohon </div>
 
@@ -257,12 +279,7 @@ class DetailSuratKeluar extends Component {
 
                       <div className="font-bold">Nomor Surat</div>
                       <div className=" col-span-2">
-                        {this.props.SuratDetail.KODE_SIFAT_NASKAH}/
-                        {this.props.SuratDetail.NOMOR_URUT}/
-                        {this.props.SuratDetail.KODE_PERGURUAN_TINGGI}.
-                        {this.props.SuratDetail.KODE_UNIT_KERJA}/
-                        {this.props.SuratDetail.KODE_HAL}/
-                        {this.props.SuratDetail.TAHUN}
+                        {this.props.SuratDetail.NOMOR_SURAT}
                       </div>
                       <div className="font-bold">Tanggal Surat</div>
                       <div className=" col-span-2">
@@ -281,10 +298,20 @@ class DetailSuratKeluar extends Component {
                       <div className=" col-span-2">
                         {this.props.SuratDetail.JENIS_SURAT}
                       </div>
-                      <div className="font-bold">Sifat Surat</div>
-                      <div className=" col-span-2">
-                        <>{this.props.SuratDetail.SIFAT_NASKAH}</>
-                      </div>
+                      {this.props.SuratDetail.TIPE_SURAT == 2 ? (
+                        <div className="font-bold">Sifat Surat</div>
+                      ) : null}
+                      {this.props.SuratDetail.TIPE_SURAT == 2 ? (
+                        <div className=" col-span-2">
+                          {this.state.sifatNaskah}
+                        </div>
+                      ) : null}
+                      {this.props.SuratDetail.TIPE_SURAT != 1 ? (
+                        <div className="font-bold">Kode Hal</div>
+                      ) : null}
+                      {this.props.SuratDetail.TIPE_SURAT != 1 ? (
+                        <div className=" col-span-2">{this.state.kodeHal} </div>
+                      ) : null}
                       <div className="font-bold">Derajat Surat</div>
                       <div className="col-span-2">
                         <>{this.props.SuratDetail.DERAJAT_SURAT}</>
