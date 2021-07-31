@@ -70,6 +70,102 @@ class AddFormDisposisiKeluar extends Component{
     this.handleShowForm = this.handleShowForm.bind(this)
     this.onFileChange = this.onFileChange.bind(this)
   }
+  handleLoading() {
+    this.setState({
+        loading: !this.state.loading,
+    })
+  }
+  handleTujuanSelect(e,index){
+    const list=[...this.state.inputListSelect]
+    list[index]['id']=e
+    this.handleInputListSelect(list)
+  }
+
+  handleInputListSelect(list){
+      this.setState({
+          inputListSelect: list,
+      })
+  }
+  handleRemoveClickSelect(index){
+    const list = [...this.state.inputListSelect]
+    list.splice(index, 1)
+    this.handleInputListSelect(list)
+  }
+  handleAddClickSelect(){
+    this.handleInputListSelect([
+      ...this.state.inputListSelect,
+      { idUnit: '', err: false },
+    ])
+  }
+  handleIdPencatatan(e) {
+    let value = e.target.value
+
+    this.setState({
+        idPencatatan: value,
+    })
+  }
+  handleIdDisposisi(e){
+      let value = e.target.value
+      this.setState({
+          idDisposisi: value,
+      })
+  }
+  handleInformasiDisposisi(e) {
+      let value = e.target.value
+      let str = ''
+      str = value.replace(/\s\s+/g, '')
+
+      this.setState({
+          informasiDisposisi: str,
+      })
+  }
+  handleKeteranganDisposisi(e) {
+      let value = e.target.value
+      let str = ''
+      str = value.replace(/\s\s+/g, '')
+
+      this.setState({
+          keteranganDisposisi: str,
+      })
+  }
+  handleTglDisposisi(exDate, value) {
+      this.setState({
+          tglDisposisi: exDate,
+      })
+      this.setState({
+          firstDate: value,
+      })
+  }
+  handleShowForm() {
+      this.setState({
+          showForm: !this.state.showForm,
+      })
+  }
+  handleInputChangeCustom(e, index) {
+      const { name, value } = e.target
+      let str = ''
+      str = name.replace(/\s\s+/g, '')
+      const list = [...this.state.inputListSelect]
+      list[index][str] = value
+      this.handleInputListSelect(list)
+  }
+
+  handleErrTglDisposisi(props) {
+    this.setState({
+        errTglDisposisi: props,
+    })
+  }
+  handleErrInformasiDisposisi(e) {
+      this.setState({
+          errInformasiDisposisi: props,
+      })
+  }
+  handleErrKeteranganDisposisi(e) {
+      this.setState({
+          errKeteranganDisposisi: props,
+      })
+  }
+
   validateSurat(input) {
       const extension = '.pdf'
       let result2 = this.state.fileDisposisi.name.match(extension)
@@ -88,43 +184,12 @@ class AddFormDisposisiKeluar extends Component{
           this.handleErrSurat('Surat file harus pdf')
       }
   }
-  handleTujuanSelect(e,index){
-      const list=[...this.state.inputListSelect]
-      list[index]['id']=e
-      this.handleInputListSelect(list)
-  }
-  
-  handleInputListSelect(list){
-      this.setState({
-          inputListSelect: list,
-      })
-  }
-  handleRemoveClickSelect(index){
-    const list = [...this.state.inputListSelect]
-    list.splice(index, 1)
-    this.handleInputListSelect(list)
-  }
-  handleAddClickSelect(){
-    this.handleInputListSelect([
-      ...this.state.inputListSelect,
-      { idUnit: '', err: false },
-    ])
-  }
-  handleLoading() {
-      this.setState({
-          loading: !this.state.loading,
-      })
-  }
-  onFileChange(event) {
-      // Update the state
-      this.setState({ fileDisposisi: event.target.files[0] })
-  }
   ValidateTglDisposisi(input) {
-      if (input == null || input == '') {
-          this.handleErrTglDisposisi(true)
-      } else {
-          this.handleErrTglDisposisi(false)
-      }
+    if (input == null || input == '') {
+        this.handleErrTglDisposisi(true)
+    } else {
+        this.handleErrTglDisposisi(false)
+    }
   }
   ValidateInformasiDisposisi(input) {
       if (input == null || input == '') {
@@ -140,7 +205,7 @@ class AddFormDisposisiKeluar extends Component{
           this.handleErrKeteranganDisposisi(false)
       }
   }
-  
+
   validateTujuanSurat(input){
       const re = /^[a-zA-Z0-9 ]*$/
       input.map((x, i) => {
@@ -169,78 +234,12 @@ class AddFormDisposisiKeluar extends Component{
       }
       })
   }
-  
-  handleErrTglDisposisi(props) {
-      this.setState({
-          errTglDisposisi: props,
-      })
+
+  onFileChange(event) {
+    // Update the state
+    this.setState({ fileDisposisi: event.target.files[0] })
   }
-  handleErrInformasiDisposisi(e) {
-      this.setState({
-          errInformasiDisposisi: props,
-      })
-  }
-  handleErrKeteranganDisposisi(e) {
-      this.setState({
-          errKeteranganDisposisi: props,
-      })
-  }
-  
-  handleIdPencatatan(e) {
-      let value = e.target.value
-  
-      this.setState({
-          idPencatatan: value,
-      })
-  }
-  
-  handleIdDisposisi(e){
-      let value = e.target.value
-      this.setState({
-          idDisposisi: value,
-      })
-  }
-  
-  handleInformasiDisposisi(e) {
-      let value = e.target.value
-      let str = ''
-      str = value.replace(/\s\s+/g, '')
-  
-      this.setState({
-          informasiDisposisi: str,
-      })
-  }
-  handleKeteranganDisposisi(e) {
-      let value = e.target.value
-      let str = ''
-      str = value.replace(/\s\s+/g, '')
-  
-      this.setState({
-          keteranganDisposisi: str,
-      })
-  }
-  
-  handleTglDisposisi(exDate, value) {
-      this.setState({
-          tglDisposisi: exDate,
-      })
-      this.setState({
-          firstDate: value,
-      })
-  }
-  handleShowForm() {
-      this.setState({
-          showForm: !this.state.showForm,
-      })
-  }
-  handleInputChangeCustom(e, index) {
-      const { name, value } = e.target
-      let str = ''
-      str = name.replace(/\s\s+/g, '')
-      const list = [...this.state.inputListSelect]
-      list[index][str] = value
-      this.handleInputListSelect(list)
-  }
+
   async handleModal(){
       await this.setState({
           showModal: !this.state.showModal,

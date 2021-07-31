@@ -39,7 +39,6 @@ class AddFormDisposisi extends Component {
       jenisDisposisi:"1",
     }
     this.handleLoading = this.handleLoading.bind(this)
-
     this.handleModal = this.handleModal.bind(this)
     this.handleTglDisposisi = this.handleTglDisposisi.bind(this)
     this.handleInformasiDisposisi = this.handleInformasiDisposisi.bind(this)
@@ -48,11 +47,10 @@ class AddFormDisposisi extends Component {
     this.handleIdPencatatan = this.handleIdPencatatan.bind(this)
     this.handleIdDisposisi = this.handleIdDisposisi.bind(this)
     this.handleInputChangeCustom = this.handleInputChangeCustom.bind(this)
-    // this.handleTujuanPencatatan = this.handleTujuanPencatatan.bind(this)
-    // this.handleTujuanDisposisi = this.handleTujuanDisposisi.bind(this)
-
-    this.onSubmit = this.onSubmit.bind(this)
-
+    this.handleShowForm = this.handleShowForm.bind(this)
+    this.handleAddClickSelect = this.handleAddClickSelect.bind(this)
+    this.handleRemoveClickSelect = this.handleRemoveClickSelect.bind(this)
+    
     this.handleErrTglDisposisi = this.handleErrTglDisposisi.bind(this)
     this.handleErrInformasiDisposisi = this.handleErrInformasiDisposisi.bind(
       this,
@@ -65,40 +63,25 @@ class AddFormDisposisi extends Component {
     this.ValidateKeteranganDisposisi = this.ValidateKeteranganDisposisi.bind(
       this,
     )
-    this.validateSurat = this.validateSurat.bind(this)
-    this.validateTujuanSurat = this.validateTujuanSurat.bind(this)
 
+    this.ValidateSurat = this.ValidateSurat.bind(this)
+    this.ValidateTujuanSurat = this.ValidateTujuanSurat.bind(this)
     this.ValidateTglDisposisi = this.ValidateTglDisposisi.bind(this)
-    this.handleShowForm = this.handleShowForm.bind(this)
-    this.handleAddClickSelect = this.handleAddClickSelect.bind(this)
-    this.handleRemoveClickSelect = this.handleRemoveClickSelect.bind(this)
+    
     this.onFileChange = this.onFileChange.bind(this)
-  }
-  validateSurat(input) {
-    const extension = '.pdf'
-    let result2 = this.state.fileDisposisi.name.match(extension)
-    if (result2) {
-      if (this.state.fileDisposisi.size > '10485760') {
-        //this.handleErrSurat('Ukuran file surat melebihi 10 Mb')
-      } else {
-        // this.handleErrSurat('')
-        let namasurat = this.props.SuratDetail.NOMOR_SURAT.split('/').join('_')
-        console.log('nama surat:' + namasurat)
-        this.setState({
-          namaFileDisposisi: namasurat,
-        })
-      }
-    } else {
-      this.handleErrSurat('Surat file harus pdf')
-    }
+    this.onSubmit = this.onSubmit.bind(this)
   }
 
+  handleLoading() {
+    this.setState({
+      loading: !this.state.loading,
+    })
+  }
   handleTujuanSelect(e,index){
     const list=[...this.state.inputListSelect]
     list[index]['id']=e
     this.handleInputListSelect(list)
   }
-
   handleRemoveClickSelect(index){
     const list = [...this.state.inputListSelect]
     list.splice(index, 1)
@@ -115,83 +98,6 @@ class AddFormDisposisi extends Component {
       inputListSelect: list,
     })
   }
-
-  handleLoading() {
-    this.setState({
-      loading: !this.state.loading,
-    })
-  }
-  onFileChange(event) {
-    // Update the state
-    this.setState({ fileDisposisi: event.target.files[0] })
-  }
-  ValidateTglDisposisi(input) {
-    if (input == null || input == '') {
-      this.handleErrTglDisposisi(true)
-    } else {
-      this.handleErrTglDisposisi(false)
-    }
-  }
-  ValidateInformasiDisposisi(input) {
-    if (input == null || input == '') {
-      this.handleErrInformasiDisposisi(true)
-    } else {
-      this.handleErrInformasiDisposisi(false)
-    }
-  }
-  ValidateKeteranganDisposisi(input) {
-    if (input == null || input == '') {
-      this.handleErrKeteranganDisposisi(true)
-    } else {
-      this.handleErrKeteranganDisposisi(false)
-    }
-  }
-
-  validateTujuanSurat(input){
-    const re = /^[a-zA-Z0-9 ]*$/
-    input.map((x, i) => {
-      if (x.idUnit != undefined) {
-        if (x.idUnit == null || x.idUnit == '' || x.idUnit == 0) {
-          this.handleErrTujuanSelect(true, i)
-        } else {
-          this.handleErrTujuanSelect(false, i)
-        }
-      } else {
-        if (
-          x.namaUnit == null ||
-          x.namaUnit == '' ||
-          x.kodeUnit == null ||
-          x.kodeUnit == ''
-        ) {
-          this.handleErrTujuanSelect(true, i)
-        } else {
-          let result = x.namaUnit.match(re)
-          if (result) {
-            this.handleErrTujuanSelect(false, i)
-          } else {
-            this.handleErrTujuanSelect(true, i)
-          }
-        }
-      }
-    })
-  }
-
-  handleErrTglDisposisi(props) {
-    this.setState({
-      errTglDisposisi: props,
-    })
-  }
-  handleErrInformasiDisposisi(e) {
-    this.setState({
-      errInformasiDisposisi: props,
-    })
-  }
-  handleErrKeteranganDisposisi(e) {
-    this.setState({
-      errKeteranganDisposisi: props,
-    })
-  }
-
   handleIdPencatatan(e) {
     let value = e.target.value
 
@@ -248,6 +154,101 @@ class AddFormDisposisi extends Component {
     this.handleInputListSelect(list)
   }
 
+
+  handleErrTglDisposisi(props) {
+    this.setState({
+      errTglDisposisi: props,
+    })
+  }
+  handleErrInformasiDisposisi(e) {
+    this.setState({
+      errInformasiDisposisi: props,
+    })
+  }
+  handleErrKeteranganDisposisi(e) {
+    this.setState({
+      errKeteranganDisposisi: props,
+    })
+  }
+
+
+  ValidateTglDisposisi(input) {
+    if (input == null || input == '') {
+      this.handleErrTglDisposisi(true)
+    } else {
+      this.handleErrTglDisposisi(false)
+    }
+  }
+  ValidateInformasiDisposisi(input) {
+    if (input == null || input == '') {
+      this.handleErrInformasiDisposisi(true)
+    } else {
+      this.handleErrInformasiDisposisi(false)
+    }
+  }
+  ValidateKeteranganDisposisi(input) {
+    if (input == null || input == '') {
+      this.handleErrKeteranganDisposisi(true)
+    } else {
+      this.handleErrKeteranganDisposisi(false)
+    }
+  }
+
+  ValidateTujuanSurat(input){
+    const re = /^[a-zA-Z0-9 ]*$/
+    input.map((x, i) => {
+      if (x.idUnit != undefined) {
+        if (x.idUnit == null || x.idUnit == '' || x.idUnit == 0) {
+          this.handleErrTujuanSelect(true, i)
+        } else {
+          this.handleErrTujuanSelect(false, i)
+        }
+      } else {
+        if (
+          x.namaUnit == null ||
+          x.namaUnit == '' ||
+          x.kodeUnit == null ||
+          x.kodeUnit == ''
+        ) {
+          this.handleErrTujuanSelect(true, i)
+        } else {
+          let result = x.namaUnit.match(re)
+          if (result) {
+            this.handleErrTujuanSelect(false, i)
+          } else {
+            this.handleErrTujuanSelect(true, i)
+          }
+        }
+      }
+    })
+  }
+
+  ValidateSurat(input) {
+    const extension = '.pdf'
+    let result2 = this.state.fileDisposisi.name.match(extension)
+    if (result2) {
+      if (this.state.fileDisposisi.size > '10485760') {
+        //this.handleErrSurat('Ukuran file surat melebihi 10 Mb')
+      } else {
+        // this.handleErrSurat('')
+        let namasurat = this.props.SuratDetail.NOMOR_SURAT.split('/').join('_')
+        console.log('nama surat:' + namasurat)
+        this.setState({
+          namaFileDisposisi: namasurat,
+        })
+      }
+    } else {
+      this.handleErrSurat('Surat file harus pdf')
+    }
+  }
+
+  
+  onFileChange(event) {
+    // Update the state
+    this.setState({ fileDisposisi: event.target.files[0] })
+  }
+  
+
   async handleModal() {
     // await this.handleTujuanDisposisi()
     await this.setState({
@@ -274,8 +275,8 @@ class AddFormDisposisi extends Component {
   async onSubmit(e) {
     e.preventDefault()
     this.handleLoading()
-    await this.validateSurat()
-    // await this.validateTujuanSurat(this.state.inputListSelect)
+    await this.ValidateSurat()
+    // await this.ValidateTujuanSurat(this.state.inputListSelect)
     let formData = new FormData()
 
     formData.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)
