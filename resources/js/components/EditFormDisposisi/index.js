@@ -83,7 +83,7 @@ class EditFormDisposisi extends Component {
         })
       }
     }else{
-      this.handleErrSurat('Surat file harus pdf')
+      this.handleErrSurat('file Disposisi file harus pdf')
     }
   }
 
@@ -250,7 +250,7 @@ class EditFormDisposisi extends Component {
         formData.append('proses_selanjutnya', this.state.keteranganDisposisi)
         formData.append('tanggal_disposisi', this.state.tanggalDisposisi)
         if(this.state.namaFileDisposisi != null){
-          formData.append('nama_file_dipsosisi',this.state.namaFileDisposisi)
+          formData.append('nama_file_disposisi',this.state.namaFileDisposisi+'_disposisi')
         }
         await api()
         .post('api/editDisposisi',formData)
@@ -318,30 +318,6 @@ class EditFormDisposisi extends Component {
               {/* content */}
               <div className="border-2 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/* header */}
-                {/* <div className="flex flex-row grid grid-cols-2 mr-8">
-                  <div className="flex flex-row grid grid-cols-3 bg-white pb-10 pt-4 pl-4 pr-4">
-                    <div className="flex flex-row items-start p-2  border-b ml-6 border-solid border-blueGray-200 rounded-t col-span-3">
-                      <div>
-                        <img
-                          className="w-8"
-                          src="assets/img/icon/Surat.png"
-                        />
-                      </div>
-                      <div className="flex">
-                        <h3 className="text-xl font-semibold">
-                          Edit Disposisi
-                        </h3>
-                      </div>
-                      <div className="font-bold col-span-3">
-                        Detail Surat
-                      </div>
-                      <div className="font-bold">No Agenda </div>
-                    </div>
-                    <div>
-
-                    </div>
-                  </div>
-                </div> */}
                 <div className="flex flex-row items-start p-2 border-b ml-6 border-solid border-blueGray-200 rounded-t col-span-3">
                   <div>
                     <img
@@ -362,11 +338,15 @@ class EditFormDisposisi extends Component {
                     </div>
                     <div className="font-bold">No Agenda </div>
                     <div className=" col-span-2">
-                    {this.props.SuratDetail.NOMOR_AGENDA}
+                    {this.props.SuratDetail.NOMOR_URUT}
                     
                     </div>
-                    <div className="font-bold">Dari</div>
-                    <div className="font-bold">Nama</div>
+                    <div className="font-bold">Pemohon</div>
+                    <div className=" col-span-2">
+                    {this.props.SuratDetail.NAMA_PEMOHON}
+                    
+                    </div>
+                    {/* <div className="font-bold">Nama</div>
                     <div className="">: 
                       {this.props.SuratDetail.NAMA_PENGIRIM}{' '}
                     </div>
@@ -384,7 +364,7 @@ class EditFormDisposisi extends Component {
                     <div className="font-bold">Penandatangan</div>
                     <div className="">: 
                       {this.props.SuratDetail.PENANDATANGAN}
-                    </div>
+                    </div> */}
                     <div className="font-bold">Tujuan</div>
                     <div className=" col-span-2">
                     {this.props.tujuanDisposisi.map((item, i) => {
@@ -395,7 +375,7 @@ class EditFormDisposisi extends Component {
                       >
                         <div
                           className={
-                            i == 0 ? '' : 'flex flex-row grid grid-cols-3'
+                            i == 0 ? '' : 'flex flex-row grid grid-cols-2'
                           }
                         >
                           <div></div>
@@ -416,18 +396,18 @@ class EditFormDisposisi extends Component {
                     <div className=" col-span-2">
                       {this.props.tglSurat}
                     </div>
-                    <div className="font-bold">Tanggal Terima </div>
+                    <div className="font-bold">Tanggal Kirim </div>
                     <div className=" col-span-2">
-                      {this.props.tglDiterima}
+                      {this.props.SuratDetail.TGL_KIRIM}
                     </div>
                     <div className="font-bold">Perihal / Ringkasan Surat </div>
                     <div className=" col-span-2">
                       {this.props.SuratDetail.PERIHAL}
                     </div>
-                    <div className="font-bold">Kode Hal </div>
+                    {/* <div className="font-bold">Kode Hal </div>
                     <div className=" col-span-2">
                     {this.props.SuratDetail.JENIS_SURAT}
-                    </div>
+                    </div> */}
                     <div className="font-bold">Jenis Surat </div>
                     <div className=" col-span-2">
                       {this.props.SuratDetail.JENIS_SURAT}
@@ -533,6 +513,7 @@ class EditFormDisposisi extends Component {
                             className="text-sm mb-2 font-bold flex flex-row "
                           >
                             <div>Tanggal Disposisi </div>
+                            {console.log('tanggal disposisi '+this.state.tanggalDisposisi)}
                             <div className="text-danger ml-2"> </div>
                           </div>
                           <div className="justify-end ">

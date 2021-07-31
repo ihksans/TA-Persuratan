@@ -457,7 +457,27 @@ class AddFormDisposisi extends Component {
                               </div>
                               <div className="font-bold">Tujuan</div>
                               <div className=" col-span-2">
-                                {this.props.SuratDetail.TUJUAN_SURAT}
+                                {/* {this.props.SuratDetail.TUJUAN_SURAT} */}
+                                {this.props.tujuanPencatatan.map((item, i) => {
+                                  return (
+                                    <div
+                                      key={i}
+                                      className={i == 0 ? ' col-span-2' : ' col-span-3'}
+                                    >
+                                      <div
+                                        className={
+                                          i == 0 ? '' : 'flex flex-row grid grid-cols-3'
+                                        }
+                                      >
+                                        <div></div>
+                                        <div className={i == 0 ? '' : ' col-span-2'}>
+                                          - {item.KODE_UNIT_KERJA} :{' '}
+                                          {item.NAMA_UNIT_KERJA}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )
+                                })}
                               </div>
                               <div className="font-bold">Nomor Surat</div>
                               <div className=" col-span-2">
@@ -1115,7 +1135,7 @@ class AddFormDisposisi extends Component {
                                     >
                                       <div
                                         className={
-                                          i == 0 ? '' : 'flex flex-row grid grid-cols-3'
+                                          i == 0 ? '' : 'flex flex-row grid grid-cols-2'
                                         }
                                       >
                                         <div></div>

@@ -1052,12 +1052,12 @@ class AddFormDisposisiKeluar extends Component{
                                   {this.props.disposisi.NOMOR_AGENDA}
                                 </div>
 
-                                <div className="font-bold">Dari</div>
-                                <div className="font-bold">Nama</div>
-                                <div className="">
-                                  : {this.props.SuratDetail.NAMA_PEMOHON}
+                                {/* <div className="font-bold">Dari</div> */}
+                                <div className="font-bold">Pemohon</div>
+                                <div className="col-span-2">
+                                  {this.props.SuratDetail.NAMA_PEMOHON}
                                 </div>
-                                <div></div>
+                                {/* <div></div>
                                 <div className="font-bold">Unit</div>
                                 <div className="">
                                   <ul>
@@ -1083,12 +1083,12 @@ class AddFormDisposisiKeluar extends Component{
                                     )}
                                   </ul>
                                 </div>
-                                <div></div>
+                                <div></div> */}
                                 <div className="font-bold">
                                   Penandatangan
                                 </div>
-                                <div className="">
-                                  : {this.props.SuratDetail.PENANDATANGAN}
+                                <div className="col-span-2">
+                                  {this.props.SuratDetail.PENANDATANGAN}
                                 </div>
 
                                 <div className="font-bold">Tujuan</div>
@@ -1101,7 +1101,7 @@ class AddFormDisposisiKeluar extends Component{
                                     >
                                       <div
                                         className={
-                                          i == 0 ? '' : 'flex flex-row grid grid-cols-3'
+                                          i == 0 ? '' : 'flex flex-row grid grid-cols-2'
                                         }
                                       >
                                         <div></div>
