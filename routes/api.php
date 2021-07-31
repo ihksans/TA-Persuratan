@@ -49,11 +49,14 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('getDisposisiByID/{id}','DisposisiController@getDisposisiByID');
 
     //nadia
+        //pengingat
     Route::post('createPengingat', 'PengingatController@createPengingat');
     Route::get('allPengingatInfo', 'PengingatController@getAllPengingat');
     Route::get('getPengingat/{id}', 'PengingatController@getPengingat');
     Route::post('updatePengingat', 'PengingatController@updatePengingat');
     Route::delete('deletePengingat/{id}', 'PengingatController@deletePengingat');
+        //exportsurat
+    Route::get('exportDataSuratMasuk', 'SuratMasukController@exportDataSuratMasuk');
 
     //ihksan
     Route::post('setPencatatan', 'PencatatanController@setPencatatan');
