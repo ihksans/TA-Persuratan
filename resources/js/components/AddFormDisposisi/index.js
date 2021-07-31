@@ -70,6 +70,8 @@ class AddFormDisposisi extends Component {
 
     this.ValidateTglDisposisi = this.ValidateTglDisposisi.bind(this)
     this.handleShowForm = this.handleShowForm.bind(this)
+    this.handleAddClickSelect = this.handleAddClickSelect.bind(this)
+    this.handleRemoveClickSelect = this.handleRemoveClickSelect.bind(this)
     this.onFileChange = this.onFileChange.bind(this)
   }
   validateSurat(input) {
@@ -91,35 +93,23 @@ class AddFormDisposisi extends Component {
     }
   }
 
-  // async handleTujuanPencatatan(){
-  //   await api()
-  //   .get('api/getDetailTujuanPencatatan/'+ this.props.SuratDetail.ID_PENCATATAN)
-  //   .then((response)=>{
-  //     this.setState({
-  //       tujuanPencatatan: response.data.content,
-  //     })
-  //     console.log('tujuan pencatatan:' + this.state.tujuanPencatatan)
-  //     console.log('tujuan pencatatan2:' + response.data.content)
-  //   })
-  // }
-
-  // async handleTujuanDisposisi(){
-  //   await api()
-  //   .get('api/getTujuanDisposisi/'+this.props.idDisposisi)
-  //   .then((response)=>{
-  //     this.setState({
-  //       tujuanDisposisi: response.data.content,
-  //     })
-  //     console.log('tujuan disposisi:' + this.state.tujuanDisposisi)
-  //     console.log('tujuan disposisi 2:' + response.data.content)
-  //   })
-  // }
   handleTujuanSelect(e,index){
     const list=[...this.state.inputListSelect]
     list[index]['id']=e
     this.handleInputListSelect(list)
   }
 
+  handleRemoveClickSelect(index){
+    const list = [...this.state.inputListSelect]
+    list.splice(index, 1)
+    this.handleInputListSelect(list)
+  }
+  handleAddClickSelect(){
+    this.handleInputListSelect([
+      ...this.state.inputListSelect,
+      { idUnit: '', err: false },
+    ])
+  }
   handleInputListSelect(list){
     this.setState({
       inputListSelect: list,
@@ -791,8 +781,66 @@ class AddFormDisposisi extends Component {
                                                     </div>
                                                   ) : null}
                                                 </>
-                                              )
-                                              }
+                                              )}
+                                              <div className="btn-box">
+                                                {this.state.inputListSelect
+                                                  .length !== 1 && (
+                                                  <button
+                                                    className="mt-1 mr-2 ml-2 w-auto p-1 border-2 rounded-md  bg-primary justify-center items-center cursor-pointer hover:orenHover"
+                                                    onClick={() =>
+                                                      this.handleRemoveClickSelect(
+                                                        i,
+                                                      )
+                                                    }
+                                                  >
+                                                    <p
+                                                      className={
+                                                        'font-bold text-putih text-sm'
+                                                      }
+                                                    >
+                                                      Hapus
+                                                    </p>
+                                                  </button>
+                                                )}
+                                                {this.state.inputListSelect
+                                                  .length -
+                                                  1 ===
+                                                  i && (
+                                                  <button
+                                                    onClick={
+                                                      this.handleAddClickSelect
+                                                    }
+                                                    className=" mr-2 ml-2 mt-1 w-auto p-1 border-2 rounded-md  bg-primary justify-center items-center cursor-pointer hover:orenHover"
+                                                  >
+                                                    <p
+                                                      className={
+                                                        'font-bold text-putih text-sm'
+                                                      }
+                                                    >
+                                                      Tambah
+                                                    </p>
+                                                  </button>
+                                                )}
+                                                {/* {this.state.inputListSelect
+                                                  .length -
+                                                  1 ===
+                                                  i && (
+                                                  <button
+                                                    onClick={
+                                                      this.handleAddClickCustom
+                                                    }
+                                                    className="mb-3 mr-2 ml-2 mt-1 w-auto p-1 border-2 rounded-md  bg-primary justify-center items-center cursor-pointer hover:orenHover"
+                                                  >
+                                                    <p
+                                                      className={
+                                                        'font-bold text-putih text-sm '
+                                                      }
+                                                    >
+                                                      Tambah custom
+                                                    </p>
+                                                  </button>
+                                                )} */}
+                                              </div>
                                           </div>
                                           )}
                                         )}
@@ -980,7 +1028,7 @@ class AddFormDisposisi extends Component {
                                     >
                                       <div
                                         className={
-                                          i == 0 ? '' : 'flex flex-row grid grid-cols-3'
+                                          i == 0 ? '' : 'flex flex-row grid grid-cols-2'
                                         }
                                       >
                                         <div></div>

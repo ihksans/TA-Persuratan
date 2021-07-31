@@ -10,18 +10,20 @@ class ClassReducers extends Component {
     constructor(props) {
     super()
     this.state = {
-        modal: false,
-        disposisi: null,
-        detailDisposisi: null,
-        loading: false,
-        url: null,
+      tujuanDisposisi:[],
+      modal: false,
+      idDisposisi: false,
+      disposisi: null,
+      detailDisposisi: null,
+      loading: false,
+      url: null,
     }
     this.handleModal = this.handleModal.bind(this)
-    // this.getDisposisi = this.getDisposisi.bind(this)
+    this.getDisposisi = this.getDisposisi.bind(this)
     this.handleLoading = this.handleLoading.bind(this)
 }
 async handleModal() {
-    // await this.getDisposisi()
+    await this.getDisposisi()
     await this.setState({
     modal: !this.state.modal,
     })

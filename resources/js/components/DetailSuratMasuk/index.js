@@ -438,10 +438,10 @@ class DetailSuratMasuk extends Component {
                           )}
                         </>
                       )}
-                      <div style={{ marginTop: 20 }}>
+                      {/* <div style={{ marginTop: 20 }}>
                           {JSON.stringify(this.props.Disposisi)}
                         
-                      </div>
+                      </div> */}
                     </div>
                     <div className="flex flex-row grid p-4 rounded-r-lg">
                       <div className="flex flex-row justify-end">
