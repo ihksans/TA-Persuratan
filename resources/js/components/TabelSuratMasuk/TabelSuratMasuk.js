@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import {} from '../../actions'
 import HeaderTabel from './HeaderTabel'
 import BoxData from './BoxDataTabel'
-
+import api from '../../service/api'
 // const TabelSuratMasuk = ({ SuratMasuk, IdJenisSurat, IdUnitKerja }) => {
 class TabelSuratMasuk extends Component {
   constructor(props) {
@@ -14,76 +14,74 @@ class TabelSuratMasuk extends Component {
       search: '',
     }
     this.getSuratMasuk = this.getSuratMasuk.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
   }
-  getSuratMasuk(e){
+  async getSuratMasuk(e) {
+    let key = e.target.value
+    let str = ''
+    str = key.replace(/\s\s+/g, '')
     this.setState({
-      search: e.target.value.substr(0,20)
+      search: str,
+    })
+    if (str != '' && str != null && str != ' ') {
+      await api()
+        .get('/api/searchSuratMasuk/' + str)
+        .then((response) => {
+          this.setState({
+            SuratMasuk: response.data.content,
+          })
+        })
+    }
+  }
+  handleSearch(e) {
+    this.setState({
+      search: e.target.value,
     })
   }
-  render(){
-    let filteredSM = this.state.SuratMasuk.filter(
-      (surat) => {
-        if (surat.TGL_DITERIMA.toLowerCase().includes(this.state.search.toLowerCase())){
-          return surat.TGL_DITERIMA.toLowerCase().includes(this.state.search.toLowerCase())
-        }
-        if (surat.TGL_SURAT.toLowerCase().includes(this.state.search.toLowerCase())){
-          return surat.TGL_SURAT.toLowerCase().includes(this.state.search.toLowerCase())
-        }
-        if (surat.NOMOR_SURAT.toLowerCase().includes(this.state.search.toLowerCase())){
-          return surat.NOMOR_SURAT.toLowerCase().includes(this.state.search.toLowerCase())
-        }
-        if (surat.PERIHAL.toLowerCase().includes(this.state.search.toLowerCase())){
-          return surat.PERIHAL.toLowerCase().includes(this.state.search.toLowerCase())
-        }
-        if (surat.TUJUAN_SURAT.toLowerCase().includes(this.state.search.toLowerCase())){
-          return surat.TUJUAN_SURAT.toLowerCase().includes(this.state.search.toLowerCase())
-        }
-        if (surat.NAMA_PENGIRIM.toLowerCase().includes(this.state.search.toLowerCase())){
-          return surat.NAMA_PENGIRIM.toLowerCase().includes(this.state.search.toLowerCase())
-        }
-      }
-    )
+  render() {
     return (
       <>
-      {/* <div className="flex right-10 justify-end mt-2">
-          <div className="flex w-1/5 border border-brokenblack shadow rounded-sm p-2 hover:shadow-md focus:outline-none">
-            <input
-            className="w-full focus:outline-none"
-            type="text"
-            placeholder="Cari Surat..."
-            onChange={this.getSuratMasuk}/>
-            <svg className="justify-end h-7 w-7"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-            </svg>
-          </div>
-      </div> */}
-      <div className="flex absolute right-10 top-32 justify-end mt-5 w-1/2">
+        <div className="flex absolute right-10 top-32 justify-end mt-5 w-1/2">
           <div className="flex w-1/2 border border-brokenblack shadow rounded-sm p-2 hover:shadow-md focus:outline-none">
             <input
-            className="w-full focus:outline-none"
-            type="text"
-            placeholder="Cari Surat..."
-            onChange={this.getSuratMasuk}/>
-            <svg className="justify-end h-7 w-7"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-            </svg>
-          </div>
-      </div>
-        <ul>
-          <HeaderTabel/>
-          {filteredSM.map((item, index) => {
-            return (
-              <li key={index}>
-                <BoxData
-                  No={index + 1}
-                  IdJenisSurat={this.props.IdJenisSurat}
-                  Surat={item}
-                  IdUnitKerja={this.props.IdUnitKerja}
-                  Disposisi={this.props.Disposisi}
+              className="w-full focus:outline-none"
+              type="text"
+              placeholder="Cari Surat..."
+              onChange={this.getSuratMasuk}
+            />
+            <button onClick={this.getSuratMasuk}>
+              <svg
+                className="justify-end h-7 w-7"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
-              </li>
-            )
-          })}
+              </svg>
+            </button>
+          </div>
+        </div>
+        <ul>
+          <HeaderTabel />
+          {this.state.SuratMasuk == null
+            ? null
+            : this.state.SuratMasuk.map((item, index) => {
+                return (
+                  <li key={index}>
+                    <BoxData
+                      No={index + 1}
+                      IdJenisSurat={this.props.IdJenisSurat}
+                      Surat={item}
+                      IdUnitKerja={this.props.IdUnitKerja}
+                    />
+                  </li>
+                )
+              })}
         </ul>
       </>
     )

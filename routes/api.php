@@ -159,5 +159,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('getAllKodeHal','KodeHalController@getAllKodeHal');
     Route::get('getKodeHal/{id}','KodeHalController@getKodeHal');
 
-    
+    //searching
+    Route::get('searchSuratMasuk/{id}','SuratMasukController@searchSuratMasuk');
+    Route::get('searchSuratKeluar/{id}','SuratKeluarController@searchSuratKeluar');
+
 });
