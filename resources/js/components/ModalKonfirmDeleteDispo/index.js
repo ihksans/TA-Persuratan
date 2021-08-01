@@ -1,37 +1,61 @@
+// import { then } from 'laravel-mix'
 import React from 'react'
 import api from '../../service/api'
 import ModalLoading from '../ModalLoading'
-export default function ModalKonfirmDeleteDispo({ IdDispo, handleDisposisi }) {
+export default function ModalKonfirmDeleteDispo({ 
+  IdDispo,
+  NamaDisposisi,
+  NamaLampiran,
+}) {
   const [showModal, setShowModal] = React.useState(false)
   const [showLoading, setLoading] = React.useState(false)
   const handleLoading = () => {
     setLoading(!showLoading)
   }
-  const deleteDispo = (id) => {
+  const deleteDispo = async (id) => {
+
     handleLoading()
     let formData = new FormData()
     formData.append('id', id)
-    api()
+    await api()
       .delete('api/deleteDisposisi/' + id)
       .then((response) => {
-        setShowModal(false)
-        handleDisposisi()
+        console.log('respon: '+ response)
+        if (NamaLampiran == null && NamaLampiran == null) {
+          handleLoading()
+          setShowModal(false)
+          window.location.reload('/#/SuratMasuk')
+        }
       })
       .catch((error) => {
         console.log(error)
-        setShowModal(false)
+        // setShowModal(false)
       })
+    if(NamaDisposisi != null){
+      await api()
+        .delete('api/delSurat/'+ NamaDisposisi)
+        then((response)=>{
+          if(NamaLampiran == null){
+            handleLoading()
+            setShowModal(false)
+            window.location.reload('/#/SuratMasuk')
+          }
+        })
+        .catch((error) => {})
+    }
+    if (NamaLampiran != null) {
+      await api()
+        .delete('api/delSurat/' + NamaLampiran)
+        .then((response) => {
+          handleLoading()
+          setShowModal(false)
+          window.location.reload('/#/SuratMasuk')
+        })
+        .catch((error) => {})
+    }
   }
   return (
     <>
-      {/* <button
-        className="ml-2 bg-brokenblack flex flex-row h-auto rounded p-1 w-auto h-auto items-center shadow-sm"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-        <img className=" h-auto" src="assets/img/icon/Trash.png" />
-        <div className="font-bold text-putih text-sm ml-1 mr-2">Hapus</div>
-      </button> */}
       <button
         className="flex flex-row bg-danger font-bold items-center ml-2 mt-1  rounded p-1 h-auto shadow-sm w-auto "
         type="button"
@@ -43,6 +67,7 @@ export default function ModalKonfirmDeleteDispo({ IdDispo, handleDisposisi }) {
             src="assets/img/icon/Trash.png"
           />
         </div>
+        {/* {console.log('id disposisi: '+ IdDispo)} */}
         <div className="font-bold text-putih ml-1 mr-2">Hapus Disposisi </div>
       </button>
       {showModal ? (
@@ -107,9 +132,7 @@ export default function ModalKonfirmDeleteDispo({ IdDispo, handleDisposisi }) {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
-      {showLoading ? (
-        <ModalLoading loading={showLoading} title={'Menghapus data'} />
-      ) : null}
+      <ModalLoading loading={showLoading} title={'Menghapus data'} />
     </>
   )
 }

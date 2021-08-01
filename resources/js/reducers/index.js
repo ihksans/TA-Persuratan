@@ -13,6 +13,10 @@ import RSifatSurat from './sifat_surat_reducers'
 import Pengingat from './pengingat_reducers'
 
 import AllDisposisi from './all_disposisi_reducers'
+import AllPencatatan from './all_pencatatan_reducers'
+import SuratKeluar from './surat_keluar_reducers'
+import RKodeHal from './kode_hal_reducers'
+import RPemohon from './pemohon_reducers'
 // import AllPencatatan from './all_pencatatan_reducers'
 
 const rootReducer = combineReducers({
@@ -29,8 +33,12 @@ const rootReducer = combineReducers({
 
   AllDisposisi,
   Pengingat,
-  // AllPencatatan,
+  AllPencatatan,
 
+  SuratKeluar,
+  RKodeHal,
+  RPemohon,
+  // AllPencatatan,
 })
 
 export default rootReducer

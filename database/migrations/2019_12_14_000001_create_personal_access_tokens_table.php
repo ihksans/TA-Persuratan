@@ -17,6 +17,7 @@ class CreatePersonalAccessTokensTable extends Migration
             $table->increments('id');
             $table->string('tokenable_type');
             $table->unsignedInteger('tokenable_id')->index('personal_access_tokens_tokenable_id_foreign');
+            $table->foreign('tokenable_id')->references('id')->on('users');
             $table->string('name');
             $table->string('token', 64)->unique();
             $table->text('abilities')->nullable();

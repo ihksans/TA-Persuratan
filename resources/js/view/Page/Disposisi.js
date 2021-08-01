@@ -11,7 +11,7 @@ import {
   setUnitKerja,
   setDerajatSurat,
   setSifatSurat,
-  // setAllPencatatan,
+  setAllPencatatan,
 } from '../../actions/index'
 // import Index from '../../components/Disposisi/index'
 import api from '../../service/api'
@@ -31,14 +31,18 @@ class Disposisi extends Component {
   }
 
   async getDisposisi() {
+    // async getDisposisi(id) {
     await api()
       .get('api/allInfoDisposisi')
+      // .get('api/allInfoDisposisi' +1)
       .then((response) => {
         this.setState({
           Disposisi: response.data.content,
         })
         this.props.setAllDisposisi(response.data)
       })
+    // await api()
+    //   .get('api/')
     await api()
       .get('api/getAllSuratMasuk')
       .then((response) => {
@@ -79,7 +83,7 @@ class Disposisi extends Component {
         this.state({
           pencatatan: response.data,
         })
-        // this.props.setAllPencatatan(response.data)
+        this.props.setAllPencatatan(response.data.content)
       })
   }
 
@@ -92,8 +96,8 @@ class Disposisi extends Component {
       //js
       <>
         <div className="w-full h-90% bg-gray-200 p-4	">
-          <div className="bg-white shadow-md rounded p-6">
-            <div className="flex flex-row">
+          <div className="bg-white shadow-md rounded p-6 nav nav-tabs">
+            <div className="flex flex-row nav-item">
               <div>
                 <img className="w-8" src="assets/img/icon/Surat.png" />
               </div>
@@ -110,6 +114,7 @@ class Disposisi extends Component {
                   Disposisi={this.state.Disposisi}
                   IdJenisSurat={this.state.jenisSurat}
                   IdUnitKerja={this.state.unitKerja}
+                  Pencatatan={this.state.pencatatan}
                 />
               ) : (
                 <TabelDisposisi
@@ -117,6 +122,8 @@ class Disposisi extends Component {
                   SuratMasuk={this.props.SuratMasuk.allSuratMasukInfo}
                   IdJenisSurat={this.state.jenisSurat}
                   IdUnitKerja={this.state.unitKerja}
+                  Pencatatan={this.state.pencatatan}
+                  // Pencatatan={this.state.Pencatatan.allPencatatanInfo}
                 />
               )}
             </div>
@@ -136,5 +143,5 @@ export default connect(mapStateToProps, {
   setUnitKerja,
   setDerajatSurat,
   setSifatSurat,
-  // setAllPencatatan,
+  setAllPencatatan,
 })(Disposisi)

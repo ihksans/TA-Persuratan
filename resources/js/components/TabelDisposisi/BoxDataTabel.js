@@ -1,7 +1,7 @@
 // import React, { useState, Component } from 'react'
 // import FormUserEdit from '../FormUserEdit'
 // import ModalKonfirmDelete from '../ModalKonfirmDelete'
-import DetailDisposisi from '../DetailDisposisi'
+import DetailDisposisiD from '../DetailDisposisiD'
 import AddFormDisposisi from '../AddFormDisposisi'
 import React, { Component } from 'react'
 import api from '../../service/api'
@@ -11,8 +11,9 @@ class BoxDataTabel extends Component{
     constructor(props){
         super()
         this.state={
-            suratMasuk:'',
+            // suratMasuk:'',
             jenisSurat:'',
+            pencatatan:''
 
         }
     }
@@ -20,54 +21,25 @@ class BoxDataTabel extends Component{
     return (
     <>
     <div className="grid grid-cols-8 border-b-2 border-gray-400 p-2">
-        {/* <div className="flex flex-row ml-4 mt-1 ">
-            <div className="">{this.props.No}.</div>
-        </div>
-        <div className="flex flex-row mt-1">
-            <div className="">{this.props.NomorAgenda}</div>
-        </div> */}
-        {/* <div className="flex flex-row  col-span-2 ml-2 mt-1">
-            <div className="grid grid-cols-2 p-2">
-                
-                
-            </div>
-        </div> */}
         <div className="flex flex-row ml-2 ">
-                    <div className="">{this.props.No}.</div>
+                    <div className="">{this.props.No}.
+                    </div>
+                    
                 </div>
                 <div className="flex flex-row">
-                    <div className="">{this.props.NomorAgenda}</div>
+                    <div className="">{this.props.Disposisi.NOMOR_AGENDA}</div>
                 </div>
 
 
         <div className="flex flex-row mt-1">
-            <div className="">{this.props.Tanggal}</div>
+            <div className="">{this.props.Disposisi.TANGGAL_DISPOSISI}</div>
         </div>
         <div className="flex flex-row mt-1">
-            {/* <ul>
-                {this.props.IdSuratMasuk.map((item, index)=>{
-                    return(
-                        <li key={index}>
-                            {this.props.suratMasuk == item.ID_PENCATATAN?(
-                                <div className="ml-2">
-                                    {item.NOMOR_SURAT.length > 15?(
-                                        <>{item.NOMOR_SURAT.slice(0,15)}...</>
-                                    ):(
-                                        <>{item.NOMOR_SURAT}...</>
-                                    )}
-                                </div>
-                            ):(
-                                <></>
-                            )}
-                        </li>
-                    )
-                })}
-            </ul> */}
-            <div className="truncate">{this.props.NomorSurat}</div>
+            <div className="truncate">{this.props.Disposisi.NOMOR_SURAT}</div>
             {/* <div className="">12893712</div> */}
         </div>
         <div className="flex flex-row mt-1">
-            <div className="truncate">{this.props.Informasi}</div>
+            <div className="truncate">{this.props.Disposisi.INFORMASI}</div>
         </div>
         <div className="flex flex-row ml-4 mt-1">
             {/* <div className="">{this.props.Tujuan}</div> */}
@@ -75,41 +47,15 @@ class BoxDataTabel extends Component{
         </div>
         <div className="flex flex-row mt-1">
             {/* <div className="">{this.props.Keterangan}</div> */}
-            <div className="truncate">{this.props.ProsesSelanjutnya}</div>
+            <div className="truncate">{this.props.Disposisi.PROSES_SELANJUTNYA}</div>
         </div>
-
-        {/* <div className="flex flex-row mt-1">
-            {Role == 1 ? (
-            <div className="">Administrator</div>
-            ) : (
-            <div className="">Staff Pengguna</div>
-            )}
-        </div> */}
-        
         <div className="">
-            {/* <button
-                          type="submit"
-                          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
-                        >
-                          <div className="ml-1">
-                            <img
-                              className="h-auto align-middle"
-                              src="assets/img/icon/Pencil.png"
-                            />
-                          </div>
-                          <div className="font-bold ml-1 mr-2">Edit</div>
-                        </button> */}
-
-            <DetailDisposisi 
+            <DetailDisposisiD
             DisposisiDetail={this.props.Disposisi}
-            TujuanSurat={this.props.TujuanSurat}
-            IdPencatatan={this.props.IdPencatatan}
-            jenisSurat={this.props.jenisSurat}
             IdUnitKerja={this.props.IdUnitKerja}
-            NomorSurat={this.props.NomorSurat}
-            // console.log('pengguna:' + this.state.pengguna)
+            UnitKerja={this.props.UnitKerja}
+            SuratMasuk={this.props.SuratMasuk}
             />
-
             {/* NomorAgenda={this.props.NOMOR_AGENDA}
             /> */}
         </div>
@@ -118,4 +64,73 @@ class BoxDataTabel extends Component{
     )
     }
 }
+// const BoxDataTabel=({
+//     No,
+//     NomorAgenda,
+//     Tanggal,
+//     // NomorSurat = {item.NOMOR_SURAT}
+//     Informasi,
+//     Tujuan,
+//     Keterangan,
+//     NomorSurat,
+//     TujuanSurat,
+//     ProsesSelanjutnya,
+//     UnitKerja,
+//     Disposisi,
+//     SuratMasuk,
+//     IdJenisSurat,
+//     IdUnitKerja,
+//     JenisDisposisi,
+//     Pencatatan,
+// })=>{
+//     const [formEdit,setFormEdit]=useState(false)
+//     return(
+//         <>
+//         <div className="grid grid-cols-8 border-b-2 border-gray-400 p-2">
+//             <div className="flex flex-row ml-2 ">
+//                     <div className="">{No}. 
+//                     {console.log('pencatatan: '+SuratMasuk)}</div>
+//                 </div>
+//                 <div className="flex flex-row">
+//                     <div className="">{NomorAgenda}</div>
+//                 </div>
+//             <div className="flex flex-row mt-1">
+//                 <div className="">{Tanggal}</div>
+//             </div>
+//             <div className="flex flex-row mt-1">
+//                 <div className="truncate">{NomorSurat}</div>
+//                 {/* <div className="">12893712</div> */}
+//             </div>
+//             <div className="flex flex-row mt-1">
+//                 <div className="truncate">{Informasi}</div>
+//             </div>
+//             <div className="flex flex-row ml-4 mt-1">
+//                 {/* <div className="">{this.props.Tujuan}</div> */}
+//                 <div className="">{TujuanSurat}</div>
+//             </div>
+//             <div className="flex flex-row mt-1">
+//                 {/* <div className="">{this.props.Keterangan}</div> */}
+//                 <div className="truncate">{ProsesSelanjutnya}</div>
+//             </div>        
+//             <div className="">
+//                 <DetailDisposisi 
+//                 DisposisiDetail={Disposisi}
+//                 TujuanSurat={TujuanSurat}
+//                 // IdPencatatan={IdPencatatan}
+//                 IdJenisSurat={IdJenisSurat}
+//                 SuratMasuk={SuratMasuk}
+//                 IdUnitKerja={IdUnitKerja}
+//                 UnitKerja={UnitKerja}
+//                 NomorSurat={NomorSurat}
+//                 Pencatatan={Pencatatan}
+//                 // console.log('pengguna:' + this.state.pengguna)
+//                 />
+    
+//                 {/* NomorAgenda={this.props.NOMOR_AGENDA}
+//                 /> */}
+//             </div>
+//         </div>
+//         </>
+//     )
+// }
 export default BoxDataTabel

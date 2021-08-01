@@ -22,14 +22,17 @@ class PencatatanController extends Controller
         $data = [
             'ID_PENGGUNA'=>$request->id_pengguna,
             'ID_JENIS_SURAT'=>$request->id_jenis_surat,
+            'ID_DERAJAT_SURAT'=>$request->id_derajat_surat,
             'KODE_ARSIP_KOM'=>$request->kode_arsip_kom,
             'KODE_ARSIP_HLM'=>$request->kode_arsip_hlm,
             'KODE_ARSIP_MANUAL'=>$request->kode_arsip_manual,
             'NAMA_FILE_SURAT'=>$request->nama_file_surat,
             'NAMA_FILE_LAMPIRAN'=>$request->nama_file_lampiran,
-            'ID_DERAJAT_SURAT'=>$request->id_derajat_surat,
+            'PERIHAL'=>$request->perihal,
+            'TGL_SURAT'=>$request->tgl_surat,
+            'PENANDATANGAN'=>$request->penandatangan,
         ];
-        $pencatatan = Pencatatan::create($data);
+       $pencatatan = Pencatatan::create($data);
 
         if($pencatatan==null){
             $respon = [
@@ -42,6 +45,7 @@ class PencatatanController extends Controller
             'Msg' => 'success',
             'content' => $pencatatan,
             ];
+        
         return response()->json($respon);
     }
     public function getPencatatanInfo($id)
@@ -84,12 +88,15 @@ class PencatatanController extends Controller
         ->update([
             'ID_PENGGUNA'=>$request->id_pengguna,
             'ID_JENIS_SURAT'=>$request->id_jenis_surat,
+            'ID_DERAJAT_SURAT'=>$request->id_derajat_surat,
             'KODE_ARSIP_KOM'=>$request->kode_arsip_kom,
             'KODE_ARSIP_HLM'=>$request->kode_arsip_hlm,
             'KODE_ARSIP_MANUAL'=>$request->kode_arsip_manual,
             'NAMA_FILE_SURAT'=>$request->nama_file_surat,
             'NAMA_FILE_LAMPIRAN'=>$request->nama_file_lampiran,
-            'ID_DERAJAT_SURAT'=>$request->id_derajat_surat,
+            'PERIHAL'=>$request->perihal,
+            'TGL_SURAT'=>$request->tgl_surat,
+            'PENANDATANGAN'=>$request->penandatangan,
         ]);
         if(!$pencatatan){
             $respon =[
