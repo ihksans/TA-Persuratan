@@ -273,4 +273,55 @@ class SuratKeluarController extends Controller
                     return response()->json($respon);
             }
     }
+    public function searchSuratKeluar($key){
+        try{
+            $suratKeluar = DB::table('surat_keluar')
+            ->join('pencatatan','pencatatan.ID_PENCATATAN','=','surat_keluar.ID_PENCATATAN')
+            ->join('pengguna','pengguna.ID_PENGGUNA','=','surat_keluar.ID_PENGGUNA')
+            ->join('pemohon','pemohon.ID_PEMOHON','=','surat_keluar.ID_PEMOHON')
+            ->join('nomor_surat','nomor_surat.ID_NOMOR_SURAT','=','surat_keluar.ID_NOMOR_SURAT')
+            ->join('derajat_surat','derajat_surat.ID_DERAJAT_SURAT','=','pencatatan.ID_DERAJAT_SURAT')
+            ->join('jenis_surat','jenis_surat.ID_JENIS_SURAT','=','pencatatan.ID_JENIS_SURAT')
+            ->where('PERIHAL', 'like','%'.$key.'%')
+            ->orWhere('KODE_ARSIP_KOM','like','%'.$key.'%')
+            ->orWhere('KODE_ARSIP_HLM','like','%'.$key.'%')
+            ->orWhere('KODE_ARSIP_MANUAL','like','%'.$key.'%')
+            ->orWhere('TGL_SURAT','like','%'.$key.'%')
+            ->orWhere('PENANDATANGAN','like','%'.$key.'%')
+            ->orWhere('TGL_KIRIM','like','%'.$key.'%')
+            ->orWhere('NOMOR_SURAT','like','%'.$key.'%')
+            ->orWhere('NAMA','like','%'.$key.'%')
+            ->orWhere('NAMA_PEMOHON','like','%'.$key.'%')
+            ->orWhere('NOMOR_URUT','like','%'.$key.'%')
+            ->orWhere('TAHUN','like','%'.$key.'%')
+            ->orWhere('DERAJAT_SURAT','like','%'.$key.'%')
+            ->orWhere('JENIS_SURAT','like','%'.$key.'%')
+            ->orWhere('KETERANGAN','like','%'.$key.'%')
+            ->select('pencatatan.PERIHAL','pencatatan.KODE_ARSIP_KOM',
+            'pencatatan.KODE_ARSIP_HLM','pencatatan.KODE_ARSIP_MANUAL',
+            'pencatatan.NAMA_FILE_SURAT','pencatatan.NAMA_FILE_LAMPIRAN',
+            'pencatatan.TGL_SURAT','pencatatan.PENANDATANGAN',
+            'surat_keluar.*',
+            'pengguna.NAMA',
+            'pemohon.*',
+            'nomor_surat.*',
+            'derajat_surat.*',
+            'jenis_surat.*')
+            ->orderBy('ID_PENCATATAN','desc')
+            ->get();
+            $respon = [
+                'Msg' => 'success',
+                'key' => $key,
+                'content' => $suratKeluar,
+            ];
+            return response()->json($respon);
+            } catch(\Exception $ex){ 
+                $respon = [
+                    'Msg' => 'error',
+                    'content' => $key,
+                    ];
+                    return response()->json($respon);
+            }
+    }
+  
 }
