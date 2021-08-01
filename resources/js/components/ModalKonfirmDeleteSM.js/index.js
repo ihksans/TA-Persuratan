@@ -75,7 +75,7 @@ export default function ModalKonfirmDeleteSM({
   return (
     <>
       <button
-        className="flex flex-row bg-danger font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
+        className="flex flex-row justify-center bg-danger font-bold items-center ml-2 mt-1 rounded p-2 shadow-sm w-75% hover:bg-red-700 focus:outline-none"
         type="button"
         onClick={() => setShowModal(true)}
       >
@@ -139,7 +139,7 @@ export default function ModalKonfirmDeleteSM({
                   <div className="flex items-center justify-center content-center">
                     <button
                       type="submit"
-                      className="rounded bg-danger text-red-500 background-transparent font-bold w-36 px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
+                      className="rounded bg-danger text-putih background-transparent font-bold w-36 px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all hover:bg-red-700"
                       onClick={() => deletePengguna(IdSurat)}
                     >
                       Ya

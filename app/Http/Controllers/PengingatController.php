@@ -93,22 +93,46 @@ class PengingatController extends Controller
     }
     public function deletePengingat($id)
     {
+        // $pengingat = Pengingat::where('ID_PENGINGAT',$id);
+        // $pengingat->delete();
+        // if(!$pengingat){
+        //     $respon = [
+        //         'msg' => 'delete failed',
+        //         'error' => 'delete pengingat'
+        //     ];
+        //     return response()->json($respon);
+        // }
+        // if($id==null){
+        //     $respon = [
+        //         'msg' => 'delete failed',
+        //         'error' => 'delete pengingat'
+        //     ];
+        //     return response()->json($respon);
+        // }      
+        // return response()->json($pengingat);
         $pengingat = Pengingat::where('ID_PENGINGAT',$id);
-        $pengingat->delete();
-        if(!$pengingat){
+        $p = $pengingat->get();
+        if ($p!=null){
+            $pengingat->delete();
+            if(!$pengingat){
+                $respon = [
+                'Msg' => 'error',
+                'content' => $id,
+                ];
+                return response()->json($respon);
+            }
             $respon = [
-                'msg' => 'delete failed',
-                'error' => 'delete pengingat'
+                'Msg' => 'success',
+                'content' => $id,
+                ];
+                return response()->json($respon,200); 
+        }
+        else{
+            $respon = [
+                'Msg' => 'delete failed',
+                'error' => 'deletePengingat'
             ];
             return response()->json($respon);
         }
-        if($id==null){
-            $respon = [
-                'msg' => 'delete failed',
-                'error' => 'delete pengingat'
-            ];
-            return response()->json($respon);
-        }      
-        return response()->json($pengingat);
     }
 }

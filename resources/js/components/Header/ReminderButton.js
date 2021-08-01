@@ -38,22 +38,40 @@ class ReminderButton extends Component {
           <></>
         ) : (
         <div className="flex flex-col">
-          <button type="submit" className="justify-items-center w-8	h-6 my-4 mx-2" onClick={this.showReminder}>
+          <button type="submit" className="justify-items-center w-8	h-6 my-4 mx-2 hover:shadow-md focus:outline-none" onClick={this.showReminder}>
             <img
-              className=" h-full w-full "
+              className="h-full w-full"
               src="assets/img/icon/surat_icon_2.png"
             />
           </button>
           {this.state.show ? (
               <>
-                <div className="relative spacing-0">
-                  <div className="absolute right-0 bg-white shadow-lg overflow-hidden">
-                    <p className="p-3">Pengingat Tindak Lanjut Surat</p>
-                    {this.props.Pengingat.allPengingatInfo == null ? (
-                      <DataReminder Pengingat={this.state.Pengingat} />
-                    ) : (
-                      <DataReminder Pengingat={this.props.Pengingat.allPengingatInfo} />
-                    )}
+                <div className="justify-center items-center z-50">
+                  <div className="grid grid-cols-2 absolute right-3 bg-white shadow-lg overflow-hidden border-t-2 border-abu">
+                    <div className="col-span-2 flex flex-row items-start p-2 border-b ml-2 mr-4 border-solid border-blueGray-200 rounded-t">
+                      <div>
+                        <img className="w-8 mt-2 p-0.5" src="assets/img/icon/Warning_2.png" />
+                      </div>
+                      <div>
+                      <p className="p-3 text-bb font-semibold">Pengingat Tindak Lanjut Surat</p>
+                      </div>
+                    </div>
+                    <div>
+                      <h2 className="mt-3 text-center text-md text-bb font-bold">Surat Masuk</h2>
+                      <div className="mt-4 mb-4 border-r-2 border-bb">
+                        {this.props.Pengingat.allPengingatInfo == null ? (
+                          <DataReminder Pengingat={this.state.Pengingat} />
+                        ) : (
+                          <DataReminder Pengingat={this.props.Pengingat.allPengingatInfo} />
+                        )}
+                      </div>
+                    </div>
+                    <div>
+                      <h2 className="mt-3 text-center text-md text-bb font-bold">Surat Keluar</h2>
+                      <div className="mt-4 mb-4 border-l-2 border-bb">
+                        
+                      </div>
+                    </div>
                   </div>
                 </div>
               </>

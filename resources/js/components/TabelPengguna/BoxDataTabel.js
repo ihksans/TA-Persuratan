@@ -26,10 +26,10 @@ const BoxData = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-row col-span-2">
+        <div className="flex flex-row col-span-2 mt-1">
           <p className="truncate ">{Jabatan}</p>
         </div>
-        <div className="flex ">
+        <div className="flex mt-1">
           <p className="truncate ">{NIP}</p>
         </div>
         <div className="flex flex-row mt-1">
@@ -42,7 +42,7 @@ const BoxData = ({
           {Role == 1 ? (
             <div className="">Administrator</div>
           ) : (
-            <div className="">Staff Pengguna</div>
+            <div className="">Staf Pengguna</div>
           )}
         </div>
         <div className="">

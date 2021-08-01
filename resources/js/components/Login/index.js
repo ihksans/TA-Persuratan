@@ -327,7 +327,7 @@ class Login extends Component {
               <div className="flex h-9">
                 <button
                   type="submit"
-                  className="w-full border-2 rounded-md bg-primary"
+                  className="w-full rounded-md bg-primary hover:bg-orenHover focus:outline-none"
                   onClick={this.handleSubmit}
                 >
                   <div className="text-sm mb-2 text-putih h-4 font-semibold">

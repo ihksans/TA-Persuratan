@@ -938,7 +938,7 @@ class AddFormSurat extends Component {
     return (
       <>
         <button
-          className="flex flex-row bg-primary p-2 mt-4"
+          className="flex flex-row bg-primary p-2 mt-4 hover:bg-orenHover focus:outline-none"
           type="button"
           onClick={this.handleModal}
         >
@@ -948,7 +948,7 @@ class AddFormSurat extends Component {
               src="assets/img/icon/Tambah.png"
             />
           </div>
-          <div className="font-bold ml-1 mr-2">Tambah Surat</div>
+          <div className="font-bold ml-1 mr-2">Tambah Data Surat</div>
         </button>
 
         {this.state.showModal ? (
@@ -958,9 +958,9 @@ class AddFormSurat extends Component {
                 {/*content*/}
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   {/*header*/}
-                  <div className="flex items-start justify-center ">
+                  <div className="flex items-start justify-center">
                     <button
-                      className="p-1 ml-auto  border-2 float-right  leading-none  outline-none focus:outline-none"
+                      className="p-1 ml-auto hover:shadow-md focus:outline-none"
                       onClick={this.handleModal}
                     >
                       <img
@@ -969,17 +969,17 @@ class AddFormSurat extends Component {
                       />
                     </button>
                   </div>
-                  <div className="flex flex-row items-start p-2 border-b ml-6 border-solid border-blueGray-200 rounded-t">
-                    <div>
+                  <div className="flex flex-row items-start p-2">
+                    <div className="ml-2">
                       <img className="w-8" src="assets/img/icon/Surat.png" />
                     </div>
                     <div className="flex ">
-                      <h3 className="text-xl font-semibold  ">Tambah Surat</h3>
+                      <h3 className="text-xl font-bold">Tambah Data Surat Masuk</h3>
                     </div>
                   </div>
 
                   {/*body*/}
-                  <div className="relative p-6 flex-auto">
+                  <div className="relative px-6 flex-auto">
                     <div className="my-4 text-blueGray-500 text-lg leading-relaxed">
                       {/* <FormData /> */}
                       <form
@@ -997,8 +997,7 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Nomor Agenda </div>
-                                    <div className="text-danger ml-2"> </div>
+                                    <div className="mt-2">Nomor Agenda </div>
                                   </div>
                                   <div className="justify-end ">
                                     <div
@@ -1015,8 +1014,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Nomor Surat </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Nomor Surat </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1024,6 +1023,7 @@ class AddFormSurat extends Component {
                                       name="nomorSurat"
                                       required
                                       id="nomorSurat"
+                                      placeholder="Masukkan Nomor Surat"
                                       className={
                                         'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	mr-4  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                       }
@@ -1044,8 +1044,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Tanggal Surat </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Tanggal Surat </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <div
@@ -1053,6 +1053,7 @@ class AddFormSurat extends Component {
                                       name="tglSurat"
                                       required
                                       id="tglSurat"
+                                      placeholder="Masukkan Tanggal Surat"
                                       className={
                                         'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                       }
@@ -1079,8 +1080,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Tanggal Diterima </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Tanggal Diterima </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <div
@@ -1088,6 +1089,7 @@ class AddFormSurat extends Component {
                                       name="tglDiterima"
                                       required
                                       id="tglDiterima"
+                                      placeholder="Masukkan Tanggal Diterima"
                                       className={
                                         'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                       }
@@ -1114,8 +1116,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Perihal </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Perihal </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <textarea
@@ -1123,6 +1125,7 @@ class AddFormSurat extends Component {
                                       name="perihal"
                                       required
                                       id="perihal"
+                                      placeholder="Masukkan Perihal/Ringkasan Surat"
                                       className={
                                         'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none  w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                       }
@@ -1142,8 +1145,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Tujuan Surat </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Tujuan Surat </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <div className="flex flex-row">
@@ -1151,7 +1154,7 @@ class AddFormSurat extends Component {
                                         <input
                                           type="text"
                                           name="tujuanSurat"
-                                          placeholder="Silahkan isi nama unit"
+                                          placeholder="Masukkan nama unit"
                                           required
                                           id="tujuanSurat"
                                           className={
@@ -1192,7 +1195,7 @@ class AddFormSurat extends Component {
                                       <div>
                                         <div
                                           onClick={this.handleCustomTujuan}
-                                          className="mr-2 ml-2 w-auto p-1 border-2 rounded-md  bg-primary justify-center items-center 		"
+                                          className="mt-1 mr-2 ml-2 w-auto p-1 border-2 rounded-md  bg-primary justify-center items-center cursor-pointer hover:orenHover"
                                         >
                                           <p
                                             className={
@@ -1226,7 +1229,7 @@ class AddFormSurat extends Component {
                                       <input
                                         type="text"
                                         name="tujuanSurat"
-                                        placeholder="Silahkan isi kode unit"
+                                        placeholder="Masukkan kode unit"
                                         required
                                         id="tujuanSurat"
                                         className={
@@ -1251,8 +1254,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Unit Pengirim </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Unit Pengirim </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <div className="flex flex-row">
@@ -1260,7 +1263,7 @@ class AddFormSurat extends Component {
                                         <input
                                           type="text"
                                           name="namaUnitPengirim"
-                                          placeholder="Silahkan isi nama unit"
+                                          placeholder="Masukkan nama unit"
                                           required
                                           id="namaUnitPengirim"
                                           className={
@@ -1304,7 +1307,7 @@ class AddFormSurat extends Component {
                                       <div>
                                         <div
                                           onClick={this.handleCustomPengirim}
-                                          className="mr-2 ml-2 w-auto p-1 border-2 rounded-md  bg-primary justify-center items-center 		"
+                                          className="mt-0.5 mr-2 ml-2 w-auto p-1 border-2 rounded-md  bg-primary justify-center items-center cursor-pointer hover:orenHover"
                                         >
                                           <p
                                             className={
@@ -1338,7 +1341,7 @@ class AddFormSurat extends Component {
                                       <input
                                         type="text"
                                         name="kodeUnitPengirim"
-                                        placeholder="Silahkan isi kode unit pengirim"
+                                        placeholder="Masukkan kode unit pengirim"
                                         required
                                         id="kodeUnitPengirim"
                                         className={
@@ -1362,8 +1365,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Nama Pengirim </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Nama Pengirim </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1371,6 +1374,7 @@ class AddFormSurat extends Component {
                                       name="namaPengirim"
                                       required
                                       id="namaPengirim"
+                                      placeholder="Masukkan Nama Pengirim"
                                       className={
                                         'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                       }
@@ -1390,8 +1394,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Penandatangan </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Penandatangan </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1399,6 +1403,7 @@ class AddFormSurat extends Component {
                                       name="penandatangan"
                                       required
                                       id="penandatangan"
+                                      placeholder="Masukkan Penandatangan"
                                       className={
                                         'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                       }
@@ -1421,8 +1426,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Jenis Surat </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Jenis Surat </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <select
@@ -1466,8 +1471,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Sifat Surat </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Sifat Surat </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <select
@@ -1511,8 +1516,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Derajat Surat </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Derajat Surat </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <select
@@ -1556,8 +1561,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Kode Arsip Kom </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Kode Arsip Kom </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1565,6 +1570,7 @@ class AddFormSurat extends Component {
                                       name="kodeArsipKom"
                                       required
                                       id="kodeArsipKom"
+                                      placeholder="Masukkan kode arsip kom"
                                       className={
                                         'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	w-56  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                       }
@@ -1584,8 +1590,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Kode Arsip Hlm </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Kode Arsip Hlm </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1593,6 +1599,7 @@ class AddFormSurat extends Component {
                                       name="kodeArsipHlm"
                                       required
                                       id="kodeArsipHlm"
+                                      placeholder="Masukkan kode arsip hlm"
                                       className={
                                         'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                       }
@@ -1612,8 +1619,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Kode Arsip Manual </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Kode Arsip Manual </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1621,6 +1628,7 @@ class AddFormSurat extends Component {
                                       name="kodeArsipManual"
                                       required
                                       id="kodeArsipManual"
+                                      placeholder="Masukkan kode arsip mnl"
                                       className={
                                         'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-56	  text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                       }
@@ -1640,8 +1648,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Surat </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Surat </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1668,8 +1676,8 @@ class AddFormSurat extends Component {
                                     htmlFor="nama"
                                     className="text-sm mb-2 font-bold flex flex-row "
                                   >
-                                    <div>Lampiran </div>
-                                    <div className="text-danger ml-2"> *</div>
+                                    <div className="mt-2">Lampiran </div>
+                                    <div className="text-danger ml-2 mt-2"> *</div>
                                   </div>
                                   <div className="justify-end ">
                                     <input
@@ -1691,13 +1699,19 @@ class AddFormSurat extends Component {
                                     )}
                                   </div>
                                 </div>
-                                <div className="flex flex-row grid grid-cols-2 mb-4 mt-4  p-2">
+                                {/* <div className="flex flex-row grid grid-cols-2 mb-4 mt-4 p-2">
                                   <div></div>
-                                  <div className=" text-xs text-abu ">
-                                    Keterangan (*): data wajib diisi.
+                                  <div className="text-xs text-abu">
+                                    Keterangan (
                                   </div>
-                                </div>
-                                <div className="flex flex-row grid grid-cols-2 items-center">
+                                  <div className="text-xs text-danger">
+                                    *
+                                  </div>
+                                  <div className="text-xs text-abu">
+                                    ): data wajib diisi.
+                                  </div>
+                                </div> */}
+                                {/* <div className="flex flex-row grid grid-cols-3 items-center">
                                   <div></div>
                                   <button
                                     type="submit"
@@ -1707,8 +1721,27 @@ class AddFormSurat extends Component {
                                   >
                                     Simpan
                                   </button>
-                                </div>
+                                </div> */}
                               </div>
+                            </div>
+                            <div className="flex justify-end content-center items-center">
+                                <div className="text-xs text-abu">
+                                  Keterangan (
+                                </div>
+                                <div className="text-xs text-danger">
+                                  *
+                                </div>
+                                <div className="text-xs text-abu mr-6">
+                                  ): data wajib diisi.
+                                </div>
+                                <button
+                                  type="submit"
+                                  className=" w-20 p-1 mr-8 border-2 rounded-md font-bold bg-biru justify-center items-center hover:bg-biruduaHover focus:outline-none"
+                                  onClick={this.onSubmit}
+                                  value="Add Pengguna"
+                                >
+                                  Simpan
+                                </button>
                             </div>
                           </div>
                         </div>

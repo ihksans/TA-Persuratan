@@ -10,6 +10,7 @@ import ModalLoading from '../ModalLoading'
 import UpdateReminder from '../FormUpdateReminder'
 import UpdateTindakLanjut from '../FormUpdateReminder/updateTL'
 import AddReminder from '../FormAddReminder'
+import moment from 'moment'
 import { isEmpty } from 'lodash-es'
 
 import Modal from '../AddFormDisposisi/Modal'
@@ -20,6 +21,7 @@ class DetailSuratMasuk extends Component {
     this.state = {
       dir: [],
       pengingat: null,
+      count: null,
       numPages: '',
       pageNumber: '',
       url: null,
@@ -89,14 +91,21 @@ class DetailSuratMasuk extends Component {
       pengingat: null,
     })
     if (this.state.getP == true) {
-      this.props.Pengingat.allPengingatInfo.map((item) => {
-        const temp = this.props.SuratDetail.ID_PENCATATAN
-        const temp2 = item.ID_PENCATATAN
-        if (temp == temp2) {
-          this.setState({
-            pengingat: item,
-          })
-        }
+      this.props.Pengingat.allPengingatInfo.map(
+        (item) => {
+          const temp = this.props.SuratDetail.ID_PENCATATAN
+          const temp2 = item.ID_PENCATATAN
+          if (temp == temp2){
+            this.setState({
+              pengingat: item
+            })
+            const rn = moment(new Date())
+            this.setState({
+              count: Math.abs(rn.diff(this.state.pengingat.WAKTU_PENGINGAT, 'days'))+1
+            })
+            console.log(this.state.count)       
+          }
+             
       })
     }
     //console.log(this.state.pengingat)
@@ -136,7 +145,7 @@ class DetailSuratMasuk extends Component {
       <>
         <button
           type="submit"
-          className="bg-primary font-bold  self-center ml-2 mt-1  rounded p-1 shadow-sm w-75%"
+          className="bg-primary font-bold  self-center ml-2 mt-1  rounded p-1 shadow-sm w-75% hover:bg-orenHover focus:outline-none"
           onClick={this.handleModal}
         >
           Lihat Detail
@@ -150,9 +159,9 @@ class DetailSuratMasuk extends Component {
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-abu outline-none focus:outline-none">
                   {/* header*/}
 
-                  <div className="flex flex-row grid grid-cols-2 mr-8">
-                    <div className="flex flex-row grid grid-cols-3 bg-white p-4">
-                      <div className="flex flex-row items-start p-2 border-b ml-6 border-solid border-blueGray-200 rounded-t col-span-3">
+                  <div className="flex flex-row grid grid-cols-2">
+                    <div className="flex flex-row grid grid-cols-3 bg-white p-4 rounded-l-lg">
+                      <div className="flex flex-row items-start p-2 col-span-3">
                         <div>
                           <img
                             className="w-8"
@@ -165,7 +174,7 @@ class DetailSuratMasuk extends Component {
                           </h3>
                         </div>
                       </div>
-                      <div className="flex flex-row  col-span-3 mb-4 border-b-2">
+                      <div className="flex flex-row col-span-3 mb-4">
                         <EditFormSurat SuratDetail={this.props.SuratDetail} />
                         <Modal
                           namaFile={this.props.NamaFileSurat}
@@ -173,6 +182,8 @@ class DetailSuratMasuk extends Component {
                           namaLampiran={this.props.NamaFileLampiran}
                           jenisSurat={this.props.jenisSurat}
                           IdUnitKerja={this.props.IdUnitKerja}
+                          pengingatS={this.state.pengingat}
+                          countDays={this.state.count}
                         />
                         <ModalLoading loading={this.state.modalLodaing} />
 
@@ -269,7 +280,7 @@ class DetailSuratMasuk extends Component {
                             <>
                               <button
                                 type="submit"
-                                className="bg-abu self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
+                                className="bg-abu self-center mt-1 rounded-full p-1 shadow-sm w-40% cursor-default focus:outline-none"
                               >
                                 Tidak Aktif
                               </button>
@@ -280,7 +291,7 @@ class DetailSuratMasuk extends Component {
                                 <>
                                   <button
                                     type="submit"
-                                    className="bg-biru self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
+                                    className="bg-biru self-center mt-1 rounded-full p-1 shadow-sm w-40% cursor-default focus:outline-none"
                                   >
                                     Aktif
                                   </button>
@@ -289,7 +300,7 @@ class DetailSuratMasuk extends Component {
                                 <>
                                   <button
                                     type="submit"
-                                    className="bg-abu self-center ml-2 mt-1  rounded-md p-1 shadow-sm w-40% cursor-default"
+                                    className="bg-abu self-center mt-1 rounded-full p-1 shadow-sm w-40% cursor-default focus:outline-none"
                                   >
                                     Tidak Aktif
                                   </button>
@@ -300,7 +311,7 @@ class DetailSuratMasuk extends Component {
 
                           <button
                             type="submit"
-                            className="bg-primary font-bold  self-center ml-2 mt-1  rounded p-1 shadow-sm w-auto"
+                            className="bg-primary font-bold  self-center ml-2 mt-1 rounded p-1 shadow-sm w-auto hover:bg-orenHover hover:shadow focus:outline-none"
                             onClick={this.handlePengingatModal}
                           >
                             <img
@@ -309,28 +320,41 @@ class DetailSuratMasuk extends Component {
                             />
                           </button>
                         </div>
+                        {this.state.pengingat != null ? (
+                          <>
+                        {this.state.pengingat.STATUS == 1 ? (
+                          <>
+                          <div className="text-sm">
+                            Harus ditindaklanjuti dalam waktu {this.state.count} hari
+                          </div>
+                          </>
+                        ):(<><div className="text-sm">
+                      </div></>)}
+                        </>
+                        ):(<><div className="text-sm">
+                        </div></>)}
                       </div>
                       <div className="font-bold">Status Tindak Lanjut</div>
 
                       {this.state.pengingat == null ? (
                         <>
-                          <div className="font-bold rounded p-2 col-span-2 bg-danger w-75% text-putih">
+                          <button className="font-semibold self-center rounded-md p-1 col-span-2 bg-danger w-75% text-putih pointer-events-none">
                             Belum ditindaklanjuti
-                          </div>
+                          </button>
                         </>
                       ) : (
                         <>
                           {this.state.pengingat.STATUS == 0 ? (
                             <>
-                              <div className="font-bold rounded p-2 col-span-2 bg-green-500 w-75% text-putih">
+                              <button className="font-semibold self-center rounded-md p-1 col-span-2 bg-green-500 w-75% text-putih pointer-events-none">
                                 Sudah ditindaklanjuti
-                              </div>
+                              </button>
                             </>
                           ) : (
                             <>
                               <button
                                 type="button"
-                                className="font-bold rounded p-2 col-span-2 bg-danger w-75% text-putih"
+                                className="font-semibold self-center rounded-md p-1 col-span-2 bg-danger w-75% text-putih"
                                 onClick={this.handleTindakLanjutModal}
                               >
                                 Belum ditindaklanjuti
@@ -340,13 +364,14 @@ class DetailSuratMasuk extends Component {
                         </>
                       )}
                     </div>
-                    <div>
-                      <div className=" flex justify-end   ">
-                        <button onClick={this.handleModal}>
+                    <div className="flex flex-row grid p-4 rounded-r-lg">
+                      <div className="flex flex-row justify-end">
+                        <button className="hover:shadow-md focus:outline-none"
+                        onClick={this.handleModal}>
                           <img src="assets/img/icon/x.png" />
                         </button>
                       </div>
-                      <div className="flex justify-center p-2 ">
+                      <div className="flex flex-row justify-center">
                         <div className="w-auto">
                           {this.props.namaFile == null ? (
                             <> File kosong</>
@@ -371,6 +396,7 @@ class DetailSuratMasuk extends Component {
                 </div>
               </div>
             </div>
+            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
           </>
         ) : null}
         {this.state.showPengingatModal ? (

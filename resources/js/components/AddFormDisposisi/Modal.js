@@ -57,7 +57,7 @@ class ClassReducers extends Component {
       let formData = new FormData()
       formData.append(
         'namafile',
-        this.props.SuratDetail.NOMOR_SURAT + '_disposisi',
+        this.props.SuratDetail.NOMOR_SURAT.split('/').join('_') + '_disposisi',
       )
       await api()
         .post('/api/getSurat', formData)
@@ -74,14 +74,14 @@ class ClassReducers extends Component {
     return (
       <>
         <button
-          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
+          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1 rounded p-2 shadow-sm w-75% hover:bg-orenHover focus:outline-none"
           type="button"
           onClick={this.handleModal}
         >
           <div className="ml-1">
             <img className="h-4 align-middle" src="assets/img/icon/Surat.png" />
           </div>
-          <div className="font-bold text-putih ml-1 mr-2">Lihat Disposisi</div>
+          <div className="font-bold text-black ml-1 mr-2">Lihat Disposisi</div>
         </button>
 
         {this.state.modal ? (
@@ -95,6 +95,8 @@ class ClassReducers extends Component {
               IdUnitKerja={this.props.IdUnitKerja}
               disposisi={this.state.disposisi}
               url={this.state.url}
+              pengingatS={this.props.pengingatS}
+              countDays={this.props.countDays}
             />
           </>
         ) : null}

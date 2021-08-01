@@ -162,9 +162,9 @@ class FormAddReminder extends Component {
             {this.state.showModal ? (
             <>
               <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                <div className="relative w-auto my-6 mx-auto max-w-6xl">
+                <div className="relative w-auto my-6 h-90% mx-auto max-w-6xl">
                   {/*content*/}
-                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                  <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full h-full bg-white outline-none focus:outline-none">
                     {/*header*/}
                     <div className="flex items-start justify-center ">
                       <button
@@ -318,14 +318,12 @@ class FormAddReminder extends Component {
                                     <div></div>
                                     <button
                                       type="submit"
-                                      className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center align-center"
+                                      className="w-2/3 p-1 border-2 rounded-md text-sm text-white font-bold bg-biru justify-center align-center hover:bg-biruduaHover focus:outline-none"
                                       onClick={this.onSubmit}
                                       value="Add Pengguna"
                                     //   value="Update Reminder"
                                     >
-                                      <div className="text-sm mb-2 text-white	h-6 font-bold justify-center ">
-                                        Simpan Pengingat
-                                      </div>
+                                      Simpan Pengingat
                                     </button>
                                   </div>
                                 </div>

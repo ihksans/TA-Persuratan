@@ -269,7 +269,7 @@ class FormUserEdit extends Component {
     return (
       <>
         <button
-          className="flex flex-row bg-primary rounded"
+          className="flex flex-row h-5 bg-primary rounded hover:bg-orenHover focus:outline-none"
           type="button"
           onClick={this.handleModal}
         >
@@ -325,7 +325,7 @@ class FormUserEdit extends Component {
                         onSubmit={this.onSubmit}
                       >
                         <div>
-                          <div className="w-full rounded-md shadow-sm ml-8">
+                          <div className="w-full rounded-md shadow-sm">
                             <div className="flex flex-row grid grid-cols-3">
                               <div
                                 htmlFor="username"
@@ -646,7 +646,7 @@ class FormUserEdit extends Component {
                               <div></div>
                               <button
                                 type="submit"
-                                className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center align-center"
+                                className=" w-1/2 p-1 border-2 rounded-md  bg-biru justify-center align-center hover:bg-biruduaHover focus:outline-none"
                                 onClick={this.onSubmit}
                                 value="Add Pengguna"
                               >

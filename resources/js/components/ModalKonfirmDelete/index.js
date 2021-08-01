@@ -31,11 +31,11 @@ export default function ModalKonfirmDelete({ IdPengguna, NamaPengguna }) {
   return (
     <>
       <button
-        className="ml-2 bg-brokenblack flex flex-row rounded p-1 items-center shadow-sm"
+        className="ml-2 bg-brokenblack flex flex-row rounded p-1 items-center shadow-sm hover:bg-black focus:outline-none"
         type="button"
         onClick={() => setShowModal(true)}
       >
-        <img className=" w-4" src="assets/img/icon/Trash.png" />
+        <img className="" src="assets/img/icon/Trash.png" />
         <div className="font-bold text-putih text-sm ml-1 mr-2">Hapus</div>
       </button>
       {showModal ? (
@@ -90,7 +90,7 @@ export default function ModalKonfirmDelete({ IdPengguna, NamaPengguna }) {
                   <div className="flex items-center justify-center content-center">
                     <button
                       type="submit"
-                      className="rounded bg-danger text-red-500 background-transparent font-bold w-36 px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
+                      className="rounded bg-danger text-putih background-transparent font-bold w-36 px-6 py-2 text-sm outline-none hover:bg-red-700 focus:outline-none mr-1 mb-1 ease-linear transition-all"
                       onClick={() => deletePengguna(IdPengguna)}
                     >
                       Ya

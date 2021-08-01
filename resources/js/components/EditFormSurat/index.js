@@ -919,6 +919,7 @@ class EditFormSurat extends Component {
       }
     } else {
       this.handleModal()
+
     }
   }
 
@@ -926,7 +927,7 @@ class EditFormSurat extends Component {
     return (
       <>
         <button
-          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75%"
+          className="flex flex-row bg-primary font-bold items-center ml-2 mt-1  rounded p-2 shadow-sm w-75% hover:bg-orenHover focus:outline-none"
           type="button"
           onClick={this.handleModal}
         >
@@ -936,7 +937,7 @@ class EditFormSurat extends Component {
               src="assets/img/icon/Pencil.png"
             />
           </div>
-          <div className="font-bold text-putih ml-1 mr-2">Edit Data Surat</div>
+          <div className="font-bold text-black ml-1 mr-2">Edit Data Surat</div>
         </button>
 
         {this.state.showModal ? (
@@ -948,7 +949,7 @@ class EditFormSurat extends Component {
                   {/*header*/}
                   <div className="flex items-start justify-center ">
                     <button
-                      className="p-1 ml-auto  border-2 float-right  leading-none  outline-none focus:outline-none"
+                      className="p-1 ml-auto float-right  leading-none  outline-none focus:outline-none"
                       onClick={this.handleModal}
                     >
                       <img
@@ -957,19 +958,19 @@ class EditFormSurat extends Component {
                       />
                     </button>
                   </div>
-                  <div className="flex flex-row items-start p-2 border-b ml-6 border-solid border-blueGray-200 rounded-t">
-                    <div>
+                  <div className="flex flex-row items-start p-2">
+                    <div className="ml-2">
                       <img className="w-8" src="assets/img/icon/Surat.png" />
                     </div>
-                    <div className="flex ">
-                      <h3 className="text-xl font-semibold  ">
+                    <div className="flex">
+                      <h3 className="text-xl font-bold">
                         Edit Data Surat Masuk
                       </h3>
                     </div>
                   </div>
 
                   {/*body*/}
-                  <div className="relative p-6 flex-auto">
+                  <div className="relative px-6 flex-auto">
                     <div className="my-4 text-blueGray-500 text-lg leading-relaxed">
                       {/* <FormData /> */}
                       <form
@@ -1468,9 +1469,9 @@ class EditFormSurat extends Component {
                                   <div className="justify-end ">
                                     <select
                                       type="text"
-                                      name="jenisSurat"
+                                      name="sifatSurat"
                                       required
-                                      id="jenisSurat"
+                                      id="sifatSurat"
                                       className={
                                         'focus:form-control   focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 focus:outline-none	 w-56 text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-2 mb-3'
                                       }
@@ -1690,7 +1691,7 @@ class EditFormSurat extends Component {
                                     )}
                                   </div>
                                 </div>
-                                <div className="flex flex-row grid grid-cols-2 mb-4 mt-4  p-2">
+                                {/* <div className="flex flex-row grid grid-cols-2 mb-4 mt-4  p-2">
                                   <div></div>
                                   <div className=" text-xs text-abu ">
                                     Keterangan (*): data wajib diisi.
@@ -1708,8 +1709,27 @@ class EditFormSurat extends Component {
                                       Simpan
                                     </div>
                                   </button>
-                                </div>
+                                </div> */}
                               </div>
+                            </div>
+                            <div className="flex justify-end content-center items-center">
+                                <div className="text-xs text-abu">
+                                  Keterangan (
+                                </div>
+                                <div className="text-xs text-danger">
+                                  *
+                                </div>
+                                <div className="text-xs text-abu mr-6">
+                                  ): data wajib diisi.
+                                </div>
+                                <button
+                                  type="submit"
+                                  className=" w-auto p-1 mr-8 border-2 rounded-md bg-biru justify-center items-center font-bold hover:bg-biruduaHover focus:outline-none"
+                                  onClick={this.onSubmit}
+                                  value="Add Pengguna"
+                                >
+                                  Simpan Perubahan
+                                </button>
                             </div>
                           </div>
                         </div>

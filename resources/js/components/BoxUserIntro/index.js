@@ -25,20 +25,21 @@ class ClassReducers extends Component {
       //js
       <>
         {this.state.isNotif ? (
-          <div className="grid grid-cols-3 gap-4 bg-birudua h-5% rounded flex justify-start items-center list-none shadow-md">
+          <div className="grid grid-cols-3 gap-4 p-1.5 bg-birudua h-auto rounded flex justify-start items-center list-none shadow-md">
             <div className="col-span-2 flex justify-start">
               <div className="flex">
                 <div className="flex items-center list-none">
-                  <div className="text-sm	flex items-center mr-1 ml-4 ">
+                  <div className="text-base	flex items-center mr-1 ml-2">
                     Selamat datang,
                   </div>
                 </div>
               </div>
               <div className="flex  items-center">
                 <div className="flex items-center list-none">
-                  <div className="text-sm	font-bold flex items-center mr-4 ">
-                    {this.props.User.currentUser.NAMA}!
+                  <div className="text-base	font-bold flex items-center">
+                    {this.props.User.currentUser.NAMA}
                   </div>
+                    !
                 </div>
               </div>
             </div>
