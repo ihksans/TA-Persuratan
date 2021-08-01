@@ -127,7 +127,7 @@ class SuratKeluarController extends Controller
                         'Msg' => 'succes',
                         'content' => $result,
                         ];            
-                         return response()->json($respon);
+                        return response()->json($respon);
                     } 
                     catch(\Exception $ex){ 
                         $respon = [
@@ -136,7 +136,7 @@ class SuratKeluarController extends Controller
                             ];
                             return response()->json($respon,200);
                         }
-              }catch(\Exception $ex){ 
+            }catch(\Exception $ex){ 
                 $respon = [
                     'Msg' => 'error',
                     'content' => $id,

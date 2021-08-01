@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SuratMasuk;
 use App\Models\JenisSurat;
+use App\Exports\Exporter;
+use Maatwebsite\Excel\Facades\Excel;
+
 class SuratMasukController extends Controller
 {
     //
@@ -145,6 +148,7 @@ class SuratMasukController extends Controller
         ->join('kode_unit_kerja','surat_masuk.ID_KODE_UNIT_KERJA','=','kode_unit_kerja.ID_KODE_UNIT_KERJA')
         ->join('kode_sifat_naskah','kode_sifat_naskah.ID_SIFAT_NASKAH', '=','surat_masuk.ID_SIFAT_NASKAH')
         ->join('pengguna','pengguna.ID_PENGGUNA','=','surat_masuk.ID_PENGGUNA')
+        // ->join('disposisi','disposisi.ID_PENCATATAN','=','surat_masuk.ID_PENCATATAN')
         ->select('pencatatan.PERIHAL','pencatatan.KODE_ARSIP_KOM','pencatatan.KODE_ARSIP_HLM','pencatatan.KODE_ARSIP_MANUAL','pencatatan.NAMA_FILE_SURAT','pencatatan.NAMA_FILE_LAMPIRAN','pencatatan.TGL_SURAT','pencatatan.PENANDATANGAN','jenis_surat.*','derajat_surat.*','surat_masuk.*','kode_unit_kerja.KODE_UNIT_KERJA','kode_unit_kerja.NAMA_UNIT_KERJA','kode_sifat_naskah.KODE_SIFAT_NASKAH','kode_sifat_naskah.SIFAT_NASKAH','pengguna.NAMA')        
         ->orderBy('ID_PENCATATAN','desc')
         ->get();
@@ -206,5 +210,10 @@ class SuratMasukController extends Controller
                 ];
                 return response()->json($respon);
         }
+    }
+    public function exportDataSuratMasuk(){
+        ob_end_clean();
+        ob_start();
+        return Excel::download(new Exporter, 'Pencatatan Surat Masuk.xlsx');
     }
 }

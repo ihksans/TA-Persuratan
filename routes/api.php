@@ -37,9 +37,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('editUser/{request}','PenggunaController@editUser');
     Route::post('updateUser', 'PenggunaController@updateUser');
     Route::delete('deleteUser/{id}', 'PenggunaController@deleteUser');
-    
-    //disposisi
-    Route::get('allInfoDisposisi','DisposisiController@allInfoDisposisi');
+        //disposisi
+    // Route::get('allInfoDisposisi/{id}','DisposisiController@allInfoDisposisi');
+    Route::get('allInfoDisposisi','DisposisiController@allInfoDisposisiSuratMasuk');
     Route::get('createDisposisi','DisposisiController@createDisposisis');
     Route::get('getDisposisi/{id}','DisposisiController@getDisposisi');
     Route::post('createDisposisi','DisposisiController@createDisposisis');
@@ -48,13 +48,17 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::delete('deleteDisposisi/{id}','DisposisiController@deleteDisposisi');
     // Route::delete('deleteUser', 'PenggunaController@deleteUser');
     Route::get('getDisposisiByID/{id}','DisposisiController@getDisposisiByID');
-
+    Route::get('allInfoDisposisiKeluar','DisposisiController@allInfoDisposisiSuratKeluar');
+    Route::get('showData','DisposisiController@showData');
     //nadia
+        //pengingat
     Route::post('createPengingat', 'PengingatController@createPengingat');
     Route::get('allPengingatInfo', 'PengingatController@getAllPengingat');
     Route::get('getPengingat/{id}', 'PengingatController@getPengingat');
     Route::post('updatePengingat', 'PengingatController@updatePengingat');
     Route::delete('deletePengingat/{id}', 'PengingatController@deletePengingat');
+        //exportsurat
+    Route::get('exportDataSuratMasuk', 'SuratMasukController@exportDataSuratMasuk');
 
     //ihksan
     //Pencatatan
@@ -121,6 +125,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('getDetailTujuanPencatatan/{id}','TujuanController@getDetailTujuanPencatatan');
     Route::delete('delAllTujuanPencatatan/{id}', 'TujuanController@delAllTujuanPencatatan');
 
+    //Tujuan Disposisi
+    Route::post('createTujuanDisposisi','TujuanController@createTujuanDisposisi');
+    Route::get('getTujuanDisposisi/{id}','TujuanController@getDetailTujuanDisposisi');
     //SuratKeluar
     Route::post('setSuratKeluar', 'SuratKeluarController@setSuratKeluar');
     Route::get('getSuratKeluar/{id}', 'SuratKeluarController@getSuratKeluar');

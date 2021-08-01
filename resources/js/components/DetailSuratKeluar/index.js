@@ -13,7 +13,7 @@ import AddReminder from '../FormAddReminder'
 import moment from 'moment'
 import { isEmpty } from 'lodash-es'
 
-import Modal from '../AddFormDisposisi/Modal'
+import Modal from '../AddFormDisposisiKeluar/Modal'
 class DetailSuratKeluar extends Component {
   constructor(props) {
     super(props)
@@ -222,7 +222,11 @@ class DetailSuratKeluar extends Component {
                           IdUnitKerja={this.props.IdUnitKerja}
                           pengingatS={this.state.pengingat}
                           countDays={this.state.count}
+                          disposisi={this.props.Disposisi}
+                          tujuanPencatatan={this.state.tujuanPencatatan}
+                          tujuanDisposisi={this.state.tujuanDisposisi}
                         />
+                        
                         <ModalLoading loading={this.state.modalLodaing} />
 
                         <ModalKonfirmDeleteSK

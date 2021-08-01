@@ -9,6 +9,7 @@ import {
   setDerajatSurat,
   setSifatSurat,
   setAllPengingat,
+  setAllDisposisi
 } from '../../actions'
 
 //Ini buat dependecies/library nya
@@ -24,6 +25,7 @@ class SuratMasuk extends Component {
       suratMasuk: [],
       jenisSurat: [],
       unitKerja: [],
+      disposisi: [],
     }
     this.getSuratMasuk = this.getSuratMasuk.bind(this)
   }
@@ -67,6 +69,14 @@ class SuratMasuk extends Component {
       .then((response) => {
         this.props.setAllPengingat(response.data)
       })
+    await api()
+      .get('api/allInfoDisposisi')
+      .then((response)=>{
+        this.setState({
+          disposisi: response.data,
+        })
+        this.props.setAllDisposisi(response.data)
+      })
   }
   componentDidMount() {
     this.getSuratMasuk()
@@ -93,7 +103,7 @@ class SuratMasuk extends Component {
               {/* <div className="transform -translate-y-12"> */}
               {this.props.SuratMasuk.allSuratMasukInfo == null ? (
                 <TabelSuratMasuk
-                  Disposisi={this.state.Disposisi}
+                  Disposisi={this.state.disposisi}
                   SuratMasuk={this.state.suratMasuk}
                   IdJenisSurat={this.state.jenisSurat}
                   IdUnitKerja={this.state.unitKerja}
@@ -127,4 +137,5 @@ export default connect(mapStateToProps, {
   setDerajatSurat,
   setSifatSurat,
   setAllPengingat,
+  setAllDisposisi
 })(SuratMasuk)

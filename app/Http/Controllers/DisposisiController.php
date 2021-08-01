@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Disposisi;
+use Illuminate\Database\QueryException;
 use App\Models\SuratMasuk;
 use App\Models\Pencatatan;
+use App\Models\TujuanDisposisi;
 
 class DisposisiController extends Controller
 {
@@ -18,11 +21,25 @@ class DisposisiController extends Controller
     {
         //
     }
-    public function allInfoDisposisi(){
+    public function allInfoDisposisiSuratMasuk(){
+        // public function allInfoDisposisi($id){
         $disposisi = DB::table('disposisi')
         ->join('surat_masuk','disposisi.ID_PENCATATAN','=','surat_masuk.ID_PENCATATAN')
+        ->join('pencatatan','disposisi.ID_PENCATATAN','=','pencatatan.ID_PENCATATAN')
+        ->where('JENIS_DISPOSISI',1)
+        ->select('disposisi.*','surat_masuk.*','pencatatan.*')
+        ->get();
+        
+        return response()->json($disposisi);
+    }
+    public function allInfoDisposisiSuratKeluar(){
+        // public function allInfoDisposisi($id){
+        $disposisi = DB::table('disposisi')
+        ->join('surat_masuk','disposisi.ID_PENCATATAN','=','surat_masuk.ID_PENCATATAN')
+        ->where('JENIS_DISPOSISI',2)
         ->select('disposisi.*','surat_masuk.*')
         ->get();
+        
         return response()->json($disposisi);
     }
     /**
@@ -32,15 +49,18 @@ class DisposisiController extends Controller
      */
     public function createDisposisis(Request $request)
     {
-       
         $data = [
             'ID_PENGGUNA'=>$request->id_pengguna,
             'ID_PENCATATAN'=>$request->id_pencatatan,
             'TANGGAL_DISPOSISI'=>$request->tanggal_disposisi,
             'NOMOR_DISPOSISI'=>$request->nomor_disposisi,
-            'PROSES_SELANJUTNYA'=>$request->proses_selanjutnya,
+            // tujuan
+            'ID_KODE_UNIT_KERJA'=>$request->id_kode_unit,
             'INFORMASI'=>$request->informasi,
+            'PROSES_SELANJUTNYA'=>$request->proses_selanjutnya,
             'NOMOR_AGENDA'=>$request->nomor_agenda,
+            'JENIS_DISPOSISI'=>$request->jenis_disposisi,
+            'NAMA_FILE_DISPOSISI'=>$request->nama_file_disposisi,
         ];
         $disposisi = Disposisi::create($data);
         if($disposisi ==null){
@@ -109,14 +129,19 @@ class DisposisiController extends Controller
      */
     public function editDisposisi(Request $request)
     {
-        $disposisi = Disposisi::where('ID_DISPOSISI', $request->id)->update([
+        $disposisi = Disposisi::where('ID_DISPOSISI', $request->id)
+        ->update([
             // 'ID_PENGGUNA'=>$request->id_pengguna,
             // 'ID_PENCATATAN'=>$request->id_pencatatan,
-            // 'TANGGAL_DISPOSISI'=>$request->tanggal_disposisi,
+            // 'ID_DISPOSISI'=>$request->id,
+            'TANGGAL_DISPOSISI'=>$request->tanggal_disposisi,
             // 'NOMOR_DISPOSISI'=>$request->nomor_disposisi,
             'PROSES_SELANJUTNYA'=>$request->proses_selanjutnya,
             'INFORMASI'=>$request->informasi,
+            // 'PROSES_SELANJUTNYA'=>$request->keteranganDisposisi,
+            // 'INFORMASI'=>$request->informasiDisposisi,
             'NOMOR_AGENDA'=>$request->nomor_agenda,
+            'NAMA_FILE_DISPOSISI'=>$request->nama_file_disposisi,
         ]);
         if(!$disposisi){
             $respon =[
@@ -131,7 +156,15 @@ class DisposisiController extends Controller
             ];
         return response()->json($respon);
     }
-
+    public function showData()
+    {
+        $count = DB::table('surat_masuk')->count();
+        $respon =[
+            'Msg' => 'success',
+            'content' => $count,
+            ];
+        return response()->json($respon);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -152,20 +185,46 @@ class DisposisiController extends Controller
      */
     public function deleteDisposisi($id)
     {
-        // $suratMasuk = Pencatatan::where('ID_PENCATATAN', $id)->first();
-        $disposisi = Disposisi::where('ID_DISPOSISI',$id);
-        $result =  $disposisi->delete();
-        if($result != null){
-            $respon =[
-            'Msg' => 'success',
-            'content' => $id,
-            ];
-        return response()->json($respon);
+        try{
+            $disposisi = TujuanDisposisi::where('ID_DISPOSISI',$id);
+            $disposisi->delete();
+        } catch(\Exception $ex){ 
+            $respon = [
+                'Msg' => 'error1',
+                'content' => $id,
+                ];
+                return response()->json($respon);
         }
-        $respon =[
-            'Msg' => 'Belum terhapus',
-            'content' => $id,
-            ];
-        return response()->json($respon);
+        try{
+            $disposisi = Disposisi::where('ID_DISPOSISI',$id);
+            $disposisi->delete();
+            $respon = [
+                'Msg' => 'succes',
+                'content' => $result,
+                ];            
+                return response()->json($respon);
+            }
+            catch(\Exception $ex){ 
+                $respon = [
+                    'Msg' => 'error3',
+                    'content' => $id,
+                    ];
+                    return response()->json($respon,200);
+            }
+        // $disposisi = Disposisi::where('ID_PENCATATAN',$id);
+        // $disposisi->delete();
+        // if($disposisi = null){
+        //     $respon =[
+        //     'Msg' => 'error',
+        //     'content' => $id,
+        //     ];
+        // return response()->json($respon);
+        // }
+        
+        // $respon =[
+        //     'Msg' => 'Belum terhapus',
+        //     'content' => $id,
+        //     ];
+        // return response()->json($respon);
     }
 }

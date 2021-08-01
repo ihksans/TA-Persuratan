@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 USE App\Models\Pencatatan;
 use App\Models\JenisSurat;
+use App\Exports\Exporter;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class PencatatanController extends Controller
 {

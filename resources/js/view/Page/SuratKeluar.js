@@ -11,6 +11,7 @@ import {
   setAllPengingat,
   setAllKodeHal,
   setAllPemohon,
+  setAllDisposisi,
 } from '../../actions'
 import api from '../../service/api'
 import TabelSuratKeluar from '../../components/TabelSuratKeluar/TabelSuratKeluar'
@@ -24,6 +25,7 @@ class SuratKeluar extends Component {
       suratKeluar: [],
       jenisSurat: [],
       unitKerja: [],
+      disposisi:[],
       lastNoAgenda: null,
     }
     this.getSuratKeluar = this.getSuratKeluar.bind(this)
@@ -77,6 +79,14 @@ class SuratKeluar extends Component {
       .get('api/getAllPemohon')
       .then((response) => {
         this.props.setAllPemohon(response.data.content)
+      })
+    await api()
+      .get('api/allInfoDisposisi')
+      .then((response)=>{
+        this.setState({
+          disposisi: response.data,
+        })
+        this.props.setAllDisposisi(response.data)
       })
     return (
       <TabelSuratKeluar
@@ -151,4 +161,5 @@ export default connect(mapStateToProps, {
   setAllPengingat,
   setAllKodeHal,
   setAllPemohon,
+  setAllDisposisi
 })(SuratKeluar)

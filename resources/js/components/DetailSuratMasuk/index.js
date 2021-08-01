@@ -20,6 +20,7 @@ class DetailSuratMasuk extends Component {
     this.state = {
       dir: [],
       tujuanPencatatan: [],
+      tujuanDisposisi: [],
       pengingat: null,
       count: null,
       numPages: '',
@@ -42,6 +43,7 @@ class DetailSuratMasuk extends Component {
     this.handleModal = this.handleModal.bind(this)
     this.handlePengingatModal = this.handlePengingatModal.bind(this)
     this.handleTujuanPencatatan = this.handleTujuanPencatatan.bind(this)
+    this.handleTujuanDisposisi = this.handleTujuanDisposisi.bind(this)
     this.handleTindakLanjutModal = this.handleTindakLanjutModal.bind(this)
     this.getFileSuratMasuk = this.getFileSuratMasuk.bind(this)
     this.getPengingatSurat = this.getPengingatSurat.bind(this)
@@ -61,13 +63,40 @@ class DetailSuratMasuk extends Component {
         console.log('tujuan pencatatan2:' + response.data.content)
       })
   }
+  async handleTujuanDisposisi() {
+    await api()
+      .get(
+        'api/getDetailTujuanPencatatan/' + this.props.SuratDetail.ID_PENCATATAN,
+      )
+      .then((response) => {
+        this.setState({
+          tujuanPencatatan: response.data.content,
+        })
+        console.log('tujuan pencatatan:' + this.state.tujuanPencatatan)
+        console.log('tujuan pencatatan2:' + response.data.content)
+        console.log('id tujuan pencatatan: '+ this.props.SuratDetail.ID_DISPOSISI)
+      })
+  }
+  async handleTujuanDisposisi(){
+    await api()
+    .get('api/getTujuanDisposisi/'+this.props.Disposisi.ID_DISPOSISI,)
+    .them((response)=>{
+      this.setState({
+        tujuanDisposisi: response.data.content,
+      })
+      console.log('tujuan disposisi:' + this.state.tujuanDisposisi)
+      console.log('tujuan disposisi 2:' + response.data.content)
+    })
+  }
   handleLoading() {
     this.setState({
       loading: !this.state.loading,
     })
   }
   async handleModal() {
+    this.handleTujuanDisposisi()
     this.handleTujuanPencatatan()
+    
     if (this.state.url == null || this.state.urlLampiran == null) {
       this.handleLoading()
       await this.getFileSuratMasuk()
@@ -81,6 +110,7 @@ class DetailSuratMasuk extends Component {
       this.reserveTgl()
       this.getPengingatSurat()
     }
+    
   }
   async handlePengingatModal() {
     await this.setState({
@@ -201,6 +231,9 @@ class DetailSuratMasuk extends Component {
                           IdUnitKerja={this.props.IdUnitKerja}
                           pengingatS={this.state.pengingat}
                           countDays={this.state.count}
+                          disposisi={this.props.Disposisi}
+                          tujuanPencatatan={this.state.tujuanPencatatan}
+                          tujuanDisposisi={this.state.tujuanDisposisi}
                         />
                         <ModalLoading loading={this.state.modalLodaing} />
 
@@ -210,7 +243,6 @@ class DetailSuratMasuk extends Component {
                         />
                       </div>
                       <div className="font-bold">Dicatat oleh </div>
-
                       <div className="col-span-2">
                         {this.props.SuratDetail.NAMA}
                       </div>
@@ -306,6 +338,8 @@ class DetailSuratMasuk extends Component {
                       <div className="">
                         : {this.props.SuratDetail.KODE_ARSIP_MANUAL}
                       </div>
+
+                      
 
                       <div className="font-bold">Status Pengingat</div>
                       <div className=" col-span-2">
@@ -404,6 +438,10 @@ class DetailSuratMasuk extends Component {
                           )}
                         </>
                       )}
+                      {/* <div style={{ marginTop: 20 }}>
+                          {JSON.stringify(this.props.Disposisi)}
+                        
+                      </div> */}
                     </div>
                     <div className="flex flex-row grid p-4 rounded-r-lg">
                       <div className="flex flex-row justify-end">

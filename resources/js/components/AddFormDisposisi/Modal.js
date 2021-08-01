@@ -10,7 +10,9 @@ class ClassReducers extends Component {
   constructor(props) {
     super()
     this.state = {
+      tujuanDisposisi:[],
       modal: false,
+      idDisposisi:null,
       disposisi: null,
       detailDisposisi: null,
       loading: false,
@@ -25,13 +27,12 @@ class ClassReducers extends Component {
     await this.setState({
       modal: !this.state.modal,
     })
-    if (this.state.modal == false) {
+    if (this .state.modal == false) {
       await this.setState({
         modal: !this.state.modal,
       })
     }
-
-    console.log('modal:' + this.state.modal)
+    console.log('modal: ' + this.state.modal)
   }
   handleLoading() {
     this.setState({
@@ -46,6 +47,16 @@ class ClassReducers extends Component {
         if (response.data.content != null) {
           this.setState({
             disposisi: response.data.content,
+            SuratDetail: this.props.SuratDetail,
+          })
+          api()
+          .get('api/getTujuanDisposisi/'+ response.data.content.ID_DISPOSISI)
+          .then((response)=>{
+            this.setState({
+              tujuanDisposisi: response.data.content,
+            })
+            console.log('tujuan disposisi:' + this.state.tujuanDisposisi)
+            console.log('tujuan disposisi 2:' + response.data.content)
           })
           //didie
         } else {
@@ -54,6 +65,7 @@ class ClassReducers extends Component {
           })
         }
       })
+      console.log('disposisi by id: '+ this.state.idDisposisi)
     if (this.state.disposisi != null) {
       let formData = new FormData()
       formData.append(
@@ -63,8 +75,11 @@ class ClassReducers extends Component {
       await api()
         .post('/api/getSurat', formData)
         .then((response) =>
+        
           this.setState({
+            
             url: response.data.url,
+            
           }),
         )
     }
@@ -98,6 +113,10 @@ class ClassReducers extends Component {
               url={this.state.url}
               pengingatS={this.props.pengingatS}
               countDays={this.props.countDays}
+              DisposisiDetail={this.props.DisposisiDetail}
+              tujuanPencatatan={this.props.tujuanPencatatan}
+              tujuanDisposisi={this.state.tujuanDisposisi}
+              idDisposisi={this.state.idDisposisi}
             />
           </>
         ) : null}

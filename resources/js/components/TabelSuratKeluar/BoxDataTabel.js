@@ -85,6 +85,7 @@ class BoxDataTabel extends Component {
             namaLampiran={this.props.Surat.NAMA_FILE_LAMPIRAN}
             jenisSurat={this.props.jenisSurat}
             IdUnitKerja={this.props.IdUnitKerja}
+            Disposisi={this.props.Disposisi}
           />
         </div>
       </>

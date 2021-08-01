@@ -29,6 +29,8 @@ export const UNSET_ALL_PENGINGAT = 'UNSET_ALL_PENGINGAT'
 export const SET_ALL_DISPOSISI = 'SET_ALL_DISPOSISI'
 export const UNSET_ALL_DISPOSISI = 'UNSET_ALL_DISPOSISI'
 
+export const SET_ALL_PENCATATAN = 'SET_ALL_PENCATATAN'
+export const UNSET_ALL_PENCATATAN = 'UNSET_ALL_PENCATATAN'
 export const SET_KODE_HAL = 'SET_KODE_HAL'
 export const UNSET_KODE_HAL = 'UNSET_KODE_HAL'
 
@@ -197,7 +199,18 @@ export function unsetAllDisposisi(payload) {
   }
   return action
 }
-
+export function setAllPencatatan(){
+  const action = {
+    type: SET_ALL_PENCATATAN,
+    payload,
+  }
+}
+export function unsetAllPencatatan(){
+  const action = {
+    type: UNSET_ALL_PENCATATAN,
+    payload, 
+  }
+}
 export function setAllSuratKeluar(payload) {
   const action = {
     type: SET_ALL_SURAT_KELUAR,
@@ -205,6 +218,7 @@ export function setAllSuratKeluar(payload) {
   }
   return action
 }
+
 
 export function unsetAllSuratKeluar() {
   const action = {

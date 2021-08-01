@@ -48,7 +48,7 @@ class KodeUnitKerjaSeeder extends Seeder
         ]);
         KodeUnitKerja::create([
             'KODE_UNIT_KERJA'=> 'R8',
-            'NAMA_UNIT_KERJA'=> 'Satruan Pengawasan Internal',
+            'NAMA_UNIT_KERJA'=> 'Satuan Pengawasan Internal',
         ]);
         KodeUnitKerja::create([
             'KODE_UNIT_KERJA'=> 'R9',
@@ -72,7 +72,7 @@ class KodeUnitKerjaSeeder extends Seeder
         ]);
         KodeUnitKerja::create([
             'KODE_UNIT_KERJA'=> 'R12',
-            'NAMA_UNIT_KERJA'=> 'Bagian ',
+            'NAMA_UNIT_KERJA'=> 'Bagian Administrasi Umum dan Keuangan',
         ]);
         KodeUnitKerja::create([
             'KODE_UNIT_KERJA'=> 'R12.1',
@@ -184,7 +184,7 @@ class KodeUnitKerjaSeeder extends Seeder
         ]);
         KodeUnitKerja::create([
             'KODE_UNIT_KERJA'=> 'ME',
-            'NAMA_UNIT_KERJA'=> 'Jurusan Teknik Mesin ',
+            'NAMA_UNIT_KERJA'=> 'Jurusan Teknik Mesin',
         ]);
         KodeUnitKerja::create([
             'KODE_UNIT_KERJA'=> 'ME.1',
@@ -220,15 +220,15 @@ class KodeUnitKerjaSeeder extends Seeder
         ]);
         KodeUnitKerja::create([
             'KODE_UNIT_KERJA'=> 'RA',
-            'NAMA_UNIT_KERJA'=> 'Jurusan Teknik Refrigasi dan Tata Udara',
+            'NAMA_UNIT_KERJA'=> 'Jurusan Teknik Refrigerasi dan Tata Udara',
         ]);
         KodeUnitKerja::create([
             'KODE_UNIT_KERJA'=> 'RA.1',
-            'NAMA_UNIT_KERJA'=> 'Program Studi Teknik Refrigasi dan Tata Udara (D3)',
+            'NAMA_UNIT_KERJA'=> 'Program Studi Teknik Refrigerasi dan Tata Udara (D3)',
         ]);
         KodeUnitKerja::create([
             'KODE_UNIT_KERJA'=> 'RA.2',
-            'NAMA_UNIT_KERJA'=> 'Program Studi Teknik Refrigasi dan Tata Udara (D4)',
+            'NAMA_UNIT_KERJA'=> 'Program Studi Teknik Refrigerasi dan Tata Udara (D4)',
         ]);
         KodeUnitKerja::create([
             'KODE_UNIT_KERJA'=> 'EL',
@@ -300,7 +300,7 @@ class KodeUnitKerjaSeeder extends Seeder
         ]);
         KodeUnitKerja::create([
             'KODE_UNIT_KERJA'=> 'AN.1',
-            'NAMA_UNIT_KERJA'=> 'Program Studi Administradi Bisnis (D3)',
+            'NAMA_UNIT_KERJA'=> 'Program Studi Administrasi Bisnis (D3)',
         ]);
         KodeUnitKerja::create([
             'KODE_UNIT_KERJA'=> 'AN.2',
