@@ -167,4 +167,25 @@ class PenggunaController extends Controller
         }      
         return response()->json($user);
     }
+    public function getCountUser(){
+        try{
+            $result = Pengguna::all();
+            $count= $result->count();
+            $respon = [
+                'Msg' => 'success',
+                'content' => $count,
+            ];
+            return response()->json($respon);
+
+        }catch(\Exception $ex){ 
+            $respon = [
+                'Msg' => 'error',
+                'content' => null,
+                ];
+                return response()->json($respon);
+
+        }
+     
+
+    }
 }

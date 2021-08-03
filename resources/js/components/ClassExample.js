@@ -26,7 +26,6 @@ class ClassExample extends Component {
         {/* 
         <div style={{ marginTop: 20 }}>
            {JSON.stringify(this.state.typeNomor)}
-         
         </div> */}
         <p>Ini Class Komponen</p>
       </>
