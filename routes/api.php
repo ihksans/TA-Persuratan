@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('getDisposisiByID/{id}','DisposisiController@getDisposisiByID');
     Route::get('allInfoDisposisiKeluar','DisposisiController@allInfoDisposisiSuratKeluar');
     Route::get('showData','DisposisiController@showData');
+    
     //nadia
         //pengingat
     Route::post('createPengingat', 'PengingatController@createPengingat');
@@ -59,6 +60,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::delete('deletePengingat/{id}', 'PengingatController@deletePengingat');
         //exportsurat
     Route::get('exportDataSuratMasuk', 'SuratMasukController@exportDataSuratMasuk');
+    Route::get('exportDataSuratKeluar', 'SuratKeluarController@exportDataSuratKeluar');
 
     //ihksan
     //Pencatatan

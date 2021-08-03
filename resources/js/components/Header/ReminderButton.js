@@ -60,16 +60,28 @@ class ReminderButton extends Component {
                       <h2 className="mt-3 text-center text-md text-bb font-bold">Surat Masuk</h2>
                       <div className="mt-4 mb-4 border-r-2 border-bb">
                         {this.props.Pengingat.allPengingatInfo == null ? (
-                          <DataReminder Pengingat={this.state.Pengingat} />
+                          <DataReminder
+                            Pengingat={this.state.Pengingat} 
+                            jenisPengingat={1}/>
                         ) : (
-                          <DataReminder Pengingat={this.props.Pengingat.allPengingatInfo} />
+                          <DataReminder 
+                            Pengingat={this.props.Pengingat.allPengingatInfo} 
+                            jenisPengingat={1}/>
                         )}
                       </div>
                     </div>
                     <div>
                       <h2 className="mt-3 text-center text-md text-bb font-bold">Surat Keluar</h2>
                       <div className="mt-4 mb-4 border-l-2 border-bb">
-                        
+                        {this.props.Pengingat.allPengingatInfo == null ? (
+                          <DataReminder
+                            Pengingat={this.state.Pengingat} 
+                            jenisPengingat={2}/>
+                        ) : (
+                          <DataReminder 
+                            Pengingat={this.props.Pengingat.allPengingatInfo} 
+                            jenisPengingat={2}/>
+                        )}
                       </div>
                     </div>
                   </div>

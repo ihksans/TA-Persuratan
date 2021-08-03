@@ -9,7 +9,8 @@ use Illuminate\Database\QueryException;
 use App\Models\NomorSuratKeluar;
 use App\Models\TujuanPencatatan;
 use App\Models\Pencatatan;
-
+use App\Exports\SuratKeluarExporter;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SuratKeluarController extends Controller
 {
@@ -323,5 +324,9 @@ class SuratKeluarController extends Controller
                     return response()->json($respon);
             }
     }
-  
+    public function exportDataSuratKeluar(){
+        ob_end_clean();
+        ob_start();
+        return (new SuratKeluarExporter)->download('Pencatatan Surat Keluar per ' .date("d-m-Y").'.xlsx');
+    }
 }

@@ -102,6 +102,7 @@ class FormUpdateReminder extends Component {
                     WAKTU_PENGINGAT: this.state.waktuPengingat,
                     DESKRIPSI: this.state.deskripsiPengingat,
                     STATUS: this.state.status,
+                    JENIS_PENGINGAT: this.props.jenisPengingat,
                 })
                 .then((response) => {
                     this.setState({
@@ -115,7 +116,12 @@ class FormUpdateReminder extends Component {
                     })
                     this.handleLoading()
                     this.handleModal()
-                    window.location.reload('/#/SuratMasuk')
+                    if (this.props.jenisPengingat == 1){
+                      window.location.reload('/#/SuratMasuk')
+                    }
+                    if (this.props.jenisPengingat == 2){
+                      window.location.reload('/#/SuratKeluar')
+                    }                    
                     // this.setState({
                     //   showModal: !this.state.showModal,
                     // })
