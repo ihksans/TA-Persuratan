@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Tab from "../../components/Tab";
 // import SuratMasuk from '../../view/Page/SuratMasuk'
 import SuratMasuk from '../../components/TabelKelolaSurat/SM'
-import Disposisi from '../../view/Page/Disposisi'
+import SuratKeluar from '../../components/TabelKelolaSurat/SK'
 
 const tabContent = [
   {
@@ -11,7 +11,7 @@ const tabContent = [
   },
   {
     title: "Surat Keluar",
-    content: <Disposisi/>, //surat keluar
+    content: <SuratKeluar/>,
   },
 ];
 

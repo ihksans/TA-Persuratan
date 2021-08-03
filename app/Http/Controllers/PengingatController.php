@@ -23,6 +23,7 @@ class PengingatController extends Controller
             'WAKTU_PENGINGAT' => $request->WAKTU_PENGINGAT,
             'DESKRIPSI' => $request->DESKRIPSI,
             'STATUS' => $request->STATUS,
+            'JENIS_PENGINGAT' => $request->JENIS_PENGINGAT,
         ];
         $pengingat = Pengingat::create($data);
         if(!$pengingat){
@@ -77,6 +78,7 @@ class PengingatController extends Controller
             'WAKTU_PENGINGAT' => $request->WAKTU_PENGINGAT,
             'DESKRIPSI' => $request->DESKRIPSI,
             'STATUS' => $request->STATUS,
+            'JENIS_PENGINGAT' => $request->JENIS_PENGINGAT,
         ]);
         if(!$pengingat){
             $respon = [

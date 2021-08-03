@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SuratMasuk;
 use App\Models\JenisSurat;
-use App\Exports\Exporter;
+use App\Exports\SuratMasukExporter;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SuratMasukController extends Controller
@@ -214,7 +214,8 @@ class SuratMasukController extends Controller
     public function exportDataSuratMasuk(){
         ob_end_clean();
         ob_start();
-        return Excel::download(new Exporter, 'Pencatatan Surat Masuk.xlsx');
+        // return Excel::download(new SuratMasukExporter, 'Pencatatan Surat Masuk.xlsx');
+        return (new SuratMasukExporter)->download('Pencatatan Surat Masuk per ' .date("d-m-Y").'.xlsx');
     }
     public function getCountSM(){
         try{

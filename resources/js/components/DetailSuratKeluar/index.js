@@ -480,6 +480,7 @@ class DetailSuratKeluar extends Component {
                   idPencatatan={this.props.SuratDetail.ID_PENCATATAN}
                   noAgenda={this.props.SuratDetail.NOMOR_AGENDA}
                   idDerajatSurat={this.props.SuratDetail.ID_DERAJAT_SURAT}
+                  jenisPengingat={2}
                 />
               </>
             ) : (
@@ -493,6 +494,7 @@ class DetailSuratKeluar extends Component {
                   status={this.state.pengingat.STATUS}
                   noAgenda={this.props.SuratDetail.NOMOR_AGENDA}
                   idDerajatSurat={this.props.SuratDetail.ID_DERAJAT_SURAT}
+                  jenisPengingat={2}
                 />
               </>
             )}
@@ -507,6 +509,7 @@ class DetailSuratKeluar extends Component {
               waktuPengingat={this.state.pengingat.WAKTU_PENGINGAT}
               deskripsiPengingat={this.state.pengingat.DESKRIPSI}
               status={this.state.pengingat.STATUS}
+              jenisPengingat={2}
             />
           </>
         ) : null}
