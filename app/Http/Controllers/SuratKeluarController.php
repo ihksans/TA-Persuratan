@@ -322,6 +322,29 @@ class SuratKeluarController extends Controller
                     ];
                     return response()->json($respon);
             }
+            
+    }
+    
+    public function getCountSK(){
+        try{
+            $result = SuratKeluar::all();
+            $count= $result->count();
+            $respon = [
+                'Msg' => 'success',
+                'content' => $count,
+            ];
+            return response()->json($respon);
+
+        }catch(\Exception $ex){ 
+            $respon = [
+                'Msg' => 'error',
+                'content' => null,
+                ];
+                return response()->json($respon);
+
+        }
+     
+
     }
   
 }

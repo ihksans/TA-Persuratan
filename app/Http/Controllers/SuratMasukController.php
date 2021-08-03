@@ -216,4 +216,25 @@ class SuratMasukController extends Controller
         ob_start();
         return Excel::download(new Exporter, 'Pencatatan Surat Masuk.xlsx');
     }
+    public function getCountSM(){
+        try{
+            $result = SuratMasuk::all();
+            $count= $result->count();
+            $respon = [
+                'Msg' => 'success',
+                'content' => $count,
+            ];
+            return response()->json($respon);
+
+        }catch(\Exception $ex){ 
+            $respon = [
+                'Msg' => 'error',
+                'content' => null,
+                ];
+                return response()->json($respon);
+
+        }
+     
+
+    }
 }

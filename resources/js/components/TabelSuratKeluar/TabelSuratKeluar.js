@@ -29,12 +29,25 @@ class TabelSuratKeluar extends Component {
             SuratKeluar: response.data.content,
           })
         })
+    }else {
+      this.setState({
+        SuratKeluar: this.props.SuratKeluar,
+      })
     }
   }
   handleSearch(e) {
     this.setState({
       search: e.target.value,
     })
+    if(
+      e.target.value == '' &&
+      e.target.value == null &&
+      e.target.value == ' '
+    ){
+      this.setState({
+        SuratKeluar: this.props.SuratKeluar,
+      })
+    }
   }
   render() {
     return (

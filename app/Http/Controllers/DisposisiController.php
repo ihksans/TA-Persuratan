@@ -200,7 +200,7 @@ class DisposisiController extends Controller
             $disposisi->delete();
             $respon = [
                 'Msg' => 'succes',
-                'content' => $result,
+                'content' => $disposisi,
                 ];            
                 return response()->json($respon);
             }
@@ -226,5 +226,26 @@ class DisposisiController extends Controller
         //     'content' => $id,
         //     ];
         // return response()->json($respon);
+    }
+    public function getCountDis(){
+        try{
+            $result = Disposisi::all();
+            $count= $result->count();
+            $respon = [
+                'Msg' => 'success',
+                'content' => $count,
+            ];
+            return response()->json($respon);
+
+        }catch(\Exception $ex){ 
+            $respon = [
+                'Msg' => 'error',
+                'content' => null,
+                ];
+                return response()->json($respon);
+
+        }
+     
+
     }
 }

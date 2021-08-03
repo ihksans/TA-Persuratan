@@ -17,12 +17,10 @@ class TabelSuratMasuk extends Component {
     this.handleSearch = this.handleSearch.bind(this)
   }
   async getSuratMasuk(e) {
-    let key = e.target.value
+    let key = this.state.search
     let str = ''
     str = key.replace(/\s\s+/g, '')
-    this.setState({
-      search: str,
-    })
+
     if (str != '' && str != null && str != ' ') {
       await api()
         .get('/api/searchSuratMasuk/' + str)
@@ -31,12 +29,25 @@ class TabelSuratMasuk extends Component {
             SuratMasuk: response.data.content,
           })
         })
+    } else {
+      this.setState({
+        SuratMasuk: this.props.SuratMasuk,
+      })
     }
   }
   handleSearch(e) {
     this.setState({
       search: e.target.value,
     })
+    if (
+      e.target.value == '' &&
+      e.target.value == null &&
+      e.target.value == ' '
+    ) {
+      this.setState({
+        SuratMasuk: this.props.SuratMasuk,
+      })
+    }
   }
   render() {
     return (
@@ -47,7 +58,7 @@ class TabelSuratMasuk extends Component {
               className="w-full focus:outline-none"
               type="text"
               placeholder="Cari Surat..."
-              onChange={this.getSuratMasuk}
+              onChange={this.handleSearch}
             />
             <button onClick={this.getSuratMasuk}>
               <svg
