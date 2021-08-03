@@ -20,7 +20,7 @@ class BoxDataTabel extends Component {
                 <div className="">{this.props.No}.</div>
               </div>
 
-              <div className="   col-span-2 ">
+              <div className="  flex flex-row items-center  col-span-2 ">
                 <div className="flex flex-row">
                   <div className="flex flex-row ">
                     {this.props.Surat.TGL_SURAT}

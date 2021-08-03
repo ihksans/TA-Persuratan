@@ -147,4 +147,25 @@ class PencatatanController extends Controller
             ];
         return response()->json($respon);
     }
+    public function getCountPenc(){
+        try{
+            $result = Pencatatan::all();
+            $count= $result->count();
+            $respon = [
+                'Msg' => 'success',
+                'content' => $count,
+            ];
+            return response()->json($respon);
+
+        }catch(\Exception $ex){ 
+            $respon = [
+                'Msg' => 'error',
+                'content' => null,
+                ];
+                return response()->json($respon);
+
+        }
+     
+
+    }
 }

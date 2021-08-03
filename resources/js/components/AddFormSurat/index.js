@@ -857,10 +857,7 @@ class AddFormSurat extends Component {
     ) {
       this.handleLoading()
       let fd = new FormData()
-      if (
-        this.state.customKodePengirim != null &&
-        this.state.customNamaPengirim != null
-      ) {
+      if (this.state.customInputPengirim == true) {
         let forDataCustom2 = new FormData()
         forDataCustom2.append('kodeUnit', this.state.customKodePengirim)
         forDataCustom2.append('namaUnit', this.state.customNamaPengirim)
@@ -868,12 +865,10 @@ class AddFormSurat extends Component {
           .post('api/setKodeUnit', forDataCustom2)
           .then((response) => {
             console.log('setKodeUnit2:' + response.data.content.id)
-            if (this.state.customInputPengirim == false) {
-              fd.append('id_kode_unit', this.state.unitPengirim)
-            } else {
-              fd.append('id_kode_unit', response.data.content.id)
-            }
+            fd.append('id_kode_unit', response.data.content.id)
           })
+      } else {
+        fd.append('id_kode_unit', this.state.unitPengirim)
       }
       let formData = new FormData()
       formData.append('id_pengguna', this.props.User.currentUser.ID_PENGGUNA)

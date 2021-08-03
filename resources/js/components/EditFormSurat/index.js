@@ -1001,8 +1001,8 @@ class EditFormSurat extends Component {
               .then((response) => {
                 if (this.state.surat == null && this.state.lampiran == null) {
                   this.handleLoading()
-                  // this.handleModal()
-                  //   window.location.reload('/#/SuratMasuk')
+                  this.handleModal()
+                  window.location.reload('/#/SuratMasuk')
                 }
               })
           }
@@ -1015,9 +1015,9 @@ class EditFormSurat extends Component {
             .post('api/addSurat', fd2)
             .then((response) => {
               if (this.state.lampiran == null) {
-                //this.handleLoading()
-                // this.handleModal()
-                //window.location.reload('/#/SuratMasuk')
+                this.handleLoading()
+                this.handleModal()
+                window.location.reload('/#/SuratMasuk')
               }
             })
         }
@@ -1032,7 +1032,7 @@ class EditFormSurat extends Component {
               //jika dari BE error
               this.handleLoading()
               this.handleModal()
-              //  window.location.reload('/#/SuratMasuk')
+              window.location.reload('/#/SuratMasuk')
             })
         }
       }
