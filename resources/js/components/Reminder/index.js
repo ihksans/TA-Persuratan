@@ -16,9 +16,7 @@ class DataReminder extends Component {
   render(){
     let rn = moment()
     let filteredPengingat = this.state.Pengingat.filter((obj)=>{
-      if (obj.JENIS_PENGINGAT == this.state.jP){
-        return obj.WAKTU_PENGINGAT >= rn.format("YYYY-MM-DD") && obj.STATUS == 1
-      }      
+      return obj.JENIS_PENGINGAT == this.state.jP     
     })
     console.log(rn.format("YYYY-MM-DD"))
     return (

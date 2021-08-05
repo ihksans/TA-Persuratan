@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import DataReminder from '../Reminder'
 import api from '../../service/api'
 import { setAllPengingat } from '../../actions'
+import moment from 'moment'
 
 class ReminderButton extends Component {
   constructor(props) {
@@ -32,6 +33,18 @@ class ReminderButton extends Component {
     this.getAllPengingat()
   }
   render() {
+    let filteredPengingat
+    let pengingatTerlewat
+    let rn = moment()
+    if (this.state.show){
+      filteredPengingat = this.props.Pengingat.allPengingatInfo.filter((obj)=>{
+          return obj.WAKTU_PENGINGAT >= rn.format("YYYY-MM-DD") && obj.STATUS == 1
+      })
+      pengingatTerlewat = this.props.Pengingat.allPengingatInfo.filter((obj)=>{
+        return obj.WAKTU_PENGINGAT < rn.format("YYYY-MM-DD") && obj.STATUS == 1
+      })
+    }
+    console.log(pengingatTerlewat)
     return (
       <>
         {this.props.User.currentUser.ROLE == 1 ? (
@@ -59,30 +72,50 @@ class ReminderButton extends Component {
                     <div>
                       <h2 className="mt-3 text-center text-md text-bb font-bold">Surat Masuk</h2>
                       <div className="mt-4 mb-4 border-r-2 border-bb">
-                        {this.props.Pengingat.allPengingatInfo == null ? (
-                          <DataReminder
-                            Pengingat={this.state.Pengingat} 
-                            jenisPengingat={1}/>
+                        {filteredPengingat == null ? (
+                          <></>
                         ) : (
                           <DataReminder 
-                            Pengingat={this.props.Pengingat.allPengingatInfo} 
+                            Pengingat={filteredPengingat} 
                             jenisPengingat={1}/>
                         )}
                       </div>
+                        {pengingatTerlewat == null ? (
+                          <></>
+                        ) : (
+                          <>
+                          {/* <h2 className="ml-3 text-xs font-semibold text-danger italic">Terlewat</h2> */}
+                          <div className="mt-1 mb-4 border-r-2 border-bb">
+                              <DataReminder 
+                                Pengingat={pengingatTerlewat} 
+                                jenisPengingat={1}/>
+                          </div>
+                          </>
+                        )}
                     </div>
                     <div>
                       <h2 className="mt-3 text-center text-md text-bb font-bold">Surat Keluar</h2>
-                      <div className="mt-4 mb-4 border-l-2 border-bb">
-                        {this.props.Pengingat.allPengingatInfo == null ? (
-                          <DataReminder
-                            Pengingat={this.state.Pengingat} 
-                            jenisPengingat={2}/>
+                      <div className="mt-4 mb-4 border-r-2 border-bb">
+                        {filteredPengingat == null ? (
+                          <></>
                         ) : (
                           <DataReminder 
-                            Pengingat={this.props.Pengingat.allPengingatInfo} 
+                            Pengingat={filteredPengingat} 
                             jenisPengingat={2}/>
                         )}
                       </div>
+                        {pengingatTerlewat == null ? (
+                          <></>
+                        ) : (
+                          <>
+                          {/* <h2 className="ml-3 text-xs font-semibold text-danger italic">Terlewat</h2> */}
+                          <div className="mt-1 mb-4 border-r-2 border-bb">
+                              <DataReminder 
+                                Pengingat={pengingatTerlewat} 
+                                jenisPengingat={2}/>
+                          </div>
+                          </>
+                        )}
                     </div>
                   </div>
                 </div>
