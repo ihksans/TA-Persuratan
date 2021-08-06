@@ -28,7 +28,6 @@ class SuratKeluarPerTypeSheet implements FromCollection, WithTitle, WithHeadings
     public function collection()
     {
         $suratKeluar = DB::table('surat_keluar')
-        ->join('kode_unit_kerja','kode_unit_kerja.ID_KODE_UNIT_KERJA','=','1')
         ->join('pencatatan','surat_keluar.ID_PENCATATAN','=','pencatatan.ID_PENCATATAN')
         ->join('pengguna','surat_keluar.ID_PENGGUNA','=','pengguna.ID_PENGGUNA')        
         ->join('jenis_surat','jenis_surat.ID_JENIS_SURAT','=','pencatatan.ID_JENIS_SURAT')
@@ -37,7 +36,7 @@ class SuratKeluarPerTypeSheet implements FromCollection, WithTitle, WithHeadings
         ->join('nomor_surat','nomor_surat.ID_NOMOR_SURAT','=','surat_keluar.ID_NOMOR_SURAT')
         ->where('jenis_surat.TIPE_SURAT',$this->jenis)
         ->select('nomor_surat.NOMOR_URUT','pencatatan.TGL_SURAT','surat_keluar.TGL_KIRIM','surat_keluar.NOMOR_SURAT','pencatatan.PERIHAL',
-        'tujuan_pencatatan.ID_KODE_UNIT_KERJA','pencatatan.PENANDATANGAN','pemohon.NAMA_PEMOHON','kode_unit_kerja.NAMA_UNIT_KERJA',
+        'tujuan_pencatatan.ID_KODE_UNIT_KERJA','pencatatan.PENANDATANGAN','pemohon.NAMA_PEMOHON','pencatatan.ID_PENCATATAN as UNIT_PEMOHON' ,
         'pencatatan.KODE_ARSIP_KOM','pencatatan.KODE_ARSIP_HLM','pencatatan.KODE_ARSIP_MANUAL','pengguna.NAMA')
         ->get();
         foreach ($suratKeluar as $row){
@@ -46,6 +45,7 @@ class SuratKeluarPerTypeSheet implements FromCollection, WithTitle, WithHeadings
             ->select('NAMA_UNIT_KERJA')
             ->get()->first();
             $row->ID_KODE_UNIT_KERJA = $tujuan->NAMA_UNIT_KERJA;
+            $row->UNIT_PEMOHON = 'Wakil Direktur Bidang Kemahasiswaan';
         }
         return $suratKeluar;
     }
