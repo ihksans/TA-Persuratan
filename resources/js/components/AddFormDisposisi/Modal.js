@@ -105,6 +105,7 @@ class ClassReducers extends Component {
             <AddFormDisposisi
               showModal={true}
               namaFile={this.props.NamaFileSurat}
+              // namaFileD={this.props.disposisi.NAMA_FILE_SURAT}
               SuratDetail={this.props.SuratDetail}
               namaLampiran={this.props.NamaFileLampiran}
               jenisSurat={this.props.jenisSurat}

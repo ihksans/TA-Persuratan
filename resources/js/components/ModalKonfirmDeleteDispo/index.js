@@ -20,8 +20,7 @@ export default function ModalKonfirmDeleteDispo({
     await api()
       .delete('api/deleteDisposisi/' + id)
       .then((response) => {
-        console.log('respon: '+ response)
-        if (NamaLampiran == null && NamaLampiran == null) {
+        if (NamaDisposisi == null) {
           handleLoading()
           setShowModal(false)
           window.location.reload('/#/SuratMasuk')
@@ -34,22 +33,12 @@ export default function ModalKonfirmDeleteDispo({
     if(NamaDisposisi != null){
       await api()
         .delete('api/delSurat/'+ NamaDisposisi)
-        then((response)=>{
-          if(NamaLampiran == null){
+        .then((response)=>{
+          // if(NamaLampiran == null){
             handleLoading()
             setShowModal(false)
             window.location.reload('/#/SuratMasuk')
-          }
-        })
-        .catch((error) => {})
-    }
-    if (NamaLampiran != null) {
-      await api()
-        .delete('api/delSurat/' + NamaLampiran)
-        .then((response) => {
-          handleLoading()
-          setShowModal(false)
-          window.location.reload('/#/SuratMasuk')
+          // }
         })
         .catch((error) => {})
     }

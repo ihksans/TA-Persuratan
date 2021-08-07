@@ -80,6 +80,7 @@ class DetailDisposisi extends Component {
     console.log('disposisi '+this.props.disposisi)
     console.log('pengingatS '+this.props.pengingatS)
     console.log('countDays '+this.props.countDays)
+    console.log(JSON.stringify(this.props.DisposisiDetail.NOMOR_SURAT))
   }
   handleDelete() {
     window.location.reload('/#/Disposisi')
@@ -231,6 +232,7 @@ class DetailDisposisi extends Component {
                       <div className="font-bold">Perihal / Ringkasan Surat</div>
                       <div className="col-span-2 ml-4 mb-4">
                         {this.props.DisposisiDetail.PERIHAL}
+                        
                       </div>
                     </div>
                     <div>

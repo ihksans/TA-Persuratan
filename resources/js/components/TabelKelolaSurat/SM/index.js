@@ -10,6 +10,7 @@ import {
 } from '../../../actions'
 import api from '../../../service/api'
 import TabelSuratMasuk from './TabelSuratMasuk'
+import moment from 'moment'
 
 class KelolaSuratMasuk extends Component {
   constructor(props) {
@@ -73,10 +74,11 @@ class KelolaSuratMasuk extends Component {
             headers: { "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }
         })
       .then((response) => {
+        const date = new Date();
         const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement("a");
             link.href = url;
-            link.setAttribute("download", "Pencatatan Surat Masuk.xlsx");
+            link.setAttribute("download", "Pencatatan Surat Masuk per "+ moment(date).format('DD-MM-YYYY') +".xlsx");
             document.body.appendChild(link);
             link.click();
             // console.log(response.data)

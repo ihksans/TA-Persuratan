@@ -53,6 +53,10 @@ export default function ModalKonfirmDeleteSM({
         })
         .catch((error) => {})
     }
+    // console.log(JSON.stringify(IdSurat))
+    // console.log(JSON.stringify(NomorSurat))
+    // console.log(JSON.stringify(NamaSurat))
+    // console.log(JSON.stringify(NamaLampiran))
   }
   return (
     <>

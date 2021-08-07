@@ -31,9 +31,7 @@ class FormUpdateReminder extends Component {
     this.handleErrorDeskripsi = this.handleErrorDeskripsi.bind(this)
     this.handleModal = this.handleModal.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
-    this.validateInputWaktuPengingat = this.validateInputWaktuPengingat.bind(
-      this,
-    )
+    this.validateInputWaktuPengingat = this.validateInputWaktuPengingat.bind(this)
     this.validateInputDeskripsi = this.validateInputDeskripsi.bind(this)
     this.handleLoading = this.handleLoading.bind(this)
   }
@@ -85,54 +83,60 @@ class FormUpdateReminder extends Component {
   }
   async onSubmit(e) {
     e.preventDefault()
-    if (
-      this.state.deskripsiPengingat != this.props.deskripsiPengingat ||
-      this.state.waktuPengingat != this.props.waktuPengingat
+    if (this.state.deskripsiPengingat != this.props.deskripsiPengingat ||
+        this.state.waktuPengingat != this.props.waktuPengingat
     ) {
       await this.validateInputWaktuPengingat(this.state.waktuPengingat)
       await this.validateInputDeskripsi(this.state.deskripsiPengingat)
 
-      if (
-        this.state.errorWaktuPengingat == false &&
-        this.state.errorDeskripsi == false
-      ) {
-        this.handleLoading()
-        api()
-          .post('api/updatePengingat', {
-            ID_PENGINGAT: this.state.idPengingat,
-            ID_PENGGUNA: this.state.idPengguna,
-            ID_PENCATATAN: this.state.idPencatatan,
-            WAKTU_PENGINGAT: this.state.waktuPengingat,
-            DESKRIPSI: this.state.deskripsiPengingat,
-            STATUS: this.state.status,
-          })
-          .then((response) => {
-            this.setState({
-              item: {
-                idPengguna: '',
-                idPencatatan: '',
-                waktuPengingat: '',
-                deskripsiPengingat: '',
-                status: '',
-              },
-            })
-            this.handleLoading()
-            this.handleModal()
-            window.location.reload('/#/SuratMasuk')
-            // this.setState({
-            //   showModal: !this.state.showModal,
-            // })
-          })
-          .catch((err) => {
-            console.log(err)
-            this.handleLoading()
-          })
-        console.log('valid form')
-      } else {
-        console.log('error form')
+            if (
+                this.state.errorWaktuPengingat == false &&
+                this.state.errorDeskripsi == false
+            ) {
+                this.handleLoading()
+                api()
+                .post('api/updatePengingat',{
+                    ID_PENGINGAT: this.state.idPengingat,
+                    ID_PENGGUNA: this.state.idPengguna,
+                    ID_PENCATATAN: this.state.idPencatatan,
+                    WAKTU_PENGINGAT: this.state.waktuPengingat,
+                    DESKRIPSI: this.state.deskripsiPengingat,
+                    STATUS: this.state.status,
+                    JENIS_PENGINGAT: this.props.jenisPengingat,
+                })
+                .then((response) => {
+                    this.setState({
+                    item: {
+                        idPengguna: '',
+                        idPencatatan: '',
+                        waktuPengingat: '',
+                        deskripsiPengingat: '',
+                        status: '',
+                        },
+                    })
+                    this.handleLoading()
+                    this.handleModal()
+                    if (this.props.jenisPengingat == 1){
+                      window.location.reload('/#/SuratMasuk')
+                    }
+                    if (this.props.jenisPengingat == 2){
+                      window.location.reload('/#/SuratKeluar')
+                    }                    
+                    // this.setState({
+                    //   showModal: !this.state.showModal,
+                    // })
+                })
+                .catch((err) => {
+                    console.log(err)
+                    this.handleLoading()
+                })
+                console.log('valid form')
+                
+            } else {
+                console.log('error form')
+            }
       }
-    }
-  }
+  }  
 
   validateInputWaktuPengingat(input) {
     if (input == null) {

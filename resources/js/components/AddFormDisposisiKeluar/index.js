@@ -25,6 +25,7 @@ class AddFormDisposisiKeluar extends Component{
       tujuanDisposisi: '',
       informasiDisposisi: null,
       keteranganDisposisi: null,
+      url:null,
       namaFileDisposisi: null,
       firstDate: new Date(),
       showForm: false,
@@ -68,6 +69,8 @@ class AddFormDisposisiKeluar extends Component{
     this.handleAddClickSelect = this.handleAddClickSelect.bind(this)
     this.handleRemoveClickSelect = this.handleRemoveClickSelect.bind(this)
     this.handleShowForm = this.handleShowForm.bind(this)
+    
+    this.getFileDisposisi = this.getFileDisposisi.bind(this)
     this.onFileChange = this.onFileChange.bind(this)
   }
   handleLoading() {
@@ -257,8 +260,29 @@ class AddFormDisposisiKeluar extends Component{
           errInformasiDisposisi: false,
           errKeteranganDisposisi: false,
           errNamaFileDisposisi: false,
+          
       })
+      if(this.state.url == null){
+        this.handleLoading()
+        await this.getFileDisposisi()
+        this.handleLoading()
+      }
   }
+  async getFileDisposisi(){
+    if(this.props.namaFile != null){
+      let formData = new FormData()
+      formData.append('namafile',this.props.namaFile)
+
+      await api()
+      .post('/api/getSurat',formData)
+      .then((response)=>
+        this.setState({
+          url: response.data.url,
+        }),
+      )
+    }
+  }
+
   async onSubmit(e) {
       e.preventDefault()
       this.handleLoading()
@@ -336,16 +360,16 @@ class AddFormDisposisiKeluar extends Component{
           }
       })
       if (this.state.fileDisposisi != null) {
-          let fd2 = new FormData()
-          console.log('nomorsurat dengan file:' + this.state.namaFileDisposisi)
-          fd2.append('myFile', this.state.fileDisposisi)
-          fd2.append('namefile', this.state.namaFileDisposisi + '_disposisi')
-          await api()
+        let fd2 = new FormData()
+        // console.log('nomorsurat dengan file:' + this.state.namaFileDisposisi)
+        fd2.append('myFile', this.state.fileDisposisi)
+        fd2.append('namefile', this.state.namaFileDisposisi + '_disposisi')
+        await api()
           .post('api/addSurat', fd2)
           .then((response) => {
-              this.handleLoading()
-              this.handleModal()
-              window.location.reload('/#/SuratMasuk')
+            this.handleLoading()
+            this.handleModal()
+            window.location.reload('/#/SuratMasuk')
           })
       }
   }
@@ -1136,7 +1160,7 @@ class AddFormDisposisiKeluar extends Component{
                                 </div>
                                 <div className="flex justify-center p-2 ">
                                   <div className="w-auto">
-                                    {this.props.SuratDetail.NOMOR_SURAT ==
+                                    {this.props.disposisi.NAMA_FILE_SURAT ==
                                     null ? (
                                       <> File kosong</>
                                     ) : (

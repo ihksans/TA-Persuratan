@@ -25,6 +25,7 @@ class AddFormDisposisi extends Component {
       tujuanDisposisi: '',
       informasiDisposisi: null,
       keteranganDisposisi: null,
+      url: null,
       namaFileDisposisi: null,
       firstDate: new Date(),
       showForm: false,
@@ -68,6 +69,7 @@ class AddFormDisposisi extends Component {
     this.ValidateTujuanSurat = this.ValidateTujuanSurat.bind(this)
     this.ValidateTglDisposisi = this.ValidateTglDisposisi.bind(this)
     
+    this.getFileDisposisi = this.getFileDisposisi.bind(this)
     this.onFileChange = this.onFileChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
@@ -268,8 +270,28 @@ class AddFormDisposisi extends Component {
       errKeteranganDisposisi: false,
       errNamaFileDisposisi: false,
     })
+    if(this.state.url == null){
+      this.handleLoading()
+      await this.getFileDisposisi()
+      this.handleLoading()
+    }
     // await this.handleTujuanPencatatan()
     
+  }
+
+  async getFileDisposisi(){
+    if(this.props.namaFile != null){
+      let formData = new FormData()
+      formData.append('namafile',this.props.namaFile)
+
+      await api()
+      .post('/api/getSurat',formData)
+      .then((response)=>
+        this.setState({
+          url: response.data.url,
+        }),
+      )
+    }
   }
 
   async onSubmit(e) {
@@ -289,14 +311,13 @@ class AddFormDisposisi extends Component {
     formData.append('jenis_disposisi', this.state.jenisDisposisi)
     if(this.state.fileDisposisi !=null){
       formData.append('nama_file_disposisi',this.state.namaFileDisposisi+'_disposisi')
+      // formData.append('nama_file_disposisi',this.state.namaFileDisposisi)
     }
     //formData.append('nomor_disposisi', this.props.SuratDetail.NOMOR_SURAT)
     await api()
       .post('api/createDisposisi', formData)
       .then((response) => {
-        // console.log('create dispo:' + response)
         this.setState({
-          // idPencatatan: respon.data.content.id,
           idDisposisi: response.data.content.id,
         })
         if (this.state.fileDisposisi == null) {
@@ -350,7 +371,7 @@ class AddFormDisposisi extends Component {
     })
     if (this.state.fileDisposisi != null) {
       let fd2 = new FormData()
-      console.log('nomorsurat dengan file:' + this.state.namaFileDisposisi)
+      // console.log('nomorsurat dengan file:' + this.state.namaFileDisposisi)
       fd2.append('myFile', this.state.fileDisposisi)
       fd2.append('namefile', this.state.namaFileDisposisi + '_disposisi')
       await api()
@@ -479,6 +500,8 @@ class AddFormDisposisi extends Component {
                                   )
                                 })}
                               </div>
+                              
+                              
                               <div className="font-bold">Nomor Surat</div>
                               <div className=" col-span-2">
                                 {this.props.SuratDetail.NOMOR_SURAT}
@@ -1022,6 +1045,7 @@ class AddFormDisposisi extends Component {
                                   <ModalKonfirmDeleteDispo
                                     IdDispo={this.props.disposisi.ID_DISPOSISI}
                                     handleDisposisi={() => this.handleModal()}
+                                    NamaDisposisi={this.props.disposisi.NAMA_FILE_DISPOSISI}
                                   />
                                 </div>
 
@@ -1037,6 +1061,7 @@ class AddFormDisposisi extends Component {
                                 </div>
                                 <div className="col-span-2">
                                   {this.props.disposisi.TANGGAL_DISPOSISI}
+                                  {console.log(JSON.stringify(this.props.disposisi))}
                                 </div>
                                 <div className="font-bold">Tujuan </div>
                                 <div className="col-span-2">
@@ -1170,14 +1195,22 @@ class AddFormDisposisi extends Component {
                                 </div>
                                 <div className="flex justify-center p-2 ">
                                   <div className="w-auto">
-                                    {this.props.SuratDetail.NOMOR_SURAT ==
+                                    {/* {this.props.namaFile ==  */}
+                                    {this.props.disposisi.NAMA_FILE_DISPOSISI ==
+                                    
                                     null ? (
                                       <> File kosong</>
                                     ) : (
                                       <>
                                         <PdfReader
+                                          // urlFile = {this.state.url}
+                                          // namaFile={this.props.disposisi.NAMA_FILE_DISPOSISI}
                                           urlFile={this.props.url}
                                           namaFile={
+                                            // this.props.disposisi.NAMA_FILE_DISPOSISI.split(
+                                            //   '/',
+                                            // ).join('_') +
+                                            // '_disposisi'
                                             this.props.SuratDetail.NOMOR_SURAT.split(
                                               '/',
                                             ).join('_') +

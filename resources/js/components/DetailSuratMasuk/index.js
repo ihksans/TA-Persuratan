@@ -43,7 +43,7 @@ class DetailSuratMasuk extends Component {
     this.handleModal = this.handleModal.bind(this)
     this.handlePengingatModal = this.handlePengingatModal.bind(this)
     this.handleTujuanPencatatan = this.handleTujuanPencatatan.bind(this)
-    this.handleTujuanDisposisi = this.handleTujuanDisposisi.bind(this)
+    // this.handleTujuanDisposisi = this.handleTujuanDisposisi.bind(this)
     this.handleTindakLanjutModal = this.handleTindakLanjutModal.bind(this)
     this.getFileSuratMasuk = this.getFileSuratMasuk.bind(this)
     this.getPengingatSurat = this.getPengingatSurat.bind(this)
@@ -63,38 +63,38 @@ class DetailSuratMasuk extends Component {
         console.log('tujuan pencatatan2:' + response.data.content)
       })
   }
-  async handleTujuanDisposisi() {
-    await api()
-      .get(
-        'api/getDetailTujuanPencatatan/' + this.props.SuratDetail.ID_PENCATATAN,
-      )
-      .then((response) => {
-        this.setState({
-          tujuanPencatatan: response.data.content,
-        })
-        console.log('tujuan pencatatan:' + this.state.tujuanPencatatan)
-        console.log('tujuan pencatatan2:' + response.data.content)
-        console.log('id tujuan pencatatan: '+ this.props.SuratDetail.ID_DISPOSISI)
-      })
-  }
-  async handleTujuanDisposisi(){
-    await api()
-    .get('api/getTujuanDisposisi/'+this.props.Disposisi.ID_DISPOSISI,)
-    .them((response)=>{
-      this.setState({
-        tujuanDisposisi: response.data.content,
-      })
-      console.log('tujuan disposisi:' + this.state.tujuanDisposisi)
-      console.log('tujuan disposisi 2:' + response.data.content)
-    })
-  }
+  // async handleTujuanDisposisi() {
+  //   await api()
+  //     .get(
+  //       'api/getDetailTujuanPencatatan/' + this.props.SuratDetail.ID_PENCATATAN,
+  //     )
+  //     .then((response) => {
+  //       this.setState({
+  //         tujuanPencatatan: response.data.content,
+  //       })
+  //       console.log('tujuan pencatatan:' + this.state.tujuanPencatatan)
+  //       console.log('tujuan pencatatan2:' + response.data.content)
+  //       console.log('id tujuan pencatatan: '+ this.props.SuratDetail.ID_DISPOSISI)
+  //     })
+  // }
+  // async handleTujuanDisposisi(){
+  //   await api()
+  //   .get('api/getTujuanDisposisi/'+this.props.Disposisi.ID_DISPOSISI,)
+  //   .them((response)=>{
+  //     this.setState({
+  //       tujuanDisposisi: response.data.content,
+  //     })
+  //     console.log('tujuan disposisi:' + this.state.tujuanDisposisi)
+  //     console.log('tujuan disposisi 2:' + response.data.content)
+  //   })
+  // }
   handleLoading() {
     this.setState({
       loading: !this.state.loading,
     })
   }
   async handleModal() {
-    this.handleTujuanDisposisi()
+    // this.handleTujuanDisposisi()
     this.handleTujuanPencatatan()
     
     if (this.state.url == null || this.state.urlLampiran == null) {
@@ -489,6 +489,7 @@ class DetailSuratMasuk extends Component {
                   idPencatatan={this.props.SuratDetail.ID_PENCATATAN}
                   noAgenda={this.props.SuratDetail.NOMOR_AGENDA}
                   idDerajatSurat={this.props.SuratDetail.ID_DERAJAT_SURAT}
+                  jenisPengingat={1}
                 />
               </>
             ) : (
@@ -502,6 +503,7 @@ class DetailSuratMasuk extends Component {
                   status={this.state.pengingat.STATUS}
                   noAgenda={this.props.SuratDetail.NOMOR_AGENDA}
                   idDerajatSurat={this.props.SuratDetail.ID_DERAJAT_SURAT}
+                  jenisPengingat={1}
                 />
               </>
             )}
@@ -516,6 +518,7 @@ class DetailSuratMasuk extends Component {
               waktuPengingat={this.state.pengingat.WAKTU_PENGINGAT}
               deskripsiPengingat={this.state.pengingat.DESKRIPSI}
               status={this.state.pengingat.STATUS}
+              jenisPengingat={1}
             />
           </>
         ) : null}
