@@ -7,7 +7,7 @@ const BoxDataReminder = ({ IdPengingat, IdPengguna, IdPencatatan, WaktuPengingat
   // const [formEdit, setFormEdit] = useState(false)
   const rn = moment(new Date())
   const b = Math.abs(rn.diff(WaktuPengingat, 'days'))+1
-  console.log(b)
+  const c = Math.abs(rn.diff(WaktuPengingat, 'days'))
   return (
     <>
       <div className="grid grid-cols-3 gap-0 w-96 p-2 bg-white text-sm">
@@ -30,7 +30,12 @@ const BoxDataReminder = ({ IdPengingat, IdPengguna, IdPencatatan, WaktuPengingat
                 : {Deskripsi}
             </div>
             <div className="flex items-start ml-1 col-span-3 font-thin text-xs text-abu">
-                {b} hari lagi
+                {WaktuPengingat < rn.format("YYYY-MM-DD") ?  (
+                    <>
+                    <h2 className="text-xs font-semibold text-danger">Terlewat</h2>&nbsp; {c} hari lalu</>
+                ):(
+                    <>{b} hari lagi</>
+                )}
             </div>
         </div>
     </>
