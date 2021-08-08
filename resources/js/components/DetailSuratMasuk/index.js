@@ -36,6 +36,7 @@ class DetailSuratMasuk extends Component {
       tglDiterima: this.props.SuratDetail.TGL_DITERIMA,
       modalLodaing: false,
       loading: false,
+      date: moment(new Date()),
     }
     this.handleLoading = this.handleLoading.bind(this)
 
@@ -392,10 +393,20 @@ class DetailSuratMasuk extends Component {
                           <>
                             {this.state.pengingat.STATUS == 1 ? (
                               <>
+                              {this.state.pengingat.WAKTU_PENGINGAT < this.state.date.format("YYYY-MM-DD") ?(
+                                <>
+                                <div className="text-sm font-semibold text-danger">
+                                  Terlewat ditindaklanjuti {Math.abs(this.state.date.diff(this.state.pengingat.WAKTU_PENGINGAT, 'days'))} hari lalu
+                                </div>
+                                </>
+                              ):(
+                                <>
                                 <div className="text-sm">
                                   Harus ditindaklanjuti dalam waktu{' '}
                                   {this.state.count} hari
                                 </div>
+                                </>
+                              )}
                               </>
                             ) : (
                               <>

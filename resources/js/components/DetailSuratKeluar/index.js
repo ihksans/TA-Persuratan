@@ -39,6 +39,7 @@ class DetailSuratKeluar extends Component {
       kodeHal: null,
       kodePt: null,
       kodeUnit: null,
+      date: moment(new Date()),
     }
     this.handleLoading = this.handleLoading.bind(this)
 
@@ -387,10 +388,20 @@ class DetailSuratKeluar extends Component {
                           <>
                             {this.state.pengingat.STATUS == 1 ? (
                               <>
+                              {this.state.pengingat.WAKTU_PENGINGAT < this.state.date.format("YYYY-MM-DD") ?(
+                                <>
+                                <div className="text-sm font-semibold text-danger">
+                                  Terlewat ditindaklanjuti {Math.abs(this.state.date.diff(this.state.pengingat.WAKTU_PENGINGAT, 'days'))} hari lalu
+                                </div>
+                                </>
+                              ):(
+                                <>
                                 <div className="text-sm">
                                   Harus ditindaklanjuti dalam waktu{' '}
                                   {this.state.count} hari
                                 </div>
+                                </>
+                              )}
                               </>
                             ) : (
                               <>
