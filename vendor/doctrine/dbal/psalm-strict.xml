@@ -6,9 +6,9 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 >
     <projectFiles>
-        <directory name="tests/Doctrine/StaticAnalysis" />
+        <directory name="static-analysis" />
         <ignoreFiles>
-            <directory name="lib" />
+            <directory name="src" />
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>

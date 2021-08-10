@@ -12,6 +12,7 @@ use Kreait\Firebase\Auth\ActionCodeSettings;
 use Kreait\Firebase\Auth\ActionCodeSettings\ValidatedActionCodeSettings;
 use Kreait\Firebase\Auth\ApiClient;
 use Kreait\Firebase\Auth\CreateActionLink;
+use Kreait\Firebase\Auth\CreateSessionCookie;
 use Kreait\Firebase\Auth\IdTokenVerifier;
 use Kreait\Firebase\Auth\SendActionLink;
 use Kreait\Firebase\Auth\SendActionLink\FailedToSendActionLink;
@@ -568,22 +569,22 @@ class Auth implements Contract\Auth
         throw new FailedToSignIn('Failed to sign in anonymously: No ID token or UID available');
     }
 
-    public function signInWithTwitterOauthCredential(string $accessToken, string $oauthTokenSecret, ?string $redirectUrl = null): SignInResult
+    public function signInWithTwitterOauthCredential(string $accessToken, string $oauthTokenSecret, ?string $redirectUrl = null, ?string $linkingIdToken = null): SignInResult
     {
-        return $this->signInWithIdpAccessToken(Provider::TWITTER, $accessToken, $redirectUrl, $oauthTokenSecret);
+        return $this->signInWithIdpAccessToken(Provider::TWITTER, $accessToken, $redirectUrl, $oauthTokenSecret, $linkingIdToken);
     }
 
-    public function signInWithGoogleIdToken(string $idToken, ?string $redirectUrl = null): SignInResult
+    public function signInWithGoogleIdToken(string $idToken, ?string $redirectUrl = null, ?string $linkingIdToken = null): SignInResult
     {
-        return $this->signInWithIdpIdToken(Provider::GOOGLE, $idToken, $redirectUrl);
+        return $this->signInWithIdpIdToken(Provider::GOOGLE, $idToken, $redirectUrl, $linkingIdToken);
     }
 
-    public function signInWithFacebookAccessToken(string $accessToken, ?string $redirectUrl = null): SignInResult
+    public function signInWithFacebookAccessToken(string $accessToken, ?string $redirectUrl = null, ?string $linkingIdToken = null): SignInResult
     {
-        return $this->signInWithIdpAccessToken(Provider::FACEBOOK, $accessToken, $redirectUrl);
+        return $this->signInWithIdpAccessToken(Provider::FACEBOOK, $accessToken, $redirectUrl, null, $linkingIdToken);
     }
 
-    public function signInWithIdpAccessToken($provider, string $accessToken, $redirectUrl = null, ?string $oauthTokenSecret = null): SignInResult
+    public function signInWithIdpAccessToken($provider, string $accessToken, $redirectUrl = null, ?string $oauthTokenSecret = null, ?string $linkingIdToken = null): SignInResult
     {
         $provider = $provider instanceof Provider ? (string) $provider : $provider;
         $redirectUrl = $redirectUrl ?? 'http://localhost';
@@ -598,6 +599,10 @@ class Auth implements Contract\Auth
             $action = SignInWithIdpCredentials::withAccessToken($provider, $accessToken);
         }
 
+        if ($linkingIdToken) {
+            $action = $action->withLinkingIdToken($linkingIdToken);
+        }
+
         if ($redirectUrl) {
             $action = $action->withRequestUri($redirectUrl);
         }
@@ -609,7 +614,7 @@ class Auth implements Contract\Auth
         return $this->signInHandler->handle($action);
     }
 
-    public function signInWithIdpIdToken($provider, $idToken, $redirectUrl = null): SignInResult
+    public function signInWithIdpIdToken($provider, $idToken, $redirectUrl = null, ?string $linkingIdToken = null): SignInResult
     {
         $provider = $provider instanceof Provider ? (string) $provider : $provider;
 
@@ -625,6 +630,10 @@ class Auth implements Contract\Auth
 
         $action = SignInWithIdpCredentials::withIdToken($provider, $idToken);
 
+        if ($linkingIdToken) {
+            $action = $action->withLinkingIdToken($linkingIdToken);
+        }
+
         if ($redirectUrl) {
             $action = $action->withRequestUri($redirectUrl);
         }
@@ -634,6 +643,13 @@ class Auth implements Contract\Auth
         }
 
         return $this->signInHandler->handle($action);
+    }
+
+    public function createSessionCookie($idToken, $ttl): string
+    {
+        return (new CreateSessionCookie\GuzzleApiClientHandler($this->httpClient))
+            ->handle(CreateSessionCookie::forIdToken($idToken, $ttl))
+        ;
     }
 
     /**

@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Kreait\Firebase\Contract;
 
+use DateInterval;
 use Firebase\Auth\Token\Exception\ExpiredToken;
 use Firebase\Auth\Token\Exception\InvalidSignature;
 use Firebase\Auth\Token\Exception\InvalidToken;
 use Firebase\Auth\Token\Exception\IssuedInTheFuture;
 use Firebase\Auth\Token\Exception\UnknownKey;
+use InvalidArgumentException;
 use Kreait\Firebase\Auth\ActionCodeSettings;
 use Kreait\Firebase\Auth\CreateActionLink\FailedToCreateActionLink;
+use Kreait\Firebase\Auth\CreateSessionCookie\FailedToCreateSessionCookie;
 use Kreait\Firebase\Auth\SendActionLink\FailedToSendActionLink;
 use Kreait\Firebase\Auth\SignIn\FailedToSignIn;
 use Kreait\Firebase\Auth\SignInResult;
@@ -268,6 +271,19 @@ interface Auth
     public function parseToken(string $tokenString): Token;
 
     /**
+     * Creates a new Firebase session cookie with the given lifetime.
+     *
+     * The session cookie JWT will have the same payload claims as the provided ID token.
+     *
+     * @param Token|string $idToken The Firebase ID token to exchange for a session cookie
+     * @param DateInterval|int $ttl
+     *
+     * @throws InvalidArgumentException if the token or TTL is invalid
+     * @throws FailedToCreateSessionCookie
+     */
+    public function createSessionCookie($idToken, $ttl): string;
+
+    /**
      * Verifies a JWT auth token. Returns a Promise with the tokens claims. Rejects the promise if the token
      * could not be verified. If checkRevoked is set to true, verifies if the session corresponding to the
      * ID token was revoked. If the corresponding user's session was invalidated, a RevokedToken
@@ -281,7 +297,7 @@ interface Auth
      * @param Token|string $idToken the JWT to verify
      * @param bool $checkIfRevoked whether to check if the ID token is revoked
      *
-     * @throws \InvalidArgumentException if the token could not be parsed
+     * @throws InvalidArgumentException if the token could not be parsed
      * @throws InvalidToken if the token could be parsed, but is invalid for any reason (invalid signature, expired, time errors)
      * @throws InvalidSignature if the signature doesn't match
      * @throws ExpiredToken if the token is expired
@@ -415,11 +431,11 @@ interface Auth
      */
     public function signInAnonymously(): SignInResult;
 
-    public function signInWithTwitterOauthCredential(string $accessToken, string $oauthTokenSecret, ?string $redirectUrl = null): SignInResult;
+    public function signInWithTwitterOauthCredential(string $accessToken, string $oauthTokenSecret, ?string $redirectUrl = null, ?string $linkingIdToken = null): SignInResult;
 
-    public function signInWithGoogleIdToken(string $idToken, ?string $redirectUrl = null): SignInResult;
+    public function signInWithGoogleIdToken(string $idToken, ?string $redirectUrl = null, ?string $linkingIdToken = null): SignInResult;
 
-    public function signInWithFacebookAccessToken(string $accessToken, ?string $redirectUrl = null): SignInResult;
+    public function signInWithFacebookAccessToken(string $accessToken, ?string $redirectUrl = null, ?string $linkingIdToken = null): SignInResult;
 
     /**
      * @see https://cloud.google.com/identity-platform/docs/reference/rest/v1/accounts/signInWithIdp
@@ -429,7 +445,7 @@ interface Auth
      *
      * @throws FailedToSignIn
      */
-    public function signInWithIdpAccessToken($provider, string $accessToken, $redirectUrl = null, ?string $oauthTokenSecret = null): SignInResult;
+    public function signInWithIdpAccessToken($provider, string $accessToken, $redirectUrl = null, ?string $oauthTokenSecret = null, ?string $linkingIdToken = null): SignInResult;
 
     /**
      * @param Provider|string $provider
@@ -438,5 +454,5 @@ interface Auth
      *
      * @throws FailedToSignIn
      */
-    public function signInWithIdpIdToken($provider, $idToken, $redirectUrl = null): SignInResult;
+    public function signInWithIdpIdToken($provider, $idToken, $redirectUrl = null, ?string $linkingIdToken = null): SignInResult;
 }
