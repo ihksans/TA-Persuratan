@@ -1,8 +1,13 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "tailwindcss/base";
 
-// Variables
-@import 'variables';
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Limelight&family=Noto+Sans&display=swap');
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+}
