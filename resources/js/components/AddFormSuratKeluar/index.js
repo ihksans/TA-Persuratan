@@ -1703,14 +1703,7 @@ class AddFormSurat extends Component {
                               <div className="text-xs text-abu mr-6">
                                 ): data wajib diisi.
                               </div>
-                              <button
-                                type="submit"
-                                className=" w-20 p-1 mr-8 border-2 rounded-md font-bold bg-primary justify-center items-center hover:bg-biruduaHover focus:outline-none"
-                                onClick={this.onSubmit2}
-                                value="Add Pengguna"
-                              >
-                                Lengkapi data nanti
-                              </button>
+
                               <button
                                 type="submit"
                                 className=" w-20 p-1 mr-8 border-2 rounded-md font-bold bg-biru justify-center items-center hover:bg-biruduaHover focus:outline-none"
@@ -1723,13 +1716,6 @@ class AddFormSurat extends Component {
                           </div>
                         </div>
                       </form>
-
-                      <div style={{ marginTop: 20 }}>
-                        Nama Pemohon:
-                        {JSON.stringify(this.state.customNamaPemohon)}
-                        UnitPemohon
-                        {JSON.stringify(this.state.unitPemohon)}
-                      </div>
                     </div>
                   </div>
                 </div>

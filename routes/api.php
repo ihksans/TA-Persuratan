@@ -156,4 +156,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('searchSuratMasuk/{id}','SuratMasukController@searchSuratMasuk');
     Route::get('searchSuratKeluar/{id}','SuratKeluarController@searchSuratKeluar');
 
+    //count data
+    
+    Route::get('getCountSK','SuratKeluarController@getCountSK');
+
 });

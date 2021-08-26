@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\DerajatSurat;
 use App\Models\KodePerguruanTinggi;
+use App\Models\Pencatatan;
+use App\Models\SuratMasuk;
 use Illuminate\Database\Seeder;
-
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -16,8 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-       $this->call(PenggunaSeeder::class);
-       $this->call(UserSeeder::class);
+    //    $this->call(PenggunaSeeder::class);
+    //    $this->call(UserSeeder::class);
       // $this->call(DerajatSeeder::class);
       // $this->call(JenisSuratSeeder::class);
       // $this->call(KodeHalSeeder::class);
@@ -25,5 +26,8 @@ class DatabaseSeeder extends Seeder
       // $this->call(KodeSifatSeeder::class);
       // $this->call(KodeUnitKerjaSeeder::class);
       // $this->call(JenisSuratSeeder::class);
+     $this->call(TujuanPencatatanSedder::class);
+       // $this->call(PencatatanSeeder::class);
+      // $this->call(SuratMasukSeeder::class);
     }
 }
